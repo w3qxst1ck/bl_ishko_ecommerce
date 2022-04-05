@@ -6,5 +6,4 @@ app_name = 'shop'
 
 urlpatterns = [
     path('', start_page),
-
 ]
