@@ -26,10 +26,9 @@ class Product(models.Model):
     title = models.CharField(max_length=255, db_index=True, verbose_name='Название')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     price = models.FloatField(verbose_name='Цена')
-    item_count = models.IntegerField(verbose_name='Количество')
-    size = models.CharField(choices=CHOICES, max_length=10, blank=True, null=True, verbose_name='Размер')
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
+    discount = models.IntegerField(blank=True, null=True, verbose_name='Скидка')
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -40,8 +39,27 @@ class Product(models.Model):
         return self.title
 
     class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+
+
+class Item(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items', verbose_name='Продукт')
+    item_count = models.IntegerField(verbose_name='Количество товара')
+    size = models.CharField(choices=CHOICES, max_length=10, blank=True, null=True, verbose_name='Размер')
+    color = models.CharField()
+
+    def __str__(self):
+        return f'{self.product.title} - {self.color} ({self.size}) - {self.item_count} шт.'
+
+    class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Фото товара', related_name='images')
+    image = models.ImageField(upload_to='products/')
 
 
 class Category(models.Model):

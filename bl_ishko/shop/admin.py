@@ -2,6 +2,9 @@ from django.contrib import admin
 from . import models
 
 
+admin.site.register(models.Item)
+
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
