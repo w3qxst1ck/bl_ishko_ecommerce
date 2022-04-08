@@ -47,7 +47,7 @@ class Item(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items', verbose_name='Продукт')
     item_count = models.IntegerField(verbose_name='Количество товара')
     size = models.CharField(choices=CHOICES, max_length=10, blank=True, null=True, verbose_name='Размер')
-    color = models.CharField()
+    color = models.CharField(max_length=128)
 
     def __str__(self):
         return f'{self.product.title} - {self.color} ({self.size}) - {self.item_count} шт.'

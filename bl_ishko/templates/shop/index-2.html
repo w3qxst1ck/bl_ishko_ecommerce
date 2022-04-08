@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEBIAN - Multi Purpose eCommerce HTML5 Template</title>
+<meta name="keywords" content="bl_ischko,eccomerce">
+<meta name="description" content="BL_ishko - Eccomerce">
+
+{% load static %}
+
+<!-- FONTS ONLINE -->
+<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+<!--MAIN STYLE-->
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/responsive.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
+<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+
+<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+<link rel="stylesheet" type="text/css" href="{% static 'rs-plugin/css/settings.css' %}" media="screen" />
+
+<!-- JavaScripts -->
+<script src="{% static 'js/modernizr.js' %}"></script>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<!-- LOADER ===========================================-->
+<div id="loader">
+  <div class="loader">
+    <div class="position-center-center"> <img src="{% static 'images/logo-dark.png' %}" alt="">
+      
+      <p class="font-playfair text-center">Please Wait...</p>
+      <div class="loading">
+      	<div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page Wrap -->
+<div id="wrap">
+  {% block header %}
+    {% include 'shop/includes/header.html' %}
+  {% endblock header %}
+  
+  {% block content %}
+  <!--======= HOME MAIN SLIDER =========-->
+  <section class="home-slider">
+    <div class="tp-banner-container">
+      <div class="tp-banner-fix" >
+        <ul>
+          
+          <!-- Slider 1 -->
+          <li data-transition="fade" data-slotamount="7"> <img src="{% static 'images/slides/slide-4.jpg' %}" data-bgposition="center top" alt="" />
+            <div class="overlay"></div>
+            <!-- Layer -->
+            <div class="tp-caption sft font-montserrat tp-resizeme rs-parallaxlevel-4" 
+                  data-x="center" 
+                  data-y="center" data-voffset="-30"
+                  data-speed="700" 
+                  data-start="1000" 
+                  data-easing="easeOutBack"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"
+                  style="color: #fff; font-size: 48px; font-weight: bold; letter-spacing: 50px; "> PRINTSUMMER</div>
+            
+            <!-- Layer -->
+            <div class="tp-caption sfb  font-playfair text-center tp-resizeme rs-parallaxlevel-4" 
+                  data-x="center" 
+                  data-y="center" data-voffset="20" 
+                  data-speed="1000" 
+                  data-start="1700" 
+                  data-easing="easeOutBack"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on" 
+                  style="color: #fff; font-size: 18px; font-style:italic;"> Contrary to popular belief, Lorem Ipsum is not simply random text. </div>
+            
+            <!-- Layer -->
+            <div class="tp-caption sfb tp-resizeme rs-parallaxlevel-4" 
+                  data-x="center" 
+                  data-y="center" data-voffset="100" 
+                  data-speed="1000" 
+                  data-start="2400" 
+                  data-easing="easeOutBack"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"> <a href="#." class="btn">Shop Now</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#" class="btn btn-1">Discover</a> </div>
+          </li>
+          
+          <!-- Slider 2 -->
+          <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/slide-5.jpg' %}" data-bgposition="center top" alt="" />
+            <div class="overlay"></div>
+            <!-- Layer -->
+            <div class="tp-caption sft font-montserrat tp-resizeme rs-parallaxlevel-4" 
+                  data-x="center" 
+                  data-y="center" data-voffset="-30"
+                  data-speed="700" 
+                  data-start="1000" 
+                  data-easing="easeOutBack"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"
+                  style="color: #fff; font-size: 48px; font-weight: bold; letter-spacing:6px; "> Pull &amp; Bear Geometric Print T-Shirt </div>
+            
+            <!-- Layer -->
+            <div class="tp-caption sfb  font-playfair text-center tp-resizeme rs-parallaxlevel-4" 
+                  data-x="center" 
+                  data-y="center" data-voffset="30" 
+                  data-speed="700" 
+                  data-start="1700" 
+                  data-easing="easeOutBack"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on" 
+                  style="color: #fff; font-size: 18px; font-style:italic;"> Contrary to popular belief, Lorem Ipsum is not simply random text. </div>
+            
+            <!-- Layer -->
+            <div class="tp-caption sfb tp-resizeme rs-parallaxlevel-4" 
+                  data-x="center" 
+                  data-y="center" data-voffset="100" 
+                  data-speed="700" 
+                  data-start="2400" 
+                  data-easing="easeOutBack"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"> <a href="#." class="btn">Shop Now</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#" class="btn btn-1">Discover</a> </div>
+          </li>
+          
+          <!-- Slider 3 -->
+          <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/slide-6.jpg' %}" data-bgposition="center center" alt="" /> 
+            <!-- SLIDER LAYERS -->
+            <div class="tp-caption lfr tp-resizeme rs-parallaxlevel-4" 
+                  data-x="right" 
+                  data-y="top"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-speed="700" 
+                  data-start="1000" 
+                  data-easing="Back.easeOut" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"        
+                  style="z-index: 1;"> <img src="{% static 'images/slides/slide-6-1.png' %}" alt=""> </div>
+            
+            <!-- Layer -->
+            <div class="tp-caption font-montserrat sft tp-resizeme rs-parallaxlevel-4" 
+                  data-x="left" 
+                  data-y="center" data-voffset="-140" 
+                  data-speed="700" 
+                  data-start="1000" 
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-easing="Back.easeOut" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"
+                  style="color: #333333; font-size: 30px; font-weight: bold; letter-spacing: 0px;"> New Look <br>
+              Brogue Shoes in Faux Suede </div>
+            
+            <!-- Layer -->
+            <div class="tp-caption font-montserrat lfr tp-resizeme rs-parallaxlevel-4" 
+                  data-x="250" 
+                  data-y="center" data-voffset="-220" 
+                  data-speed="700" 
+                  data-start="1400" 
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-easing="Back.easeOut" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"> <span class="off-tag">-30%</span> </div>
+            
+            <!-- Layer -->
+            <div class="tp-caption sfb tp-resizeme  font-playfair text-center rs-parallaxlevel-4" 
+                  data-x="left" 
+                  data-y="center" data-voffset="-70" 
+                  data-speed="700" 
+                  data-start="1700" 
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-easing="Back.easeOut" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"
+                  style="color: #ababab; font-size: 18px; font-weight: 200; font-style:italic; letter-spacing:0px;"> Contrary to popular belief</div>
+            
+            <!-- Layer -->
+            <div class="tp-caption sfb tp-resizeme rs-parallaxlevel-4" 
+                  data-x="left" 
+                  data-y="center" data-voffset="0" 
+                  data-speed="700" 
+                  data-start="2400"
+                  data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" 
+                  data-easing="Back.easeOut" 
+                  data-splitin="none" 
+                  data-splitout="none" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300" 
+                  data-captionhidden="on"
+                  style="z-index: 10;"> <a href="#" class="btn btn-1">Discover</a> </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= NEW COLLECRION =========-->
+    <section class="section-p-30px new-collection">
+      <div class="container">
+        <div class="new-col-slide animate fadeInUp" data-wow-delay="0.4s"> 
+          <!-- Slider 1 -->
+          <div class="inn-sec"> <a href="#."> <img src="{% static 'images/new-collec-1.jpg' %}" alt="" > <span><i class="fa fa-anchor"></i> MEN’S DESIGN</span> </a> </div>
+          <!-- Slider 2 -->
+          <div class="inn-sec"> <a href="#."> <img src="{% static 'images/new-collec-2.jpg' %}" alt="" > <span><i class="fa fa-tree"></i> BLAZER &amp; BAGS</span> </a> </div>
+          <!-- Slider 3 -->
+          <div class="inn-sec"> <a href="#."> <img src="{% static 'images/new-collec-3.jpg' %}" alt="" > <span><i class="fa fa-bicycle"></i> SHOES</span> </a> </div>
+          <!-- Slider 5 -->
+          <div class="inn-sec"> <a href="#."> <img src="{% static 'images/new-collec-2.jpg' %}" alt="" > <span><i class="fa fa-tree"></i> BLAZER &amp; BAGS</span> </a> </div>
+          <!-- Slider 4 -->
+          <div class="inn-sec"> <a href="#."> <img src="{% static 'images/new-collec-1.jpg' %}" alt="" > <span><i class="fa fa-anchor"></i> MEN’S DESIGN</span> </a> </div>
+          <!-- Slider 6 -->
+          <div class="inn-sec"> <a href="#."> <img src="{% static 'images/new-collec-3.jpg' %}" alt="" > <span><i class="fa fa-bicycle"></i> SHOES</span> </a> </div>
+        </div>
+      </div>
+    </section>
+    
+    <!--======= New Arrival =========-->
+    <section class="section-p-30px new-arrival">
+      <div class="container"> 
+        
+        <!--  Tittle -->
+        <div class="tittle animate fadeInUp" data-wow-delay="0.4s">
+          <h5>NEW ARRIVAL</h5>
+          <p>Treding fashion</p>
+        </div>
+        
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist animate fadeInUp" data-wow-delay="0.4s">
+          <li role="presentation" class="active"><a href="#men" aria-controls="men" role="tab" data-toggle="tab">MEN’S</a></li>
+          <li role="presentation"><a href="#women" aria-controls="women" role="tab" data-toggle="tab">WOMAN</a></li>
+          <li role="presentation"><a href="#access" aria-controls="access" role="tab" data-toggle="tab">ACCESSORIES</a></li>
+          <li role="presentation"><a href="#shoes" aria-controls="shoes" role="tab" data-toggle="tab">SHOES</a></li>
+          <li role="presentation"><a href="#bags" aria-controls="bags" role="tab" data-toggle="tab">BAGS</a></li>
+        </ul>
+        
+        <!-- Tab panes -->
+        <div class="tab-content animate fadeInUp" data-wow-delay="0.4s"> 
+          <!-- MEN’S  -->
+          <div role="tabpanel" class="tab-pane fade in active" id="men"> 
+            
+            <!--  New Arrival Tabs Products  -->
+            <div class="popurlar_product">
+              <ul class="row">
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="new-tag"> NEW </div>
+                    
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="hot-tag"> HOT </div>
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- WOMAN  -->
+          <div role="tabpanel" class="tab-pane fade" id="women"> 
+            <!--  New Arrival Tabs Products  -->
+            <div class="popurlar_product">
+              <ul class="row">
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="new-tag"> NEW </div>
+                    
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="hot-tag"> HOT </div>
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- ACCESSORIES  -->
+          <div role="tabpanel" class="tab-pane fade" id="access"> 
+            <!--  New Arrival Tabs Products  -->
+            <div class="popurlar_product">
+              <ul class="row">
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="#."><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="new-tag"> NEW </div>
+                    
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="hot-tag"> HOT </div>
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- SHOES  -->
+          <div role="tabpanel" class="tab-pane fade" id="shoes"> 
+            <!--  New Arrival Tabs Products  -->
+            <div class="popurlar_product">
+              <ul class="row">
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="new-tag"> NEW </div>
+                    
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="hot-tag"> HOT </div>
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- BAGS  -->
+          <div role="tabpanel" class="tab-pane fade" id="bags"> 
+            <!--  New Arrival Tabs Products  -->
+            <div class="popurlar_product">
+              <ul class="row">
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+                
+                <!--  New Arrival  -->
+                <li class="col-sm-3">
+                  <div class="items-in"> 
+                    <!--  Tags  -->
+                    <div class="hot-tag"> HOT </div>
+                    <!-- Image --> 
+                    <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
+                    <!-- Hover Details -->
+                    <div class="over-item">
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                        <!-- Rating Stars -->
+                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!--======= New Arrival =========-->
+    <section class="section-p-30px new-arrival ">
+      <div class="container"> 
+        
+        <!--  Tittle -->
+        <div class="tittle animate fadeInUp" data-wow-delay="0.4s">
+          <h5>POPULAR WEEKLY</h5>
+          <p>Most haver in your Shop </p>
+        </div>
+        <div class="popurlar_product animate fadeInUp" data-wow-delay="0.4s">
+          <ul class="row">
+            
+            <!--  New Arrival  -->
+            <li class="col-sm-3">
+              <div class="items-in"> 
+                <!-- Image --> 
+                <img src="{% static 'images/week-img-1.jpg' %}" alt=""> 
+                <!-- Hover Details -->
+                <div class="over-item">
+                  <ul class="animated fadeIn">
+                    <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                    <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                    <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                    <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                    <!-- Rating Stars -->
+                    <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                  </ul>
+                </div>
+                <!-- Item Name -->
+                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+              </div>
+            </li>
+            
+            <!--  New Arrival  -->
+            <li class="col-sm-3">
+              <div class="items-in"> 
+                <!-- Image --> 
+                <img src="{% static 'images/week-img-2.jpg' %}" alt=""> 
+                <!-- Hover Details -->
+                <div class="over-item">
+                  <ul class="animated fadeIn">
+                    <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                    <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                    <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                    <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                    <!-- Rating Stars -->
+                    <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                  </ul>
+                </div>
+                <!-- Item Name -->
+                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+              </div>
+            </li>
+            
+            <!--  New Arrival  -->
+            <li class="col-sm-3">
+              <div class="items-in"> 
+                <!--  Tags  -->
+                <div class="off-tag"> -30% </div>
+                
+                <!-- Image --> 
+                <img src="{% static 'images/week-img-3.jpg' %}" alt=""> 
+                <!-- Hover Details -->
+                <div class="over-item">
+                  <ul class="animated fadeIn">
+                    <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                    <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                    <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                    <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                    <!-- Rating Stars -->
+                    <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                  </ul>
+                </div>
+                <!-- Item Name -->
+                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+              </div>
+            </li>
+            
+            <!--  New Arrival  -->
+            <li class="col-sm-3">
+              <div class="items-in"> 
+                <!--  Tags  -->
+                <div class="hot-tag"> HOT </div>
+                <!-- Image --> 
+                <img src="{% static 'images/week-img-4.jpg' %}" alt=""> 
+                <!-- Hover Details -->
+                <div class="over-item">
+                  <ul class="animated fadeIn">
+                    <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                    <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                    <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                    <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                    <!-- Rating Stars -->
+                    <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                  </ul>
+                </div>
+                <!-- Item Name -->
+                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!--======= IN THE LOOK =========-->
+    <section class="section-p-30px in-the-look no-padding-b"> 
+      <!--  Tittle -->
+      <div class="tittle animate fadeInUp" data-wow-delay="0.4s">
+        <h5>IN THIS LOOK</h5>
+        <p>Love Design</p>
+      </div>
+      <ul>
+        
+        <!--  Item 1 -->
+        <li class="animate fadeInLeft" data-wow-delay="0.4s"> <img src="{% static 'images/look-img-1.jpg' %}" alt="" >
+          <div class="inn-look"> <a href="#.">10.Deep <br>
+            'Lord of the Flies’</a>
+            <hr>
+            <span>From $325.00</span> <a href="#." class="btn">SHOP NOW</a> </div>
+        </li>
+        <!--  Item 2 -->
+        <li class="animate fadeInLeft" data-wow-delay="0.6s"> <img src="{% static 'images/look-img-2.jpg' %}" alt="" >
+          <div class="inn-look"> <a href="#.">VAN STYLE FOR <br>
+            THE AGENDA</a>
+            <hr>
+            <span>From $325.00</span> <a href="#." class="btn">SHOP NOW</a> </div>
+        </li>
+        <!--  Item 3 -->
+        <li class="animate fadeInUp" data-wow-delay="0.8s"> <img src="{% static 'images/look-img-3.jpg' %}" alt="" >
+          <div class="inn-look"> <a href="#.">YOUNG & RECLESS <br>
+            SUMMER 2015</a>
+            <hr>
+            <span>From $325.00</span> <a href="#." class="btn">SHOP NOW</a> </div>
+        </li>
+        <!--  Item 4 -->
+        <li class="animate fadeInRight" data-wow-delay="0.4s"> <img src="{% static 'images/look-img-4.jpg' %}" alt="" >
+          <div class="inn-look"> <a href="#.">SUPERME <br>
+            2015 SRPING</a>
+            <hr>
+            <span>From $325.00</span> <a href="#." class="btn">SHOP NOW</a> </div>
+        </li>
+        <!--  Item 5 -->
+        <li class="animate fadeInRight" data-wow-delay="0.6s"> <img src="{% static 'images/look-img-5.jpg' %}" alt="" >
+          <div class="inn-look"> <a href="#.">LUCIA TARRANT</a>
+            <hr>
+            <span>From $325.00</span> <a href="#." class="btn">SHOP NOW</a> </div>
+        </li>
+      </ul>
+    </section>
+    
+    <!--======= Popurlar Product =========-->
+    <section class="section-p-60px blog">
+      <div class="container"> 
+        <!--  Tittle -->
+        <div class="tittle animate fadeInUp" data-wow-delay="0.4s">
+          <h5>THE BLOG</h5>
+          <p>Tell your Story</p>
+        </div>
+        
+        <!--  Blog Posts -->
+        <div class="blog-posts">
+          <ul class="row">
+            <!--  Posts 1 -->
+            <li class="col-sm-4 animate fadeInLeft" data-wow-delay="0.4s"> 
+              <!--  Image --> 
+              <img class="img-responsive" src="{% static 'images/blog-small-1.jpg' %}" alt=""> <span class="tags">FASHION NEWS</span> <a href="#." class="tittle-post font-playfair">Mighty Healthy 2013 Spring/Summer</a>
+              <p>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens danadelion.</p>
+              <!--  Post Info -->
+              <ul class="info">
+                <li><i class="fa fa-user"></i> admin</li>
+                <li><i class="fa fa-calendar-o"></i> 12 JULY</li>
+                <li><i class="fa fa-eye"></i> 325</li>
+              </ul>
+            </li>
+            
+            <!--  Posts 2 -->
+            <li class="col-sm-4 animate fadeInUp" data-wow-delay="0.4s"> 
+              <!--  Image --> 
+              <img class="img-responsive" src="{% static 'images/blog-small-2.jpg' %}" alt=""> <span class="tags">TRENDING NEWS</span> <a href="#." class="tittle-post font-playfair">No colors are the best ones.</a>
+              <p>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens danadelion.</p>
+              <!--  Post Info -->
+              <ul class="info">
+                <li><i class="fa fa-user"></i> admin</li>
+                <li><i class="fa fa-calendar-o"></i> 12 JULY</li>
+                <li><i class="fa fa-eye"></i> 325</li>
+              </ul>
+            </li>
+            
+            <!--  Posts 2 -->
+            <li class="col-sm-4 animate fadeInRight" data-wow-delay="0.4s"> 
+              <!--  Image --> 
+              <img class="img-responsive" src="{% static 'images/blog-small-3.jpg' %}" alt=""> <span class="tags">MOTION GRAPHIC</span> <a href="#." class="tittle-post font-playfair">All in Black Venna</a>
+              <p>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens danadelion.</p>
+              <!--  Post Info -->
+              <ul class="info">
+                <li><i class="fa fa-user"></i> admin</li>
+                <li><i class="fa fa-calendar-o"></i> 12 JULY</li>
+                <li><i class="fa fa-eye"></i> 325</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!--======= PARALLAX SECTION =========-->
+    <section class="parallex animate fadeInUp" data-wow-delay="0.4s" data-stellar-background-ratio="0.7">
+      <div class="overlay">
+        <div class="container"> <span>Our Story</span>
+          <h3>THE HAPPIEST DAY IN YOUR LIFE</h3>
+          <a href="#." class="btn">LEARN MORE</a> </div>
+      </div>
+    </section>
+    
+    <!--======= Services =========-->
+    <section class="section-p-60px services">
+      <div class="container"> 
+        <!--  Tittle -->
+        <div class="tittle">
+          <h5>OUR SERVICES</h5>
+          <p>Creat Our Pervfect  Online Shop</p>
+        </div>
+        
+        <!--  Services -->
+        <ul class="row">
+          
+          <!--  Fashion Design -->
+          <li class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
+            <div class="icon"><i class="fa fa-anchor"></i></div>
+            <h6>Fashion Design</h6>
+            <hr>
+            <p class="font-montserrat">Gumbo beet greens corn soko endive gumbo gourd.</p>
+          </li>
+          
+          <!--  Fashion Design -->
+          <li class="col-sm-3 animate fadeInLeft" data-wow-delay="0.6s">
+            <div class="icon"><i class="fa fa-headphones"></i></div>
+            <h6>MUSIC PRODUCTION</h6>
+            <hr>
+            <p class="font-montserrat">Gumbo beet greens corn soko endive gumbo gourd.</p>
+          </li>
+          
+          <!--  Fashion Design -->
+          <li class="col-sm-3 animate fadeInRight" data-wow-delay="0.4s">
+            <div class="icon"><i class="fa fa-paint-brush"></i></div>
+            <h6>CONCEPT DESIGN</h6>
+            <hr>
+            <p class="font-montserrat">Gumbo beet greens corn soko endive gumbo gourd.</p>
+          </li>
+          
+          <!--  Fashion Design -->
+          <li class="col-sm-3 animate fadeInRight" data-wow-delay="0.6s">
+            <div class="icon"><i class="fa fa-leaf"></i></div>
+            <h6>WEB DEVELOPMENT</h6>
+            <hr>
+            <p class="font-montserrat">Gumbo beet greens corn soko endive gumbo gourd.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    
+    <!--======= TESTIMONIALS =========-->
+    <section class="testimonial" data-stellar-background-ratio="0.7">
+      <div class="section-p-60px overlay">
+        <div class="container"> 
+          
+          <!-- Tittle -->
+          <div class="tittle white animate fadeInUp" data-wow-delay="0.4s">
+            <h5>WHAT CLIENTS SAY?</h5>
+            <p>Our Happy Clients</p>
+          </div>
+          
+          <!-- Slider Section -->
+          <div class="testi-slides animate fadeInUp" data-wow-delay="0.4s"> 
+            
+            <!-- Slider 1 -->
+            <div class="testi">
+              <div class="avatar"> <img src="{% static 'images/avatar-4.jpg' %}" alt=""> </div>
+              <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation”</p>
+              <hr class="ver">
+              <hr>
+              <h6>TYRION LANNISTER</h6>
+              <p>Founder-Ceo. Dell Corp</p>
+            </div>
+            
+            <!-- Slider 2 -->
+            <div class="testi">
+              <div class="avatar"> <img src="{% static 'images/avatar-5.jpg' %}" alt=""> </div>
+              <p>“Lorem ipsum dolor sit amet, quis nostrud exercitation consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, ”</p>
+              <hr class="ver">
+              <hr>
+              <h6>LANNISTER TYRION </h6>
+              <p>Founder-Ceo. Dell Corp</p>
+            </div>
+            
+            <!-- Slider 3 -->
+            <div class="testi">
+              <div class="avatar"> <img src="{% static 'images/avatar-6.jpg' %}" alt=""> </div>
+              <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, quis nostrud exercitation sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation”</p>
+              <hr class="ver">
+              <hr>
+              <h6>TYRION STERLANNI</h6>
+              <p>Founder-Ceo. Dell Corp</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!--======= Core Feature =========-->
+    <section class="section-p-60px conact-us">
+      <div class="container"> 
+        <!-- Tittle -->
+        <div class="tittle animate fadeInUp" data-wow-delay="0.4s">
+          <h5>CONTACT US</h5>
+          <p>Contact us if you have any question.</p>
+        </div>
+      </div>
+      
+      <!-- Map -->
+      <div id="map" class="animate fadeInUp" data-wow-delay="0.4s"></div>
+      
+      <!--======= CONTACT FORM =========-->
+      <div class="container animate fadeInUp" data-wow-delay="0.4s">
+        <div class="contact">
+          <div class="contact-form"> 
+            <!--======= FORM  =========-->
+            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="row">
+                    <li class="col-sm-12">
+                      <label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="*NAME">
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="*EMAIL">
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label>
+                        <input type="text" class="form-control" name="company" id="company" placeholder="WEBSITE">
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="row">
+                    <li class="col-sm-12">
+                      <label>
+                        <input type="text" class="form-control" name="website" id="website" placeholder="SUBJECT">
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label>
+                        <textarea class="form-control" name="message" id="message" rows="5" placeholder="*MESSAGE"></textarea>
+                      </label>
+                    </li>
+                    <li class="col-sm-12 no-margin">
+                      <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">SEND MESSAGE</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!--======= Subcribe =========-->
+    <section class="subcribe animate fadeInUp" data-wow-delay="0.4s" data-stellar-background-ratio="0.8">
+      <div class="overlay">
+        <div class="container">
+          <h4>subcribe</h4>
+          <!--  Subsribe Form -->
+          <div class="col-md-7 no-padding pull-right">
+            <div class="sub-mail">
+              <form>
+                <input type="search" placeholder="YOUR EMAIL ADDRESS..">
+                <!--  Button -->
+                <button type="submit">SUBSCRIBLE</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!--======= Clients =========-->
+    <section class="section-p-60px our-clients">
+      <div class="container"> 
+        <!--  Tittle -->
+        <div class="tittle animate fadeInUp" data-wow-delay="0.4s">
+          <h5>OUR CLIENTS</h5>
+          <p>Contact us if you have any question.</p>
+        </div>
+        
+        <!--  Text Intro -->
+        <p class="font-montserrat intro text-center animate fadeInUp" data-wow-delay="0.4s">Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens danadelion.</p>
+        <!--  Client Logo Slider -->
+        <div class="client-slide animate fadeInUp" data-wow-delay="0.4s">
+          <div class="slide"><a href="#."><img class="img-responsive" src="{% static 'images/client-logo-1.png' %}" alt=""></a></div>
+          <div class="slide"><a href="#."><img class="img-responsive" src="{% static 'images/client-logo-2.png' %}" alt=""></a></div>
+          <div class="slide"><a href="#."><img class="img-responsive" src="{% static 'images/client-logo-3.png' %}" alt=""></a></div>
+          <div class="slide"><a href="#."><img class="img-responsive" src="{% static 'images/client-logo-4.png' %}" alt=""></a></div>
+          <div class="slide"><a href="#."><img class="img-responsive" src="{% static 'images/client-logo-2.png' %}" alt=""></a></div>
+          <div class="slide"><a href="#."><img class="img-responsive" src="{% static 'images/client-logo-4.png' %}" alt=""></a></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  {% endblock content %}
+
+  {% block footer %}
+    {% include 'shop/includes/footer.html' %}
+  {% endblock footer %}
+  <!-- GO TO TOP --> 
+  	<a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a> 
+  <!-- GO TO TOP End -->
+</div>
+<!-- Wrap End --> 
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/own-menu.js' %}"></script> 
+<script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+<script src="{% static 'js/jquery.isotope.min.js' %}"></script>
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script> 
+<!-- begin map script--> 
+<script type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=false'></script> 
+<script type="text/javascript">
+/*==========  Map  ==========*/
+var map;
+function initialize_map() {
+if ($('#map').length) {
+	var myLatLng = new google.maps.LatLng(-37.814199, 144.961560);
+	var mapOptions = {
+		zoom: 17,
+		center: myLatLng,
+		scrollwheel: false,
+		panControl: false,
+		zoomControl: true,
+		scaleControl: false,
+		mapTypeControl: false,
+		streetViewControl: false
+	};
+	map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	var marker = new google.maps.Marker({
+		position: myLatLng,
+		map: map,
+		tittle: 'Envato',
+		icon: './images/map-locator.png'
+	});
+} else {
+	return false;
+}
+}
+google.maps.event.addDomListener(window, 'load', initialize_map);
+</script>
+</body>
+</html>
