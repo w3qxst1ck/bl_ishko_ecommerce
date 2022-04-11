@@ -11,3 +11,10 @@ def faq_page(request):
 
 def product_detail(request):
     return render(request, 'shop/detail.html')
+
+
+def about_page(request):
+    return render(request, 'shop/about.html')
+
+def shop_page(request):
+    return render(request, 'shop/shop.html')
