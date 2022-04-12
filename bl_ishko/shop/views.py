@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 def home_page(request):
-    return render(request, 'shop/base1.html')
+    return render(request, 'shop/base.html')
 
 
 def faq_page(request):

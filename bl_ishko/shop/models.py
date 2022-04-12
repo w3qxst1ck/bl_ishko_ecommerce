@@ -29,6 +29,9 @@ class Product(models.Model):
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
     discount = models.IntegerField(blank=True, null=True, verbose_name='Скидка')
+    description = models.TextField(verbose_name='Опсиание')
+    compound = models.TextField(verbose_name='Состав')
+    care = models.TextField(verbose_name='Уход')
 
     def save(self, *args, **kwargs):
         if not self.id:

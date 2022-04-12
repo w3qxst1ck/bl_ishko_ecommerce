@@ -1,8 +1,12 @@
-{% extends 'shop/base1.html' %}
+{% extends 'shop/base.html' %}
 
 {% load static %}
 
 {% block title %}Shop{% endblock title %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
 
 
 {% block content %}
