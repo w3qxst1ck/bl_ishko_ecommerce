@@ -1,0 +1,90 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block title %}Registration{% endblock title %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
+
+
+{% block content %}
+
+  <!--======= SUB BANNER =========-->
+  <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
+    <div class="container">
+      <h4>REGISTRATION</h4>
+      <!-- Breadcrumb -->
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">REGISTRATION</li>
+      </ol>
+    </div>
+  </section>
+  
+  <!-- CONTENT START -->
+  <div class="content"> 
+
+    <!--======= LOGIN =========-->
+    <section class="animate fadeInUp" data-wow-delay="0.4s">
+      <div class="container">
+
+        <div class="shopping-cart">
+          <div class="cart-ship-info">
+            <div class="row justify-content-center" style="margin-bottom: 200px; margin-top: 100px;">
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+                <h6>REGISTRATION FORM</h6>
+                <form>
+                  <ul class="row">
+                    
+                    <li class="col-md-12"> 
+                      <!-- COMPANY NAME -->
+                      <label>*EMAIL
+                        <input type="text" name="company" value="" placeholder="">
+                      </label>
+                    </li>
+                    <!-- Name -->
+                    <li class="col-md-6">
+                      <label> *FIRST NAME
+                        <input type="text" name="first-name" value="" placeholder="">
+                      </label>
+                    </li>
+                    <!-- LAST NAME -->
+                    <li class="col-md-6">
+                      <label> *LAST NAME
+                        <input type="text" name="last-name" value="" placeholder="">
+                      </label>
+                    </li>
+                    <li class="col-md-12"> 
+                      <!-- ADDRESS -->
+                      <label>*PASSWORD
+                        <input type="text" name="address" value="" placeholder="">
+                      </label>
+                    </li>
+                  </ul>
+                  <p><a href="">HAVE AN ACCOUNT?</a></p>
+                  <a href="#." class="btn btn-dark btn-small">REGISTRATION</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/own-menu.js' %}"></script> 
+<script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+<script src="{% static 'js/jquery.isotope.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script> 
+{% endblock scripts %}

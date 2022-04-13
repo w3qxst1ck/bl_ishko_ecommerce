@@ -1,0 +1,333 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block title %}Cart{% endblock title %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
+
+{% block content %}
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner">
+      <div class="container">
+        <h4>SHOPPING CART</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">SHOPPING CART</li>
+        </ol>
+      </div>
+    </section>
+    
+    <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in chart-page">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="payment_steps">
+          <ul class="row">
+            <!-- SHOPPING CART -->
+            <li class="col-sm-4 current"> <i class="fa fa-shopping-cart"></i>
+              <h6>SHOPPING CART</h6>
+            </li>
+            
+            <!-- CHECK OUT DETAIL -->
+            <li class="col-sm-4"> <i class="fa fa-align-left"></i>
+              <h6>CHECK OUT DETAIL</h6>
+            </li>
+            
+            <!-- ORDER COMPLETE -->
+            <li class="col-sm-4"> <i class="fa fa-check"></i>
+              <h6>ORDER COMPLETE</h6>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Payments Steps -->
+        <div class="shopping-cart text-center">
+          <div class="cart-head">
+            <ul class="row">
+              <!-- PRODUCTS -->
+              <li class="col-sm-3">
+                <h6>PRODUCTS</h6>
+              </li>
+              <!-- NAME -->
+              <li class="col-sm-3">
+                <h6>NAME</h6>
+              </li>
+              <!-- QTY -->
+              <li class="col-sm-1">
+                <h6>QTY</h6>
+              </li>
+              <!-- PRICE -->
+              <li class="col-sm-2">
+                <h6>PRICE</h6>
+              </li>
+              <!-- TOTAL PRICE -->
+              <li class="col-sm-2">
+                <h6>TOTAL PRICE</h6>
+              </li>
+              <li class="col-sm-1"> </li>
+            </ul>
+          </div>
+          
+          <!-- Cart Details -->
+          <ul class="row cart-details">
+            <li class="col-sm-6">
+              <div class="media"> 
+                <!-- Media Image -->
+                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/week-img-2.jpg' %}" alt=""> </a> </div>
+                
+                <!-- Item Name -->
+                <div class="media-body">
+                  <div class="position-center-center">
+                    <h6>LOOSE-FIT TRENCH COAT</h6>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <!-- QTY -->
+            <li class="col-sm-1">
+              <div class="position-center-center">
+                <input type="text" value="02">
+              </div>
+            </li>
+            
+            <!-- PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span> 129.00 USD</span> </div>
+            </li>
+            <!-- TOTAL PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span>258.00 USD</span> </div>
+            </li>
+            
+            <!-- EDIT AND REMOVE -->
+            <li class="col-sm-1">
+              <div class="position-center-center"> <a href="#."><i class="fa fa-pencil-square-o"></i> </a> <a href="#."><i class="fa fa-times"></i></a> </div>
+            </li>
+          </ul>
+          
+          <!-- Cart Details -->
+          <ul class="row cart-details">
+            <li class="col-sm-6">
+              <div class="media"> 
+                <!-- Media Image -->
+                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/week-img-3.jpg' %}" alt=""> </a> </div>
+                
+                <!-- Item Name -->
+                <div class="media-body">
+                  <div class="position-center-center">
+                    <h6>LOOSE-FIT TRENCH COAT</h6>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <!-- QTY -->
+            <li class="col-sm-1">
+              <div class="position-center-center">
+                <input type="text" value="02">
+              </div>
+            </li>
+            
+            <!-- PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span> 129.00 USD</span> </div>
+            </li>
+            <!-- TOTAL PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span>258.00 USD</span> </div>
+            </li>
+            
+            <!-- EDIT AND REMOVE -->
+            <li class="col-sm-1">
+              <div class="position-center-center"> <a href="#."><i class="fa fa-pencil-square-o"></i> </a> <a href="#."><i class="fa fa-times"></i></a> </div>
+            </li>
+          </ul>
+          
+          <!-- BTN INFO -->
+          <div class="btn-sec"> 
+            
+            <!-- CLEAR SHOPPING CART --> 
+            <a href="#." class="btn btn-dark"> <i class="fa fa-trash-o"></i> CLEAR SHOPPING CART </a> 
+            
+            <!-- UPDATE SHOPPING CART --> 
+            <a href="#." class="btn btn-dark"> <i class="fa fa-arrow-circle-o-up"></i> UPDATE SHOPPING CART </a> 
+            
+            <!-- CONTINUE SHOPPING --> 
+            <a href="#." class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i> CONTINUE SHOPPING </a> </div>
+          
+          <!-- SHOPPING INFORMATION -->
+          <div class="cart-ship-info">
+            <div class="row"> 
+              
+              <!-- DISCOUNT CODE -->
+              <div class="col-sm-4">
+                <h6>DISCOUNT CODE</h6>
+                <form>
+                  <input type="text" value="" placeholder="ENTER YOUR CODE IF YOU HAVE ONE">
+                  <button type="submit" class="btn btn-small btn-dark">APPLY CODE</button>
+                </form>
+              </div>
+              
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-4">
+                <h6>ESTIMATE SHIPPING & TAX</h6>
+                <form>
+                  <!-- *COUNTRY -->
+                  <label> *COUNTRY
+                    <select class="selectpicker">
+                      <option>UNITED KINGDOM</option>
+                      <option>UNITED STATE</option>
+                      <option>PAKISTAN</option>
+                    </select>
+                  </label>
+                  
+                  <!-- STATE/PROVINCE -->
+                  <label> STATE/PROVINCE
+                    <input type="text" value="" placeholder="">
+                  </label>
+                  <!-- ZIP/POSTAL CODE -->
+                  <label> ZIP/POSTAL CODE
+                    <input type="text" value="" placeholder="">
+                  </label>
+                  <button type="submit" class="btn btn-small btn-dark">APPLY CODE</button>
+                </form>
+              </div>
+              
+              <!-- SUB TOTAL -->
+              <div class="col-sm-4">
+                <div class="grand-total"> <span>SUB TOTAL: 258.00 USD</span>
+                  <h4>GRAND: <span> 258.00 USD </span></h4>
+                  <a href="#." class="btn">PROCEED TO CHECK OUT</a>
+                  <p>Checkout with Multiple Addresses</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!--======= RELATED PRODUCTS =========-->
+      <section class="section-p-60px new-arrival new-arri-w-slide">
+        <div class="container"> 
+          
+          <!--  Tittle -->
+          <div class="tittle tittle-2">
+            <h5>RELATED PRODUCTS</h5>
+            <p class="font-playfair">Most haver in your Shop </p>
+          </div>
+          
+          <!--  New Arrival Tabs Products  -->
+          <div class="popurlar_product client-slide"> 
+            
+            <!--  New Arrival  -->
+            <div class="items-in"> 
+              <!-- Image --> 
+              <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+              <!-- Hover Details -->
+              <div class="over-item">
+                <ul class="animated fadeIn">
+                  <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
+                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                  <!-- Rating Stars -->
+                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                </ul>
+              </div>
+              <!-- Item Name -->
+              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+            </div>
+            
+            <!--  New Arrival  -->
+            <div class="items-in"> 
+              <!-- Image --> 
+              <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
+              <!-- Hover Details -->
+              <div class="over-item">
+                <ul class="animated fadeIn">
+                  <li> <a href="images/new-item-2.jpg" data-lighter><i class="ion-search"></i></a></li>
+                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                  <!-- Rating Stars -->
+                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                </ul>
+              </div>
+              <!-- Item Name -->
+              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+            </div>
+            
+            <!--  New Arrival  -->
+            <div class="items-in"> 
+              <!--  Tags  -->
+              <div class="new-tag"> NEW </div>
+              
+              <!-- Image --> 
+              <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
+              <!-- Hover Details -->
+              <div class="over-item">
+                <ul class="animated fadeIn">
+                  <li> <a href="images/new-item-3.jpg" data-lighter><i class="ion-search"></i></a></li>
+                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                  <!-- Rating Stars -->
+                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                </ul>
+              </div>
+              <!-- Item Name -->
+              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+            </div>
+            
+            <!--  New Arrival  -->
+            <div class="items-in"> 
+              <!--  Tags  -->
+              <div class="hot-tag"> HOT </div>
+              <!-- Image --> 
+              <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
+              <!-- Hover Details -->
+              <div class="over-item">
+                <ul class="animated fadeIn">
+                  <li> <a href="images/new-item-4.jpg" data-lighter><i class="ion-search"></i></a></li>
+                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                  <!-- Rating Stars -->
+                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                </ul>
+              </div>
+              <!-- Item Name -->
+              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+  {% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/own-menu.js' %}"></script> 
+<script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+<script src="{% static 'js/jquery.isotope.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}
