@@ -18,6 +18,5 @@ urlpatterns = [
     path('about/', about_page, name='about-page'),
     path('shop/', shop_page, name='shop-page'),
     path('wishlist/', wishlist_page, name='wishlist-page'),
-    path('login/', login, name='login'),
     path('registration/', registration, name='registration'),
 ]
