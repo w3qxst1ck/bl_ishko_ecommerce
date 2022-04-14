@@ -2,20 +2,49 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+{% block title %}LOGOUT{% endblock %}
 
 {% block content %}
-<h1>Выход</h1>
 
-<p>Вы уверены что хотите выйти из этой учетной записи?</p>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit" class="btn btn-dark btn-small">ВЫХОД</button>
-</form>
+<!--======= SUB BANNER =========-->
+  <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
+    <div class="container">
+      <h4>ВЫХОД ИЗ АККАНУТА</h4>
+      <!-- Breadcrumb -->
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">ВЫХОД ИЗ АККАНУТА</li>
+      </ol>
+    </div>
+  </section>
+
+<div class="content"> 
+    <!--======= LOGIN =========-->
+    <section class="animate fadeInUp" data-wow-delay="0.4s">
+      <div class="container">
+        <div class="shopping-cart">
+          <div class="cart-ship-info">
+            <div class="row justify-content-center" style="margin-bottom: 200px; margin-top: 100px;">
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+                <h6>ВЫХОД</h6>
+                <form method="POST" action="{% url 'account_logout' %}">
+                  {% csrf_token %}
+                  {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                  {% endif %}
+					<p>Вы уверены что хотите выйти из этой учетной записи?</p>
+                  <button type="submit" class="btn btn-dark btn-small">ВЫХОД</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
 
 
 {% endblock %}
