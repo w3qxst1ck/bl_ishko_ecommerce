@@ -2,7 +2,9 @@
 
 {% load static %}
 
-{% block title %}Detail{% endblock title %}
+{% load thumbnail %}
+
+{% block title %}{{ product.title|upper }}{% endblock title %}
 
 {% block header %}
   {% include 'shop/includes/header-light.html' %}
@@ -16,12 +18,12 @@
     <!--======= SUB BANNER =========-->
     <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
       <div class="container">
-        <h4>DRAEY TRENCH COAT</h4>
+        <h4>{{ product.title|upper }}</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
           <li><a href="#">Home</a></li>
           <li><a href="#">SHOP</a></li>
-          <li class="active">DRAEY TRENCH COAT</li>
+          <li class="active">{{ product.title|upper }}</li>
         </ol>
       </div>
     </section>
@@ -35,11 +37,18 @@
           <div class="col-sm-6 large-detail animate fadeInLeft" data-wow-delay="0.4s">
             <div class="images-slider">
               <ul class="slides">
-                <li data-thumb="{% static 'images/item-detail-img-1.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-1.jpg' %}"  alt=""> </li>
+                {% for product_image in product.images.all %}
+                  <li data-thumb="{{ product_image.image.url }}"> 
+                    {% thumbnail product_image.image "570x660" crop="center" as im %}
+                      <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  alt=""> 
+                    {% endthumbnail %}
+                  </li>
+                {% endfor %}
+                <!-- <li data-thumb="{{ product.images.first.image.url }}"> <img class="img-responsive" src="{{ product.images.first.image.url }}"  alt=""> </li>
                 <li data-thumb="{% static 'images/item-detail-img-2.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-2.jpg' %}"  alt=""> </li>
                 <li data-thumb="{% static 'images/item-detail-img-3.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-3.jpg' %}"  alt=""> </li>
                 <li data-thumb="{% static 'images/item-detail-img-4.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-4.jpg' %}"  alt=""> </li>
-                <li data-thumb="{% static 'images/item-detail-img-5.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-5.jpg' %}"  alt=""> </li>
+                <li data-thumb="{% static 'images/item-detail-img-5.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-5.jpg' %}"  alt=""> </li> -->
               </ul>
             </div>
           </div>
@@ -48,18 +57,24 @@
           <div class="col-sm-6 animate fadeInRight" data-wow-delay="0.4s">
             <div class="row">
               <div class="col-sm-12">
-                <h5>DRAEY TRENCH COAT</h5>
-                <span class="price">129.00 USD</span> </div>
-              <div class="col-sm-12"> <span class="code">PRODUCT CODE: SKU: PDID-BC-01.</span>
+                <h5>{{ product.title|upper }}</h5>
+                <span class="price">{{ product.price }} RUB</span> </div>
+              <div class="col-sm-12"> <span class="code">КАТЕГОРИЯ: {{ product.category.title|upper }}</span>
                 <div class="some-info no-border"> <br>
-                  <div class="in-stoke"> <i class="fa fa-check-circle"></i> IN STOCK</div>
+                  {% if product.is_active %}
+                    <div class="in-stoke"> <i class="fa fa-check-circle"></i>В НАЛИЧИИ</div>
+                  {% else %}
+                    <div class="in-stoke"> <i class="fa fa-check-circle"></i>НЕТ В НАЛИЧИИ</div>
+                  {% endif %}
                   <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
-                  <a href="#review"  class="review">(3) Review</a> &nbsp;&nbsp;&nbsp; <a href="#review-form" class="review">Add Your Review</a></div>
+                  <a href="#review"  class="review">(3) Отзывы</a> &nbsp;&nbsp;&nbsp; <a href="#review-form" class="review">Оставить отзыв</a></div>
                 <hr>
               </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectusLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectusLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida , tristique ut lectusLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+            <p>{{ product.description }}</p>
+            <p>Состав: {{ product.compound }}</p>
+            <p>Уход: {{ product.care }}</p>
+
             <hr>
             <div class="row">
               <div class="col-sm-12">
@@ -68,10 +83,9 @@
                   <p>*COLOR</p>
                   <select class="selectpicker">
                     <option>PLEASE SELETCT</option>
-                    <option>RED</option>
-                    <option>BLUE</option>
-                    <option>GREEN</option>
-                    <option>YELLOW</option>
+                    {% for item in product.items.all %}
+                      <option>{{ item.color|upper }}</option>
+                    {% endfor %}
                   </select>
                 </div>
               </div>
@@ -81,10 +95,9 @@
                   <p>*SIZE</p>
                   <select class="selectpicker">
                     <option>PLEASE SELETCT</option>
-                    <option>Small</option>
-                    <option>Large </option>
-                    <option>X Large</option>
-                    <option>XX Large</option>
+                    {% for item in product.items.all %}
+                      <option>{{ item.size|upper }}</option>
+                    {% endfor %}
                   </select>
                 </div>
               </div>
@@ -94,13 +107,13 @@
               <div class="col-sm-12">
                 <div class="fun-share">
                   <input type="text" value="1">
-                  <a href="#." class="btn btn-small btn-dark">ADD TO CART</a> <a href="#." class="share-sec"><i class="ion-shuffle"></i></a> <a class="share-sec" href="#."><i class="fa fa-heart-o"></i></a> </div>
+                  <a href="#." class="btn btn-small btn-dark">В КОРЗИНУ</a> <a href="#." class="share-sec"><i class="ion-shuffle"></i></a> <a class="share-sec" href="#."><i class="fa fa-heart-o"></i></a> </div>
               </div>
               <!-- SHARE -->
               <div class="col-sm-12">
                 <ul class="share-with">
                   <li>
-                    <p>SHARE WITH</p>
+                    <p>ПОДЕЛИТЬСЯ</p>
                   </li>
                   <li><a href="#."><i class="fa fa-facebook"></i></a></li>
                   <li><a href="#."><i class="fa fa-twitter"></i></a></li>
@@ -117,20 +130,27 @@
           <div class="text-center"> 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation"><a href="#descr" aria-controls="men" role="tab" data-toggle="tab">DESCRIPTION</a></li>
-              <li role="presentation" class="active"><a href="#review" aria-controls="women" role="tab" data-toggle="tab">REVIEW (03)</a></li>
-              <li role="presentation"><a href="#tags" aria-controls="access" role="tab" data-toggle="tab">TAGS</a></li>
+              <li role="presentation"><a href="#descr" aria-controls="men" role="tab" data-toggle="tab">ОПИСАНИЕ</a></li>
+              <li role="presentation"><a href="#tags" aria-controls="access" role="tab" data-toggle="tab">СОСТАВ</a></li>
+              <li role="presentation" class="active"><a href="#review" aria-controls="women" role="tab" data-toggle="tab">ОТЗЫВЫ (03)</a></li>
             </ul>
           </div>
           <!-- Tab panes -->
           <div class="tab-content"> 
             <!-- DESCRIPTION -->
             <div role="tabpanel" class="tab-pane fade" id="descr">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectusLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectusLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.<br>
-                <br>
-                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. </p>
+              <p>{{ product.description }}<br>
+                <br></p>
             </div>
-            
+
+            <!-- TAGS -->
+            <div role="tabpanel" class="tab-pane fade" id="tags">
+              <p>Состав: {{ product.compound }}<br>
+                <br></p>
+              <p>Уход: {{ product.care }}<br>
+                <br></p>
+            </div>
+
             <!-- REVIEW -->
             <div role="tabpanel" class="tab-pane fade  in active" id="review">
               <h6>3 REVIEWS FOR SHIP YOUR IDEA</h6>
@@ -165,11 +185,11 @@
               </div>
               
               <!-- ADD REVIEW -->
-              <h6 class="margin-t-40">ADD REVIEW</h6>
+              <h6 class="margin-t-40">ОСТАВИТЬ ОТЗЫВ</h6>
               <form id="review-form">
                 <ul class="row">
                   <li class="col-sm-6">
-                    <label> *NAME
+                    <label> *ИМЯ
                       <input type="text" value="" placeholder="">
                     </label>
                   </li>
@@ -179,24 +199,21 @@
                     </label>
                   </li>
                   <li class="col-sm-12">
-                    <label> *YOUR REVIEW
+                    <label> *ВАШ ОТЗЫВ
                       <textarea></textarea>
                     </label>
                   </li>
                   <li class="col-sm-6"> 
                     <!-- Rating Stars -->
-                    <div class="stars"> <span>YOUR RATING</span> <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <div class="stars"> <span>ОЦЕНКА</span> <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
                   </li>
                   <li class="col-sm-6">
-                    <button type="submit" class="btn btn-dark btn-small pull-right no-margin">POST REVIEW</button>
+                    <button type="submit" class="btn btn-dark btn-small pull-right no-margin">ОПУБЛИКОВАТЬ</button>
                   </li>
                 </ul>
               </form>
             </div>
-            
-            <!-- TAGS -->
-            <div role="tabpanel" class="tab-pane fade" id="tags"> </div>
-          </div>
+
         </div>
       </div>
       
@@ -206,8 +223,8 @@
           
           <!--  Tittle -->
           <div class="tittle tittle-2 animate fadeInUp" data-wow-delay="0.4s">
-            <h5>RELATED PRODUCTS</h5>
-            <p class="font-playfair">Most haver in your Shop </p>
+            <h5>ПОХОЖИЕ ТОВАРЫ</h5>
+            <p class="font-playfair">Вам также может понравиться</p>
           </div>
           
           <!--  New Arrival Tabs Products  -->

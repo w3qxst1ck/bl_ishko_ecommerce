@@ -64,6 +64,13 @@ class ProductImages(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Фото товара', related_name='images')
     image = models.ImageField(upload_to='products/')
 
+    def __str__(self):
+        return f'{self.id}. {self.product.title}'
+
+    class Meta:
+        verbose_name = 'Фото продукта'
+        verbose_name_plural = 'Фото продуктов'
+
 
 class Category(models.Model):
     title = models.CharField(max_length=255)

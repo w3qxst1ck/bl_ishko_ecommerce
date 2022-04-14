@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+
+from .models import Product
 
 
 def home_page(request):
@@ -9,8 +12,9 @@ def faq_page(request):
     return render(request, 'shop/faq.html')
 
 
-def product_detail(request):
-    return render(request, 'shop/detail.html')
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    return render(request, 'shop/detail.html', context={'product': product,})
 
 
 def about_page(request):

@@ -33,6 +33,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # photo editor
+    'sorl.thumbnail',
+
     # apps
     'shop.apps.ShopConfig',
 ]

@@ -2,6 +2,9 @@ from django.contrib import admin
 from . import models
 
 
+admin.site.register(models.ProductImages)
+
+
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
