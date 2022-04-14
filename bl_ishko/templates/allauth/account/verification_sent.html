@@ -2,11 +2,47 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block title %}VERIFICATION{% endblock %}
 
-{% block content %}
-    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+{% block content_auth %}
+   <!--======= SUB BANNER =========-->
+  <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
+    <div class="container">
+      <h4>ПОДТВЕРЖДЕНИЕ АККАУНТА</h4>
+      <!-- Breadcrumb -->
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">ПОДТВЕРЖДЕНИЕ АККАУНТА</li>
+      </ol>
+    </div>
+  </section>
+  
+  <!-- CONTENT START -->
+  <div class="content"> 
 
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder. Please contact us if you do not receive the verification e-mail within a few minutes.{% endblocktrans %}</p>
+    <!--======= LOGIN =========-->
+    <section class="animate fadeInUp" data-wow-delay="0.4s">
+      <div class="container">
 
+        <div class="shopping-cart">
+          <div class="cart-ship-info">
+            <div class="row justify-content-center" style="margin-bottom: 200px; margin-top: 100px;">
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+                <h6>ПОДТВЕРДИТЕ ВАШ E-MAIL АДРЕС</h6>
+                <form method="POST" action="{{ action_url }}">
+                  {% csrf_token %}
+                  <ul class="row">
+                     <li class="col-md-12">
+                     	<p>Мы отправили Вам на почту письмо для подтверждения. Перейдите по ссылке, чтобы закончить процесс регистрации. Если вы не видите письмо во "Входящих", проверьте папку "Спам". Пожалуйста, свяжитесь с нами, если вы так и не получили письмо в течение нескольких минут.</p>
+                     </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 {% endblock %}

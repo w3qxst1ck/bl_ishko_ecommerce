@@ -3,29 +3,58 @@
 {% load i18n %}
 {% load account %}
 
-{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+{% block title %}CONFIRM EMAIL{% endblock %}
 
+{% block content_auth %}
 
-{% block content %}
-<h1>{% trans "Confirm E-mail Address" %}</h1>
+<!--======= SUB BANNER =========-->
+  <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
+    <div class="container">
+      <h4>ПОДТВЕРЖДЕНИЕ</h4>
+      <!-- Breadcrumb -->
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">ПОДТВЕРЖДЕНИЕ</li>
+      </ol>
+    </div>
+  </section>
+  
+  <!-- CONTENT START -->
+  <div class="content"> 
 
-{% if confirmation %}
+    <!--======= LOGIN =========-->
+    <section class="animate fadeInUp" data-wow-delay="0.4s">
+      <div class="container">
 
-{% user_display confirmation.email_address.user as user_display %}
-
-<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
-
-<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-{% csrf_token %}
-    <button type="submit">{% trans 'Confirm' %}</button>
-</form>
-
-{% else %}
-
-{% url 'account_email' as email_url %}
-
-<p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
-
-{% endif %}
+        <div class="shopping-cart">
+          <div class="cart-ship-info">
+            <div class="row justify-content-center" style="margin-bottom: 200px; margin-top: 100px;">
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+                <h6>ПОДТВЕРЖДЕНИЕ E-MAIL АДРЕСА</h6>
+                <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                	{% if confirmation %}
+							{% user_display confirmation.email_address.user as user_display %}
+                  	{% csrf_token %}
+                  <ul class="row">
+                    <li class="col-md-12">
+                        <p>{% blocktrans with confirmation.email_address.email as email %}Пожалуйста, подтвердите, что <a href="mailto:{{ email }}">{{ email }}</a> это электронная почта пользователя {{ user_display }}.{% endblocktrans %}</p>
+                    </li>
+                  {% else %}
+                  	{% url 'account_email' as email_url %}
+                  	<li class="col-md-12">
+                        <p>{% blocktrans %}Эта ссылка для подтверждения уже недействительна, либо некорректна. Пожалуйста, <a href="{{ email_url }}">отправьте новый запрос для подтверждения электронной почты</a>.{% endblocktrans %}</p>
+                    </li>
+                  {% endif %}
+                  </ul>
+                  <button type="submit" class="btn btn-dark btn-small">ПОДТВЕРДИТЬ</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 {% endblock %}
