@@ -1,0 +1,54 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
+
+{% block content %}
+
+    {% block body %}
+    {% if messages %}
+    <div>
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+<!--     <div>
+      <strong>Menu:</strong>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div> -->
+    {% block content_auth %}
+    {% endblock %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+
+{% endblock content %}
+
+
+{% block scripts %}
+  <script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+  <script src="{% static 'js/wow.min.js' %}"></script> 
+  <script src="{% static 'js/bootstrap.min.js' %}"></script> 
+  <script src="{% static 'js/own-menu.js' %}"></script> 
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+  <script src="{% static 'js/jquery.isotope.min.js' %}"></script> 
+  <script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+  <script src="{% static 'js/main.js' %}"></script> 
+{% endblock scripts %}
