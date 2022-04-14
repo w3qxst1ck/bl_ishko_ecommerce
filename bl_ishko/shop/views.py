@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 
+from allauth.account.urls import urlpatterns
+from allauth.account.forms import ResetPasswordForm
+
 from .models import Product
 
 
