@@ -9,8 +9,14 @@
         <div class="language"> <a href="#." class="active">RU</a></div>
         <div class="top-links">
           <ul>
-            <li><a href="#.">MY ACCOUNT</a></li>
-            <li><a href="#.">MY WISHLIST</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="">ЛИЧЫЙ КАБИНЕТ</a></li>
+              <li><a href="#.">ИЗБРАННОЕ</a></li>
+              <li><a href="{% url 'account_logout' %}">ВЫЙТИ</a></li>
+            {% else %}
+              <li><a href="{% url 'account_login' %}">ВОЙТИ</a></li>
+              <li><a href="{% url 'account_signup' %}">ЗАРЕГИСТРИРОВАТЬСЯ</a></li>
+            {% endif %}
             <li class="font-montserrat">CURRENCY:
               <select class="selectpicker">
                 <option>RUB</option>

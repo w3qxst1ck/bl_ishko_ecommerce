@@ -1,17 +1,5 @@
 from django.db import models
-from django.utils.text import slugify
-from .utils import alphabet
-from time import time
-
-
-def gen_slug(title, model_type=None):
-    if model_type:
-        eng_title = ''.join(alphabet.get(c, c) for c in title.lower())
-        slug_field = ' '.join(eng_title.split()[:4]) + '-' + str(time())[-3:]
-    else:
-        slug_field = ''.join(alphabet.get(c, c) for c in title.lower())
-    return slugify(slug_field, allow_unicode=True)
-
+from .utils import gen_slug
 
 CHOICES = (
     ('XS', 'XS'),
@@ -87,3 +75,5 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+
+
