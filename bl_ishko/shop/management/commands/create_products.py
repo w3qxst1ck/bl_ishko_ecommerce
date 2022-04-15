@@ -15,7 +15,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         count = 11
-        # products_to_upload = self.load_from_json('products')
         self.create_categories()
         self.create_products(count)
         self.create_items(count * 5)
