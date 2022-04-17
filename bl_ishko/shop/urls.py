@@ -3,7 +3,7 @@ from django.urls import path
 
 from .views import (home_page, faq_page, product_detail, about_page,
                     shop_page, contact_page, cart_page, checkout_page,
-                    login, wishlist_page, registration)
+                    wishlist_page)
 
 
 app_name = 'shop'
@@ -18,5 +18,4 @@ urlpatterns = [
     path('about/', about_page, name='about-page'),
     path('shop/', shop_page, name='shop-page'),
     path('wishlist/', wishlist_page, name='wishlist-page'),
-    path('registration/', registration, name='registration'),
 ]

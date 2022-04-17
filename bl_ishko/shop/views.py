@@ -33,6 +33,7 @@ def contact_page(request):
 
 
 def cart_page(request):
+
     return render(request, 'shop/cart.html')
 
 
@@ -40,13 +41,6 @@ def checkout_page(request):
     return render(request, 'shop/checkout.html')
 
 
-def login(request):
-    return render(request, 'users/login.html')
-
-
 def wishlist_page(request):
     return render(request, 'shop/wishlist.html')
 
-
-def registration(request):
-    return render(request, 'users/registration.html')

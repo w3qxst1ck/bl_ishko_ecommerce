@@ -20,6 +20,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name='Опсиание')
     compound = models.TextField(verbose_name='Состав')
     care = models.TextField(verbose_name='Уход')
+    title_image = models.ImageField(upload_to='products/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -75,5 +76,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+
+
 
 

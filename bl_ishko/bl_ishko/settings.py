@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 
     # apps
     'shop.apps.ShopConfig',
-    'users'
+    'users',
+    'cart'
 ]
 
 SITE_ID = 1
