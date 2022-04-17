@@ -13,7 +13,7 @@ CHOICES = (
 
 class Product(models.Model):
     title = models.CharField(max_length=255, db_index=True, verbose_name='Название')
-    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, verbose_name='Категория')
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, related_name='products', verbose_name='Категория')
     price = models.FloatField(verbose_name='Цена')
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
@@ -21,7 +21,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name='Опсиание')
     compound = models.TextField(verbose_name='Состав')
     care = models.TextField(verbose_name='Уход')
-    title_image = models.ImageField(upload_to='products/', blank=True, null=True)
+    title_image = models.ImageField(upload_to='products/title_images')
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -76,6 +76,9 @@ class Category(models.Model):
         if not self.id:
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('shop:cat-shop-page', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Категория'

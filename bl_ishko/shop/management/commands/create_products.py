@@ -34,6 +34,7 @@ class Command(BaseCommand):
         print('Объекты Categories супешно созданы!')
 
     def create_products(self, count):
+        all_images = os.listdir(path='shop/data/images/')
         for _ in range(count):
             mixer.blend(
                 Product,
@@ -43,6 +44,7 @@ class Command(BaseCommand):
                 slug=mixer.SKIP,
                 discount=random.choice([0, 10, 20, 30]),
                 is_active=True,
+                title_image=File(open(f'shop/data/images/{all_images[random.randint(0, len(all_images)-1)]}', 'rb')),
                 )
         print('Объекты Products супешно созданы!')
 
