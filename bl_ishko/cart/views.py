@@ -6,22 +6,23 @@ from cart.models import OrderItem, Order
 from shop.models import Item
 
 
+@login_required
 def cart_page(request):
-    return render(request, 'cart/cart.html')
+    order = get_object_or_404(Order, user=request.user)
+    return render(request, 'cart/cart.html', context={'order': order})
 
 
 @login_required
-def add_to_cart(request, slug):
-    item = get_object_or_404(Item, product__slug=slug)
+def add_to_cart(request, pk):
+    item = get_object_or_404(Item, id=pk)
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
         user=request.user,
-        ordered=False
     )
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
-        if order.order_items.filter(item__product__slug=slug).exists():
+        if order.order_items.filter(item__id=pk).exists():
             order_item.quantity += 1
             order_item.save()
         else:

@@ -1,5 +1,6 @@
 from django.db import models
 from .utils import gen_slug
+from django.shortcuts import reverse
 
 CHOICES = (
     ('XS', 'XS'),
@@ -26,6 +27,9 @@ class Product(models.Model):
         if not self.id:
             self.slug = gen_slug(self.title, model_type='product')
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('shop:detail-page', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title

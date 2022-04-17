@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Cart{% endblock title %}
+{% block title %}КОРЗИНА{% endblock title %}
 
 {% block header %}
   {% include 'shop/includes/header-light.html' %}
@@ -15,11 +15,11 @@
     <!--======= SUB BANNER =========-->
     <section class="sub-banner">
       <div class="container">
-        <h4>SHOPPING CART</h4>
+        <h4>ОФОРМЛЕНИЕ ЗАКАЗА</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
           <li><a href="#">Home</a></li>
-          <li class="active">SHOPPING CART</li>
+          <li class="active">КОРЗИНА</li>
         </ol>
       </div>
     </section>
@@ -33,7 +33,7 @@
           <ul class="row">
             <!-- SHOPPING CART -->
             <li class="col-sm-4 current"> <i class="fa fa-shopping-cart"></i>
-              <h6>SHOPPING CART</h6>
+              <h6>КОРЗИНА</h6>
             </li>
             
             <!-- CHECK OUT DETAIL -->
@@ -54,103 +54,72 @@
             <ul class="row">
               <!-- PRODUCTS -->
               <li class="col-sm-3">
-                <h6>PRODUCTS</h6>
+                <h6>ТОВАРЫ</h6>
               </li>
               <!-- NAME -->
               <li class="col-sm-3">
-                <h6>NAME</h6>
+                <h6>НАЗВАНИЕ</h6>
               </li>
               <!-- QTY -->
               <li class="col-sm-1">
-                <h6>QTY</h6>
+                <h6>КОЛ-ВО</h6>
               </li>
               <!-- PRICE -->
               <li class="col-sm-2">
-                <h6>PRICE</h6>
+                <h6>ЦЕНА</h6>
               </li>
               <!-- TOTAL PRICE -->
               <li class="col-sm-2">
-                <h6>TOTAL PRICE</h6>
+                <h6>СУММА</h6>
               </li>
               <li class="col-sm-1"> </li>
             </ul>
           </div>
           
-          <!-- Cart Details -->
-          <ul class="row cart-details">
-            <li class="col-sm-6">
-              <div class="media"> 
-                <!-- Media Image -->
-                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/week-img-2.jpg' %}" alt=""> </a> </div>
-                
-                <!-- Item Name -->
-                <div class="media-body">
-                  <div class="position-center-center">
-                    <h6>LOOSE-FIT TRENCH COAT</h6>
+          {% for item in order.order_items.all %}
+            <!-- Cart Details -->
+            <ul class="row cart-details">
+              <li class="col-sm-6">
+                <div class="media"> 
+                  <!-- Media Image -->
+                  <div class="media-left media-middle"> <a href="{{ item.item.product.get_absolute_url }}" class="item-img"> <img class="media-object" src="{{ item.item.product.title_image.url }}" alt=""> </a> </div>
+                  
+                  <!-- Item Name -->
+                  <div class="media-body">
+                    <div class="position-center-center">
+                      <a href="{{ item.item.product.get_absolute_url }}"> 
+                        <h6>{{ item.item.product.title|upper|truncatechars:20 }}</h6>
+                        <h6>{{ item.item.color }} - {{ item.item.size }}</h6>
+                      </a>
+
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-            
-            <!-- QTY -->
-            <li class="col-sm-1">
-              <div class="position-center-center">
-                <input type="text" value="02">
-              </div>
-            </li>
-            
-            <!-- PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <span> 129.00 USD</span> </div>
-            </li>
-            <!-- TOTAL PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <span>258.00 USD</span> </div>
-            </li>
-            
-            <!-- EDIT AND REMOVE -->
-            <li class="col-sm-1">
-              <div class="position-center-center"> <a href="#."><i class="fa fa-pencil-square-o"></i> </a> <a href="#."><i class="fa fa-times"></i></a> </div>
-            </li>
-          </ul>
-          
-          <!-- Cart Details -->
-          <ul class="row cart-details">
-            <li class="col-sm-6">
-              <div class="media"> 
-                <!-- Media Image -->
-                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/week-img-3.jpg' %}" alt=""> </a> </div>
-                
-                <!-- Item Name -->
-                <div class="media-body">
-                  <div class="position-center-center">
-                    <h6>LOOSE-FIT TRENCH COAT</h6>
-                  </div>
+              </li>
+              
+              <!-- QTY -->
+              <li class="col-sm-1">
+                <div class="position-center-center">
+                  <input type="text" value="{{ item.quantity }}">
                 </div>
-              </div>
-            </li>
-            
-            <!-- QTY -->
-            <li class="col-sm-1">
-              <div class="position-center-center">
-                <input type="text" value="02">
-              </div>
-            </li>
-            
-            <!-- PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <span> 129.00 USD</span> </div>
-            </li>
-            <!-- TOTAL PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <span>258.00 USD</span> </div>
-            </li>
-            
-            <!-- EDIT AND REMOVE -->
-            <li class="col-sm-1">
-              <div class="position-center-center"> <a href="#."><i class="fa fa-pencil-square-o"></i> </a> <a href="#."><i class="fa fa-times"></i></a> </div>
-            </li>
-          </ul>
+              </li>
+              
+              <!-- PRICE -->
+              <li class="col-sm-2">
+                <div class="position-center-center"> <span> {{ item.item.product.price }} RUB</span> </div>
+              </li>
+              <!-- TOTAL PRICE -->
+              <li class="col-sm-2">
+                <div class="position-center-center"> <span>{{ item.item_total }} RUB</span> </div>
+              </li>
+              
+              <!-- EDIT AND REMOVE -->
+              <li class="col-sm-1">
+                <div class="position-center-center"> <a href="#."><i class="fa fa-pencil-square-o"></i> </a> <a href="#."><i class="fa fa-times"></i></a> </div>
+              </li>
+            </ul>
+          {% endfor %}
+
           
           <!-- BTN INFO -->
           <div class="btn-sec"> 
@@ -204,8 +173,8 @@
               
               <!-- SUB TOTAL -->
               <div class="col-sm-4">
-                <div class="grand-total"> <span>SUB TOTAL: 258.00 USD</span>
-                  <h4>GRAND: <span> 258.00 USD </span></h4>
+                <div class="grand-total"> <span>SUB TOTAL: {{ order.get_order_total_price }} RUB</span>
+                  <h4>GRAND: <span> {{ order.get_order_total_price }} RUB </span></h4>
                   <a href="#." class="btn">PROCEED TO CHECK OUT</a>
                   <p>Checkout with Multiple Addresses</p>
                 </div>

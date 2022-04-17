@@ -8,8 +8,11 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Товар')
     quantity = models.IntegerField(default=1, verbose_name='Количество')
 
+    def item_total(self):
+        return self.quantity * self.item.product.price
+
     def __str__(self):
-        return f'{self.item.product.title} - {self.quantity}'
+        return f'{self.item.id}.{self.item.product.title} - {self.quantity}'
 
 
 class Order(models.Model):
@@ -18,6 +21,9 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     ordered = models.BooleanField(default=False)
+
+    def get_order_total_price(self):
+        return sum([item.item_total() for item in self.order_items.all()])
 
     def __str__(self):
         return f'{self.user.email}'
