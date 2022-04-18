@@ -19,7 +19,7 @@
               <li><a href="{% url 'account_login' %}">ВОЙТИ</a></li>
               <li><a href="{% url 'account_signup' %}">ЗАРЕГИСТРИРОВАТЬСЯ</a></li>
             {% endif %}
-            <li class="font-montserrat">CURRENCY:
+            <li class="font-montserrat">ВАЛЮТА:
               <select class="selectpicker">
                 <option>RUB</option>
               </select>
@@ -119,7 +119,7 @@
             <li class="meganav"><a href="{% url 'shop:shop-page' %}">МАГАЗИН</a>
               <ul class="dropdown">
                 {% for c in categories %}
-                <li><a href="03-pay-checkout.html">{{ c.title }}</a></li>
+                <li><a href="{{ c.get_absolute_url }}">{{ c.title }}</a></li>
                 {% endfor %}
               </ul>
             </li>
@@ -222,7 +222,7 @@
             </li>
             
             <!--======= Shopping Cart =========-->
-            <li class="shop-cart"><a href="{% url 'cart:cart-page' %}"><i class="fa fa-shopping-cart"></i></a> <span class="numb">2</span>
+            <li class="shop-cart"><a href="{% url 'cart:cart-page' %}"><i class="fa fa-shopping-cart"></i></a> {% if order.order_items.all %}<span class="numb">{{ order.get_total_quantity }}</span>{% endif %}
               <ul class="dropdown">
                 {% for item in order.order_items.all %}
                 <li>
@@ -237,18 +237,18 @@
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="media-heading">{{ item.item.product.title|upper|truncatechars:10 }}</h6>
+                      <h6 class="media-heading">{{ item.item.product.title|upper|truncatechars:19 }}</h6>
                       <span class="price">{{ item.item_total }} RUB</span> <span class="qty">КОЛ-ВО: {{ item.quantity }}</span> </div>
                   </div>
                 </li>
                 {% endfor %}
                 
                 <li class="no-padding no-border">
-                  <h5 class="text-center">SUBTOTAL: {{ order.get_order_total_price }} RUB</h5>
+                  <h5 class="text-center">СУММА: {% if order %}{{ order.get_order_total_price }}{% else %}0{% endif %} RUB</h5>
                 </li>
                 <li class="no-padding no-border">
                   <div class="row">
-                    <div class="col-xs-6"> <a href="{% url 'cart:cart-page' %}" class="btn btn-small">VIEW CART</a></div>
+                    <div class="col-xs-6"> <a href="{% url 'cart:cart-page' %}" class="btn btn-small">КОРЗИНА</a></div>
                     <div class="col-xs-6 "> <a href="#." class="btn btn-1 btn-small">CHECK OUT</a></div>
                   </div>
                 </li>

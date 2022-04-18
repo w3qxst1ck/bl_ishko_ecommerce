@@ -57,6 +57,19 @@
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-3"></div>
               <div class="col-sm-6">
+
+<!--                 {% if messages %}
+                <form >
+                  <ul class="row">
+                    <li class="col-md-12">
+                      {% for message in messages %}
+                      <p>Message: {{message}}</p>
+                      {% endfor %}
+                    </li>
+                  </ul>
+                </form>
+                {% endif %} -->
+
                 <h6>LOGIN FORM</h6>
                 <form method="POST" action="{% url 'account_login' %}">
                   {% csrf_token %}

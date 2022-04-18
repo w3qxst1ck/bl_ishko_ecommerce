@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    # math in templates
+    'mathfilters',
+
     # photo editor
     'sorl.thumbnail',
 
@@ -81,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bl_ishko.context_processors.get_order',
+                'bl_ishko.context_processors.get_categories',
             ],
         },
     },
@@ -93,6 +98,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 WSGI_APPLICATION = 'bl_ishko.wsgi.application'
+LOGIN_REDIRECT_URL = 'shop:shop-page'
 
 
 # Database

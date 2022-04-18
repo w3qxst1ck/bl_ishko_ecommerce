@@ -3,6 +3,7 @@
 {% load static %}
 
 {% load thumbnail %}
+{% load mathfilters %}
 
 {% block title %}Shop{% endblock title %}
 
@@ -18,7 +19,7 @@
     <!--======= SUB BANNER =========-->
     <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
       <div class="container">
-        <h4>{% if category %}ВСЕ {{ category.title|upper }}{% else %}ВСЕ ТОВАРЫ{% endif %}</h4>
+        <h4>{% if category %}{{ category.title|upper }}{% else %}ВСЕ ТОВАРЫ{% endif %}</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
           <li><a href="{% url 'shop:home-page' %}">Home</a></li>
@@ -150,17 +151,18 @@
                   <option>Short by</option>
                   <option>Short by</option>
                 </select>
-                <p>Показаны 1-12 из {{ products.count }} товаров</p>
+                <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
               </div>
               
               <!--======= VIEW ITEM NUMBER =========-->
+              
               <div class="view-num">
                 <ul>
-                  <li>View&nbsp;</li>
-                  <li><a href="#.">9</a>/</li>
-                  <li><a href="#.">12</a>/</li>
-                  <li><a href="#.">24</a>/</li>
-                  <li><a href="#.">All</a></li>
+                  {% if category %}
+                  <li><a href="{% url 'shop:shop-page' %}">Все категории</a></li>
+                  {% else %}
+                  <li><a>Все товары</a></li>
+                  {% endif %}
                 </ul>
               </div>
             </div>
@@ -171,7 +173,7 @@
 
                 {% for product in products %}
                 <!-- New Products -->
-                <li class="col-sm-4 animate fadeIn" data-wow-delay="0.4s">
+                <li class="col-sm-4 animate fadeIn" data-wow-delay="{% if forloop.counter > 3 %}{% if forloop.counter|mod:3 == 0 %}0.6{% else %}{{ forloop.counter|mod:3|mul:0.2 }}{% endif %}{% else %}{{ forloop.counter|mul:0.2 }}{% endif %}s">
                   <div class="items-in"> 
                     <!-- Image -->
                     {% thumbnail product.title_image "270x340" crop="center" as im %}
@@ -197,6 +199,7 @@
             </div>
             
             <!--======= PAGINATION =========-->
+            {% if products.count > 12 %}
             <ul class="pagination animate fadeInUp" data-wow-delay="0.4s">
               <li><a href="#.">1</a></li>
               <li><a href="#.">2</a></li>
@@ -205,6 +208,9 @@
               <li><a href="#.">5</a></li>
               <li><a href="#."><i class="fa fa-angle-right"></i></a></li>
             </ul>
+            {% else %}
+            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s"></ul>
+            {% endif %}
           </div>
         </div>
       </div>
