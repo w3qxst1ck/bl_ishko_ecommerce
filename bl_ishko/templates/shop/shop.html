@@ -22,7 +22,7 @@
         <h4>{% if category %}{{ category.title|upper }}{% else %}ВСЕ ТОВАРЫ{% endif %}</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="{% url 'shop:home-page' %}">Home</a></li>
+          <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
           <li class="active">МАГАЗИН</li>
         </ol>
       </div>
@@ -191,7 +191,7 @@
                       </ul>
                     </div>
                     <!-- Item Name -->
-                    <div class="details-sec"> <a href="#.">{{ product.title|upper }}</a> <span class="font-montserrat">{{ product.price }} RUB</span> </div>
+                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat">{{ product.price }} RUB</span> </div>
                   </div>
                 </li>
                 {% endfor %}

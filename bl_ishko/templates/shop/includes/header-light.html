@@ -6,9 +6,9 @@
   {% block header_class %}<header class="header-style-2">{% endblock header_class %}
       <!-- Top Bar -->
     <div class="top-bar">
-      <div class="container"> 
+      <div class="container">
         <!-- Language -->
-        <div class="language"> <a href="#." class="active">RU</a></div>
+        <div class="language"> <a class="active">RU</a></div>
         <div class="top-links">
           <ul>
             {% if user.is_authenticated %}
@@ -183,17 +183,7 @@
                 </li>
               </ul>
             </li>
-            <li><a href="08-01-blog-mansory.html">BLOG</a>
-              <ul class="dropdown">
-                <li><a href="08-01-blog-mansory.html">Blog Mansory</a></li>
-                <li><a href="08-02-blog-left-side-bar.html">Blog Left Side Bar</a></li>
-                <li><a href="08-02-blog-right-side-bar.html">Blog Right Side Bar</a></li>
-                <li><a href="08-04-blog-medium-image.html">Blog Medium Image</a></li>
-                <li><a href="08-05-blog-large-images.html">Blog Large Images</a></li>
-                <li><a href="08-06-blog-02-col.html">Blog 02 Col</a></li>
-                <li><a href="08-07-blog-03-col.html">Blog 03 Col</a></li>
-                <li><a href="08-08-blog-04-col.html">Blog 04 Col</a></li>
-              </ul>
+            <li><a href="{% url 'shop:faq-page' 1 %}">FAQ</a>
             </li>
             <ul class="dropdown">
               <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID </a>

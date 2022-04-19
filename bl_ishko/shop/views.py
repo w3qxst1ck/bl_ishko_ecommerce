@@ -1,15 +1,18 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 
-from .models import Product, Category
+from .models import Product, Category, Faq, FaqCategory
 
 
 def home_page(request):
     return render(request, 'shop/base.html')
 
 
-def faq_page(request):
-    return render(request, 'shop/faq.html')
+def faq_page(request, pk):
+    faq_categories = FaqCategory.objects.all().order_by('title')
+    faq_category = get_object_or_404(FaqCategory, id=pk)
+    faqs = Faq.objects.filter(category=faq_category)
+    return render(request, 'shop/faq.html', {'faqs': faqs, 'faq_categories': faq_categories})
 
 
 def product_detail(request, slug):

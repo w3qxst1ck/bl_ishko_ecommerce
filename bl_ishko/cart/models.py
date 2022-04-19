@@ -11,6 +11,12 @@ class OrderItem(models.Model):
     def item_total(self):
         return self.quantity * self.item.product.price
 
+    def item_total_with_sale(self):
+        item_total = self.item_total()
+        if self.item.product.discount:
+            item_total = item_total - item_total * self.item.product.discount / 100
+        return item_total
+
     def __str__(self):
         return f'{self.item.id}.{self.item.product.title} - {self.quantity}'
 
@@ -24,6 +30,9 @@ class Order(models.Model):
 
     def get_order_total_price(self):
         return sum([item.item_total() for item in self.order_items.all()])
+
+    def get_order_total_price_with_sale(self):
+        return sum([item.item_total_with_sale() for item in self.order_items.all()])
 
     def get_total_quantity(self):
         return sum([item.quantity for item in self.order_items.all()])

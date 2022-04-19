@@ -21,8 +21,8 @@
         <h4>{{ product.title|upper }}</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">SHOP</a></li>
+          <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
+          <li><a href="{% url 'shop:shop-page' %}">МАГАЗИН</a></li>
           <li class="active">{{ product.title|upper }}</li>
         </ol>
       </div>
@@ -40,7 +40,7 @@
                 {% for product_image in product.images.all %}
                   <li data-thumb="{{ product_image.image.url }}"> 
                     {% thumbnail product_image.image "570x660" crop="center" as im %}
-                      <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  alt=""> 
+                      <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
                     {% endthumbnail %}
                   </li>
                 {% endfor %}
@@ -64,7 +64,7 @@
                   {% if product.is_active %}
                     <div class="in-stoke"> <i class="fa fa-check-circle"></i>В НАЛИЧИИ</div>
                   {% else %}
-                    <div class="in-stoke"> <i class="fa fa-check-circle"></i>НЕТ В НАЛИЧИИ</div>
+                    <div class="in-stoke"> НЕТ В НАЛИЧИИ</div>
                   {% endif %}
                   <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
                   <a href="#review"  class="review">(3) Отзывы</a> &nbsp;&nbsp;&nbsp; <a href="#review-form" class="review">Оставить отзыв</a></div>

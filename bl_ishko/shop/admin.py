@@ -3,6 +3,8 @@ from . import models
 
 
 admin.site.register(models.ProductImages)
+admin.site.register(models.Faq)
+admin.site.register(models.FaqCategory)
 
 
 @admin.register(models.Category)

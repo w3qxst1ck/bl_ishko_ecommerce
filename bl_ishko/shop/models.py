@@ -85,5 +85,32 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
 
+class FaqCategory(models.Model):
+    title = models.CharField(max_length=255, db_index=True, verbose_name='Название категории')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('shop:faq-page', kwargs={'pk': self.id})
+
+    class Meta:
+        verbose_name = 'Категория FAQ'
+        verbose_name_plural = 'Категории FAQ'
+
+
+class Faq(models.Model):
+    title = models.TextField(verbose_name='Вопрос', db_index=True)
+    text = models.TextField(verbose_name='Ответ', db_index=True)
+    category = models.ForeignKey(FaqCategory, on_delete=models.CASCADE, related_name='faqs', verbose_name='Категория')
+
+    def __str__(self):
+        return f'{self.category.title} - {self.title}'
+
+    class Meta:
+        verbose_name = 'FAQ'
+        verbose_name_plural = 'FAQs'
+
+
 
 

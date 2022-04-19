@@ -18,7 +18,7 @@
         <h4>ОФОРМЛЕНИЕ ЗАКАЗА</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
+          <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
           <li class="active">КОРЗИНА</li>
         </ol>
       </div>
@@ -106,11 +106,11 @@
               
               <!-- PRICE -->
               <li class="col-sm-2">
-                <div class="position-center-center"> <span> {{ item.item.product.price }} RUB</span> </div>
+                <div class="position-center-center"> <span>{{ item.item.product.price }} RUB</span> </div>
               </li>
               <!-- TOTAL PRICE -->
               <li class="col-sm-2">
-                <div class="position-center-center"> <span>{{ item.item_total }} RUB</span> </div>
+                <div class="position-center-center"> <span>{% if item.item.product.discount %}{{ item.item_total_with_sale }} RUB (sale {{ item.item.product.discount }}%){% else %}{{ item.item_total }} RUB{% endif %}</span> </div>
               </li>
               
               <!-- EDIT AND REMOVE -->
@@ -125,13 +125,13 @@
           <div class="btn-sec"> 
             
             <!-- CLEAR SHOPPING CART --> 
-            <a href="#." class="btn btn-dark"> <i class="fa fa-trash-o"></i> CLEAR SHOPPING CART </a> 
+            <a href="#." class="btn btn-dark"> <i class="fa fa-trash-o"></i> ОЧИСТИТЬ КОРЗИНУ </a> 
             
             <!-- UPDATE SHOPPING CART --> 
             <a href="#." class="btn btn-dark"> <i class="fa fa-arrow-circle-o-up"></i> UPDATE SHOPPING CART </a> 
             
             <!-- CONTINUE SHOPPING --> 
-            <a href="#." class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i> CONTINUE SHOPPING </a> </div>
+            <a href="{% url 'shop:shop-page' %}" class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i> ПРОДОЛЖИТЬ ПОКУПКИ </a> </div>
           
           <!-- SHOPPING INFORMATION -->
           <div class="cart-ship-info">
@@ -173,9 +173,9 @@
               
               <!-- SUB TOTAL -->
               <div class="col-sm-4">
-                <div class="grand-total"> <span>SUB TOTAL: {{ order.get_order_total_price }} RUB</span>
-                  <h4>GRAND: <span> {{ order.get_order_total_price }} RUB </span></h4>
-                  <a href="#." class="btn">PROCEED TO CHECK OUT</a>
+                <div class="grand-total"> <span>СУММА БЕЗ СКИДКИ: {{ order.get_order_total_price }} RUB</span>
+                  <h4>СУММА: <span> {{ order.get_order_total_price_with_sale }} RUB </span></h4>
+                  <a href="#." class="btn">ПЕРЕЙТИ К ОПЛАТЕ</a>
                   <p>Checkout with Multiple Addresses</p>
                 </div>
               </div>
