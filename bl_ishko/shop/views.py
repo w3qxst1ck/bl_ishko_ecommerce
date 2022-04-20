@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 
@@ -9,10 +10,16 @@ def home_page(request):
 
 
 def faq_page(request, pk):
-    faq_categories = FaqCategory.objects.all().order_by('title')
+    search_query = request.GET.get('search', '')
+    faq_categories = FaqCategory.objects.all().order_by('title').exclude(title='Основные')
     faq_category = get_object_or_404(FaqCategory, id=pk)
-    faqs = Faq.objects.filter(category=faq_category)
-    return render(request, 'shop/faq.html', {'faqs': faqs, 'faq_categories': faq_categories})
+    if request.GET.get('search'):
+        faqs = Faq.objects.filter(Q(title__icontains=search_query) | Q(text__icontains=search_query))
+    else:
+        faqs = Faq.objects.filter(category=faq_category)
+    main_category = FaqCategory.objects.filter(title='Основные')[0]
+    return render(request, 'shop/faq.html', {'faqs': faqs, 'faq_categories': faq_categories,
+                                             'main_category': main_category})
 
 
 def product_detail(request, slug):

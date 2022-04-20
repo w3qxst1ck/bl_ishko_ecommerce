@@ -35,13 +35,14 @@
               <!--  SEARCH -->
               <div class="search">
                 <form>
-                  <input type="text" placeholder="SEARCH FAQ">
+                  <input type="text" placeholder="НАЙТИ ВОПРОС" name="search" action="{% url 'shop:faq-page' 1 %}">
                   <button type="submit"> <i class="fa fa-search"></i></button>
                 </form>
               </div>
               
               <!-- FAQS NAV -->
               <ul class="cate faq-cate">
+                <li><a href="{{ main_category.get_absolute_url }}"> {{ main_category.title }}</a></li>
                 {% for c in faq_categories %}
                 <li><a href="{{ c.get_absolute_url }}"> {{ c.title }}</a></li>
                 {% endfor %}
@@ -60,9 +61,9 @@
                 <!-- FAQS 1 -->
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ faq.id }}"> {{ faq.title }}</a> </h4>
+                    <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ faq.id }}" {% if forloop.counter != 1 %}class="collapsed"{% endif %}> {{ faq.title }}</a> </h4>
                   </div>
-                  <div id="collapse{{ faq.id }}" class="panel-collapse collapse in">
+                  <div id="collapse{{ faq.id }}" class="panel-collapse collapse {% if forloop.counter == 1 %}in{% endif %}">
                     <div class="panel-body"> {{ faq.text }} </div>
                   </div>
                 </div>
