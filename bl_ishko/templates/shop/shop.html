@@ -184,7 +184,7 @@
                       <ul class="animated fadeIn">
                         <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
                         <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                        <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
                         <li class="full-w"> <a href="#." class="btn">В КОРЗИНУ</a></li>
                         <!-- Rating Stars -->
                         <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>

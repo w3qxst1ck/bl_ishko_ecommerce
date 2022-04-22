@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import WishProduct
 
-# Register your models here.
+
+@admin.register(WishProduct)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'product')
+    list_display_links = ('id', 'user', 'product')
+    list_filter = ('user', 'product')
+    search_fields = ('user', 'product')

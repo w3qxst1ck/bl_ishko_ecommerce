@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load thumbnail %}
+
 {% block title %}Wishlist{% endblock title %}
 
 {% block header %}
@@ -19,159 +21,108 @@
         <h4>ИЗБРАННЫЕ ТОВАРЫ</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li class="active">ИЗБРАННОЕ</li>
+          <li><a href="{% url 'shop:home-page' %}">Home</a></li>
+          <li class="active">Избранное</li>
         </ol>
       </div>
     </section>
     
-    <!--======= PAGES INNER =========-->
-    <section class="section-p-30px pages-in chart-page wish-list">
-      <div class="container"> 
-        
-        <!-- Payments Steps -->
-        <div class="shopping-cart text-left">
-          <div class="cart-head">
-            <ul class="row">
-              <!-- PRODUCTS -->
-              <li class="col-sm-5">
-                <h6>ТОВАР</h6>
-              </li>
+
+      <!--======= PAGES INNER =========-->
+      <section class="section-p-30px pages-in chart-page wish-list">
+        <div class="container"> 
+          
+          {% if wish_products %}
+            <!-- Payments Steps -->
+            <div class="shopping-cart text-left">
+              <div class="cart-head">
+                <ul class="row">
+                  <!-- PRODUCTS -->
+                  <li class="col-sm-5">
+                    <h6>ТОВАР</h6>
+                  </li>
+                  
+                  <!-- PRICE -->
+                  <li class="col-sm-2">
+                    <h6>ЦЕНА</h6>
+                  </li>
+                  
+                  <li class="col-sm-2">  <h6>В НАЛИЧИИ</h6></li>
+                  
+                  <li class="col-sm-2">  <h6>В КОРЗИНУ</h6></li>
+                </ul>
+              </div>
+
               
-              <!-- PRICE -->
-              <li class="col-sm-2">
-                <h6>ЦЕНА</h6>
-              </li>
+              {% for wish_product in wish_products %}          
+                <!-- Cart Details -->
+                <ul class="row cart-details">
+                  <li class="col-sm-5">
+                    <div class="media"> 
+                      <!-- Media Image -->
+                      <div class="media-left media-middle">
+                        <a href="{{ wish_product.product.get_absolute_url }}" class="item-img"> 
+                          {% thumbnail wish_product.product.title_image "150x188" crop="center" as im %}
+                            <img class="media-object" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                          {% endthumbnail %}
+                        </a> 
+                      </div>
+                      
+                      <!-- Item Name -->
+                      <div class="media-body">
+                          <h6>{{ wish_product.product.title|upper }}</h6>
+                        
+                      </div>
+                    </div>
+                  </li>
+                  
+                  
+                  <!-- PRICE -->
+                  <li class="col-sm-2">
+                    <div class="position-center-center"> <span> ₽{{ wish_product.product.price }}</span> </div>
+                  </li>
+                  
+                   <!-- STOCK -->
+                  <li class="col-sm-2"> 
+                    <div class="position-center-center">
+                      {% if wish_product.product.is_active %}
+                        В НАЛИЧИИ
+                      {% else %}
+                        НЕТ В НАЛИЧИИ
+                      {% endif %}
+                    </div>
+                  </li>
+                  
+                  <!-- TOTAL PRICE -->
+                  <li class="col-sm-2">
+                    <div class="position-center-center"> <a href="#." class="btn">В КОРЗИНУ</a> </div>
+                  </li>
+                  
+                  <!-- EDIT AND REMOVE -->
+                  <li class="col-sm-1">
+                    <div class="position-center-center"> <a href="{% url 'users:wishlist-delete' wish_product.product.slug %}"><i class="fa fa-times"></i></a> </div>
+                  </li>
+                </ul>
+              {% endfor %}
+            
+            <!-- BTN INFO -->
+            <div class="btn-sec"> 
               
-              <li class="col-sm-2">  <h6>В НАЛИЧИИ</h6></li>
+              <!-- CLEAR SHOPPING CART --> 
+              <a href="{% url 'users:wishlist-delete-all' %}" class="btn btn-dark"> <i class="fa fa-trash-o"></i>ОЧИСТИТЬ ИЗБРАННЫЕ</a> 
               
-              <li class="col-sm-2">  <h6>В КОРЗИНУ</h6></li>
-            </ul>
+              <!-- UPDATE SHOPPING CART --> 
+              <!-- <a href="#." class="btn btn-dark"> <i class="fa fa-arrow-circle-o-up"></i> UPDATE SHOPPING CART </a> 
+               -->
+              <!-- CONTINUE SHOPPING --> 
+              <a href="{% url 'shop:shop-page' %}" class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i>ПРОДОЛЖИТЬ ПОКУПКИ</a> </div>
+            
           </div>
-          
-          <!-- Cart Details -->
-          <ul class="row cart-details">
-            <li class="col-sm-5">
-              <div class="media"> 
-                <!-- Media Image -->
-                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/week-img-2.jpg' %}" alt=""> </a> </div>
-                
-                <!-- Item Name -->
-                <div class="media-body">
-                    <h6>LOOSE-FIT TRENCH COAT</h6>
-                  
-                </div>
-              </div>
-            </li>
-            
-            
-            <!-- PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <span> $129.00</span> </div>
-            </li>
-            
-             <!-- STOCK -->
-            <li class="col-sm-2"> <div class="position-center-center"> In STOCK</div></li>
-            
-            <!-- TOTAL PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <a href="#." class="btn">В КОРЗИНУ</a> </div>
-            </li>
-            
-            <!-- EDIT AND REMOVE -->
-            <li class="col-sm-1">
-              <div class="position-center-center"> <a href="#."><i class="fa fa-times"></i></a> </div>
-            </li>
-          </ul>
-          
-          
-          <!-- Cart Details -->
-          <ul class="row cart-details">
-            <li class="col-sm-5">
-              <div class="media"> 
-                <!-- Media Image -->
-                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/week-img-2.jpg' %}" alt=""> </a> </div>
-                
-                <!-- Item Name -->
-                <div class="media-body">
-                    <h6>LOOSE-FIT TRENCH COAT</h6>
-                  
-                </div>
-              </div>
-            </li>
-            
-            
-            <!-- PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <span> $129.00</span> </div>
-            </li>
-            
-             <!-- STOCK -->
-            <li class="col-sm-2"> <div class="position-center-center"> In STOCK</div></li>
-            
-            <!-- TOTAL PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <a href="#." class="btn">ADD TO CART</a> </div>
-            </li>
-            
-            <!-- EDIT AND REMOVE -->
-            <li class="col-sm-1">
-              <div class="position-center-center"> <a href="#."><i class="fa fa-times"></i></a> </div>
-            </li>
-          </ul>
-          
-          
-          <!-- Cart Details -->
-          <ul class="row cart-details">
-            <li class="col-sm-5">
-              <div class="media"> 
-                <!-- Media Image -->
-                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/week-img-2.jpg' %}" alt=""> </a> </div>
-                
-                <!-- Item Name -->
-                <div class="media-body">
-                    <h6>LOOSE-FIT TRENCH COAT</h6>
-                  
-                </div>
-              </div>
-            </li>
-            
-            
-            <!-- PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <span> $129.00</span> </div>
-            </li>
-            
-             <!-- STOCK -->
-            <li class="col-sm-2"> <div class="position-center-center"> In STOCK</div></li>
-            
-            <!-- TOTAL PRICE -->
-            <li class="col-sm-2">
-              <div class="position-center-center"> <a href="#." class="btn">ADD TO CART</a> </div>
-            </li>
-            
-            <!-- EDIT AND REMOVE -->
-            <li class="col-sm-1">
-              <div class="position-center-center"> <a href="#."><i class="fa fa-times"></i></a> </div>
-            </li>
-          </ul>
-          
-          
-          <!-- BTN INFO -->
-          <div class="btn-sec"> 
-            
-            <!-- CLEAR SHOPPING CART --> 
-            <a href="#." class="btn btn-dark"> <i class="fa fa-trash-o"></i> CLEAR SHOPPING CART </a> 
-            
-            <!-- UPDATE SHOPPING CART --> 
-            <a href="#." class="btn btn-dark"> <i class="fa fa-arrow-circle-o-up"></i> UPDATE SHOPPING CART </a> 
-            
-            <!-- CONTINUE SHOPPING --> 
-            <a href="#." class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i> CONTINUE SHOPPING </a> </div>
-          
         </div>
-      </div>
-      
+      {% else %}
+        <p align="center">У ВАС ПОКА НЕТ ИЗБРАННЫХ ТОВАРОВ</p>
+      {% endif %}
+
       <!--======= RELATED PRODUCTS =========-->
       <section class="section-p-60px new-arrival new-arri-w-slide">
         <div class="container"> 

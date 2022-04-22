@@ -17,5 +17,4 @@ urlpatterns = [
     path('about/', about_page, name='about-page'),
     path('shop/', shop_page, name='shop-page'),
     path('shop/<str:slug>/', category_shop_page, name='cat-shop-page'),
-    path('wishlist/', wishlist_page, name='wishlist-page'),
 ]

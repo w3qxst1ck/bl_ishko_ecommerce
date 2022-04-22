@@ -13,7 +13,7 @@
           <ul>
             {% if user.is_authenticated %}
               <li><a href="">ЛИЧЫЙ КАБИНЕТ</a></li>
-              <li><a href="#.">ИЗБРАННОЕ</a></li>
+              <li><a href="{% url 'users:wishlist-page' %}">ИЗБРАННОЕ</a></li>
               <li><a href="{% url 'account_logout' %}">ВЫЙТИ</a></li>
             {% else %}
               <li><a href="{% url 'account_login' %}">ВОЙТИ</a></li>

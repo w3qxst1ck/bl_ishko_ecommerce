@@ -107,7 +107,10 @@
               <div class="col-sm-12">
                 <div class="fun-share">
                   <input type="text" value="1">
-                  <a href="#." class="btn btn-small btn-dark">В КОРЗИНУ</a> <a href="#." class="share-sec"><i class="ion-shuffle"></i></a> <a class="share-sec" href="#."><i class="fa fa-heart-o"></i></a> </div>
+                  <a href="#." class="btn btn-small btn-dark">В КОРЗИНУ</a> 
+                  <a href="#." class="share-sec"><i class="ion-shuffle"></i></a> 
+                  <a class="share-sec" href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a> 
+                </div>
               </div>
               <!-- SHARE -->
               <div class="col-sm-12">
