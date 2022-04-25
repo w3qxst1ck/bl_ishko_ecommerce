@@ -214,25 +214,26 @@
             <!--======= Shopping Cart =========-->
             <li class="shop-cart"><a href="{% url 'cart:cart-page' %}"><i class="fa fa-shopping-cart"></i></a> {% if order.order_items.all %}<span class="numb">{{ order.get_total_quantity }}</span>{% endif %}
               <ul class="dropdown">
-                {% for item in order.order_items.all %}
-                <li>
-                  <div class="media">
-                    <div class="media-left">
-                      <div class="cart-img"> 
-                        <a href="{{ item.item.product.get_absolute_url }}">
-                          {% thumbnail item.item.product.title_image "388x450" crop="center" as im %}
-                            <img class="media-object img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="...">
-                          {% endthumbnail %}
-                        </a> 
+                {% if order.order_items %}
+                  {% for item in order.order_items.all %}
+                  <li>
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="cart-img"> 
+                          <a href="{{ item.item.product.get_absolute_url }}">
+                            {% thumbnail item.item.product.title_image "388x450" crop="center" as im %}
+                              <img class="media-object img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="...">
+                            {% endthumbnail %}
+                          </a> 
+                        </div>
                       </div>
+                      <div class="media-body">
+                        <h6 class="media-heading">{{ item.item.product.title|upper|truncatechars:19 }}</h6>
+                        <span class="price">{{ item.item_total }} RUB</span> <span class="qty">КОЛ-ВО: {{ item.quantity }}</span> </div>
                     </div>
-                    <div class="media-body">
-                      <h6 class="media-heading">{{ item.item.product.title|upper|truncatechars:19 }}</h6>
-                      <span class="price">{{ item.item_total }} RUB</span> <span class="qty">КОЛ-ВО: {{ item.quantity }}</span> </div>
-                  </div>
-                </li>
-                {% endfor %}
-                
+                  </li>
+                  {% endfor %}
+
                 <li class="no-padding no-border">
                   <h5 class="text-center">СУММА: {% if order %}{{ order.get_order_total_price }}{% else %}0{% endif %} RUB</h5>
                 </li>
@@ -242,6 +243,17 @@
                     <div class="col-xs-6 "> <a href="#." class="btn btn-1 btn-small">CHECK OUT</a></div>
                   </div>
                 </li>
+                {% else %}
+                  <li class="no-padding no-border">
+                  <h5 class="text-center">В КОРЗИНЕ НЕТ ТОВАРОВ</h5>
+                </li>
+                <li class="no-padding no-border">
+                  <div class="row">
+                    <div class="col-xs-6"> <a href="{% url 'cart:cart-page' %}" class="btn btn-small">КОРЗИНА</a></div>
+                    <div class="col-xs-6 "> <a href="#." class="btn btn-1 btn-small">CHECK OUT</a></div>
+                  </div>
+                </li>
+                {% endif %}
               </ul>
             </li>
             <!--======= SEARCH ICON =========-->

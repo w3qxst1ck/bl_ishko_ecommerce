@@ -8,7 +8,11 @@ from shop.models import Item
 
 @login_required
 def cart_page(request):
-    order = get_object_or_404(Order, user=request.user)
+    order = []
+    try:
+        order = Order.objects.get(user=request.user)
+    except Order.DoesNotExist:
+        pass
     return render(request, 'cart/cart.html', context={'order': order})
 
 
@@ -32,3 +36,15 @@ def add_to_cart(request, pk):
         order.order_items.add(order_item)
     return redirect('cart:cart-page')
 
+
+@login_required
+def delete_from_cart(request, pk):
+    # item = get_object_or_404(Item, id=pk)
+    order = get_object_or_404(Order, user=request.user)
+    if order.order_items.filter(item__id=pk).exists():
+        order_item = OrderItem.objects.filter(item__id=pk, user=request.user)[0]
+        order.order_items.remove(order_item)
+        order_item.delete()
+        return redirect('cart:cart-page')
+
+    return redirect('cart:cart-page')
