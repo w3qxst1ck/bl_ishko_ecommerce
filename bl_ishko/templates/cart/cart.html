@@ -52,7 +52,7 @@
         <div class="shopping-cart text-center">
           
           
-          {% if order.order_items %}
+          {% if order.order_items.all %}
             <div class="cart-head">
                   <ul class="row">
                     <!-- PRODUCTS -->
@@ -78,20 +78,20 @@
                     <li class="col-sm-1"> </li>
                   </ul>
                 </div>
-            {% for item in order.order_items.all %}
+            {% for order_item in order.order_items.all %}
               <!-- Cart Details -->
               <ul class="row cart-details">
                 <li class="col-sm-6">
                   <div class="media"> 
                     <!-- Media Image -->
-                    <div class="media-left media-middle"> <a href="{{ item.item.product.get_absolute_url }}" class="item-img"> <img class="media-object" src="{{ item.item.product.title_image.url }}" alt=""> </a> </div>
+                    <div class="media-left media-middle"> <a href="{{ order_item.item.product.get_absolute_url }}" class="item-img"> <img class="media-object" src="{{ order_item.item.product.title_image.url }}" alt=""> </a> </div>
                     
                     <!-- Item Name -->
                     <div class="media-body">
                       <div class="position-center-center">
-                        <a href="{{ item.item.product.get_absolute_url }}"> 
-                          <h6>{{ item.item.product.title|upper|truncatechars:20 }}</h6>
-                          <h6>{{ item.item.color }} - {{ item.item.size }}</h6>
+                        <a href="{{ order_item.item.product.get_absolute_url }}"> 
+                          <h6>{{ order_item.item.product.title|upper|truncatechars:20 }}</h6>
+                          <h6>{{ order_item.item.color }} - {{ order_item.item.size }}</h6>
                         </a>
 
                       </div>
@@ -102,24 +102,24 @@
                 <!-- QTY -->
                 <li class="col-sm-1">
                   <div class="position-center-center">
-                    <input type="text" value="{{ item.quantity }}">
+                    <input type="text" value="{{ order_item.quantity }}">
                   </div>
                 </li>
                 
                 <!-- PRICE -->
                 <li class="col-sm-2">
-                  <div class="position-center-center"> <span>{{ item.item.product.price }} RUB</span> </div>
+                  <div class="position-center-center"> <span>{{ order_item.item.product.price }} RUB</span> </div>
                 </li>
                 <!-- TOTAL PRICE -->
                 <li class="col-sm-2">
-                  <div class="position-center-center"> <span>{% if item.item.product.discount %}{{ item.item_total_with_sale }} RUB (sale {{ item.item.product.discount }}%){% else %}{{ item.item_total }} RUB{% endif %}</span> </div>
+                  <div class="position-center-center"> <span>{% if order_item.item.product.discount %}{{ order_item.item_total_with_sale }} RUB (sale {{ order_item.item.product.discount }}%){% else %}{{ order_item.item_total }} RUB{% endif %}</span> </div>
                 </li>
                 
                 <!-- EDIT AND REMOVE -->
                 <li class="col-sm-1">
                   <div class="position-center-center"> 
                     <a href="#."><i class="fa fa-pencil-square-o"></i></a>
-                    <a href="{% url 'cart:cart-delete-item' item.id %}"><i class="fa fa-times"></i></a>
+                    <a href="{% url 'cart:cart-delete-item' order_item.id %}"><i class="fa fa-times"></i></a>
                   </div>
                 </li>
               </ul>
