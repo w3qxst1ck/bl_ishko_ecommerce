@@ -9,7 +9,7 @@ from shop.models import Product
 
 @login_required
 def wish_list(request):
-    wish_products = WishProduct.objects.filter(user=request.user)
+    wish_products = WishProduct.objects.filter(user=request.user).order_by('-adding_date')
     context = {'wish_products': None}
     if len(wish_products) > 0:
         context = {'wish_products': wish_products}
@@ -19,10 +19,9 @@ def wish_list(request):
 @login_required
 def add_item_to_wish_list(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    try:
+    wishlist_qs = WishProduct.objects.filter(user=request.user, product=product)
+    if not wishlist_qs.exists():
         WishProduct.objects.create(product=product, user=request.user)
-    except IntegrityError:
-        pass    # поставить message о том что товар уже в избранном
     return redirect(request.META.get('HTTP_REFERER'))
 
 

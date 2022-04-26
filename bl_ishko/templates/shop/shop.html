@@ -187,7 +187,7 @@
                         {% if product not in wish_list_products %}
                           <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
                         {% else %}
-                          <li> <a href="{% url 'users:wishlist-add' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                          <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
                         {% endif %}
                         <li class="full-w"> <a href="#." class="btn">В КОРЗИНУ</a></li>
                         <!-- Rating Stars -->
