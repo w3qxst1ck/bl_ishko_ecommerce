@@ -9,15 +9,17 @@ def home_page(request):
     return render(request, 'shop/base.html')
 
 
-def faq_page(request, pk):
+def faq_page(request, pk=None):
     search_query = request.GET.get('search', '')
     faq_categories = FaqCategory.objects.all().order_by('title').exclude(title='Основные')
-    faq_category = get_object_or_404(FaqCategory, id=pk)
-    if request.GET.get('search'):
+    main_category = FaqCategory.objects.filter(title='Основные')[0]
+    if pk:
+        faq_category = get_object_or_404(FaqCategory, id=pk)
+        faqs = Faq.objects.filter(category=faq_category)
+    elif search_query:
         faqs = Faq.objects.filter(Q(title__icontains=search_query) | Q(text__icontains=search_query))
     else:
-        faqs = Faq.objects.filter(category=faq_category)
-    main_category = FaqCategory.objects.filter(title='Основные')[0]
+        faqs = None
     return render(request, 'shop/faq.html', {'faqs': faqs, 'faq_categories': faq_categories,
                                              'main_category': main_category})
 

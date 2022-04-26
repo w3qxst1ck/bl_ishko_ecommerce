@@ -6021,3 +6021,32 @@ input:focus {
 	opacity: 1;
 	color: #fff;
 }
+/*==========================================================================
+	   Modal window
+========================================================================== */
+.table-header span {
+	font-size: 10px;
+	letter-spacing: 2px;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 1.42857143;
+	color: #333;
+	text-align: center;
+	font-weight: normal;
+}
+.table-th {
+	text-align: center;
+}
+.table-row {
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+}
+.row-header {
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	font-weight: 500;
+}
+.modal-body {
+	overflow-y: auto;
+}
