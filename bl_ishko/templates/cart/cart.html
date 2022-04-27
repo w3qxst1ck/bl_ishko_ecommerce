@@ -56,11 +56,11 @@
             <div class="cart-head">
                   <ul class="row">
                     <!-- PRODUCTS -->
-                    <li class="col-sm-3">
+                    <li class="col-sm-2">
                       <h6>ТОВАРЫ</h6>
                     </li>
                     <!-- NAME -->
-                    <li class="col-sm-3">
+                    <li class="col-sm-4">
                       <h6>НАЗВАНИЕ</h6>
                     </li>
                     <!-- QTY -->
@@ -81,19 +81,31 @@
             {% for order_item in order.order_items.all %}
               <!-- Cart Details -->
               <ul class="row cart-details">
-                <li class="col-sm-6">
+                <li class="col-sm-2">
                   <div class="media"> 
                     <!-- Media Image -->
                     <div class="media-left media-middle"> <a href="{{ order_item.item.product.get_absolute_url }}" class="item-img"> <img class="media-object" src="{{ order_item.item.product.title_image.url }}" alt=""> </a> </div>
                     
                     <!-- Item Name -->
-                    <div class="media-body">
+                    <!-- <div class="media-body">
                       <div class="position-center-center">
                         <a href="{{ order_item.item.product.get_absolute_url }}"> 
-                          <h6 >{{ order_item.item.product.title|upper|truncatechars:20 }}</h6>
+                          <h6>{{ order_item.item.product.title|upper|truncatechars:20 }}</h6>
                           <h6>{{ order_item.item.color }} - {{ order_item.item.size }}</h6>
                         </a>
+                      </div>
+                    </div> -->
+                  </div>
+                </li>
 
+                <li class="col-sm-4">
+                  <div class="media">
+                    <div class="media-body">
+                      <div class="position-center-center">
+                          <a href="{{ order_item.item.product.get_absolute_url }}"> 
+                          <h6>{{ order_item.item.product.title|upper|truncatechars:20 }}</h6>
+                          <h6>{{ order_item.item.color }} - {{ order_item.item.size }}</h6>
+                        </a>
                       </div>
                     </div>
                   </div>
