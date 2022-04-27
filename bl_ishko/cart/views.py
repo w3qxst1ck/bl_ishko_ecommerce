@@ -47,3 +47,12 @@ def delete_from_cart(request, pk):
         order.order_items.remove(order_item)
         order_item.delete()
     return redirect('cart:cart-page')
+
+
+@login_required
+def delete_all_from_cart(request):
+    order = get_object_or_404(Order, user=request.user)
+    order_items = order.order_items.all()
+    if order_items.exists():
+        order_items.delete()
+    return redirect('cart:cart-page')

@@ -102,7 +102,8 @@
                 <!-- QTY -->
                 <li class="col-sm-1">
                   <div class="position-center-center">
-                    <input type="text" value="{{ order_item.quantity }}">
+                    <!-- <input type="text" value="{{ order_item.quantity }}"> -->
+                    <span>{{ order_item.quantity }}</span>
                   </div>
                 </li>
                 
@@ -133,7 +134,7 @@
             <div class="btn-sec"> 
               
               <!-- CLEAR SHOPPING CART --> 
-              <a href="#." class="btn btn-dark"> <i class="fa fa-trash-o"></i> ОЧИСТИТЬ КОРЗИНУ </a> 
+              <a href="{% url 'cart:cart-delete-all' %}" class="btn btn-dark"> <i class="fa fa-trash-o"></i> ОЧИСТИТЬ КОРЗИНУ </a> 
               
               <!-- UPDATE SHOPPING CART --> 
               <a href="{% url 'users:wishlist-page' %}" class="btn btn-dark"> <i class="fa fa-heart-o"></i> ПЕРЕЙТИ В ИЗБРАННОЕ </a> 
