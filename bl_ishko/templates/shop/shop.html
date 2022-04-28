@@ -212,51 +212,53 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                       <section class="pages-in item-detail-page">
-
+                        <form action="{% url 'cart:add-to-cart' product.id %}" method="GET">
                             <!-- color -->
                             <div class="col-sm-12">
                               <div class="item-select">
                                 <!-- COLOR -->
                                 <p>*ЦВЕТ</p>
-                                <select class="selectpicker" >
-                                  <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option>
+                                <select class="selectpicker" id='product-color'>
+                                  <!-- <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option> -->
                                   {% for item in product.items.all %}
                                     <option>{{ item.color|upper }}</option>
                                   {% endfor %}
                                 </select>
+                                <input type="" id="color_input" hidden="true" name="color" value="{{ product.items.all.0.color }}">
                               </div>
                             </div>
 
                             <!-- size -->
-                              <div class="col-sm-12">
-                                <div class="item-select"> 
-                                  <!--  SIZE -->
-                                  <p>*РАЗМЕР</p>
-                                  <select class="selectpicker">
-                                    <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option>
-                                    {% for item in product.items.all %}
-                                      <option>{{ item.size|upper }}</option>
-                                    {% endfor %}
-                                  </select>
-                                </div>
+                            <div class="col-sm-12">
+                              <div class="item-select"> 
+                                <!--  SIZE -->
+                                <p>*РАЗМЕР</p>
+                                <select class="selectpicker" id='product-size'>
+                                  <!-- <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option> -->
+                                  {% for item in product.items.all %}
+                                    <option>{{ item.size|upper }}</option>
+                                  {% endfor %}
+                                </select>
+                                <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all.0.size }}">
                               </div>
+                            </div>
 
-                              <div class="col-sm-12">
-                                <p style="font-size: 12px; margin-top: 10px">{{ product.description }}</p>
-                              </div>
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">{{ product.description }}</p>
+                            </div>
 
-                              <div class="col-sm-12">
-                                <p style="font-size: 12px; margin-top: 10px">Состав: {{ product.compound }}</p>
-                              </div> 
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">Состав: {{ product.compound }}</p>
+                            </div> 
 
-                              <div class="col-sm-12">
-                                <p style="font-size: 12px; margin-top: 10px">Уход: {{ product.care }}</p>
-                              </div> 
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">Уход: {{ product.care }}</p>
+                            </div> 
 
-                              <div class="col-sm-12" >
-                                <a href="#." class="btn btn-small btn-dark float-right">В КОРЗИНУ</a>
-                              </div>
-
+                            <div class="col-sm-12">
+                              <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
+                            </div>
+                        </form>
                       </section>
                     </div>
                   </div>
