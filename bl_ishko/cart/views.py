@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from shop.models import Product
 
 from cart.models import OrderItem, Order
 from shop.models import Item
@@ -18,7 +19,11 @@ def cart_page(request):
 
 @login_required
 def add_to_cart(request, pk):
-    item = get_object_or_404(Item, id=pk)
+    print(request.GET)
+    print(pk)
+    product = get_object_or_404(Product, id=pk)
+    item = product.items.filter(color=request.GET.get('color').lower().capitalize(), size=request.GET.get('size'))[0]
+
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
         user=request.user,

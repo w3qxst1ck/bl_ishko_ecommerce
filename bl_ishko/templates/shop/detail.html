@@ -76,43 +76,51 @@
             <p>Уход: {{ product.care }}</p>
 
             <hr>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="item-select"> 
-                  <!-- COLOR -->
-                  <p>*COLOR</p>
-                  <select class="selectpicker">
-                    <option>PLEASE SELETCT</option>
-                    {% for item in product.items.all %}
-                      <option>{{ item.color|upper }}</option>
-                    {% endfor %}
-                  </select>
+            <form action="{% url 'cart:add-to-cart' product.id %}" method="GET">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="item-select"> 
+
+                    <!-- COLOR -->
+                    <p>*ЦВЕТ</p>
+                    <select class="selectpicker" id='product-color'>
+                      <!-- <option>PLEASE SELETCT</option> -->
+                      {% for item in product.items.all %}
+                        <option val>{{ item.color|upper }}</option>
+                      {% endfor %}
+                    </select>
+                    <input type="" id="color_input" hidden="true" name="color" value="{{ product.items.all.0.color }}">
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="item-select"> 
+
+                    <!--  SIZE -->
+                    <p>*РАЗМЕР</p>
+                    <select class="selectpicker" id='product-size'>
+                      <!-- <option>PLEASE SELETCT</option> -->
+                      {% for item in product.items.all %}
+                        <option>{{ item.size|upper }}</option>
+                      {% endfor %}
+                    </select>
+                    <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all.0.size }}">
+
+                    <a href="" data-toggle="modal" data-target="#sizeModal"><p>ТАБЛИЦА РАЗМЕРОВ</p></a>
+                  </div>
                 </div>
               </div>
-              <div class="col-sm-12">
-                <div class="item-select"> 
-                  <!--  SIZE -->
-                  <p>*SIZE</p>
-                  <select class="selectpicker">
-                    <option>PLEASE SELETCT</option>
-                    {% for item in product.items.all %}
-                      <option>{{ item.size|upper }}</option>
-                    {% endfor %}
-                  </select>
-                  <a href="" data-toggle="modal" data-target="#sizeModal"><p>ТАБЛИЦА РАЗМЕРОВ</p></a>
+              <div class="row"> 
+                <!-- QUIENTY -->
+                <div class="col-sm-12">
+                  <div class="fun-share">
+                    <input type="text" value=1>
+                    <button type="submit" class="btn btn-small btn-dark">В КОРЗИНУ</button> 
+                    <a href="#." class="share-sec"><i class="ion-shuffle"></i></a> 
+                    <a class="share-sec" href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a> 
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="row"> 
-              <!-- QUIENTY -->
-              <div class="col-sm-12">
-                <div class="fun-share">
-                  <input type="text" value="1">
-                  <a href="#." class="btn btn-small btn-dark">В КОРЗИНУ</a> 
-                  <a href="#." class="share-sec"><i class="ion-shuffle"></i></a> 
-                  <a class="share-sec" href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a> 
-                </div>
-              </div>
+            </form>
+
               <!-- SHARE -->
               <div class="col-sm-12">
                 <ul class="share-with">

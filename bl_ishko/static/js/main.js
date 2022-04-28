@@ -73,6 +73,20 @@ $(".testi-slides").owlCarousel({
 	nav: true,
 	animateOut: 'fadeOut'	
 });
+/*-----------------------------------------------------------------------------------*/
+/* 	ADD TO CART
+/*-----------------------------------------------------------------------------------*/
+$("#product-color").on('change', function () {
+	let color_value = this.value;
+	let color_input = $("#color_input");
+	color_input.val(color_value);
+})
+
+$("#product-size").on('change', function () {
+	let size_value = this.value;
+	let size_input = $("#size_input");
+	size_input.val(size_value);
+})
 
 /*-----------------------------------------------------------------------------------*/
 /* 	ABOUT CLIENT SLIDER
