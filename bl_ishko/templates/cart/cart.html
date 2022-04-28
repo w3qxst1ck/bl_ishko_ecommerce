@@ -85,16 +85,6 @@
                   <div class="media"> 
                     <!-- Media Image -->
                     <div class="media-left media-middle"> <a href="{{ order_item.item.product.get_absolute_url }}" class="item-img"> <img class="media-object" src="{{ order_item.item.product.title_image.url }}" alt=""> </a> </div>
-                    
-                    <!-- Item Name -->
-                    <!-- <div class="media-body">
-                      <div class="position-center-center">
-                        <a href="{{ order_item.item.product.get_absolute_url }}"> 
-                          <h6>{{ order_item.item.product.title|upper|truncatechars:20 }}</h6>
-                          <h6>{{ order_item.item.color }} - {{ order_item.item.size }}</h6>
-                        </a>
-                      </div>
-                    </div> -->
                   </div>
                 </li>
 
@@ -104,7 +94,7 @@
                       <div class="position-center-center">
                           <a href="{{ order_item.item.product.get_absolute_url }}"> 
                           <h6>{{ order_item.item.product.title|upper|truncatechars:20 }}</h6>
-                          <h6>{{ order_item.item.color }} - {{ order_item.item.size }}</h6>
+                          <h6>{{ order_item.item.product.color|upper }} - {{ order_item.item.size }}</h6>
                         </a>
                       </div>
                     </div>

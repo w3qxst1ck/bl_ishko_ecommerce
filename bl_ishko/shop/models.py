@@ -14,6 +14,7 @@ CHOICES = (
 class Product(models.Model):
     title = models.CharField(max_length=255, db_index=True, verbose_name='Название')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, related_name='products', verbose_name='Категория')
+    color = models.CharField(max_length=128)
     price = models.FloatField(verbose_name='Цена')
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
@@ -43,10 +44,9 @@ class Item(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items', verbose_name='Продукт')
     item_count = models.IntegerField(verbose_name='Количество товара')
     size = models.CharField(choices=CHOICES, max_length=10, blank=True, null=True, verbose_name='Размер')
-    color = models.CharField(max_length=128)
 
     def __str__(self):
-        return f'{self.product.title} - {self.color} ({self.size}) - {self.item_count} шт.'
+        return f'{self.product.title} ({self.size}) - {self.item_count} шт.'
 
     class Meta:
         verbose_name = 'Товар'

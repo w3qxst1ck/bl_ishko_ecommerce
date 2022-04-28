@@ -83,12 +83,12 @@
 
                     <!-- COLOR -->
                     <p>*ЦВЕТ</p>
-                    <select class="selectpicker" id='product-color'>
+                    <!-- <select class="selectpicker" id='product-color'> -->
                       <!-- <option>PLEASE SELETCT</option> -->
-                      {% for item in product.items.all %}
+<!--                       {% for item in product.items.all %}
                         <option val>{{ item.color|upper }}</option>
                       {% endfor %}
-                    </select>
+                    </select> -->
                     <input type="" id="color_input" hidden="true" name="color" value="{{ product.items.all.0.color }}">
                   </div>
                 </div>

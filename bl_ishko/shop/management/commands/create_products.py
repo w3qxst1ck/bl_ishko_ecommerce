@@ -39,6 +39,7 @@ class Command(BaseCommand):
             mixer.blend(
                 Product,
                 title=mixer.FAKE,
+                color=random.choice(['Red', 'BLue', 'Yellow', 'Black', 'Purple', 'Orange', 'Green', 'White']),
                 category=mixer.SELECT,
                 price=random.randint(100, 1000),
                 slug=mixer.SKIP,
@@ -55,7 +56,6 @@ class Command(BaseCommand):
                 product=mixer.SELECT,
                 item_count=random.randint(1, 6),
                 size=random.choice(['XS', 'S', 'M', 'L', 'XL']),
-                color=random.choice(['Red', 'BLue', 'Yellow', 'Black', 'Purple', 'Orange', 'Green', 'White'])
             )
 
     def create_images(self, count):

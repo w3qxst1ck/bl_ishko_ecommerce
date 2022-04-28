@@ -16,9 +16,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'price', 'is_active', 'discount')
+    list_display = ('id', 'title', 'color', 'price', 'is_active', 'discount')
     list_display_links = ('id', 'title')
-    list_filter = ('category', 'price', 'discount', 'is_active')
+    list_filter = ('category', 'color', 'price', 'discount', 'is_active')
     search_fields = ('title', 'category__title')
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ('is_active',)
@@ -26,8 +26,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(models.Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'color', 'size', 'item_count')
+    list_display = ('id', 'product', 'size', 'item_count')
     list_display_links = ('id', 'product')
-    list_filter = ('color', 'size', 'item_count')
+    list_filter = ('size', 'item_count')
     search_fields = ('product__title',)
 

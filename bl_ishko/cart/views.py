@@ -19,11 +19,10 @@ def cart_page(request):
 
 @login_required
 def add_to_cart(request, pk):
-    print(request.GET)
-    print(pk)
     product = get_object_or_404(Product, id=pk)
-    item = product.items.filter(color=request.GET.get('color').lower().capitalize(), size=request.GET.get('size'))[0]
-
+    input_size = request.GET.get('size')
+    #try
+    item = product.items.filter(size=input_size)[0]
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
         user=request.user,
