@@ -216,23 +216,43 @@
               <ul class="dropdown">
                 {% if order.order_items %}
                   {% for item in order.order_items.all %}
-                  <li>
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="cart-img"> 
-                          <a href="{{ item.item.product.get_absolute_url }}">
-                            {% thumbnail item.item.product.title_image "388x450" crop="center" as im %}
-                              <img class="media-object img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="...">
-                            {% endthumbnail %}
-                          </a> 
+                  {% if forloop.counter < 4 %}
+                    <li>
+                      <div class="media">
+                        <div class="media-left">
+                          <div class="cart-img"> 
+                            <a href="{{ item.item.product.get_absolute_url }}">
+                              {% thumbnail item.item.product.title_image "388x450" crop="center" as im %}
+                                <img class="media-object img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="...">
+                              {% endthumbnail %}
+                            </a> 
+                          </div>
                         </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">{{ item.item.product.title|upper|truncatechars:19 }}</h6>
+                          <h6 class="media-heading">РАЗМЕР: {{ item.item.size }}</h6>
+                          <span class="price">{{ item.item_total }} RUB</span> <span class="qty">КОЛ-ВО: {{ item.quantity }}</span> </div>
                       </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">{{ item.item.product.title|upper|truncatechars:19 }}</h6>
-                        <span class="price">{{ item.item_total }} RUB</span> <span class="qty">КОЛ-ВО: {{ item.quantity }}</span> </div>
-                    </div>
-                  </li>
+                    </li>
+                  {% endif %}
                   {% endfor %}
+                  {% if order.get_total_quantity > 3 %}
+                    <li>
+                      <div class="media">
+                       <!--  <div class="media-left">
+                          <div class="cart-img"> 
+                            <a href="{{ item.item.product.get_absolute_url }}">
+                              {% thumbnail item.item.product.title_image "388x450" crop="center" as im %}
+                                <img class="media-object img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="...">
+                              {% endthumbnail %}
+                            </a> 
+                          </div>
+                        </div> -->
+                        <div class="media-body">
+                          <span class="qty">ЕЩЕ ТОВАРОВ В КОРЗИНЕ: {{ order.get_total_quantity|add:'-3' }}</span> </div>
+                      </div>
+                    </li>
+                  {% endif %}
 
                 <li class="no-padding no-border">
                   <h5 class="text-center">СУММА: {% if order %}{{ order.get_order_total_price }}{% else %}0{% endif %} RUB</h5>

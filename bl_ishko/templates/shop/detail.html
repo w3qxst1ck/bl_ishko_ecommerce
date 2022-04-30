@@ -115,8 +115,12 @@
                   <div class="fun-share">
                     <input type="text" value=1>
                     <button type="submit" class="btn btn-small btn-dark">В КОРЗИНУ</button> 
-                    <a href="#." class="share-sec"><i class="ion-shuffle"></i></a> 
-                    <a class="share-sec" href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a> 
+                    <a href="#." class="share-sec"><i class="ion-shuffle"></i></a>
+                    {% if product not in wish_list_products %}
+                      <a class="share-sec" href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a> 
+                    {% else %}
+                      <a class="share-sec" href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a> 
+                    {% endif %}
                   </div>
                 </div>
             </form>

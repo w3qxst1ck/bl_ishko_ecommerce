@@ -27,7 +27,16 @@ def faq_page(request, pk=None):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    return render(request, 'shop/detail.html', context={'product': product})
+    if request.user.is_authenticated:
+        wish_list = WishProduct.objects.filter(user=request.user)
+        if wish_list.exists():
+            wish_list_products = [product.product for product in wish_list]
+        else:
+            wish_list_products = []
+    else:
+        wish_list_products = []
+    return render(request, 'shop/detail.html', context={'product': product,
+                                                        'wish_list_products': wish_list_products})
 
 
 def about_page(request):

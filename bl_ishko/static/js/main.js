@@ -80,13 +80,13 @@ $("#product-color").on('change', function () {
 	let color_value = this.value;
 	let color_input = $("#color_input");
 	color_input.val(color_value);
-})
+});
 
-$("#product-size").on('change', function () {
+$("select#product-size").on('change', function () {
 	let size_value = this.value;
-	let size_input = $("#size_input");
+	let size_input = $(this).siblings('input');
 	size_input.val(size_value);
-})
+});
 
 /*-----------------------------------------------------------------------------------*/
 /* 	ABOUT CLIENT SLIDER

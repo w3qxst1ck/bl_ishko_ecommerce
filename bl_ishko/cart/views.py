@@ -30,7 +30,7 @@ def add_to_cart(request, pk):
     order_qs = Order.objects.filter(user=request.user, is_active=True)
     if order_qs.exists():
         order = order_qs[0]
-        if order.order_items.filter(item__id=pk).exists():
+        if order.order_items.filter(item=item).exists():
             order_item.quantity += 1
             order_item.save()
         else:

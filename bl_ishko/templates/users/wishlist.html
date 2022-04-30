@@ -97,7 +97,7 @@
                   
                   <!-- TOTAL PRICE -->
                   <li class="col-sm-2">
-                    <div class="position-center-center"> <a href="#." class="btn">В КОРЗИНУ</a> </div>
+                    <div class="position-center-center"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}" class="btn">В КОРЗИНУ</a> </div>
                   </li>
                   
                   <!-- EDIT AND REMOVE -->
@@ -118,7 +118,57 @@
                -->
               <!-- CONTINUE SHOPPING --> 
               <a href="{% url 'shop:shop-page' %}" class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i>ПРОДОЛЖИТЬ ПОКУПКИ</a> </div>
-            
+              
+              {% for wish_product in wish_products %}
+            <!-- Modal window -->
+              <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+                  <div class="modal-content">
+                    <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <section class="pages-in item-detail-page">
+                        <form action="{% url 'cart:add-to-cart' wish_product.product.id %}" method="GET">
+                            <!-- size -->
+                            <div class="col-sm-12">
+                              <div class="item-select"> 
+                                <!--  SIZE -->
+                                <p>*РАЗМЕР</p>
+                                <select class="selectpicker" id='product-size'>
+                                  <!-- <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option> -->
+                                  {% for item in wish_product.product.items.all %}
+                                    <option>{{ item.size|upper }}</option>
+                                  {% endfor %}
+                                </select>
+                                <input type="" id="size_input" hidden="true" name="size" value="{{ wish_product.product.items.all.0.size }}">
+                              </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">{{ wish_product.product.description }}</p>
+                            </div>
+
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">Состав: {{ wish_product.product.compound }}</p>
+                            </div> 
+
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">Уход: {{ wish_product.product.care }}</p>
+                            </div> 
+
+                            <div class="col-sm-12">
+                              <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
+                            </div>
+                        </form>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- end Modal window -->
+            {% endfor %}
+
           </div>
         </div>
       {% else %}

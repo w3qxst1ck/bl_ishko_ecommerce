@@ -213,21 +213,6 @@
                       </button>
                       <section class="pages-in item-detail-page">
                         <form action="{% url 'cart:add-to-cart' product.id %}" method="GET">
-                            <!-- color -->
-                            <div class="col-sm-12">
-                              <div class="item-select">
-                                <!-- COLOR -->
-                                <p>*ЦВЕТ</p>
-                                <select class="selectpicker" id='product-color'>
-                                  <!-- <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option> -->
-                                  {% for item in product.items.all %}
-                                    <option>{{ item.color|upper }}</option>
-                                  {% endfor %}
-                                </select>
-                                <input type="" id="color_input" hidden="true" name="color" value="{{ product.items.all.0.color }}">
-                              </div>
-                            </div>
-
                             <!-- size -->
                             <div class="col-sm-12">
                               <div class="item-select"> 
