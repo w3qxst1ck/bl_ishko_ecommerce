@@ -87,6 +87,29 @@ $("select#product-size").on('change', function () {
 	let size_input = $(this).siblings('input');
 	size_input.val(size_value);
 });
+/*-----------------------------------------------------------------------------------*/
+/* 	COPY URL
+/*-----------------------------------------------------------------------------------*/
+$("a#share-product").on('click', function () {
+	var dummy = document.createElement('input'),
+	text = window.location.href;
+	document.body.appendChild(dummy);
+	dummy.value = text;
+	dummy.select();
+	document.execCommand('copy');
+	document.body.removeChild(dummy);
+});
+$("a#share-product1").on('click', function () {
+	var dummy = document.createElement('input');
+	var my_domen = "http://127.0.0.1:8000";
+	var product_url = $(this).parents().siblings('input').val();
+	var text = my_domen + product_url;
+	document.body.appendChild(dummy);
+	dummy.value = text;
+	dummy.select();
+	document.execCommand('copy');
+	document.body.removeChild(dummy);
+});
 
 /*-----------------------------------------------------------------------------------*/
 /* 	ABOUT CLIENT SLIDER

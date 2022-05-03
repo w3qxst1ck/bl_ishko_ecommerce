@@ -1,6 +1,7 @@
 {% extends 'shop/base.html' %}
 
 {% load static %}
+{% load sort_size %}
 
 {% load thumbnail %}
 
@@ -87,7 +88,7 @@
                    <!-- STOCK -->
                   <li class="col-sm-2"> 
                     <div class="position-center-center">
-                      {% if wish_product.product.is_active %}
+                      {% if wish_product.product.items.all|distinct_size %}
                         В НАЛИЧИИ
                       {% else %}
                         НЕТ В НАЛИЧИИ
@@ -136,12 +137,15 @@
                                 <!--  SIZE -->
                                 <p>*РАЗМЕР</p>
                                 <select class="selectpicker" id='product-size'>
-                                  <!-- <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option> -->
-                                  {% for item in wish_product.product.items.all %}
-                                    <option>{{ item.size|upper }}</option>
-                                  {% endfor %}
+                                  {% if wish_product.product.items.all|distinct_size %}
+                                    {% for size in wish_product.product.items.all|distinct_size %}
+                                      <option>{{ size }}</option>
+                                    {% endfor %}
+                                  {% else %}
+                                    <option disabled>ТОВАР ОТСУТСТВУЕТ</option>
+                                  {% endif %}
                                 </select>
-                                <input type="" id="size_input" hidden="true" name="size" value="{{ wish_product.product.items.all.0.size }}">
+                                <input type="" id="size_input" hidden="true" name="size" value="{{ wish_product.product.items.all|distinct_size|first }}">
                               </div>
                             </div>
 
@@ -156,10 +160,11 @@
                             <div class="col-sm-12">
                               <p style="font-size: 12px; margin-top: 10px">Уход: {{ wish_product.product.care }}</p>
                             </div> 
-
-                            <div class="col-sm-12">
-                              <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
-                            </div>
+                            {% if wish_product.product.items.all|distinct_size %}
+                              <div class="col-sm-12">
+                                <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
+                              </div>
+                            {% endif %}
                         </form>
                       </section>
                     </div>

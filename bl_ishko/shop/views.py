@@ -44,19 +44,21 @@ def about_page(request):
 
 
 def shop_page(request, slug=None):
+    # get products from category
     if slug:
         category = get_object_or_404(Category, slug=slug)
         products = Product.objects.filter(category=category)
     else:
         products = Product.objects.all()
-        if request.user.is_authenticated:
-            wish_list = WishProduct.objects.filter(user=request.user)
-            if wish_list.exists():
-                wish_list_products = [product.product for product in wish_list]
-            else:
-                wish_list_products = []
+    # wish product list
+    if request.user.is_authenticated:
+        wish_list = WishProduct.objects.filter(user=request.user)
+        if wish_list.exists():
+            wish_list_products = [product.product for product in wish_list]
         else:
             wish_list_products = []
+    else:
+        wish_list_products = []
     return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products})
 
 

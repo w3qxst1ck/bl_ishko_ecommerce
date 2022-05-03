@@ -1,6 +1,7 @@
 {% extends 'shop/base.html' %}
 
 {% load static %}
+{% load sort_size %}
 
 {% load thumbnail %}
 
@@ -61,7 +62,7 @@
                 <span class="price">{{ product.price }} RUB</span> </div>
               <div class="col-sm-12"> <span class="code">КАТЕГОРИЯ: {{ product.category.title|upper }}</span>
                 <div class="some-info no-border"> <br>
-                  {% if product.is_active %}
+                  {% if product.items.all|distinct_size %}
                     <div class="in-stoke"> <i class="fa fa-check-circle"></i>В НАЛИЧИИ</div>
                   {% else %}
                     <div class="in-stoke"> НЕТ В НАЛИЧИИ</div>
@@ -82,14 +83,14 @@
                   <div class="item-select"> 
 
                     <!-- COLOR -->
-                    <p>*ЦВЕТ</p>
+                    <!-- <p>*ЦВЕТ</p> -->
                     <!-- <select class="selectpicker" id='product-color'> -->
                       <!-- <option>PLEASE SELETCT</option> -->
 <!--                       {% for item in product.items.all %}
                         <option val>{{ item.color|upper }}</option>
                       {% endfor %}
                     </select> -->
-                    <input type="" id="color_input" hidden="true" name="color" value="{{ product.items.all.0.color }}">
+                    <!-- <input type="" id="color_input" hidden="true" name="color" value="{{ product.items.all.0.color }}"> -->
                   </div>
                 </div>
                 <div class="col-sm-12">
@@ -99,11 +100,15 @@
                     <p>*РАЗМЕР</p>
                     <select class="selectpicker" id='product-size'>
                       <!-- <option>PLEASE SELETCT</option> -->
-                      {% for item in product.items.all %}
-                        <option>{{ item.size|upper }}</option>
-                      {% endfor %}
+                      {% if product.items.all|distinct_size %}
+                        {% for size in product.items.all|distinct_size %}
+                          <option>{{ size }}</option>
+                        {% endfor %}
+                      {% else %}
+                        <option disabled>ТОВАР ОТСУТСТВУЕТ</option>
+                      {% endif %}
                     </select>
-                    <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all.0.size }}">
+                    <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all|distinct_size|first }}">
 
                     <a href="" data-toggle="modal" data-target="#sizeModal"><p>ТАБЛИЦА РАЗМЕРОВ</p></a>
                   </div>
@@ -114,8 +119,12 @@
                 <div class="col-sm-12">
                   <div class="fun-share">
                     <input type="text" value=1>
-                    <button type="submit" class="btn btn-small btn-dark">В КОРЗИНУ</button> 
-                    <a href="#." class="share-sec"><i class="ion-shuffle"></i></a>
+                    {% if product.items.all|distinct_size %}
+                      <button type="submit" class="btn btn-small btn-dark">В КОРЗИНУ</button>
+                    {% else %}
+                      <button type="submit" class="btn btn-small btn-dark" disabled>В КОРЗИНУ</button>
+                    {% endif %}
+                    <a href="" data-toggle="modal" data-target="#shareModal" id="share-product" class="share-sec"><i class="ion-shuffle"></i></a>
                     {% if product not in wish_list_products %}
                       <a class="share-sec" href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a> 
                     {% else %}
@@ -330,7 +339,7 @@
           </div>
         </div>
 
-        <!-- Modal window -->
+        <!-- Modal window size table -->
         <div class="modal fade" id="sizeModal" tabindex="-1" role="dialog" aria-labelledby="sizeModal" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
             <div class="modal-content">
@@ -464,6 +473,28 @@
                 <div class="col">
                   <p style="font-size: 11px;">Все размеры указаны в сантиметрах.</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end Modal window -->
+
+        <!-- Modal window share product -->
+        <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+            <div class="modal-content">
+              <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="col">
+                  <h6 style="font-weight: 600;">ПОДЕЛИТЬСЯ</h6>
+                </div>
+                
+                <div class="col">
+                  <p style="font-size: 11px;">Ссылка на товар скопирована в буфер обмена.</p>
+                </div>
+
               </div>
             </div>
           </div>

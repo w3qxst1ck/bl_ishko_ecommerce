@@ -1,6 +1,7 @@
 {% extends 'shop/base.html' %}
 
 {% load static %}
+{% load sort_size %}
 
 {% load thumbnail %}
 {% load mathfilters %}
@@ -183,7 +184,8 @@
                     <div class="over-item">
                       <ul class="animated fadeIn">
                         <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                        <li> <a href="" id="share-product1" data-toggle="modal" data-target="#shareModal"><i class="ion-shuffle"></i></a></li>
+                        <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
                         {% if product not in wish_list_products %}
                           <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
                         {% else %}
@@ -219,12 +221,15 @@
                                 <!--  SIZE -->
                                 <p>*РАЗМЕР</p>
                                 <select class="selectpicker" id='product-size'>
-                                  <!-- <option>ПОЖАЛУЙСТА ВЫБЕРИТЕ</option> -->
-                                  {% for item in product.items.all %}
-                                    <option>{{ item.size|upper }}</option>
-                                  {% endfor %}
+                                  {% if product.items.all|distinct_size %}
+                                    {% for size in product.items.all|distinct_size %}
+                                      <option>{{ size }}</option>
+                                    {% endfor %}
+                                  {% else %}
+                                    <option disabled>ТОВАР ОТСУТСТВУЕТ</option>
+                                  {% endif %}
                                 </select>
-                                <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all.0.size }}">
+                                <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all|distinct_size|first }}">
                               </div>
                             </div>
 
@@ -239,10 +244,11 @@
                             <div class="col-sm-12">
                               <p style="font-size: 12px; margin-top: 10px">Уход: {{ product.care }}</p>
                             </div> 
-
-                            <div class="col-sm-12">
-                              <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
-                            </div>
+                            {% if product.items.all|distinct_size %}
+                              <div class="col-sm-12">
+                                <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
+                              </div>
+                            {% endif %}
                         </form>
                       </section>
                     </div>
@@ -251,6 +257,28 @@
               </div>
             <!-- end Modal window -->
             {% endfor %}
+
+            <!-- Modal window share product -->
+            <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+                <div class="modal-content">
+                  <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="col">
+                      <h6 style="font-weight: 600;">ПОДЕЛИТЬСЯ</h6>
+                    </div>
+                    
+                    <div class="col">
+                      <p style="font-size: 11px;">Ссылка на товар скопирована в буфер обмена.</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end Modal window -->
             
             <!--======= PAGINATION =========-->
             {% if products.count > 12 %}
@@ -263,7 +291,7 @@
               <li><a href="#."><i class="fa fa-angle-right"></i></a></li>
             </ul>
             {% else %}
-            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s"></ul>
+            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s" style="border-bottom: none; border-top: none;"></ul>
             {% endif %}
           </div>
         </div>

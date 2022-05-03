@@ -17,5 +17,5 @@ urlpatterns = [
     path('detail/<str:slug>/', product_detail, name='detail-page'),
     path('about/', about_page, name='about-page'),
     path('shop/', shop_page, name='shop-page'),
-    path('shop/<str:slug>/', category_shop_page, name='cat-shop-page'),
+    path('shop/<str:slug>/', shop_page, name='cat-shop-page'),
 ]

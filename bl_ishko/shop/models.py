@@ -14,7 +14,7 @@ CHOICES = (
 class Product(models.Model):
     title = models.CharField(max_length=255, db_index=True, verbose_name='Название')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, related_name='products', verbose_name='Категория')
-    color = models.CharField(max_length=128)
+    color = models.CharField(max_length=128, verbose_name='Цвет')
     price = models.FloatField(verbose_name='Цена')
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
@@ -33,7 +33,7 @@ class Product(models.Model):
         return reverse('shop:detail-page', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return self.title
+        return f'{self.title} - {self.color}'
 
     class Meta:
         verbose_name = 'Продукт'
