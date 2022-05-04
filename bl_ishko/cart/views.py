@@ -41,7 +41,9 @@ def add_to_cart(request, pk):
             order.order_items.add(order_item)
         item.item_count -= 1
         item.save()
-    return redirect('cart:cart-page')
+    else:
+        redirect('shop:shop-page')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required

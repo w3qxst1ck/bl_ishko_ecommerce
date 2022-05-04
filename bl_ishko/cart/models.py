@@ -37,6 +37,9 @@ class Order(models.Model):
     def get_total_quantity(self):
         return sum([item.quantity for item in self.order_items.all()])
 
+    def get_order_items_count(self):
+        return self.order_items.all().count()
+
     def __str__(self):
         return f'{self.user.email}'
 

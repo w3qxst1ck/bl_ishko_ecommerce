@@ -183,7 +183,7 @@
                 </li>
               </ul>
             </li>
-            <li><a href="{% url 'shop:faq-page' 1 %}">FAQ</a>
+            <li><a href="{% url 'shop:faq-page' 1 %}">ПОКУПАТЕЛЯМ</a>
             </li>
             <ul class="dropdown">
               <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID </a>
@@ -216,7 +216,7 @@
               <ul class="dropdown">
                 {% if order.order_items %}
                   {% for item in order.order_items.all %}
-                  {% if forloop.counter < 4 %}
+                  {% if forloop.counter < 3 %}
                     <li>
                       <div class="media">
                         <div class="media-left">
@@ -236,7 +236,7 @@
                     </li>
                   {% endif %}
                   {% endfor %}
-                  {% if order.get_total_quantity > 3 %}
+                  {% if order.get_order_items_count > 2 %}
                     <li>
                       <div class="media">
                        <!--  <div class="media-left">
@@ -249,7 +249,7 @@
                           </div>
                         </div> -->
                         <div class="media-body">
-                          <span class="qty">ЕЩЕ ТОВАРОВ В КОРЗИНЕ: {{ order.get_total_quantity|add:'-3' }}</span> </div>
+                          <span class="qty">ЕЩЕ ТОВАРОВ В КОРЗИНЕ: {{ order.get_order_items_count|add:'-2' }}</span> </div>
                       </div>
                     </li>
                   {% endif %}

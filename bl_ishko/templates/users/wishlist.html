@@ -138,8 +138,8 @@
                                 <p>*РАЗМЕР</p>
                                 <select class="selectpicker" id='product-size'>
                                   {% if wish_product.product.items.all|distinct_size %}
-                                    {% for size in wish_product.product.items.all|distinct_size %}
-                                      <option>{{ size }}</option>
+                                  {% for size in wish_product.product.items.all|distinct_size %}
+                                  <option>{{ size }}</option>
                                     {% endfor %}
                                   {% else %}
                                     <option disabled>ТОВАР ОТСУТСТВУЕТ</option>
