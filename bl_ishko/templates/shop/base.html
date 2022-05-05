@@ -9,6 +9,7 @@
 <meta name="author" content="Sofy">
 
 {% load static %}
+{% load thumbnail %}
 
 <!-- FONTS ONLINE -->
 <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
@@ -43,7 +44,10 @@
 <!-- LOADER ===========================================-->
 <div id="loader">
   <div class="loader">
-    <div class="position-center-center"> <img src="{% static 'images/image2.png' %}" alt="">
+    <div class="position-center-center">
+      {% thumbnail product.title_image "258x200" crop="center" as im %}
+      <img src="{% static 'images/image2.png' %}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+      {% endthumbnail %}
       <p class="font-playfair text-center">Пожалуйста подождите...</p>
       <div class="loading">
         <div class="ball"></div>
