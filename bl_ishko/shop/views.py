@@ -87,3 +87,4 @@ def checkout_page(request):
 def wishlist_page(request):
     return render(request, 'shop/wishlist.html')
 
+
