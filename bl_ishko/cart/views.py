@@ -76,3 +76,13 @@ def delete_all_from_cart(request):
         # delete order_items from order
         order_items.delete()
     return redirect('cart:cart-page')
+
+
+@login_required
+def order_complete_page(request):
+    order_qs = Order.objects.filter(user=request.user, is_active=True)
+    if order_qs.exists():
+        order = order_qs[0]
+    else:
+        order = None
+    return render(request, 'cart/order_complete.html', {'order': order})

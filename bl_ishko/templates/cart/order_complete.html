@@ -1,0 +1,133 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+{% load mathfilters %}
+
+{% block title %}ЗАКАЗ ОФОРМЛЕН{% endblock title %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
+
+{% block content %}
+  
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner">
+      <div class="container">
+        <h4>SHOPPING CART</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">SHOPPING CART</li>
+        </ol>
+      </div>
+    </section>
+    
+    <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in chart-page">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="payment_steps">
+          <ul class="row">
+            <!-- SHOPPING CART -->
+            <li class="col-sm-4"> <i class="fa fa-shopping-cart"></i>
+              <h6>КОРЗИНА</h6>
+            </li>
+            
+            <!-- CHECK OUT DETAIL -->
+            <li class="col-sm-4"> <i class="fa fa-align-left"></i>
+              <h6>CHECK OUT DETAIL</h6>
+            </li>
+            
+            <!-- ORDER COMPLETE -->
+            <li class="col-sm-4 current"> <i class="fa fa-check"></i>
+              <h6>ЗАКАЗ ГОТОВ</h6>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Payments Steps -->
+        <div class="shopping-cart"> 
+          
+          <!-- SHOPPING INFORMATION -->
+          <div class="cart-ship-info">
+            <div class="row"> 
+              
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-7">
+                <h6>ЗАКАЗ ГОТОВ</h6>
+                <div class="order_complete">
+                  <p>В ближайшее время администратор магазина свяжяется с вами по телефону или электронной почте для подтверждения заказа и уточнения деталей доставки и оплаты.<p>
+                </div>
+              </div>
+              
+              <!-- SUB TOTAL -->
+              <div class="col-sm-5">
+                <div class="order-place">
+                  <h5>ВАШ ЗАКАЗ</h5>
+                  <div class="order-detail">
+                    <p>ТОВАР <span>СУММА</span></p>
+                    <div class="item-order">
+                      {% for order_item in order.order_items.all %}
+                        <p>{{ order_item.item.product.title|upper }} <span class="color"> x{{ order_item.quantity }} </span></p>
+                        <p>ЦВЕТ: {{ order_item.item.product.color|upper }} </p>
+                        <p class="text-right">{% if order_item.item.product.discount %}{{ order_item.item_total_with_sale }} RUB (sale {{ order_item.item.product.discount }}%){% else %}{{ order_item.item_total }} RUB{% endif %}</p>
+                      {% endfor %}
+                    </div>
+                    <p>СУММА ЗАКАЗА <span>{{ order.get_order_total_price_with_sale }} RUB</span></p>
+                    <p>ДОСТАВКА <span>500 RUB</span></p>
+                    <p>ОБЩАЯ СУММА <span>{{ order.get_order_total_price_with_sale|addition:500 }} RUB</span></p>
+                  </div>
+                  <div class="pay-meth">
+                    <h5>ДЕТАЛИ ЗАКАЗА</h5>
+                    <ul>
+                      <li>
+                        <p>Пожалуйста проверьте правильность заказа и выберете предпочтительный для вас способ доставки.</p>
+                        <div class="checkbox">
+                          <input id="checkbox3-1" class="styled" type="checkbox">
+                          <label for="checkbox3-1"> ДОСТАВКА ПОЧТОЙ РОССИИ </label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="checkbox">
+                          <input id="checkbox3-2" class="styled" type="checkbox">
+                          <label for="checkbox3-2"> ДОСТАВКА СДЭК </label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="checkbox">
+                          <input id="checkbox3-4" class="styled" type="checkbox">
+                          <label for="checkbox3-4"><span class="color"> ПОДТВЕРДИТЬ ЗАКАЗ </span> </label>
+                        </div>
+                      </li>
+                    </ul>
+                    <a href="#." class="btn btn-small btn-dark pull-right">ГОТОВО</a> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/own-menu.js' %}"></script> 
+<script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+<script src="{% static 'js/jquery.isotope.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}
