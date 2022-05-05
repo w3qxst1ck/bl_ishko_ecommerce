@@ -22,6 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('title', 'category__title')
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ('is_active',)
+    ordering = ('-created',)
 
 
 @admin.register(models.Item)

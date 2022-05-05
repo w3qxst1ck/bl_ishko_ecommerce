@@ -17,6 +17,7 @@ class Product(models.Model):
     color = models.CharField(max_length=128, verbose_name='Цвет')
     price = models.FloatField(verbose_name='Цена')
     slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     discount = models.IntegerField(blank=True, null=True, verbose_name='Скидка')
     description = models.TextField(verbose_name='Опсиание')

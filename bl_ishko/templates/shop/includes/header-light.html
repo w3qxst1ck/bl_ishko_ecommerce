@@ -124,53 +124,59 @@
               </ul>
             </li>
 
-            <li class="meganav"><a href="index.html">LOOKBOOK</a> 
+            <li class="meganav"><a href="">НОВИНКИ</a> 
               <!--======= MEGA MENU =========-->
               <ul class="megamenu full-width look-book">
                 <li class="row nav-post">
                   <div class="col-sm-2">
                     <h6>Shop</h6>
                     <ul>
-                      <li><a href="#."> MEN’S</a></li>
-                      <li><a href="#."> WOMAN</a></li>
-                      <li><a href="#."> KID’S</a></li>
-                      <li><a href="#."> BAGS & SHOES</a></li>
-                      <li><a href="#."> SEASONAL</a></li>
-                      <li><a href="#."> LOOKBOOK</a></li>
-                      <li><a href="#."> </a></li>
+                      {% for c in categories %}
+                        <li><a href="{{ c.get_absolute_url }}"> {{ c.title|upper }}</a></li>
+                      {% endfor %}
                     </ul>
                   </div>
                   <div class="col-sm-5">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="nav-img"> <a href="#"> <img class="media-object img-responsive" src="{% static 'images/nav-img-1.jpg' %}" alt=""> </a> </div>
+                    {% for product in new_products %}
+                      {% if forloop.counter != 3 %}
+                        <div class="media">
+                          <div class="media-left">
+                            <div class="nav-img">
+                              <a href="{{ product.get_absolute_url }}">
+                                {% thumbnail product.title_image "170x170" crop="center" as im %}
+                                  <img class="media-object img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                                {% endthumbnail %}
+                              </a>
+                            </div>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">{{ product.title|truncatechars:20 }}</h6>
+                            <p>{{ product.description|truncatechars:70 }}</p>
+                            <a href="{{ product.get_absolute_url }}">ПОДРОБНЕЕ</a>
+                          </div>
+                        </div>
+                      {% else %}
                       </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">Oversized T-Shirt Dress</h6>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium </p>
-                        <a href="#.">READ MORE</a> </div>
-                    </div>
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="nav-img"> <a href="#"> <img class="media-object img-responsive" src="{% static 'images/nav-img-4.jpg' %}" alt=""> </a> </div>
-                      </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">Oversized T-Shirt Dress</h6>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium </p>
-                        <a href="#.">READ MORE</a> </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-5">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="nav-img"> <a href="#"> <img class="media-object img-responsive" src="{% static 'images/nav-img-2.jpg' %}" alt=""> </a> </div>
-                      </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">Oversized T-Shirt Dress</h6>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium </p>
-                        <a href="#.">READ MORE</a> </div>
-                    </div>
-                    <div class="media">
+                      <div class="col-sm-5">
+                        <div class="media">
+                          <div class="media-left">
+                            <div class="nav-img">
+                              <a href="{{ product.get_absolute_url }}">
+                                {% thumbnail product.title_image "170x170" crop="center" as im %}
+                                  <img class="media-object img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                                {% endthumbnail %}
+                              </a>
+                            </div>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">{{ product.title|truncatechars:20 }}</h6>
+                            <p>{{ product.description|truncatechars:70 }}</p>
+                            <a href="{{ product.get_absolute_url }}">ПОДРОБНЕЕ</a>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                    <!-- <div class="media">
                       <div class="media-left">
                         <div class="nav-img"> <a href="#"> <img class="media-object img-responsive" src="{% static 'images/nav-img-3.jpg' %}" alt=""> </a> </div>
                       </div>
@@ -178,7 +184,7 @@
                         <h6 class="media-heading">Oversized T-Shirt Dress</h6>
                         <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium </p>
                         <a href="#.">READ MORE</a> </div>
-                    </div>
+                    </div> -->
                   </div>
                 </li>
               </ul>

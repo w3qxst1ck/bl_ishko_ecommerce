@@ -21,6 +21,11 @@ class OrderItem(models.Model):
     def __str__(self):
         return f'{self.item.id}.{self.item.product.title} - {self.quantity}'
 
+    class Meta:
+        verbose_name = 'Товар в заказе'
+        verbose_name_plural = 'Товары в заказе'
+        ordering = ['-created']
+
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='order')
@@ -43,4 +48,9 @@ class Order(models.Model):
 
     def __str__(self):
         return f'{self.user.email}'
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+        ordering = ['-created']
 

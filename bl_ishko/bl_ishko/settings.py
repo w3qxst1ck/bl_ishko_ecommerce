@@ -86,6 +86,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'bl_ishko.context_processors.get_order',
                 'bl_ishko.context_processors.get_categories',
+                'bl_ishko.context_processors.get_new_products',
             ],
         },
     },
