@@ -6050,3 +6050,13 @@ input:focus {
 .modal-body {
 	overflow-y: auto;
 }
+
+.order_complete p{
+	font-size: 14px;
+	margin: 20px 0;
+	font-weight: lighter;
+	color: #272727;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 24px;
+	text-align: justify;
+}

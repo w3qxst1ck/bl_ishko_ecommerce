@@ -110,3 +110,11 @@ def is_enough_items(order_items):
 
 def send_message(text, client_email):
     pass
+
+def order_complete_page(request):
+    order_qs = Order.objects.filter(user=request.user, is_active=True)
+    if order_qs.exists():
+        order = order_qs[0]
+    else:
+        order = None
+    return render(request, 'cart/order_complete.html', {'order': order})
