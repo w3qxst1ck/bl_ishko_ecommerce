@@ -45,9 +45,7 @@
 <div id="loader">
   <div class="loader">
     <div class="position-center-center">
-      {% thumbnail product.title_image "258x200" crop="center" as im %}
-      <img src="{% static 'images/image2.png' %}" width="{{ im.width }}" height="{{ im.height }}" alt="">
-      {% endthumbnail %}
+      <img src="{% static 'images/image2.png' %}" width="258" height="200" alt="">
       <p class="font-playfair text-center">Пожалуйста подождите...</p>
       <div class="loading">
         <div class="ball"></div>
