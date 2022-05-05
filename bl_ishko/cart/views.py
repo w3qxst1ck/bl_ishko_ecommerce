@@ -28,7 +28,7 @@ def add_to_cart(request, pk):
             item=item,
             user=request.user,
         )
-        order_qs = Order.objects.filter(user=request.user, is_active=True)
+        order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
         if order_qs.exists():
             order = order_qs[0]
             if order.order_items.filter(item=item).exists():
@@ -101,8 +101,6 @@ def decrease_quantity(item, decrease_count):
 
 def is_enough_items(order_items):
     for order_item in order_items:
-        print(order_item.item.item_count)
-        print(order_item.quantity)
         if order_item.item.item_count - order_item.quantity < 0:
             return False
     return True
@@ -110,6 +108,7 @@ def is_enough_items(order_items):
 
 def send_message(text, client_email):
     pass
+
 
 def order_complete_page(request):
     order_qs = Order.objects.filter(user=request.user, is_active=True)
