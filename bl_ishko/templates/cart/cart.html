@@ -194,7 +194,7 @@
               <div class="col-sm-4">
                 <div class="grand-total"> <span>СУММА БЕЗ СКИДКИ: {{ order.get_order_total_price }} RUB</span>
                   <h4>СУММА: <span> {{ order.get_order_total_price_with_sale }} RUB </span></h4>
-                  <a href="#." class="btn">ПЕРЕЙТИ К ОПЛАТЕ</a>
+                  <a href="{% url 'cart:checkout-order' %}" class="btn">ПЕРЕЙТИ К ОПЛАТЕ</a>
                   <p>Checkout with Multiple Addresses</p>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.utils import timezone
 from shop.models import Product
 
@@ -9,7 +9,7 @@ from shop.models import Item
 
 @login_required
 def cart_page(request):
-    order_qs = Order.objects.filter(user=request.user, is_active=True)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
     else:
@@ -76,3 +76,37 @@ def delete_all_from_cart(request):
         # delete order_items from order
         order_items.delete()
     return redirect('cart:cart-page')
+
+
+@login_required
+def checkout_order(request):
+    order = get_object_or_404(Order, user=request.user)
+    if is_enough_items(order.order_items.all()):
+        text = f'Заказ успешно офрмлен, его номер {order.id}. По указанному ' \
+               f'номеру с вами свяяжется сотрудник, для подтверждения'
+        send_message(text, request.user.email)
+        for order_item in order.order_items.all():
+            decrease_quantity(order_item.item, order_item.quantity)
+        order.ordered = True
+        order.save()
+        return HttpResponse('<h1>Заказ офрмлен</h1>')
+    else:
+        return HttpResponse('<h1>Ошибка в офрмлении заказа</h1>')
+
+
+def decrease_quantity(item, decrease_count):
+    item.item_count -= decrease_count
+    item.save()
+
+
+def is_enough_items(order_items):
+    for order_item in order_items:
+        print(order_item.item.item_count)
+        print(order_item.quantity)
+        if order_item.item.item_count - order_item.quantity < 0:
+            return False
+    return True
+
+
+def send_message(text, client_email):
+    pass
