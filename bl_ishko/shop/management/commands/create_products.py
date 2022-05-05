@@ -17,7 +17,7 @@ class Command(BaseCommand):
         count = 11
         self.create_categories()
         self.create_products(count)
-        # self.create_items(count * 5)
+        self.create_items(count * 5)
         self.create_images(count * 5)
 
     @staticmethod
@@ -49,14 +49,22 @@ class Command(BaseCommand):
                 )
         print('Объекты Products супешно созданы!')
 
-    # def create_items(self, count):
-    #     for _ in range(count):
-    #         mixer.blend(
-    #             Item,
-    #             product=mixer.SELECT,
-    #             item_count=random.randint(1, 6),
-    #             size=random.choice(['XS', 'S', 'M', 'L', 'XL']),
-    #         )
+    def create_items(self, count):
+        for _ in range(count):
+            mixer.blend(
+                Item,
+                product=mixer.SELECT,
+                item_count=random.randint(1, 6),
+                size=random.choice(['XS', 'S', 'M', 'L', 'XL']),
+            )
+        # check duplicates
+        all_items = Item.objects.all()
+        all_products = Product.objects.all()
+        for product in all_products:
+            for size in ['XS', 'S', 'M', 'L', 'XL']:
+                if len(all_items.filter(product=product, size=size)) > 1:
+                    for item in all_items.filter(product=product, size=size)[1:]:
+                        item.delete()
 
     def create_images(self, count):
         all_images = os.listdir(path='shop/data/images/')

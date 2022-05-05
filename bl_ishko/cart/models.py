@@ -7,6 +7,7 @@ class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Товар')
     quantity = models.IntegerField(default=1, verbose_name='Количество')
+    created = models.DateTimeField(auto_now_add=True)
 
     def item_total(self):
         return self.quantity * self.item.product.price
