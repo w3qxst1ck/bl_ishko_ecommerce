@@ -266,7 +266,7 @@
                 <li class="no-padding no-border">
                   <div class="row">
                     <div class="col-xs-6"> <a href="{% url 'cart:cart-page' %}" class="btn btn-small">КОРЗИНА</a></div>
-                    <div class="col-xs-6 "> <a href="#." class="btn btn-1 btn-small">CHECK OUT</a></div>
+                    <div class="col-xs-6 "> <a href="{% url 'cart:checkout-page' %}" class="btn btn-1 btn-small">ОФОРМИТЬ</a></div>
                   </div>
                 </li>
                 {% else %}

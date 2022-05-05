@@ -4,7 +4,7 @@ from shop.models import Category, Product
 
 def get_order(request):
     if request.user.is_authenticated:
-        order = Order.objects.filter(user=request.user, ordered=False)
+        order = Order.objects.filter(user=request.user, ordered=False, is_active=True)
         if order.exists():
             order = order[0]
     else:

@@ -35,17 +35,17 @@
           <ul class="row">
             <!-- SHOPPING CART -->
             <li class="col-sm-4"> <i class="fa fa-shopping-cart"></i>
-              <h6>SHOPPING CART</h6>
+              <h6>КОРЗИНА</h6>
             </li>
             
             <!-- CHECK OUT DETAIL -->
             <li class="col-sm-4 current"> <i class="fa fa-align-left"></i>
-              <h6>CHECK OUT DETAIL</h6>
+              <h6>ОФОРМЛЕНИЕ ЗАКАЗА</h6>
             </li>
             
             <!-- ORDER COMPLETE -->
             <li class="col-sm-4"> <i class="fa fa-check"></i>
-              <h6>ORDER COMPLETE</h6>
+              <h6>ЗАКАЗ ГОТОВ</h6>
             </li>
           </ul>
         </div>
@@ -59,94 +59,85 @@
               
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-7">
-                <h6>BILLING DETAILS</h6>
+                <h6>ДЕТАЛИ ЗАКАЗА</h6>
                 <form>
                   <ul class="row">
-                    
-                    <!-- *COUNTRY -->
-                    <li class="col-md-12">
-                      <label> *COUNTRY
-                        <select class="selectpicker">
-                          <option>UNITED KINGDOM</option>
-                          <option>UNITED STATE</option>
-                          <option>PAKISTAN</option>
-                        </select>
-                      </label>
-                    </li>
                     <!-- Name -->
                     <li class="col-md-6">
-                      <label> *FIRST NAME
-                        <input type="text" name="first-name" value="" placeholder="">
+                      <label> *ИМЯ
+                        <input type="text" name="first-name" value="" placeholder="" required>
                       </label>
                     </li>
                     <!-- LAST NAME -->
                     <li class="col-md-6">
-                      <label> *LAST NAME
-                        <input type="text" name="last-name" value="" placeholder="">
+                      <label> *ФАМИЛИЯ
+                        <input type="text" name="last-name" value="" placeholder="" required>
                       </label>
                     </li>
-                    <li class="col-md-12"> 
-                      <!-- COMPANY NAME -->
-                      <label>COMPANY NAME
-                        <input type="text" name="company" value="" placeholder="">
-                      </label>
-                    </li>
-                    <li class="col-md-12"> 
-                      <!-- ADDRESS -->
-                      <label>*ADDRESS
-                        <input type="text" name="address" value="" placeholder="">
-                        <input type="text" name="address" value="" placeholder="Optional">
-                      </label>
-                    </li>
-                    <!-- TOWN/CITY -->
+                    <!-- *COUNTRY -->
                     <li class="col-md-12">
-                      <label>*TOWN/CITY
-                        <input type="text" name="town" value="" placeholder="">
+                      <label> *СТРАНА
+                        <select class="selectpicker">
+                          <option>РОССИЯ</option>
+                        </select>
                       </label>
                     </li>
-                    
                     <!-- COUNTRY -->
                     <li class="col-md-6">
-                      <label> COUNTRY
-                        <input type="text" name="contry-state" value="" placeholder="STATE/COUNTRY">
+                      <label> РЕГИОН
+                        <input type="text" name="contry-state" value="" placeholder="Краснодарский край">
                       </label>
                     </li>
                     
                     <!-- POSTCODE -->
                     <li class="col-md-6">
-                      <label> *POSTCODE
-                        <input type="text" name="postal-code" value="" placeholder="POSTCODE/ZIP">
+                      <label> *ПОЧТОВЫЙ ИНДЕКС
+                        <input type="number" name="postal-code" value="" placeholder="123456" max='999999' min="000001" required>
+                      </label>
+                    </li>
+
+                    <!-- TOWN/CITY -->
+                    <li class="col-md-12">
+                      <label>*ГОРОД/НАСЕЛЕННЫЙ ПУНКТ
+                        <input type="text" name="town" value="" placeholder="Сочи" required>
+                      </label>
+                    </li>
+                    <li class="col-md-12"> 
+                      <!-- ADDRESS -->
+                      <label>*АДРЕС
+                        <input type="text" name="address" value="" placeholder="улица Пушкинская, д. 25, кв. 10" required>
+                        <!-- <input type="text" name="address" value="" placeholder="Optional"> -->
                       </label>
                     </li>
                     
                     <!-- EMAIL ADDRESS -->
                     <li class="col-md-6">
-                      <label> *EMAIL ADDRESS
-                        <input type="text" name="contry-state" value="" placeholder="">
+                      <label> *EMAIL 
+                        <input type="text" name="contry-state" value="{{ user.email }}" placeholder="" required>
                       </label>
                     </li>
                     <!-- PHONE -->
                     <li class="col-md-6">
-                      <label> *PHONE
-                        <input type="text" name="postal-code" value="" placeholder="">
+                      <label> *ТЕЛЕФОН
+                        <input type="tel" name="postal-code" value="+7" placeholder="" required>
                       </label>
                     </li>
                     
                     <!-- CREATE AN ACCOUNT -->
-                    <li class="col-md-6">
+<!--                     <li class="col-md-6">
                       <div class="checkbox">
                         <input id="checkbox1" class="styled" type="checkbox">
                         <label for="checkbox1"> CREATE AN ACCOUNT ? </label>
                       </div>
                     </li>
-                    
+      -->               
                     <!-- SHIP TO BILLING ADDRESS -->
-                    <li class="col-md-6">
+<!--                     <li class="col-md-6">
                       <div class="checkbox">
                         <input id="checkbox2" class="styled" type="checkbox">
                         <label for="checkbox2"> SHIP TO BILLING ADDRESS? </label>
                       </div>
-                    </li>
+                    </li> -->
                   </ul>
                 </form>
               </div>
@@ -154,19 +145,20 @@
               <!-- SUB TOTAL -->
               <div class="col-sm-5">
                 <div class="order-place">
-                  <h5>YOUR ORDER</h5>
+                  <h5>ВАШ ЗАКАЗ</h5>
                   <div class="order-detail">
-                    <p>PRODUCT <span>TOTAL</span></p>
+                    <p>ТОВАР <span>СУММА</span></p>
                     <div class="item-order">
-                      <p>DRAEY TRENCH COAT <span class="color"> x1 </span></p>
-                      <p>COLOR: BLACK </p>
-                      <p class="text-right">250.00 USD</p>
+                      {% for order_item in order.order_items.all %}
+                        <p>{{ order_item.item.product.title|upper }} <span class="color"> x{{ order_item.quantity }} </span></p>
+                        <p>ЦВЕТ: {{ order_item.item.product.color|upper }} </p>
+                        <p class="text-right">{% if order_item.item.product.discount %}{{ order_item.item_total_with_sale }} RUB (sale {{ order_item.item.product.discount }}%){% else %}{{ order_item.item_total }} RUB{% endif %}</p>
+                      {% endfor %}
                     </div>
-                    <p>CART SUBTOTAL <span>250.00 USD</span></p>
-                    <p>SHIPPING AND HANDLING <span>FREE SHIPPING</span></p>
-                    <p>ORDER TOTAL <span>250.00 USD</span></p>
+                    <p>СУММА ЗАКАЗА <span>{{ order.get_order_total_price_with_sale }} RUB</span></p>
+                    <p>ДОСТАВКА <span>500 RUB</span></p>
+                    <p>ОБЩАЯ СУММА <span>{{ order.get_order_total_price_with_sale|addition:500 }} RUB</span></p>
                   </div>
-                  <div class="pay-meth">
                     <h5>PAYMENT METHODS</h5>
                     <ul>
                       <li>
@@ -195,110 +187,13 @@
                         </div>
                       </li>
                     </ul>
-                    <a href="#." class="btn btn-small btn-dark pull-right">PLACE ORDER</a> </div>
+                    <a href="{% url 'cart:order-complete-page' %}" class="btn btn-small btn-dark pull-right">ПОДТВЕРДИТЬ ЗАКАЗ</a> </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <!--======= RELATED PRODUCTS =========-->
-      <section class="section-p-60px new-arrival new-arri-w-slide">
-        <div class="container"> 
-          
-          <!--  Tittle -->
-          <div class="tittle tittle-2">
-            <h5>RELATED PRODUCTS</h5>
-            <p class="font-playfair">Most haver in your Shop </p>
-          </div>
-          
-          <!--  New Arrival Tabs Products  -->
-          <div class="popurlar_product client-slide"> 
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!-- Image --> 
-              <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!-- Image --> 
-              <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-2.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!--  Tags  -->
-              <div class="new-tag"> NEW </div>
-              
-              <!-- Image --> 
-              <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-3.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!--  Tags  -->
-              <div class="hot-tag"> HOT </div>
-              <!-- Image --> 
-              <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-4.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </section>
   </div>
 {% endblock content %}

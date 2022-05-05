@@ -47,7 +47,7 @@ class Order(models.Model):
         return self.order_items.all().count()
 
     def __str__(self):
-        return f'{self.user.email}'
+        return f'{self.user.email} - {self.ordered}'
 
     class Meta:
         verbose_name = 'Заказ'

@@ -9,7 +9,7 @@ from shop.models import Item
 
 @login_required
 def cart_page(request):
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    order_qs = Order.objects.filter(user=request.user, ordered=False, is_active=True)
     if order_qs.exists():
         order = order_qs[0]
     else:
@@ -21,7 +21,6 @@ def cart_page(request):
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     input_size = request.GET.get('size')
-    #try
     item = product.items.filter(size=input_size)[0]
     if item.item_count > 0:
         order_item, created = OrderItem.objects.get_or_create(
@@ -39,8 +38,6 @@ def add_to_cart(request, pk):
         else:
             order = Order.objects.create(user=request.user)
             order.order_items.add(order_item)
-        item.item_count -= 1
-        item.save()
     else:
         redirect('shop:shop-page')
     return redirect(request.META.get('HTTP_REFERER'))
@@ -48,16 +45,10 @@ def add_to_cart(request, pk):
 
 @login_required
 def delete_from_cart(request, pk):
-    # item = get_object_or_404(Item, id=pk)
-    order = get_object_or_404(Order, user=request.user)
+    order = get_object_or_404(Order, user=request.user, ordered=False, is_active=True)
     order_items = order.order_items.filter(id=pk)
     if order_items.exists():
         order_item = order_items[0]
-        # increase item count
-        item = order_item.item
-        item.item_count += order_item.quantity
-        item.save()
-        # delete order_item from order
         order.order_items.remove(order_item)
         order_item.delete()
     return redirect('cart:cart-page')
@@ -65,38 +56,45 @@ def delete_from_cart(request, pk):
 
 @login_required
 def delete_all_from_cart(request):
-    order = get_object_or_404(Order, user=request.user)
+    order = get_object_or_404(Order, user=request.user, ordered=False, is_active=True)
     order_items = order.order_items.all()
     if order_items.exists():
-        # increase item count
-        for order_item in order_items:
-            item = order_item.item
-            item.item_count += order_item.quantity
-            item.save()
-        # delete order_items from order
         order_items.delete()
     return redirect('cart:cart-page')
 
 
 @login_required
-def checkout_order(request):
-    order = get_object_or_404(Order, user=request.user)
+def order_complete_page(request):
+    order = get_object_or_404(Order, user=request.user, ordered=False, is_active=True)
     if is_enough_items(order.order_items.all()):
         text = f'Заказ успешно офрмлен, его номер {order.id}. По указанному ' \
                f'номеру с вами свяяжется сотрудник, для подтверждения'
-        send_message(text, request.user.email)
+        send_message(text, request.user.email)  # TODO исправить мэйл, взять из формы
         for order_item in order.order_items.all():
-            decrease_quantity(order_item.item, order_item.quantity)
+            item = order_item.item
+            item.item_count -= order_item.quantity
+            item.save()
         order.ordered = True
         order.save()
-        return HttpResponse('<h1>Заказ офрмлен</h1>')
+        return render(request, 'cart/order_complete.html', context={'order': order})
     else:
-        return HttpResponse('<h1>Ошибка в офрмлении заказа</h1>')
+        return HttpResponse('<h1>Ошибка в офрмлении заказа</h1>')   # TODO обработать нехватку товара
 
 
-def decrease_quantity(item, decrease_count):
-    item.item_count -= decrease_count
-    item.save()
+def send_message(text, client_email):
+    pass
+
+
+@login_required
+def checkout_page(request):
+    order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
+    if order_qs.exists():
+        if is_enough_items(order_qs[0].order_items.all()):
+            return render(request, 'cart/checkout_page.html')
+        else:
+            return HttpResponse('Недостаточно товара')
+    else:
+        return HttpResponse('Заказ не существует')
 
 
 def is_enough_items(order_items):
@@ -104,16 +102,3 @@ def is_enough_items(order_items):
         if order_item.item.item_count - order_item.quantity < 0:
             return False
     return True
-
-
-def send_message(text, client_email):
-    pass
-
-
-def order_complete_page(request):
-    order_qs = Order.objects.filter(user=request.user, is_active=True)
-    if order_qs.exists():
-        order = order_qs[0]
-    else:
-        order = None
-    return render(request, 'cart/order_complete.html', {'order': order})
