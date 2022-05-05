@@ -6,12 +6,13 @@ import os
 from django.core.files import File
 
 
-from shop.models import Product, Category, ProductImages, Item
+from shop.models import Product, Category, ProductImages, Item, FaqCategory, Faq
 
 
 class Command(BaseCommand):
     help = 'Create Product with items and category in DB'
     CATEGORIES = ['Шорты', 'Футболки', 'Майки', 'Носки', 'Трусы', 'Аксессуары', 'Топики']
+    FAQ_CATEGORIES = ['Основные', 'Возврат', 'Выбор размера', 'Доставка']
 
     def handle(self, *args, **options):
         count = 11
@@ -19,6 +20,8 @@ class Command(BaseCommand):
         self.create_products(count)
         self.create_items(count * 5)
         self.create_images(count * 5)
+        self.create_faqs_categories()
+        self.create_faqs()
 
     @staticmethod
     def load_from_json(name):
@@ -76,3 +79,22 @@ class Command(BaseCommand):
                 image=File(open(f'shop/data/images/{all_images[i]}', 'rb')),
             )
         print('Фотографии товаров успешно созданы!')
+
+    def create_faqs_categories(self):
+        for category in self.FAQ_CATEGORIES:
+            FaqCategory.objects.create(
+                title=category
+            )
+        print('Объекты FAQCategory успешно созданы!')
+
+    def create_faqs(self):
+        categories = FaqCategory.objects.all()
+        for category in categories:
+            for _ in range(random.randint(2, 6)):
+                mixer.blend(
+                    Faq,
+                    title=mixer.FAKE,
+                    text=mixer.FAKE,
+                    category=category
+                )
+        print('Объекты FAQs усупешно созданы!')
