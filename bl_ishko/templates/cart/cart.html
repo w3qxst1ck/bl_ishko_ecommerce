@@ -38,12 +38,12 @@
             
             <!-- CHECK OUT DETAIL -->
             <li class="col-sm-4"> <i class="fa fa-align-left"></i>
-              <h6>CHECK OUT DETAIL</h6>
+              <h6>ОФОРМЛЕНИЕ ЗАКАЗА</h6>
             </li>
             
             <!-- ORDER COMPLETE -->
             <li class="col-sm-4"> <i class="fa fa-check"></i>
-              <h6>ORDER COMPLETE</h6>
+              <h6>ГОТОВО</h6>
             </li>
           </ul>
         </div>
@@ -106,6 +106,9 @@
                   <div class="position-center-center">
                     <!-- <input type="text" value="{{ order_item.quantity }}"> -->
                     <span>{{ order_item.quantity }}</span>
+                    {% if order_item.quantity > order_item.item.item_count %}
+                      <br><span>(доступно: {{ order_item.item.item_count }} шт.)</span>
+                    {% endif %}
                   </div>
                 </li>
                 
@@ -194,8 +197,14 @@
               <div class="col-sm-4">
                 <div class="grand-total"> <span>СУММА БЕЗ СКИДКИ: {{ order.get_order_total_price }} RUB</span>
                   <h4>СУММА: <span> {{ order.get_order_total_price_with_sale }} RUB </span></h4>
-                  <a href="{% url 'cart:checkout-page' %}" class="btn">ПЕРЕЙТИ К ОФОРМЛЕНИЮ</a>
-                  <p>Checkout with Multiple Addresses</p>
+                  
+                  {% if sold_out %}
+                    <a disabled href="" class="btn">ПЕРЕЙТИ К ОФОРМЛЕНИЮ</a>
+                    <p>Некоторые товары отсутствуют в необходимом количестве</p>
+                  {% else %}
+                    <p>Пожалуйста, убедитесь в правильности выбранных товаров и их количестве</p>
+                    <a href="{% url 'cart:checkout-page' %}" class="btn">ПЕРЕЙТИ К ОФОРМЛЕНИЮ</a>
+                  {% endif %}
                 </div>
               </div>
             </div>

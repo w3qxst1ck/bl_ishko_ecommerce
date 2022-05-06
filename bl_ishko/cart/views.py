@@ -10,11 +10,11 @@ from shop.models import Item
 @login_required
 def cart_page(request):
     order_qs = Order.objects.filter(user=request.user, ordered=False, is_active=True)
+    sold_out = False
     if order_qs.exists():
-        order = order_qs[0]
-    else:
-        order = None
-    return render(request, 'cart/cart.html', context={'order': order})
+        if not is_enough_items(order_qs[0]):
+            sold_out = True
+    return render(request, 'cart/cart.html', context={'sold_out': sold_out})
 
 
 @login_required
@@ -89,16 +89,16 @@ def send_message(text, client_email):
 def checkout_page(request):
     order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
     if order_qs.exists():
-        if is_enough_items(order_qs[0].order_items.all()):
+        if is_enough_items(order_qs[0]):
             return render(request, 'cart/checkout_page.html')
         else:
-            return HttpResponse('Недостаточно товара')
+            return render(request, 'cart/sold_out.html')
     else:
         return HttpResponse('Заказ не существует')
 
 
-def is_enough_items(order_items):
-    for order_item in order_items:
-        if order_item.item.item_count - order_item.quantity < 0:
+def is_enough_items(order):
+    for order_item in order.order_items.all():
+        if order_item.item.item_count < order_item.quantity:
             return False
     return True

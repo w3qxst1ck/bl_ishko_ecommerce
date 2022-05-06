@@ -1,0 +1,89 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block title %}КОРЗИНА{% endblock title %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
+
+{% block content %}
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner">
+      <div class="container">
+        <h4>ОФОРМЛЕНИЕ ЗАКАЗА</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
+          <li class="active">КОРЗИНА</li>
+        </ol>
+      </div>
+    </section>
+    
+    <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in chart-page">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="payment_steps">
+          <ul class="row">
+            <!-- SHOPPING CART -->
+            <li class="col-sm-4"> <i class="fa fa-shopping-cart"></i>
+              <h6>КОРЗИНА</h6>
+            </li>
+            
+            <!-- CHECK OUT DETAIL -->
+            <li class="col-sm-4 current"> <i class="fa fa-align-left"></i>
+              <h6>ОФОРМЛЕНИЕ ЗАКАЗА</h6>
+            </li>
+            
+            <!-- ORDER COMPLETE -->
+            <li class="col-sm-4"> <i class="fa fa-check"></i>
+              <h6>ГОТОВО</h6>
+            </li>
+          </ul>
+        </div>
+        
+            <!-- Sold out -->
+            <div class="shopping-cart text-center">
+              <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                  <div class="order_complete" style="margin-left: 45px;">
+                    <p style="font-weight: 500;">Некоторые товары отсутствуют в наличии.<p>
+                    {% for order_item in order.order_items.all %}
+                      {% if order_item.quantity > order_item.item.item_count %}
+                        <p>Вы выбрали "{{ order_item.item.product.title|upper }} {{ order_item.item.size }}": {{ order_item.quantity }} шт., в данный момент в наличии имеется {{ order_item.item.item_count }} шт. размера {{ order_item.item.size }}.</p>
+                      {% endif %}
+                    {% endfor %}
+                    <p>Пожалуйста, перейдите в <a href="{% url 'cart:cart-page' %}" style="color: #af5875; font-weight: 500;">корзину</a> и откорректируйте Ваш заказ.</p>
+                </div>
+              </div>    
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/own-menu.js' %}"></script> 
+<script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+<script src="{% static 'js/jquery.isotope.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}
