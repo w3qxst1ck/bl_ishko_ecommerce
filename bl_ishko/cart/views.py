@@ -64,9 +64,21 @@ def delete_all_from_cart(request):
 
 
 @login_required
+def checkout_page(request):
+    order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
+    if order_qs.exists():
+        if is_enough_items(order_qs[0]):
+            return render(request, 'cart/checkout_page.html')
+        else:
+            return render(request, 'cart/sold_out.html')
+    else:
+        return HttpResponse('Заказ не существует')
+
+
+@login_required
 def order_complete_page(request):
-    order = get_object_or_404(Order, user=request.user, ordered=False, is_active=True)
-    if is_enough_items(order.order_items.all()):
+    order = Order.objects.filter(user=request.user, is_active=True)[0]
+    if is_enough_items(order):
         text = f'Заказ успешно офрмлен, его номер {order.id}. По указанному ' \
                f'номеру с вами свяяжется сотрудник, для подтверждения'
         send_message(text, request.user.email)  # TODO исправить мэйл, взять из формы
@@ -83,18 +95,6 @@ def order_complete_page(request):
 
 def send_message(text, client_email):
     pass
-
-
-@login_required
-def checkout_page(request):
-    order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
-    if order_qs.exists():
-        if is_enough_items(order_qs[0]):
-            return render(request, 'cart/checkout_page.html')
-        else:
-            return render(request, 'cart/sold_out.html')
-    else:
-        return HttpResponse('Заказ не существует')
 
 
 def is_enough_items(order):

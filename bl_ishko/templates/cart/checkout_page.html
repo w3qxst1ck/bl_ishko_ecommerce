@@ -60,7 +60,7 @@
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-7">
                 <h6>ДЕТАЛИ ЗАКАЗА</h6>
-                <form>
+                <form action="{% url 'cart:order-complete-page' %}">
                   <ul class="row">
                     <!-- Name -->
                     <li class="col-md-6">
@@ -113,7 +113,7 @@
                     <!-- EMAIL ADDRESS -->
                     <li class="col-md-6">
                       <label> *EMAIL 
-                        <input type="text" name="contry-state" value="{{ user.email }}" placeholder="" required>
+                        <input type="email" name="contry-state" value="{{ user.email }}" placeholder="" required>
                       </label>
                     </li>
                     <!-- PHONE -->
@@ -139,7 +139,7 @@
                       </div>
                     </li> -->
                   </ul>
-                </form>
+                <!-- </form> -->
               </div>
               
               <!-- SUB TOTAL -->
@@ -150,7 +150,7 @@
                     <p>ТОВАР <span>СУММА</span></p>
                     <div class="item-order">
                       {% for order_item in order.order_items.all %}
-                        <p>{{ order_item.item.product.title|upper }} <span class="color"> x{{ order_item.quantity }} </span></p>
+                        <p>{{ order_item.item.product.title|upper }} - {{ order_item.item.size }} <span class="color"> x{{ order_item.quantity }} </span></p>
                         <p>ЦВЕТ: {{ order_item.item.product.color|upper }} </p>
                         <p class="text-right">{% if order_item.item.product.discount %}{{ order_item.item_total_with_sale }} RUB (sale {{ order_item.item.product.discount }}%){% else %}{{ order_item.item_total }} RUB{% endif %}</p>
                       {% endfor %}
@@ -187,8 +187,9 @@
                         </div>
                       </li>
                     </ul>
-                    <a href="{% url 'cart:order-complete-page' %}" class="btn btn-small btn-dark pull-right">ПОДТВЕРДИТЬ ЗАКАЗ</a> </div>
+                    <button type="submit" class="btn btn-small btn-dark pull-right">ПОДТВЕРДИТЬ ЗАКАЗ</button> </div>
                 </div>
+                </form>
               </div>
             </div>
           </div>
