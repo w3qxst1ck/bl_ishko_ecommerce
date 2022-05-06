@@ -90,7 +90,7 @@ def order_complete_page(request):
         order.save()
         return render(request, 'cart/order_complete.html', context={'order': order})
     else:
-        return HttpResponse('<h1>Ошибка в офрмлении заказа</h1>')   # TODO обработать нехватку товара
+        return render(request, 'cart/sold_out.html')
 
 
 def send_message(text, client_email):

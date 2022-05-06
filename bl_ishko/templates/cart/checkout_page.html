@@ -85,7 +85,7 @@
                     <!-- COUNTRY -->
                     <li class="col-md-6">
                       <label> РЕГИОН
-                        <input type="text" name="contry-state" value="" placeholder="Краснодарский край">
+                        <input type="text" name="region" value="" placeholder="Краснодарский край">
                       </label>
                     </li>
                     
@@ -99,7 +99,7 @@
                     <!-- TOWN/CITY -->
                     <li class="col-md-12">
                       <label>*ГОРОД/НАСЕЛЕННЫЙ ПУНКТ
-                        <input type="text" name="town" value="" placeholder="Сочи" required>
+                        <input type="text" name="city" value="" placeholder="Сочи" required>
                       </label>
                     </li>
                     <li class="col-md-12"> 
@@ -113,13 +113,13 @@
                     <!-- EMAIL ADDRESS -->
                     <li class="col-md-6">
                       <label> *EMAIL 
-                        <input type="email" name="contry-state" value="{{ user.email }}" placeholder="" required>
+                        <input type="email" name="email" value="{{ user.email }}" placeholder="" required>
                       </label>
                     </li>
                     <!-- PHONE -->
                     <li class="col-md-6">
                       <label> *ТЕЛЕФОН
-                        <input type="tel" name="postal-code" value="+7" placeholder="" required>
+                        <input type="tel" name="phone" placeholder="+7" required>
                       </label>
                     </li>
                     
@@ -143,7 +143,7 @@
               </div>
               
               <!-- SUB TOTAL -->
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="margin-bottom: 50px;">
                 <div class="order-place">
                   <h5>ВАШ ЗАКАЗ</h5>
                   <div class="order-detail">

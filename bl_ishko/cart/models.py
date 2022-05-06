@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from shop.models import Item
 from django.conf import settings
@@ -28,6 +30,7 @@ class OrderItem(models.Model):
 
 
 class Order(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='order')
     order_items = models.ManyToManyField(OrderItem)
     created = models.DateTimeField(auto_now_add=True)
@@ -47,7 +50,11 @@ class Order(models.Model):
         return self.order_items.all().count()
 
     def __str__(self):
-        return f'{self.user.email} - {self.ordered}'
+        if self.ordered:
+            ordered = 'Выполнен'
+        else:
+            ordered = 'Не выполнен'
+        return f'{self.id}. {self.user.email} - {ordered}'
 
     class Meta:
         verbose_name = 'Заказ'
