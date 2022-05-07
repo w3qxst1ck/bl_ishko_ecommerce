@@ -23,7 +23,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name='Опсиание')
     compound = models.TextField(verbose_name='Состав')
     care = models.TextField(verbose_name='Уход')
-    title_image = models.ImageField(upload_to='products/title_images')
+    title_image = models.ImageField(upload_to='products/title_images', verbose_name='Главная картинка')
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -52,6 +52,7 @@ class Item(models.Model):
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+        ordering = ['product__title',]
 
 
 class ProductImages(models.Model):
@@ -59,11 +60,12 @@ class ProductImages(models.Model):
     image = models.ImageField(upload_to='products/')
 
     def __str__(self):
-        return f'{self.id}. {self.product.title}'
+        return f'{self.id}. {self.product.title} - {self.product.color}'
 
     class Meta:
         verbose_name = 'Фото продукта'
         verbose_name_plural = 'Фото продуктов'
+        ordering = ['product__title']
 
 
 class Category(models.Model):
@@ -82,8 +84,9 @@ class Category(models.Model):
         return reverse('shop:cat-shop-page', kwargs={'slug': self.slug})
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = 'Категория товаров'
+        verbose_name_plural = 'Категории товаров'
+        ordering = ['title']
 
 
 class FaqCategory(models.Model):

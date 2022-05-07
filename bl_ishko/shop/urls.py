@@ -2,8 +2,7 @@
 from django.urls import path
 
 from .views import (home_page, faq_page, product_detail, about_page,
-                    shop_page, contact_page, checkout_page, category_shop_page,
-                    wishlist_page)
+                    shop_page, contact_page, checkout_page)
 
 
 app_name = 'shop'

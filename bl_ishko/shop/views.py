@@ -62,15 +62,6 @@ def shop_page(request, slug=None):
     return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products})
 
 
-def category_shop_page(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    products = Product.objects.filter(category=category)
-    return render(request, 'shop/shop.html', {
-        'products': products,
-        'category': category
-    })
-
-
 def contact_page(request):
     return render(request, 'shop/contact.html')
 

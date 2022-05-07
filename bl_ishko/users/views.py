@@ -41,7 +41,7 @@ def delete_all_items_from_wishlist(request):
         WishProduct.objects.filter(user=request.user).delete()
     except WishProduct.DoesNotExist:
         pass
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('users:wishlist-page')
 
 
 def profile(request):
