@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-from django.utils import timezone
 from shop.models import Product
 
 from cart.models import OrderItem, Order
-from shop.models import Item
+from .services import is_enough_items, send_message_to_client
 
 
 @login_required
@@ -79,15 +78,14 @@ def checkout_page(request):
 def order_complete_page_intermediate(request):
     order = Order.objects.filter(user=request.user, is_active=True)[0]
     if is_enough_items(order):
-        text = f'Заказ успешно офрмлен, его номер {order.id}. По указанному ' \
-               f'номеру с вами свяяжется сотрудник, для подтверждения'
-        send_message(text, request.user.email)  # TODO исправить мэйл, взять из формы
         for order_item in order.order_items.all():
             item = order_item.item
             item.item_count -= order_item.quantity
             item.save()
         order.ordered = True
         order.save()
+        # оповещение клиента
+        send_message_to_client(request, order)
         return redirect('cart:order-complete-page', uuid=order.id)
     else:
         return render(request, 'cart/sold_out.html')
@@ -99,12 +97,3 @@ def order_complete_page(request, uuid):
     return render(request, 'cart/order_complete.html', context={'order': order})
 
 
-def send_message(text, client_email):
-    pass
-
-
-def is_enough_items(order):
-    for order_item in order.order_items.all():
-        if order_item.item.item_count < order_item.quantity:
-            return False
-    return True

@@ -68,6 +68,7 @@ class Command(BaseCommand):
                 if len(all_items.filter(product=product, size=size)) > 1:
                     for item in all_items.filter(product=product, size=size)[1:]:
                         item.delete()
+        print('Объекты Items супешно созданы!')
 
     def create_images(self, count):
         all_images = os.listdir(path='shop/data/images/')

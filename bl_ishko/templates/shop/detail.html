@@ -38,6 +38,13 @@
           <div class="col-sm-6 large-detail animate fadeInLeft" data-wow-delay="0.4s">
             <div class="images-slider">
               <ul class="slides">
+              <!--======= TITLE IMAGE =========-->
+                <li data-thumb="{{ product.title_image.url }}"> 
+                    {% thumbnail product.title_image "570x660" crop="center" as im %}
+                      <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
+                    {% endthumbnail %}
+                </li>
+                <!--======= PRODUCT IMAGES =========-->
                 {% for product_image in product.images.all %}
                   <li data-thumb="{{ product_image.image.url }}"> 
                     {% thumbnail product_image.image "570x660" crop="center" as im %}
@@ -45,7 +52,8 @@
                     {% endthumbnail %}
                   </li>
                 {% endfor %}
-                <!-- <li data-thumb="{{ product.images.first.image.url }}"> <img class="img-responsive" src="{{ product.images.first.image.url }}"  alt=""> </li>
+
+<!--                 <li data-thumb="{{ product.images.first.image.url }}"> <img class="img-responsive" src="{{ product.images.first.image.url }}"  alt=""> </li>
                 <li data-thumb="{% static 'images/item-detail-img-2.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-2.jpg' %}"  alt=""> </li>
                 <li data-thumb="{% static 'images/item-detail-img-3.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-3.jpg' %}"  alt=""> </li>
                 <li data-thumb="{% static 'images/item-detail-img-4.jpg' %}"> <img class="img-responsive" src="{% static 'images/item-detail-img-4.jpg' %}"  alt=""> </li>
