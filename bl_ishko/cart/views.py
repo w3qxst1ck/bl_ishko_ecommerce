@@ -76,7 +76,7 @@ def checkout_page(request):
 
 
 @login_required
-def order_complete_page(request):
+def order_complete_page_intermediate(request):
     order = Order.objects.filter(user=request.user, is_active=True)[0]
     if is_enough_items(order):
         text = f'Заказ успешно офрмлен, его номер {order.id}. По указанному ' \
@@ -88,9 +88,15 @@ def order_complete_page(request):
             item.save()
         order.ordered = True
         order.save()
-        return render(request, 'cart/order_complete.html', context={'order': order})
+        return redirect('cart:order-complete-page', uuid=order.id)
     else:
         return render(request, 'cart/sold_out.html')
+
+
+@login_required
+def order_complete_page(request, uuid):
+    order = Order.objects.get(id=uuid)
+    return render(request, 'cart/order_complete.html', context={'order': order})
 
 
 def send_message(text, client_email):

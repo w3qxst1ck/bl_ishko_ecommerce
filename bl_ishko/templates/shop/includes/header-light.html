@@ -150,7 +150,7 @@
                             </div>
                           </div>
                           <div class="media-body">
-                            <h6 class="media-heading">{{ product.title|truncatechars:20 }}</h6>
+                            <h6 class="media-heading"><a href="{{ product.get_absolute_url }}">{{ product.title|truncatechars:20 }}</a></h6>
                             <p>{{ product.description|truncatechars:70 }}</p>
                             <a href="{{ product.get_absolute_url }}">ПОДРОБНЕЕ</a>
                           </div>
