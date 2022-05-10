@@ -52,7 +52,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-sm-9 profile" style="margin-top: 43px;">
+          <div class="col-sm-9 profile" style="margin-top: 85px;">
             <table class="table">
               <thead>
                 <tr>
@@ -68,7 +68,7 @@
                     <th scope="row"><a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}">{{ order.id }}</a></th>
                     <td>{{ order.created }}</td>
                     <td>{{ order.get_order_total_price_with_sale }} RUB</td>
-                    <td>{% if order.ordered and not order.is_active %}Выполнен{% else %}В работе{% endif %}</td>
+                    <td>{% if order.ordered and not order.is_active %}Выполнен{% elif order.ordered and order.is_active %}В работе{% elif not order.ordered and not order.is_active %}Отменен{% endif %}</td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -92,12 +92,24 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <section class="pages-in item-detail-page">
-              {% for order_item in order.order_items.all %}
               <div class="col-sm-12">
-                <p style="font-size: 12px; margin-top: 10px">{{ order_item.item.title }} {{ order_item.item.color }} ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
+                <h6 style="font-weight: 500; padding: 0px; margin-top: 0px;">Информация о заказе</h6>
               </div>
-
-              {% endfor %}
+              <div class="col-sm-12">
+                {% for order_item in order.order_items.all %}
+                  <div class="order_complete">
+                    <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px;">{{ order_item.item.product.title }} {{ order_item.item.product.color }} ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
+                  </div>
+                {% endfor %}
+                <div class="order_complete">
+                  <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px;">Сумма заказа: {{ order.get_order_total_price_with_sale }} RUB</p>
+                </div>
+                {% if order.ordered and order.is_active %}
+                <div class="col-sm-12" style="padding-left: 0px;">
+                  <a href="" class="btn btn-small btn-dark float-right">ОТМЕНИТЬ ЗАКАЗ</a>
+                </div>
+                {% endif %}
+              </div>
             </section>
           </div>
         </div>
