@@ -17,3 +17,10 @@ class WishProduct(models.Model):
         verbose_name_plural = 'Избранные товары'
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', verbose_name='Пользователь')
+    text = models.TextField()
+    adding_date = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name='Товар')
+
+

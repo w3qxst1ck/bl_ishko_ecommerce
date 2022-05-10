@@ -11,11 +11,10 @@
 {% block content %}
   <!-- CONTENT START -->
   <div class="content"> 
-    
     <!--======= SUB BANNER =========-->
     <section class="sub-banner">
       <div class="container">
-        <h4>ОФОРМЛЕНИЕ ЗАКАЗА</h4>
+        <h4>КОРЗИНА</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
           <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
@@ -192,7 +191,8 @@
                 <div class="col-sm-4"></div>
 
               {% endif %}
-              
+
+              {% if order.order_items.all %}
               <!-- SUB TOTAL -->
               <div class="col-sm-4">
                 <div class="grand-total"> <span>СУММА БЕЗ СКИДКИ: {{ order.get_order_total_price }} RUB</span>
@@ -207,6 +207,7 @@
                   {% endif %}
                 </div>
               </div>
+              {% endif %}
             </div>
           </div>
         </div>

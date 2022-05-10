@@ -39,10 +39,6 @@ def product_detail(request, slug):
                                                         'wish_list_products': wish_list_products})
 
 
-def about_page(request):
-    return render(request, 'shop/about.html')
-
-
 def shop_page(request, slug=None):
     # get products from category
     if slug:
@@ -64,18 +60,5 @@ def shop_page(request, slug=None):
 
 def contact_page(request):
     return render(request, 'shop/contact.html')
-
-
-def cart_page(request):
-
-    return render(request, 'shop/cart.html')
-
-
-def checkout_page(request):
-    return render(request, 'shop/checkout.html')
-
-
-def wishlist_page(request):
-    return render(request, 'shop/wishlist.html')
 
 

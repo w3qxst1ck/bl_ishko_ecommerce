@@ -66,10 +66,13 @@ def delete_all_from_cart(request):
 def checkout_page(request):
     order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
     if order_qs.exists():
-        if is_enough_items(order_qs[0]):
-            return render(request, 'cart/checkout_page.html')
+        if order_qs[0].order_items.all():
+            if is_enough_items(order_qs[0]):
+                return render(request, 'cart/checkout_page.html')
+            else:
+                return render(request, 'cart/sold_out.html')
         else:
-            return render(request, 'cart/sold_out.html')
+            return render(request, 'cart/empty_order.html')
     else:
         return HttpResponse('Заказ не существует')
 

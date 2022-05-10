@@ -1,5 +1,4 @@
 {% extends 'shop/base.html' %}
-{% extends 'shop/base.html' %}
 
 {% load static %}
 
@@ -55,15 +54,10 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
                   <div class="order_complete" style="margin-left: 45px;">
-                    <p style="font-weight: 500;">Некоторые товары отсутствуют в наличии.<p>
-                    {% for order_item in order.order_items.all %}
-                      {% if order_item.quantity > order_item.item.item_count %}
-                        <p>Вы выбрали "{{ order_item.item.product.title|upper }} {{ order_item.item.size }}": {{ order_item.quantity }} шт., в данный момент в наличии имеется {{ order_item.item.item_count }} шт. размера {{ order_item.item.size }}.</p>
-                      {% endif %}
-                    {% endfor %}
-                    <p>Пожалуйста, перейдите в <a href="{% url 'cart:cart-page' %}" style="color: #af5875; font-weight: 500;">корзину</a> и откорректируйте Ваш заказ.</p>
+                    <p style="font-weight: 500;">В корзине пока нет товаров.<p>
+                    <p>Продолжить <a href="{% url 'shop:shop-page' %}" style="color: #af5875; font-weight: 500;">покупки</a>.</p>
                 </div>
-              </div>
+              </div>    
             </div>
           </div>
         </div>
