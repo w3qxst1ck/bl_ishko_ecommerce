@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.db.utils import IntegrityError
 
 from cart.models import Order
-from .models import WishProduct
+from .models import WishProduct, ProductComment
 from shop.models import Product
 
 
@@ -54,3 +54,13 @@ def profile(request):
 def profile_orders(request):
     orders = Order.objects.filter(user=request.user, ordered=True, is_active=True)
     return render(request, 'users/profile_orders.html', {'orders': orders})
+
+
+@login_required
+def add_comment_to_product(request, slug):
+    print(request.GET.get('comment_text'))
+    product = get_object_or_404(Product, slug=slug)
+    comment = ProductComment.objects.create(product=product, user=request.user)
+    comment.text = request.GET.get('comment_text')
+    comment.save()
+    return redirect(request.META.get('HTTP_REFERER'))

@@ -31,7 +31,7 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='order')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', verbose_name='Пользоатель')
     order_items = models.ManyToManyField(OrderItem)
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
