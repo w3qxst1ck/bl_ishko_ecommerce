@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.db.utils import IntegrityError
 
-from .models import WishProduct
+from .models import WishProduct, ProductComment
 from shop.models import Product
 
 
@@ -47,3 +47,13 @@ def delete_all_items_from_wishlist(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+@login_required
+def add_comment_to_product(request, slug):
+    print(request.GET.get('comment_text'))
+    product = get_object_or_404(Product, slug=slug)
+    comment = ProductComment.objects.create(product=product, user=request.user)
+    comment.text = request.GET.get('comment_text')
+    comment.save()
+    return redirect(request.META.get('HTTP_REFERER'))

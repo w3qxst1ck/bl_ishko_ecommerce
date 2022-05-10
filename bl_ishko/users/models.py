@@ -17,10 +17,16 @@ class WishProduct(models.Model):
         verbose_name_plural = 'Избранные товары'
 
 
-class Comment(models.Model):
+class ProductComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', verbose_name='Пользователь')
     text = models.TextField()
     adding_date = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name='Товар')
 
+    def __str__(self):
+        return f'{self.user.email} - {self.product.title}'
+
+    class Meta:
+        verbose_name = 'Комментарий к товару'
+        verbose_name_plural = 'Комментарии к товарам'
 

@@ -188,19 +188,20 @@
             <div role="tabpanel" class="tab-pane fade  in active" id="review">
               <h6>3 REVIEWS FOR SHIP YOUR IDEA</h6>
               
-              <!-- REVIEW PEOPLE 1 -->
-              <div class="media">
-                <div class="media-left"> 
-                  <!--  Image -->
-                  <div class="avatar"> <a href="#"> <img class="media-object" src="{% static 'images/avatar-1.jpg' %}" alt=""> </a> </div>
+              {% for comment in comments %}
+                <!-- REVIEW PEOPLE 1 -->
+                <div class="media">
+                  <div class="media-left"> 
+                    <!--  Image -->
+                    <div class="avatar"> <a href="#"> <img class="media-object" src="{% static 'images/avatar-1.jpg' %}" alt=""> </a> </div>
+                  </div>
+                  <!--  Details -->
+                  <div class="media-body">
+                    <p class="font-playfair">{{ comment.text }}</p>
+                    <h6>{{ comment.user.username }}<span class="pull-right">{{ comment.adding_date }}</span> </h6>
+                  </div>
                 </div>
-                <!--  Details -->
-                <div class="media-body">
-                  <p class="font-playfair">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua.”</p>
-                  <h6>TYRION LANNISTER <span class="pull-right">June 7, 2013</span> </h6>
-                </div>
-              </div>
+              {% endfor %}
               
               <!-- REVIEW PEOPLE 1 -->
               
@@ -217,34 +218,38 @@
                 </div>
               </div>
               
+              {% if user.is_authenticated %}
               <!-- ADD REVIEW -->
-              <h6 class="margin-t-40">ОСТАВИТЬ ОТЗЫВ</h6>
-              <form id="review-form">
-                <ul class="row">
-                  <!-- <li class="col-sm-6">
-                    <label> *ИМЯ
-                      <input type="text" value="" placeholder="">
-                    </label>
-                  </li>
-                  <li class="col-sm-6">
-                    <label> *EMAIL
-                      <input type="email" value="" placeholder="">
-                    </label>
-                  </li> -->
-                  <li class="col-sm-12">
-                    <label> *ВАШ ОТЗЫВ
-                      <textarea></textarea>
-                    </label>
-                  </li>
-                  <li class="col-sm-6"> 
-                    <!-- Rating Stars -->
-                    <div class="stars"> <span>ОЦЕНКА</span> <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-                  </li>
-                  <li class="col-sm-6">
-                    <button type="submit" class="btn btn-dark btn-small pull-right no-margin">ОПУБЛИКОВАТЬ</button>
-                  </li>
-                </ul>
-              </form>
+                <h6 class="margin-t-40">ОСТАВИТЬ ОТЗЫВ</h6>
+                <form id="review-form" action="{% url 'users:add-comment' product.slug %}">
+                  <ul class="row">
+                    <!-- <li class="col-sm-6">
+                      <label> *ИМЯ
+                        <input type="text" value="" placeholder="">
+                      </label>
+                    </li>
+                    <li class="col-sm-6">
+                      <label> *EMAIL
+                        <input type="email" value="" placeholder="">
+                      </label>
+                    </li> -->
+                    <li class="col-sm-12">
+                      <label> *ВАШ ОТЗЫВ
+                        <textarea required name='comment_text'></textarea>
+                      </label>
+                    </li>
+                    <li class="col-sm-6"> 
+                      <!-- Rating Stars -->
+                      <div class="stars"> <span>ОЦЕНКА</span> <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    </li>
+                    <li class="col-sm-6">
+                      <button type="submit" class="btn btn-dark btn-small pull-right no-margin">ОПУБЛИКОВАТЬ</button>
+                    </li>
+                  </ul>
+                </form>
+              {% else %}
+                <p class="font-playfair" style="margin-top: 20px;">Для того чтобы оставить комментарий необходимо <a href="{% url 'account_login' %}">авторизироваться</a>.</p>
+              {% endif %}
             </div>
 
         </div>

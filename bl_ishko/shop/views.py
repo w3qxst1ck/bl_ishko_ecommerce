@@ -1,8 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView
 
-from users.models import WishProduct
+from users.models import WishProduct, ProductComment
 from .models import Product, Category, Faq, FaqCategory
 
 
@@ -35,8 +36,45 @@ def product_detail(request, slug):
             wish_list_products = []
     else:
         wish_list_products = []
+    comments = ProductComment.objects.filter(product=product).order_by('-adding_date')
     return render(request, 'shop/detail.html', context={'product': product,
-                                                        'wish_list_products': wish_list_products})
+                                                        'wish_list_products': wish_list_products,
+                                                        'comments': comments
+                                                        })
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = 'shop/detail.html'
+
+    def get_object(self, queryset=None):
+        product = Product.objects.get(slug=self.kwargs['slug'])
+        print(product.id)
+        print(product.items.all())
+        return product
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['wish_list_products'] = self.__get_wishlist()
+        data['sorted_sizes'] = self.__sort_sizes()
+
+    def __sort_sizes(self):
+        all_sizes = ['XS', 'S', 'M', 'L', 'XL']
+        sizes = [item.size.upper() for item in self.object.items.all() if item.item_count > 0]
+        unique_sizes = list(set(sizes))
+        return [s.upper() for s in all_sizes if s in unique_sizes]
+
+    def __get_wishlist(self):
+        if self.request.user.is_authenticated:
+            wish_list = WishProduct.objects.filter(user=self.request.user)
+            if wish_list.exists():
+                wish_list_products = [product.product for product in wish_list]
+            else:
+                wish_list_products = []
+        else:
+            wish_list_products = []
+        return wish_list_products
 
 
 def shop_page(request, slug=None):
