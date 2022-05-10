@@ -98,7 +98,7 @@
               <div class="col-sm-12">
                 {% for order_item in order.order_items.all %}
                   <div class="order_complete">
-                    <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px;">{{ order_item.item.product.title }} {{ order_item.item.product.color }} ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
+                    <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px;"><a href="{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title }} {{ order_item.item.product.color }}</a> ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
                   </div>
                 {% endfor %}
                 <div class="order_complete">

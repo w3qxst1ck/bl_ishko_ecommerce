@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import WishProduct, ProductComment
+from .models import WishProduct, ProductComment, UserInfo
 
 
 @admin.register(WishProduct)
@@ -11,3 +11,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProductComment)
+admin.site.register(UserInfo)

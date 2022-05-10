@@ -8,10 +8,17 @@ class UserInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=12, null=True, blank=True)
     country = models.CharField(max_length=30, blank=True, default='Россия')
-    region = models.CharField(max_length=127)
-    city = models.CharField(max_length=127)
-    index = models.CharField(max_length=6)
-    address = models.CharField(max_length=255)
+    region = models.CharField(max_length=127, blank=True, null=True)
+    city = models.CharField(max_length=127, blank=True, null=True)
+    index = models.CharField(max_length=6, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.email}'
+
+    class Meta:
+        verbose_name = 'Информация о пользователе'
+        verbose_name_plural = 'Информация о пользователях'
 
 
 class WishProduct(models.Model):
