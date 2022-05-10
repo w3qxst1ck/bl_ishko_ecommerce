@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -52,7 +53,7 @@ def profile(request):
 
 @login_required
 def profile_orders(request):
-    orders = Order.objects.filter(user=request.user, ordered=True, is_active=True)
+    orders = Order.objects.filter(user=request.user).filter(~Q(is_active=True) | ~Q(ordered=False))
     return render(request, 'users/profile_orders.html', {'orders': orders})
 
 
