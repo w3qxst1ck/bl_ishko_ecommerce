@@ -14,7 +14,6 @@ urlpatterns = [
     path('contact/', contact_page, name='contact-page'),
     path('detail/<str:slug>/', product_detail, name='detail-page'),
     # path('detail/<str:slug>/', ProductDetailView.as_view(), name='detail-page'),
-    # path('about/', about_page, name='about-page'),
     path('shop/', shop_page, name='shop-page'),
     path('shop/<str:slug>/', shop_page, name='cat-shop-page'),
 ]

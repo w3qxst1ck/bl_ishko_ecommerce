@@ -35,14 +35,13 @@
           <!--======= SIDE BAR =========-->
           <div class="col-sm-3 animate fadeInLeft" data-wow-delay="0.2s">
             <div class="side-bar">
-              <!-- <h4>Фильтры</h4> -->
               
               <!-- HEADING -->
               <div class="heading">
                 <h6 style="border-bottom: none;">{{ request.user.email }}</h6>
               </div>
               
-              <!-- CATEGORIES -->
+              <!-- SIDR BAR -->
               <ul class="cate">
                 
                 <li><a href="{% url 'users:profile-page' %}" style="color: #af5875; padding-left: 5px;">Личные данные</a></li>
@@ -52,9 +51,82 @@
               </ul>
             </div>
           </div>
-         </div>
 
+        <!-- SELF INFO -->
+        <div class="shopping-cart"> 
+          <!-- SHOPPING INFORMATION -->
+          <div class="cart-ship-info">
+            <div class="row"> 
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-7">
+                <h6>КОНТАКТНЫЕ ДАННЫЕ</h6>
+                <form action="{% url 'cart:order-complete-page-intermediate' %}">
+                  <ul class="row">
+                    <!-- Name -->
+                    <li class="col-md-6">
+                      <label>ИМЯ
+                        <input type="text" name="first-name" value="" placeholder="" required>
+                      </label>
+                    </li>
+                    <!-- LAST NAME -->
+                    <li class="col-md-6">
+                      <label>ФАМИЛИЯ
+                        <input type="text" name="last-name" value="" placeholder="" required>
+                      </label>
+                    </li>
+                    <!-- *COUNTRY -->
+                    <li class="col-md-12">
+                      <label>СТРАНА
+                        <select class="selectpicker">
+                          <option>РОССИЯ</option>
+                        </select>
+                      </label>
+                    </li>
+                    <!-- COUNTRY -->
+                    <li class="col-md-6">
+                      <label>РЕГИОН
+                        <input type="text" name="region" value="" placeholder="Краснодарский край">
+                      </label>
+                    </li>
+                    
+                    <!-- POSTCODE -->
+                    <li class="col-md-6">
+                      <label>ПОЧТОВЫЙ ИНДЕКС
+                        <input type="number" name="postal-code" value="" placeholder="123456" max='999999' min="000001" required>
+                      </label>
+                    </li>
 
+                    <!-- TOWN/CITY -->
+                    <li class="col-md-12">
+                      <label>ГОРОД/НАСЕЛЕННЫЙ ПУНКТ
+                        <input type="text" name="city" value="" placeholder="Сочи" required>
+                      </label>
+                    </li>
+                    <li class="col-md-12"> 
+                      <!-- ADDRESS -->
+                      <label>АДРЕС
+                        <input type="text" name="address" value="" placeholder="улица Пушкинская, д. 25, кв. 10" required>
+                        <!-- <input type="text" name="address" value="" placeholder="Optional"> -->
+                      </label>
+                    </li>
+                    
+                    <!-- EMAIL ADDRESS -->
+                    <li class="col-md-6">
+                      <label> EMAIL 
+                        <input type="email" name="email" value="{{ user.email }}" placeholder="" required disabled>
+                      </label>
+                    </li>
+                    <!-- PHONE -->
+                    <li class="col-md-6">
+                      <label> ТЕЛЕФОН
+                        <input type="tel" name="phone" placeholder="+7" required>
+                      </label>
+                    </li>
+                  </ul>
+                  <button type="submit" class="btn btn-small btn-dark pull-right">Сохранить</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

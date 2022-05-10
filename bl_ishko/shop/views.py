@@ -36,10 +36,10 @@ def product_detail(request, slug):
             wish_list_products = []
     else:
         wish_list_products = []
-    comments = ProductComment.objects.filter(product=product).order_by('-adding_date')
+    # comments = ProductComment.objects.filter(product=product).order_by('-adding_date')
     return render(request, 'shop/detail.html', context={'product': product,
                                                         'wish_list_products': wish_list_products,
-                                                        'comments': comments
+                                                        # 'comments': comments
                                                         })
 
 
