@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.db.utils import IntegrityError
 
+from cart.models import Order
 from .models import WishProduct
 from shop.models import Product
 
@@ -47,3 +48,9 @@ def delete_all_items_from_wishlist(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+@login_required
+def profile_orders(request):
+    orders = Order.objects.filter(user=request.user, ordered=True, is_active=True)
+    return render(request, 'users/profile_orders.html', {'orders': orders})

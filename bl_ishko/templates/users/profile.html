@@ -39,14 +39,14 @@
               
               <!-- HEADING -->
               <div class="heading">
-                <h6>{{ request.user.email }}</h6>
+                <h6 style="border-bottom: none;">{{ request.user.email }}</h6>
               </div>
               
               <!-- CATEGORIES -->
               <ul class="cate">
                 
-                <li><a href="">Личные данные</a></li>
-                <li><a href="">Мои заказы</a></li>
+                <li><a href="{% url 'users:profile-page' %}" style="color: #af5875; padding-left: 5px;">Личные данные</a></li>
+                <li><a href="{% url 'users:profile-orders-page' %}">Мои заказы</a></li>
                 <li><a href="{% url 'users:wishlist-page' %}">Избранные товары</a></li>
                 <li><a href="{% url 'shop:faq-page' 1 %}">Информация</a></li>
               </ul>

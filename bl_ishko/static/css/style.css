@@ -6051,7 +6051,7 @@ input:focus {
 	overflow-y: auto;
 }
 
-.order_complete p{
+.order_complete p {
 	font-size: 14px;
 	margin: 20px 0;
 	font-weight: lighter;
@@ -6059,4 +6059,16 @@ input:focus {
 	font-family: 'Montserrat', sans-serif;
 	line-height: 24px;
 	text-align: justify;
+}
+
+.profile table {
+	font-size: 12px;
+	font-weight: lighter;
+	color: #272727;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 24px;
+}
+
+.profile th {
+	font-weight: 400;
 }

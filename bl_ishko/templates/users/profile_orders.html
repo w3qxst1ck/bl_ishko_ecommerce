@@ -1,0 +1,129 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+
+{% block title %}Мои Заказы{% endblock title %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
+
+
+
+{% block content %}
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner">
+      <div class="container">
+        <h4>МОИ ЗАКАЗЫ</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
+          <li class="active">МОИ ЗАКАЗЫ</li>
+        </ol>
+      </div>
+    </section>
+
+        <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in">
+      <div class="container">
+        <div class="row"> 
+          
+          <!--======= SIDE BAR =========-->
+          <div class="col-sm-3 animate fadeInLeft" data-wow-delay="0.2s">
+            <div class="side-bar">
+              <!-- <h4>Фильтры</h4> -->
+              
+              <!-- HEADING -->
+              <div class="heading">
+                <h6 style="border-bottom: none;">{{ request.user.email }}</h6>
+              </div>
+              
+              <!-- CATEGORIES -->
+              <ul class="cate">
+                
+                <li><a href="{% url 'users:profile-page' %}">Личные данные</a></li>
+                <li><a href="{% url 'users:profile-orders-page' %}" style="color: #af5875; padding-left: 5px;">Мои заказы</a></li>
+                <li><a href="{% url 'users:wishlist-page' %}">Избранные товары</a></li>
+                <li><a href="{% url 'shop:faq-page' 1 %}">Информация</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-9 profile" style="margin-top: 43px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">№ Заказа</th>
+                  <th scope="col">Дата</th>
+                  <th scope="col">Сумма</th>
+                  <th scope="col">Статус</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                  <tr>
+                    <th scope="row"><a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}">{{ order.id }}</a></th>
+                    <td>{{ order.created }}</td>
+                    <td>{{ order.get_order_total_price_with_sale }} RUB</td>
+                    <td>{% if order.ordered and not order.is_active %}Выполнен{% else %}В работе{% endif %}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>    
+         </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal window -->
+    {% for order in orders %}
+    <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+        <div class="modal-content">
+          <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <section class="pages-in item-detail-page">
+              {% for order_item in order.order_items.all %}
+              <div class="col-sm-12">
+                <p style="font-size: 12px; margin-top: 10px">{{ order_item.item.title }} {{ order_item.item.color }} ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
+              </div>
+
+              {% endfor %}
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  <!-- end Modal window -->
+
+  </div>
+    
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/own-menu.js' %}"></script> 
+<script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+<script src="{% static 'js/jquery.isotope.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}
+
