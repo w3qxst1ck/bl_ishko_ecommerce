@@ -44,5 +44,6 @@ def delete_all_items_from_wishlist(request):
     return redirect('users:wishlist-page')
 
 
+@login_required
 def profile(request):
-    pass
+    return render(request, 'users/profile.html')

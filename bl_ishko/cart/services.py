@@ -26,6 +26,7 @@ def send_message_to_client(request, order):
 
 
 def send_message_to_admin(admin_email=ADMIN_EMAIL):
+    """Отправка сообщения администратору о заказе"""
     pass
 
 

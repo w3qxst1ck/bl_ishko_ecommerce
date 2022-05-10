@@ -12,7 +12,7 @@
         <div class="top-links">
           <ul>
             {% if user.is_authenticated %}
-              <li><a href="">ЛИЧЫЙ КАБИНЕТ</a></li>
+              <li><a href="{% url 'users:profile-page' %}">ЛИЧЫЙ КАБИНЕТ</a></li>
               <li><a href="{% url 'users:wishlist-page' %}">ИЗБРАННОЕ</a></li>
               <li><a href="{% url 'account_logout' %}">ВЫЙТИ</a></li>
             {% else %}
