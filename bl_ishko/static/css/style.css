@@ -6072,3 +6072,11 @@ input:focus {
 .profile th {
 	font-weight: 400;
 }
+
+.profile p {
+	font-size: 12px;
+	font-weight: 400;
+	color: #272727;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 24px;
+}

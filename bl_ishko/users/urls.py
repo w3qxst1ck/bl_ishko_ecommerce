@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .views import wish_list, add_item_to_wish_list, delete_item_from_wishlist, delete_all_items_from_wishlist, profile, \
     add_comment_to_product, profile_orders
 

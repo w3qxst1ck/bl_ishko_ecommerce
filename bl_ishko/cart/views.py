@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from shop.models import Product
 
@@ -100,5 +101,20 @@ def order_complete_page_intermediate(request):
 def order_complete_page(request, uuid):
     order = Order.objects.get(id=uuid)
     return render(request, 'cart/order_complete.html', context={'order': order})
+
+
+@login_required
+def cancel_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.ordered = False
+    order.is_active = False
+    order.save()
+    return redirect('users:profile-orders-page')
+
+
+@login_required
+def cancel_order_confirm(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'users/cancel_order_confirm.html', {'order': order})
 
 

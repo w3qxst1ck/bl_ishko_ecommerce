@@ -27,7 +27,7 @@
       </div>
     </section>
 
-        <!--======= PAGES INNER =========-->
+    <!--======= PAGES INNER =========-->
     <section class="section-p-30px pages-in">
       <div class="container">
         <div class="row"> 
@@ -52,8 +52,11 @@
               </ul>
             </div>
           </div>
-          <div class="col-sm-9 profile" style="margin-top: 85px;">
-            <table class="table">
+
+          <!-- CONTENT -->
+          <div class="col-sm-9">
+            <div class="profile animate fadeInLeft" style="margin-top: 42px;">
+              <table class="table">
               <thead>
                 <tr>
                   <th scope="col">№ Заказа</th>
@@ -73,14 +76,13 @@
                 {% endfor %}
               </tbody>
             </table>
+            </div>
           </div>    
          </div>
-
-
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- Modal window -->
     {% for order in orders %}
@@ -96,19 +98,20 @@
                 <h6 style="font-weight: 500; padding: 0px; margin-top: 0px;">Информация о заказе</h6>
               </div>
               <div class="col-sm-12">
-                {% for order_item in order.order_items.all %}
-                  <div class="order_complete">
-                    <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px;"><a href="{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title }} {{ order_item.item.product.color }}</a> ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
-                  </div>
-                {% endfor %}
+                
                 <div class="order_complete">
+                  {% for order_item in order.order_items.all %}
+                    <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px; font-weight: 300;"><a href="{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title }} {{ order_item.item.product.color }}</a> ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
+                  {% endfor %}
                   <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px;">Сумма заказа: {{ order.get_order_total_price_with_sale }} RUB</p>
                 </div>
+
                 {% if order.ordered and order.is_active %}
                 <div class="col-sm-12" style="padding-left: 0px;">
-                  <a href="" class="btn btn-small btn-dark float-right">ОТМЕНИТЬ ЗАКАЗ</a>
+                  <a href="{% url 'cart:cancel-order-confirm' order.id %}" class="btn btn-small btn-dark float-right">ОТМЕНИТЬ ЗАКАЗ</a>
                 </div>
                 {% endif %}
+
               </div>
             </section>
           </div>

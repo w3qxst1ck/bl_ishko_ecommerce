@@ -50,11 +50,15 @@ class Order(models.Model):
         return self.order_items.all().count()
 
     def __str__(self):
-        if self.ordered:
-            ordered = 'Выполнен'
-        else:
-            ordered = 'Не выполнен'
-        return f'{self.id}. {self.user.email} - {ordered}'
+        if self.ordered and self.is_active:
+            order_status = 'В работе'
+        elif self.ordered and not self.is_active:
+            order_status = 'Выполнен'
+        elif not self.ordered and self.is_active:
+            order_status = 'В корзине'
+        elif not self.ordered and not self.is_active:
+            order_status = 'Отменен'
+        return f'{self.id}. {self.user.email} - {order_status}'
 
     class Meta:
         verbose_name = 'Заказ'
