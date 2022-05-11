@@ -56,26 +56,34 @@
           <!-- CONTENT -->
           <div class="col-sm-9">
             <div class="profile animate fadeInLeft" style="margin-top: 42px;">
-              <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">№ Заказа</th>
-                  <th scope="col">Дата</th>
-                  <th scope="col">Сумма</th>
-                  <th scope="col">Статус</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for order in orders %}
-                  <tr>
-                    <th scope="row"><a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}">{{ order.id }}</a></th>
-                    <td>{{ order.created }}</td>
-                    <td>{{ order.get_order_total_price_with_sale }} RUB</td>
-                    <td>{% if order.ordered and not order.is_active %}Выполнен{% elif order.ordered and order.is_active %}В работе{% elif not order.ordered and not order.is_active %}Отменен{% endif %}</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+              {% if orders %}
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">№ Заказа</th>
+                      <th scope="col">Дата</th>
+                      <th scope="col">Сумма</th>
+                      <th scope="col">Статус</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in orders %}
+                      <tr>
+                        <th scope="row"><a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}">{{ order.id }}</a></th>
+                        <td>{{ order.created }}</td>
+                        <td>{{ order.get_order_total_price_with_sale }} RUB</td>
+                        <td>{% if order.ordered and not order.is_active %}Выполнен{% elif order.ordered and order.is_active %}В работе{% elif not order.ordered and not order.is_active %}Отменен{% endif %}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                <div class="col-sm-9">
+                  <div class="profile animate fadeInLeft">
+                    <p style="margin-top: 8px; font-weight: 400;">У Вас пока нет заказов. Самое время что-нибудь выбрать из нашего <a href="{% url 'shop:shop-page' %}" style="color: #af5875;">каталога</a>.</p>
+                  </div>
+                </div>
+              {% endif %}
             </div>
           </div>    
          </div>
@@ -101,7 +109,7 @@
                 
                 <div class="order_complete">
                   {% for order_item in order.order_items.all %}
-                    <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px; font-weight: 300;"><a href="{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title }} {{ order_item.item.product.color }}</a> ({{ order_item.item.size }}) - {{ order_item.quantity }}</p>
+                    <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px; font-weight: 300;"><a href="{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title }} {{ order_item.item.product.color }}</a> ({{ order_item.item.size }}) - {{ order_item.quantity }} шт.</p>
                   {% endfor %}
                   <p style="font-size: 12px; margin-bottom: 10px; margin-top: 10px;">Сумма заказа: {{ order.get_order_total_price_with_sale }} RUB</p>
                 </div>
