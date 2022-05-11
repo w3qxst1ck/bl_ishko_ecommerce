@@ -21,7 +21,7 @@ class OrderItem(models.Model):
         return round(item_total, 1)
 
     def __str__(self):
-        return f'{self.item.id}.{self.item.product.title} - {self.quantity}'
+        return f'{self.item.id}.{self.item.product.title} {self.item.product.color} {self.item.size} - {self.quantity}'
 
     class Meta:
         verbose_name = 'Товар в заказе'
@@ -58,7 +58,7 @@ class Order(models.Model):
             order_status = 'В корзине'
         elif not self.ordered and not self.is_active:
             order_status = 'Отменен'
-        return f'{self.id}. {self.user.email} - {order_status}'
+        return f'Заказ {self.id} от {self.user.email} - {order_status}'
 
     class Meta:
         verbose_name = 'Заказ'

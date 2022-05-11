@@ -106,9 +106,15 @@ def order_complete_page(request, uuid):
 @login_required
 def cancel_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
+    # изменение статуса заказа
     order.ordered = False
     order.is_active = False
     order.save()
+    # изменение количества товара на складе
+    for order_item in order.order_items.all():
+        item = order_item.item
+        item.item_count += order_item.quantity
+        item.save()
     return redirect('users:profile-orders-page')
 
 
