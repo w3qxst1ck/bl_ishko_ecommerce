@@ -2,10 +2,11 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 
 from cart.models import Order
-from .models import WishProduct, ProductComment
+from .models import WishProduct, ProductComment, UserInfo
 from shop.models import Product
 
 
@@ -48,6 +49,19 @@ def delete_all_items_from_wishlist(request):
 
 @login_required
 def profile(request):
+    if request.method == 'POST':
+        user = get_object_or_404(User, id=request.user.id)
+        user_info = get_object_or_404(UserInfo, user=user)
+        query_post = request.POST
+        for field in ['first_name', 'last_name']:
+            if query_post[field] != getattr(user, field, None):
+                setattr(user, field, query_post[field])
+        for field in ['region', 'index', 'city', 'address', 'phone']:
+            if query_post[field] != getattr(user_info, field, None):
+                setattr(user_info, field, query_post[field])
+        user.save()
+        user_info.save()
+        return redirect('users:profile-page')
     return render(request, 'users/profile.html')
 
 

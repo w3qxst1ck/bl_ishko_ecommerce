@@ -60,18 +60,31 @@
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-7">
                 <h6>КОНТАКТНЫЕ ДАННЫЕ</h6>
-                <form action="{% url 'cart:order-complete-page-intermediate' %}">
+                <form action="{% url 'users:profile-page' %}" method="POST">
+                  {% csrf_token %}
                   <ul class="row">
+                    <!-- EMAIL ADDRESS -->
+                    <li class="col-md-6">
+                      <label> EMAIL 
+                        <input type="email" name="email" value="{{ user.email }}" placeholder="" disabled>
+                      </label>
+                    </li>
+                    <!-- USERNAME -->
+                    <li class="col-md-6">
+                      <label>USERNAME
+                        <input type="tel" name="username" value="{{ user.username }}" disabled>
+                      </label>
+                    </li>
                     <!-- Name -->
                     <li class="col-md-6">
                       <label>ИМЯ
-                        <input type="text" name="first-name" value="" placeholder="" required>
+                        <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="">
                       </label>
                     </li>
                     <!-- LAST NAME -->
                     <li class="col-md-6">
                       <label>ФАМИЛИЯ
-                        <input type="text" name="last-name" value="" placeholder="" required>
+                        <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="">
                       </label>
                     </li>
                     <!-- *COUNTRY -->
@@ -85,41 +98,32 @@
                     <!-- COUNTRY -->
                     <li class="col-md-6">
                       <label>РЕГИОН
-                        <input type="text" name="region" value="" placeholder="Краснодарский край">
+                        <input type="text" name="region" value="{{ user.info.region }}" placeholder="Краснодарский край">
                       </label>
                     </li>
-                    
                     <!-- POSTCODE -->
                     <li class="col-md-6">
                       <label>ПОЧТОВЫЙ ИНДЕКС
-                        <input type="number" name="postal-code" value="" placeholder="123456" max='999999' min="000001" required>
+                        <input type="number" name="index" value="{{ user.info.index }}" placeholder="123456" max='999999' min="000001">
                       </label>
                     </li>
-
                     <!-- TOWN/CITY -->
                     <li class="col-md-12">
                       <label>ГОРОД/НАСЕЛЕННЫЙ ПУНКТ
-                        <input type="text" name="city" value="" placeholder="Сочи" required>
+                        <input type="text" name="city" value="{{ user.info.city }}" placeholder="Сочи">
                       </label>
                     </li>
                     <li class="col-md-12"> 
                       <!-- ADDRESS -->
                       <label>АДРЕС
-                        <input type="text" name="address" value="" placeholder="улица Пушкинская, д. 25, кв. 10" required>
+                        <input type="text" name="address" value="{{ user.info.address }}" placeholder="улица Пушкинская, д. 25, кв. 10">
                         <!-- <input type="text" name="address" value="" placeholder="Optional"> -->
-                      </label>
-                    </li>
-                    
-                    <!-- EMAIL ADDRESS -->
-                    <li class="col-md-6">
-                      <label> EMAIL 
-                        <input type="email" name="email" value="{{ user.email }}" placeholder="" required disabled>
                       </label>
                     </li>
                     <!-- PHONE -->
                     <li class="col-md-6">
                       <label> ТЕЛЕФОН
-                        <input type="tel" name="phone" placeholder="+7" required>
+                        <input type="tel" name="phone" value="{{ user.info.phone }}" placeholder="+7">
                       </label>
                     </li>
                   </ul>
