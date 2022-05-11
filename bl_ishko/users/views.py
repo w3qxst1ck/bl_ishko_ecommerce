@@ -73,7 +73,6 @@ def profile_orders(request):
 
 @login_required
 def add_comment_to_product(request, slug):
-    print(request.GET.get('comment_text'))
     product = get_object_or_404(Product, slug=slug)
     comment = ProductComment.objects.create(product=product, user=request.user)
     comment.text = request.GET.get('comment_text')
