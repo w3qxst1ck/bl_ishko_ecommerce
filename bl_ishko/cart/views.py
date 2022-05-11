@@ -20,7 +20,14 @@ def cart_page(request):
 @login_required
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
+
     input_size = request.GET.get('size')
+    # получение количества товара с фронтенда
+    if request.GET.get('quantity'):
+        input_quantity = int(request.GET.get('quantity'))
+    else:
+        input_quantity = 1
+
     item = product.items.filter(size=input_size)[0]
     if item.item_count > 0:
         order_item, created = OrderItem.objects.get_or_create(
@@ -31,12 +38,16 @@ def add_to_cart(request, pk):
         if order_qs.exists():
             order = order_qs[0]
             if order.order_items.filter(item=item).exists():
-                order_item.quantity += 1
+                order_item.quantity += input_quantity
                 order_item.save()
             else:
+                order_item.quantity = input_quantity
+                order_item.save()
                 order.order_items.add(order_item)
         else:
             order = Order.objects.create(user=request.user)
+            order_item.quantity = input_quantity
+            order_item.save()
             order.order_items.add(order_item)
     else:
         redirect('shop:shop-page')

@@ -87,6 +87,12 @@ $("select#product-size").on('change', function () {
 	let size_input = $(this).siblings('input');
 	size_input.val(size_value);
 });
+
+$("#product-quantity").on('change', function () {
+	let quantity_value = this.value;
+	let quantity_input = $("#quantity_input");
+	quantity_input.val(quantity_value);
+});
 /*-----------------------------------------------------------------------------------*/
 /* 	COPY URL
 /*-----------------------------------------------------------------------------------*/

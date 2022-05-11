@@ -126,7 +126,8 @@
                 <!-- QUIENTY -->
                 <div class="col-sm-12">
                   <div class="fun-share">
-                    <input type="text" value=1>
+                    <input type="number" max="9" value=1 id="product-quantity">
+                    <input type="hidden" id="quantity_input" name="quantity" value="1">
                     {% if product.items.all|distinct_size %}
                       <button type="submit" class="btn btn-small btn-dark">В КОРЗИНУ</button>
                     {% else %}
@@ -361,7 +362,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
                 <div class="col">
-                  <h6 style="font-weight: 600;">ТАБЛИЦА РАЗМЕРОВ</h6>
+                  <h6 style="font-weight: 400;">ТАБЛИЦА РАЗМЕРОВ</h6>
                 </div>
                 
                 <div class="col">
@@ -429,7 +430,7 @@
 
                 <!-- Second table -->
                 <div class="col">
-                  <h6 style="font-weight: 600;">ОБМЕРЫ ИЗДЕЛИЯ</h6>
+                  <h6 style="font-weight: 400;">ОБМЕРЫ ИЗДЕЛИЯ</h6>
                 </div>
 
                 <div class="col">
