@@ -166,7 +166,7 @@
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation"><a href="#descr" aria-controls="men" role="tab" data-toggle="tab">ОПИСАНИЕ</a></li>
               <li role="presentation"><a href="#tags" aria-controls="access" role="tab" data-toggle="tab">СОСТАВ</a></li>
-              <li role="presentation" class="active"><a href="#review" aria-controls="women" role="tab" data-toggle="tab">ОТЗЫВЫ (03)</a></li>
+              <li role="presentation" class="active"><a href="#review" aria-controls="women" role="tab" data-toggle="tab">ОТЗЫВЫ ({{ product.comments.all.count }})</a></li>
             </ul>
           </div>
           <!-- Tab panes -->
@@ -187,7 +187,11 @@
 
             <!-- REVIEW -->
             <div role="tabpanel" class="tab-pane fade  in active" id="review">
-              <h6>3 REVIEWS FOR SHIP YOUR IDEA</h6>
+              {% if product.comments.all %}
+                <h6>{{ product.comments.all.count }} ОТЗЫВОВ О ТОВАРЕ</h6>
+              {% else %}
+                <p>ПОКА НЕТ ОТЗЫВОВ, СТАНЬТЕ ПЕРВЫМ</p>
+              {% endif %}
               
               {% for comment in product.comments.all %}
                 <!-- REVIEW PEOPLE 1 -->
@@ -203,26 +207,12 @@
                   </div>
                 </div>
               {% endfor %}
-              
-              <!-- REVIEW PEOPLE 1 -->
-              
-              <div class="media">
-                <div class="media-left"> 
-                  <!--  Image -->
-                  <div class="avatar"> <a href="#"> <img class="media-object" src="{% static 'images/avatar-2.jpg' %}" alt=""> </a> </div>
-                </div>
-                <!--  Details -->
-                <div class="media-body">
-                  <p class="font-playfair">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua.”</p>
-                  <h6>TYRION LANNISTER <span class="pull-right">June 7, 2013</span> </h6>
-                </div>
-              </div>
-              
+
               {% if user.is_authenticated %}
               <!-- ADD REVIEW -->
                 <h6 class="margin-t-40">ОСТАВИТЬ ОТЗЫВ</h6>
-                <form id="review-form" action="{% url 'users:add-comment' product.slug %}">
+                <form id="review-form" action="{% url 'shop:detail-page' product.slug %}" method="POST">
+                  {% csrf_token %}
                   <ul class="row">
                     <!-- <li class="col-sm-6">
                       <label> *ИМЯ

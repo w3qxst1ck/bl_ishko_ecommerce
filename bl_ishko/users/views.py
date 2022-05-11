@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 
 from cart.models import Order
-from .models import WishProduct, ProductComment, UserInfo
+from .models import WishProduct, UserInfo
 from shop.models import Product
 
 
@@ -71,10 +71,3 @@ def profile_orders(request):
     return render(request, 'users/profile_orders.html', {'orders': orders})
 
 
-@login_required
-def add_comment_to_product(request, slug):
-    product = get_object_or_404(Product, slug=slug)
-    comment = ProductComment.objects.create(product=product, user=request.user)
-    comment.text = request.GET.get('comment_text')
-    comment.save()
-    return redirect(request.META.get('HTTP_REFERER'))

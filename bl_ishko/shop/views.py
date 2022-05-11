@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 
@@ -27,6 +27,14 @@ def faq_page(request, pk=None):
 
 
 def product_detail(request, slug):
+    if request.method == 'POST':
+        product = get_object_or_404(Product, slug=slug)
+        comment = ProductComment.objects.create(product=product, user=request.user)
+        comment.text = request.POST['comment_text']
+        print(request.POST['comment_text'])
+        comment.save()
+        return redirect('shop:detail-page', slug=slug)
+
     product = get_object_or_404(Product, slug=slug)
     if request.user.is_authenticated:
         wish_list = WishProduct.objects.filter(user=request.user)
