@@ -180,7 +180,55 @@
         <p align="center" style="margin-bottom: 100px; margin-top: 50px">У ВАС ПОКА НЕТ ИЗБРАННЫХ ТОВАРОВ</p>
       {% endif %}
 
-
+      <!--======= RELATED PRODUCTS =========-->
+      <section class="section-p-60px new-arrival new-arri-w-slide">
+        <div class="container"> 
+          
+          <!--  Tittle -->
+          <div class="tittle tittle-2">
+            {% if wish_products %}
+              <h5>ПОХОЖИЕ ТОВАРЫ</h5>
+              <p class="font-playfair">Вам также может понравиться</p>
+            {% else %}
+              <h5>ПОПУЛЯРНЫЕ ТОВАРЫ</h5>
+              <p class="font-playfair">Вам может понравиться</p>
+            {% endif %}
+          </div>
+          
+          <!--  New Arrival Tabs Products  -->
+          <div class="popurlar_product client-slide"> 
+            {% for product in related_products %}
+              <!--  New Arrival  -->
+              <div class="items-in"> 
+              <!--  Tags  -->
+              <!-- <div class="new-tag"> NEW </div> -->
+              <!-- <div class="hot-tag"> HOT </div> -->
+                <!-- Image --> 
+                {% thumbnail product.title_image "270x340" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                {% endthumbnail %}
+                <!-- Hover Details -->
+                <div class="over-item">
+                  <ul class="animated fadeIn">
+                    <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
+                    <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                    {% if product not in wish_products %}
+                      <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
+                    {% else %}
+                      <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                    {% endif %}
+                    <li class="full-w"> <a href="#." class="btn">В КОРЗИНУ</a></li>
+                    <!-- Rating Stars -->
+                    <!-- <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li> -->
+                  </ul>
+                </div>
+                <!-- Item Name -->
+                <div class="details-sec"> <a href="#.">{{product.title|upper }}</a> <span class="font-montserrat">{{ product.price }} RUB</span> </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
   </div>
 
 {% endblock content %}

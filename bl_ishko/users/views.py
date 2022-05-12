@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 
+from .services import save_or_change_user_info, get_related_products
 from cart.models import Order
 from .models import WishProduct, UserInfo
 from shop.models import Product
@@ -13,9 +14,10 @@ from shop.models import Product
 @login_required
 def wish_list(request):
     wish_products = WishProduct.objects.filter(user=request.user).order_by('-adding_date')
-    context = {'wish_products': None}
+    related_products = get_related_products(wish_products)
+    context = {'wish_products': None, 'related_products': related_products}
     if len(wish_products) > 0:
-        context = {'wish_products': wish_products}
+        context['wish_products'] = wish_products
     return render(request, 'users/wishlist.html', context=context)
 
 
@@ -50,17 +52,7 @@ def delete_all_items_from_wishlist(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        user = get_object_or_404(User, id=request.user.id)
-        user_info = get_object_or_404(UserInfo, user=user)
-        query_post = request.POST
-        for field in ['first_name', 'last_name']:
-            if query_post[field] != getattr(user, field, None):
-                setattr(user, field, query_post[field])
-        for field in ['region', 'index', 'city', 'address', 'phone']:
-            if query_post[field] != getattr(user_info, field, None):
-                setattr(user_info, field, query_post[field])
-        user.save()
-        user_info.save()
+        save_or_change_user_info(request)
         return redirect('users:profile-page')
     return render(request, 'users/profile.html')
 
