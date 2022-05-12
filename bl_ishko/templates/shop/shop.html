@@ -182,6 +182,12 @@
                     {% endthumbnail %}
                     <!-- Hover Details -->
                     <div class="over-item">
+
+                      <!--  Tags  -->
+                      {% if product.discount %}
+                        <div class="hot-tag">-{{ product.discount }}%</div>
+                      {% endif %}
+
                       <ul class="animated fadeIn">
                         <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
                         <li> <a href="" id="share-product1" data-toggle="modal" data-target="#shareModal"><i class="ion-shuffle"></i></a></li>
@@ -192,12 +198,10 @@
                           <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
                         {% endif %}
                         <li class="full-w"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}" class="btn">В КОРЗИНУ</a></li>
-                        <!-- Rating Stars -->
-                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
                       </ul>
                     </div>
                     <!-- Item Name -->
-                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat">{{ product.price }} RUB</span> </div>
+                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
                   </div>
                 </li>
                 {% endfor %}

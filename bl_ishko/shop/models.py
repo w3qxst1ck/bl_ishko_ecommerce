@@ -33,6 +33,11 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('shop:detail-page', kwargs={'slug': self.slug})
 
+    def get_price(self):
+        if self.discount:
+            return round(self.price - self.price * 0.01 * self.discount, 1)
+        return self.price
+
     def __str__(self):
         return f'{self.title} - {self.color}'
 
