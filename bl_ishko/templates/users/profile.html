@@ -98,32 +98,32 @@
                     <!-- COUNTRY -->
                     <li class="col-md-6">
                       <label>РЕГИОН
-                        <input type="text" name="region" value="{{ user.info.region }}" placeholder="Краснодарский край">
+                        <input type="text" name="region" value="{% if user.info.region %}{{ user.info.region }}{% endif %}" placeholder="Краснодарский край">
                       </label>
                     </li>
                     <!-- POSTCODE -->
                     <li class="col-md-6">
                       <label>ПОЧТОВЫЙ ИНДЕКС
-                        <input type="number" name="index" value="{{ user.info.index }}" placeholder="123456" max='999999' min="000001">
+                        <input type="number" name="index" value="{% if user.info.region %}{{ user.info.index }}{% endif %}" placeholder="123456" max='999999' min="000001">
                       </label>
                     </li>
                     <!-- TOWN/CITY -->
                     <li class="col-md-12">
                       <label>ГОРОД/НАСЕЛЕННЫЙ ПУНКТ
-                        <input type="text" name="city" value="{{ user.info.city }}" placeholder="Сочи">
+                        <input type="text" name="city" value="{% if user.info.region %}{{ user.info.city }}{% endif %}" placeholder="Сочи">
                       </label>
                     </li>
                     <li class="col-md-12"> 
                       <!-- ADDRESS -->
                       <label>АДРЕС
-                        <input type="text" name="address" value="{{ user.info.address }}" placeholder="улица Пушкинская, д. 25, кв. 10">
+                        <input type="text" name="address" value="{% if user.info.region %}{{ user.info.address }}{% endif %}" placeholder="улица Пушкинская, д. 25, кв. 10">
                         <!-- <input type="text" name="address" value="" placeholder="Optional"> -->
                       </label>
                     </li>
                     <!-- PHONE -->
                     <li class="col-md-6">
                       <label> ТЕЛЕФОН
-                        <input type="tel" name="phone" value="{{ user.info.phone }}" placeholder="+7">
+                        <input type="tel" name="phone" value="{% if user.info.region %}{{ user.info.phone }}{% endif %}" placeholder="+7">
                       </label>
                     </li>
                   </ul>
