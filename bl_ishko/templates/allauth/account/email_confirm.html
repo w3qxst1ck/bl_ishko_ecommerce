@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load account %}
 
-{% block title %}CONFIRM EMAIL{% endblock %}
+{% block title %}Подтверждение{% endblock %}
 
 {% block content_auth %}
 
@@ -13,7 +13,7 @@
       <h4>ПОДТВЕРЖДЕНИЕ</h4>
       <!-- Breadcrumb -->
       <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
         <li class="active">ПОДТВЕРЖДЕНИЕ</li>
       </ol>
     </div>

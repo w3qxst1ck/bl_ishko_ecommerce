@@ -22,7 +22,7 @@
         <h4>ИЗБРАННЫЕ ТОВАРЫ</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="{% url 'shop:home-page' %}">Home</a></li>
+          <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
           <li class="active">Избранное</li>
         </ol>
       </div>
@@ -82,7 +82,11 @@
                   
                   <!-- PRICE -->
                   <li class="col-sm-2">
-                    <div class="position-center-center"> <span> ₽{{ wish_product.product.price }}</span> </div>
+                    {% if wish_product.product.discount %}
+                    <div class="position-center-center"> <span> ₽ {{ wish_product.product.get_price }}<br>(sale {{ wish_product.product.discount }}%)</span> </div>
+                    {% else %}
+                    <div class="position-center-center"> <span> ₽ {{ wish_product.product.price }}</span> </div>
+                    {% endif %}
                   </li>
                   
                    <!-- STOCK -->
@@ -209,6 +213,9 @@
                 {% endthumbnail %}
                 <!-- Hover Details -->
                 <div class="over-item">
+                  {% if product.discount %}
+                    <div class="hot-tag">-{{ product.discount }}%</div>
+                  {% endif %}
                   <ul class="animated fadeIn">
                     <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
                     <li> <a href="#."><i class="ion-shuffle"></i></a></li>
@@ -223,7 +230,7 @@
                   </ul>
                 </div>
                 <!-- Item Name -->
-                <div class="details-sec"> <a href="#.">{{product.title|upper }}</a> <span class="font-montserrat">{{ product.price }} RUB</span> </div>
+                <div class="details-sec"> <a href="#.">{{product.title|upper }}</a> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
               </div>
             {% endfor %}
           </div>
