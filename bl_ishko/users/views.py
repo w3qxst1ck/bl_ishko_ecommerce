@@ -15,7 +15,7 @@ from shop.models import Product
 def wish_list(request):
     wish_products = WishProduct.objects.filter(user=request.user).order_by('-adding_date')
     related_products = get_related_products(wish_products)
-    context = {'wish_products': None, 'related_products': related_products}
+    context = {'wish_products': [], 'related_products': related_products}
     if len(wish_products) > 0:
         context['wish_products'] = wish_products
     return render(request, 'users/wishlist.html', context=context)
