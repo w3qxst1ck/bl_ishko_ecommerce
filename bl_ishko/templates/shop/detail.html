@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load sort_size %}
+{% load comment_end %}
 
 {% load thumbnail %}
 
@@ -193,7 +194,7 @@
             <!-- REVIEW -->
             <div role="tabpanel" class="tab-pane fade  in active" id="review">
               {% if product.comments.all %}
-                <h6>{{ product.comments.all.count }} ОТЗЫВОВ О ТОВАРЕ</h6>
+                <h6>{{ product.comments.all.count|change_comment_end }} О ТОВАРЕ</h6>
               {% else %}
                 <p>ПОКА НЕТ ОТЗЫВОВ, СТАНЬТЕ ПЕРВЫМ</p>
               {% endif %}
@@ -203,7 +204,7 @@
                 <div class="media">
                   <div class="media-left"> 
                     <!--  Image -->
-                    <div class="avatar"> <a href="#"> <img class="media-object" src="{% static 'images/avatar-1.jpg' %}" alt=""> </a> </div>
+                    <div class="avatar"> <a> <img class="media-object" src="{% static 'images/avatar-1.jpg' %}" alt=""> </a> </div>
                   </div>
                   <!--  Details -->
                   <div class="media-body">
