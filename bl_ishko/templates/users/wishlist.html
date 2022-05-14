@@ -184,6 +184,28 @@
         <p align="center" style="margin-bottom: 100px; margin-top: 50px">У ВАС ПОКА НЕТ ИЗБРАННЫХ ТОВАРОВ</p>
       {% endif %}
 
+      <!-- Modal window share product -->
+      <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+          <div class="modal-content">
+            <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="col">
+                <h6 style="font-weight: 600;">ПОДЕЛИТЬСЯ</h6>
+              </div>
+              
+              <div class="col">
+                <p style="font-size: 11px;">Ссылка на товар скопирована в буфер обмена.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end Modal window -->
+
       <!--======= RELATED PRODUCTS =========-->
       <section class="section-p-60px new-arrival new-arri-w-slide">
         <div class="container"> 
@@ -218,7 +240,8 @@
                   {% endif %}
                   <ul class="animated fadeIn">
                     <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
-                    <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                    <li> <a href="" data-toggle="modal" data-target="#shareModal" id="share-product1"><i class="ion-shuffle"></i></a></li>
+                    <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
                     {% if product not in wish_products %}
                       <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
                     {% else %}
