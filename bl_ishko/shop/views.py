@@ -5,6 +5,7 @@ from django.views.generic import DetailView
 
 from users.models import WishProduct, ProductComment
 from .models import Product, Category, Faq, FaqCategory
+from .services import get_related_products_for_detail
 
 
 def home_page(request):
@@ -27,15 +28,15 @@ def faq_page(request, pk=None):
 
 
 def product_detail(request, slug):
-    if request.method == 'POST':
-        product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product, slug=slug)
+
+    if request.method == 'POST' and request.user.is_authenticated:
         comment = ProductComment.objects.create(product=product, user=request.user)
         comment.text = request.POST['comment_text']
-        print(request.POST['comment_text'])
         comment.save()
         return redirect('shop:detail-page', slug=slug)
 
-    product = get_object_or_404(Product, slug=slug)
+    related_products = get_related_products_for_detail(product)
     if request.user.is_authenticated:
         wish_list = WishProduct.objects.filter(user=request.user)
         if wish_list.exists():
@@ -44,10 +45,9 @@ def product_detail(request, slug):
             wish_list_products = []
     else:
         wish_list_products = []
-    # comments = ProductComment.objects.filter(product=product).order_by('-adding_date')
     return render(request, 'shop/detail.html', context={'product': product,
                                                         'wish_list_products': wish_list_products,
-                                                        # 'comments': comments
+                                                        'related_products': related_products,
                                                         })
 
 
@@ -58,8 +58,6 @@ class ProductDetailView(DetailView):
 
     def get_object(self, queryset=None):
         product = Product.objects.get(slug=self.kwargs['slug'])
-        print(product.id)
-        print(product.items.all())
         return product
 
     def get_context_data(self, **kwargs):

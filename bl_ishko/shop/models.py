@@ -1,6 +1,7 @@
 from django.db import models
 from .utils import gen_slug
 from django.shortcuts import reverse
+from datetime import datetime, timedelta
 
 CHOICES = (
     ('XS', 'XS'),
@@ -37,6 +38,10 @@ class Product(models.Model):
         if self.discount:
             return round(self.price - self.price * 0.01 * self.discount, 1)
         return self.price
+
+    def is_new(self):
+        delta = timedelta(days=30)
+        return True if self.created - datetime.now() < delta else False
 
     def __str__(self):
         return f'{self.title} - {self.color}'

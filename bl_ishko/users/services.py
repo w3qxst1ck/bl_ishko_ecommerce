@@ -22,7 +22,7 @@ def save_or_change_user_info(request):
     user_info.save()
 
 
-def get_related_products(wish_products):
+def get_related_products(wish_products, count=6):
     related_products = []
 
     if wish_products:
@@ -38,26 +38,27 @@ def get_related_products(wish_products):
             # доабвляем товары в related products
             related_products.extend(category_and_color)
 
-        if len(related_products) < 6:
+        if len(related_products) < count:
             for wish_product in wish_products:
                 category_products = Product.objects.filter(Q(category=wish_product.product.category) & ~Q(id__in=id_already_in_use))
                 for product in category_products:
                     id_already_in_use.add(product.id)
                 related_products.extend(category_products)
 
-        if len(related_products) < 6:
+        if len(related_products) < count:
             # id_already_in_related = list(id_already_in_related) + [product.id for product in related_products]
-            random_products = Product.objects.filter(~Q(id__in=id_already_in_use)).order_by('-created')[:6 - len(related_products)] #TODO со скидкой
+            random_products = Product.objects.filter(~Q(id__in=id_already_in_use)).order_by('-created')[:count - len(related_products)] #TODO со скидкой
             for product in random_products:
                 id_already_in_use.add(product.id)
             related_products.extend(random_products)
     else:
-        related_products.extend(Product.objects.all().order_by('-created')[:6])  #TODO выбирать со скидкой
+        related_products.extend(Product.objects.all().order_by('-created')[:count])  #TODO выбирать со скидкой
 
+    # минимально необходимое число продуктов
     if len(related_products) < 4:
         id_already_in_related = [product.id for product in related_products]
         related_products.extend(Product.objects.filter(~Q(id__in=id_already_in_related))[:4-len(related_products)])
 
-    return related_products[:6]
+    return related_products[:count]
 
 
