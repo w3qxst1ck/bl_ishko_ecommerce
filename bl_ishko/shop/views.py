@@ -51,38 +51,6 @@ def product_detail(request, slug):
                                                         })
 
 
-class ProductDetailView(DetailView):
-    model = Product
-    context_object_name = 'product'
-    template_name = 'shop/detail.html'
-
-    def get_object(self, queryset=None):
-        product = Product.objects.get(slug=self.kwargs['slug'])
-        return product
-
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['wish_list_products'] = self.__get_wishlist()
-        data['sorted_sizes'] = self.__sort_sizes()
-
-    def __sort_sizes(self):
-        all_sizes = ['XS', 'S', 'M', 'L', 'XL']
-        sizes = [item.size.upper() for item in self.object.items.all() if item.item_count > 0]
-        unique_sizes = list(set(sizes))
-        return [s.upper() for s in all_sizes if s in unique_sizes]
-
-    def __get_wishlist(self):
-        if self.request.user.is_authenticated:
-            wish_list = WishProduct.objects.filter(user=self.request.user)
-            if wish_list.exists():
-                wish_list_products = [product.product for product in wish_list]
-            else:
-                wish_list_products = []
-        else:
-            wish_list_products = []
-        return wish_list_products
-
-
 def shop_page(request, slug=None):
     # get products from category
     if slug:
@@ -106,3 +74,7 @@ def contact_page(request):
     return render(request, 'shop/contact.html')
 
 
+def search_view(request):
+    if request.method == 'POST':
+        result = []
+        return render(request, 'shop/shop.html', context={'products': result})

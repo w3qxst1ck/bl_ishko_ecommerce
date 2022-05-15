@@ -21,3 +21,7 @@ def get_related_products_for_detail(product, count=6):
         related_products.extend(Product.objects.filter(~Q(id__in=id_already_in_use)).order_by('-created')[:count - len(related_products)])
 
     return related_products[:count]
+
+
+def search_products(request):
+    pass

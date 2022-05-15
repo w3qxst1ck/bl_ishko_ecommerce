@@ -287,36 +287,23 @@
               </ul>
             </li>
             <!--======= SEARCH ICON =========-->
-            <li class="search-nav"><a href="#."><i class="fa fa-search"></i></a>
+            <li class="search-nav"><a><i class="fa fa-search"></i></a>
               <ul class="dropdown">
                 <li class="row">
                   <div class="col-sm-4 no-padding">
                     <select class="selectpicker">
-                      <option>MEN'S</option>
-                      <option>WOMENS</option>
-                      <option>KIDS</option>
-                      <option>FASHION</option>
-                      <option>MEN'S</option>
-                      <option>WOMENS</option>
-                      <option>KIDS</option>
-                      <option>FASHION</option>
-                      <option>MEN'S</option>
-                      <option>WOMENS</option>
-                      <option>KIDS</option>
-                      <option>FASHION</option>
-                      <option>MEN'S</option>
-                      <option>WOMENS</option>
-                      <option>KIDS</option>
-                      <option>FASHION</option>
-                      <option>MEN'S</option>
-                      <option>WOMENS</option>
-                      <option>KIDS</option>
-                      <option>FASHION</option>
+                      <option>КАТЕГОРИИ</option>
+                      {% for category in categories %}
+                        <option>{{ category|upper }}</option>
+                      {% endfor %}
                     </select>
                   </div>
                   <div class="col-sm-8 no-padding">
-                    <input type="search" class="form-control" placeholder="Search Here">
-                    <button type="submit"> <i class="fa fa-search"></i> </button>
+                    <form action="{% url 'shop:search' %}" method="POST">
+                      {% csrf_token %}
+                      <input type="search" class="form-control" placeholder="Search Here">
+                      <button type="submit"> <i class="fa fa-search"></i> </button>
+                    </form>
                   </div>
                 </li>
               </ul>
