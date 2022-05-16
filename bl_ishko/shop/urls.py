@@ -1,4 +1,3 @@
-
 from django.urls import path
 
 from .views import (home_page, faq_page, product_detail,
@@ -17,5 +16,4 @@ urlpatterns = [
     path('shop/', shop_page, name='shop-page'),
     path('shop/<str:slug>/', shop_page, name='cat-shop-page'),
     path('search/', search_view, name='search'),
-
 ]
