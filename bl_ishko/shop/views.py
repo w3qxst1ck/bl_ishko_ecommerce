@@ -59,6 +59,12 @@ def shop_page(request, slug=None):
     else:
         products = Product.objects.all()
         category = None
+
+    # get product for color
+    if request.GET.get('color', None):
+        color = request.GET.get('color')
+        products = products.filter(color=color)
+
     # wish product list
     if request.user.is_authenticated:
         wish_list = WishProduct.objects.filter(user=request.user)

@@ -87,10 +87,10 @@
               
               <!-- COLORE -->
               <ul class="cate">
-                <li><a href="#.">Purple <span>(32) </span></a></li>
-                <li><a href="#.">Red (9) <span>(9)</span></a> </li>
-                <li><a href="#.">Yellow <span>(25)</span></a> </li>
-                <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#color"> White/Black <span>(15)</span></a>
+                {% for color_tuple in colors_tuple_list %}
+                  <li><a href="?color={{ color }}">{{ color_tuple.0 }} <span>({{ color_tuple.1 }}) </span></a></li>
+                {% endfor %}
+                <!-- <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#color"> White/Black <span>(15)</span></a>
                   <div class="collapse" id="color">
                     <div class="well">
                       <ul>
@@ -100,7 +100,7 @@
                       </ul>
                     </div>
                   </div>
-                </li>
+                </li> -->
               </ul>
               
               <!-- HEADING -->
