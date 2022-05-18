@@ -1,0 +1,261 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+{% load sort_size %}
+
+{% load thumbnail %}
+{% load mathfilters %}
+
+{% block title %}Магазин{% endblock title %}
+
+{% block header %}
+  {% include 'shop/includes/header-light.html' %}
+{% endblock header %}
+
+
+{% block content %}
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
+      <div class="container">
+        <h4>{% if category %}{{ category.title|upper }}{% else %}ВСЕ ТОВАРЫ{% endif %}</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="{% url 'shop:home-page' %}">Главная</a></li>
+          <li class="active">МАГАЗИН</li>
+        </ol>
+      </div>
+    </section>
+    
+    <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in">
+      <div class="container">
+        <div class="row"> 
+          
+          <!--======= SIDE BAR =========-->
+          <div class="col-sm-3 animate fadeInLeft" data-wow-delay="0.2s">
+
+          </div>
+          
+          <!--======= ITEMS =========-->
+          <div class="col-sm-9 animate fadeInUp" data-wow-delay="0.2s">
+            <div class="items-short-type animate fadeInUp" data-wow-delay="0.4s"> 
+              
+              <!--======= GRID LIST STYLE =========-->
+              <div class="grid-list"> <a href="#."><i class="fa fa-th-large"></i></a> <a href="#."><i class="fa fa-th-list"></i></a> </div>
+              
+              <!--======= SHORT BY =========-->
+              <div class="short-by">
+                <select class="selectpicker">
+                  <option>Short by</option>
+                  <option>Short by</option>
+                </select>
+                <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
+              </div>
+              
+              <!--======= VIEW ITEM NUMBER =========-->
+              
+              <div class="view-num">
+                <ul>
+                  {% if category %}
+                  <li><a href="{% url 'shop:shop-page' %}">Все категории</a></li>
+                  {% else %}
+                  <li><a>Все товары</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+
+            {% if products %}
+              <!--======= Products =========-->
+            <div class="popurlar_product">
+              <ul class="row">
+
+                {% for product in products %}
+                <!-- New Products -->
+                <li class="col-sm-4 animate fadeIn" data-wow-delay="{% if forloop.counter > 3 %}{% if forloop.counter|mod:3 == 0 %}0.6{% else %}{{ forloop.counter|mod:3|mul:0.2 }}{% endif %}{% else %}{{ forloop.counter|mul:0.2 }}{% endif %}s">
+                  <div class="items-in"> 
+                    <!-- Image -->
+                    {% thumbnail product.title_image "270x340" crop="center" as im %}
+                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                    {% endthumbnail %}
+                    <!-- Hover Details -->
+                    <div class="over-item">
+
+                      <!--  Tags  -->
+                      {% if product.discount %}
+                        <div class="hot-tag">-{{ product.discount }}%</div>
+                      {% endif %}
+
+                      <ul class="animated fadeIn">
+                        <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        <li> <a href="" id="share-product1" data-toggle="modal" data-target="#shareModal"><i class="ion-shuffle"></i></a></li>
+                        <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
+                        {% if product not in wish_list_products %}
+                          <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
+                        {% else %}
+                          <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                        {% endif %}
+                        <li class="full-w"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}" class="btn">В КОРЗИНУ</a></li>
+                      </ul>
+                    </div>
+                    <!-- Item Name -->
+                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            {% else %}
+              <p>По запросу "...." ничего не найдено</p>
+            {% endif %}
+            
+            
+            {% for product in products %}
+            <!-- Modal window -->
+              <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+                  <div class="modal-content">
+                    <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <section class="pages-in item-detail-page">
+                        <form action="{% url 'cart:add-to-cart' product.id %}" method="GET">
+                            <!-- size -->
+                            <div class="col-sm-12">
+                              <div class="item-select"> 
+                                <!--  SIZE -->
+                                <p>*РАЗМЕР</p>
+                                <select class="selectpicker" id='product-size'>
+                                  {% if product.items.all|distinct_size %}
+                                    {% for size in product.items.all|distinct_size %}
+                                      <option>{{ size }}</option>
+                                    {% endfor %}
+                                  {% else %}
+                                    <option disabled>ТОВАР ОТСУТСТВУЕТ</option>
+                                  {% endif %}
+                                </select>
+                                <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all|distinct_size|first }}">
+                              </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">{{ product.description }}</p>
+                            </div>
+
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">Состав: {{ product.compound }}</p>
+                            </div> 
+
+                            <div class="col-sm-12">
+                              <p style="font-size: 12px; margin-top: 10px">Уход: {{ product.care }}</p>
+                            </div> 
+                            {% if product.items.all|distinct_size %}
+                              <div class="col-sm-12">
+                                <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
+                              </div>
+                            {% endif %}
+                        </form>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- end Modal window -->
+            {% endfor %}
+
+            <!-- Modal window share product -->
+            <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+                <div class="modal-content">
+                  <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="col">
+                      <h6 style="font-weight: 500; font-family: 'Montserrat', sans-serif;">ПОДЕЛИТЬСЯ</h6>
+                    </div>
+                    
+                    <div class="col">
+                      <p style="font-size: 11px; font-family: 'Montserrat', sans-serif;">Ссылка на товар скопирована в буфер обмена.</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end Modal window -->
+            
+            <!--======= PAGINATION =========-->
+            {% if products.count > 12 %}
+            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s">
+              <li><a href="#.">1</a></li>
+              <li><a href="#.">2</a></li>
+              <li><a href="#.">3</a></li>
+              <li><a href="#.">4</a></li>
+              <li><a href="#.">5</a></li>
+              <li><a href="#."><i class="fa fa-angle-right"></i></a></li>
+            </ul>
+            {% else %}
+            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s" style="border-bottom: none; border-top: none;"></ul>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/own-menu.js' %}"></script> 
+<script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script> 
+<script src="{% static 'js/jquery.isotope.min.js' %}"></script> 
+<script src="{% static 'js/jquery.nouislider.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script> 
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script> 
+<script>
+jQuery(document).ready(function($) {
+  
+  //  Price Filter ( noUiSlider Plugin)
+    $("#price-range").noUiSlider({
+    range: {
+      'min': [ 0 ],
+      'max': [ 1000 ]
+    },
+    start: [40, 940],
+        connect:true,
+        serialization:{
+            lower: [
+        $.Link({
+          target: $("#price-min")
+        })
+      ],
+      upper: [
+        $.Link({
+          target: $("#price-max")
+        })
+      ],
+      format: {
+      // Set formatting
+        decimals: 2,
+        prefix: '$'
+      }
+        }
+  })
+})
+
+</script>
+{% endblock scripts %}

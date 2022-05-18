@@ -76,5 +76,7 @@ def contact_page(request):
 
 def search_view(request):
     if request.method == 'POST':
+        # try:
+        #     products = Product.objects.filter(title__icontains=request.POST.get(''))
         result = []
-        return render(request, 'shop/shop.html', context={'products': result})
+        return render(request, 'shop/search.html', context={'products': result})
