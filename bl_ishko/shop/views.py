@@ -58,6 +58,7 @@ def shop_page(request, slug=None):
         products = Product.objects.filter(category=category)
     else:
         products = Product.objects.all()
+        category = None
     # wish product list
     if request.user.is_authenticated:
         wish_list = WishProduct.objects.filter(user=request.user)
@@ -67,7 +68,8 @@ def shop_page(request, slug=None):
             wish_list_products = []
     else:
         wish_list_products = []
-    return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products})
+    return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products,
+                                              'category': category})
 
 
 def contact_page(request):

@@ -152,7 +152,9 @@
                   <option>Short by</option>
                   <option>Short by</option>
                 </select>
-                <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
+                {% if products %}
+                  <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
+                {% endif %}
               </div>
               
               <!--======= VIEW ITEM NUMBER =========-->
