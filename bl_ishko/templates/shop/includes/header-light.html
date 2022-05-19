@@ -237,7 +237,7 @@
                           <div class="media-body">
                             <h6 class="media-heading">{{ item.item.product.title|upper|truncatechars:19 }}</h6>
                             <h6 class="media-heading">РАЗМЕР: {{ item.item.size }}</h6>
-                            <span class="price">{{ item.item_total }} RUB</span> <span class="qty">КОЛ-ВО: {{ item.quantity }}</span> </div>
+                            <span class="price">{{ item.item_total_with_sale }} RUB</span> <span class="qty">КОЛ-ВО: {{ item.quantity }}</span> </div>
                         </div>
                       </li>
                     {% endif %}
