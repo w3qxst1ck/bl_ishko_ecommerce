@@ -14,13 +14,7 @@ def get_order(request):
 
 def get_categories(request):
     categories = Category.objects.all().order_by('title')
-    all_products = Product.objects.all()
-    colors = sorted(list(set([product.color for product in all_products])))
-    colors_tuple_list = []
-    for color in colors:
-        product_count = all_products.filter(color=color).count()
-        colors_tuple_list.append((color, product_count))
-    return {'categories': categories, 'colors_tuple_list': colors_tuple_list}
+    return {'categories': categories}
 
 
 def get_new_products(request):

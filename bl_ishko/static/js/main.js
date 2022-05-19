@@ -118,6 +118,20 @@ $("a#share-product1").on('click', function () {
 });
 
 /*-----------------------------------------------------------------------------------*/
+/* 	PRICE SLIDER
+/*-----------------------------------------------------------------------------------*/
+$("#price-min").on('DOMSubtreeModified', function () {
+	var minPriceValue = $(this).text().replace('₽', '');
+	var minPriceInput = $("#price-min-input");
+	minPriceInput.val(minPriceValue);
+});
+$("#price-max").on('DOMSubtreeModified', function () {
+	var maxPriceValue = $(this).text().replace('₽', '');
+	var maxPriceInput = $("#price-max-input");
+	maxPriceInput.val(maxPriceValue);
+});
+
+/*-----------------------------------------------------------------------------------*/
 /* 	ABOUT CLIENT SLIDER
 /*-----------------------------------------------------------------------------------*/
 $(".new-col-slide").owlCarousel({ 
