@@ -36,7 +36,107 @@
           
           <!--======= SIDE BAR =========-->
           <div class="col-sm-3 animate fadeInLeft" data-wow-delay="0.2s">
-
+            <div class="side-bar">
+              <h4>Фильтры</h4>
+              
+              <!-- HEADING -->
+              <div class="heading">
+                <h6>КАТЕГОРИИ</h6>
+              </div>
+              
+              <!-- CATEGORIES -->
+              <ul class="cate">
+                {% for category in categories %}
+                <li><a href="{{ category.get_absolute_url }}">{{ category.title }} <span>({{ category.products.count }})</span></a></li>
+                {% endfor %}
+<!--                 <li><a href="#.">Woman <span>(9)</span></a> </li>
+                <li><a href="#.">Kid’s <span>(25)</span></a> </li>
+                <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#access"> Accessories <span>(15)</span></a>
+                  <div class="collapse" id="access">
+                    <div class="well">
+                      <ul>
+                        <li><a href="#.">Men</a></li>
+                        <li><a href="#.">Woman</a></li>
+                        <li><a href="#.">Kid</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li><a href="#.">Bag & Shoes <span>(8)</span></a> </li>
+                <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#watches"> Watch <span>(15)</span></a>
+                  <div class="collapse" id="watches">
+                    <div class="well">
+                      <ul>
+                        <li><a href="#.">Men Watch</a></li>
+                        <li><a href="#.">Woman Watch</a></li>
+                        <li><a href="#.">Kid Watch</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li><a href="#.">Sale <span> (11)</span></a> </li>
+                <li><a href="#.">Top Rate <span>(35)</span></a> </li>
+                <li><a href="#.">Collections <span>(17)</span></a> </li> -->
+                <li><a href="{% url 'shop:contact-page' %}">СВЯЗАТЬСЯ С НАМИ </a> </li>
+              </ul>
+              
+              <!-- HEADING -->
+              <div class="heading">
+                <h6>COLOR</h6>
+              </div>
+              
+              <!-- COLORE -->
+              <ul class="cate">
+                <li><a href="#.">Purple <span>(32) </span></a></li>
+                <li><a href="#.">Red (9) <span>(9)</span></a> </li>
+                <li><a href="#.">Yellow <span>(25)</span></a> </li>
+                <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#color"> White/Black <span>(15)</span></a>
+                  <div class="collapse" id="color">
+                    <div class="well">
+                      <ul>
+                        <li><a href="#.">Red</a></li>
+                        <li><a href="#.">Purple</a></li>
+                        <li><a href="#.">Yellow</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              
+              <!-- HEADING -->
+              <div class="heading">
+                <h6>PRICE</h6>
+              </div>
+              <!-- PRICE -->
+              <div class="cost-price-content">
+                <div id="price-range" class="price-range"></div>
+                <span id="price-min" class="price-min">20</span> <span id="price-max" class="price-max">80</span> </div>
+              <a href="#." class="btn btn-small btn-dark" >FILTER</a> 
+              
+              <!-- TAGS -->
+              <h4 class="margin-t-40">Product Tags</h4>
+              <ul class="tags">
+                <li><a href="#.">FASHION</a></li>
+                <li><a href="#.">BAGS</a></li>
+                <li><a href="#.">TABLET</a></li>
+                <li><a href="#.">ELECTRONIC</a></li>
+                <li><a href="#.">BEAUTY</a></li>
+                <li><a href="#.">TRtENDING</a></li>
+                <li><a href="#.">SHOES</a></li>
+              </ul>
+              
+              <!-- COMPAIR BOX -->
+              <h4 class="margin-t-40">Compare</h4>
+              <div class="compair-box">
+                <div class="position-center-center full-width text-center"> No products to compare </div>
+              </div>
+              <a href="#." class="btn btn-small btn-dark" >Compare</a> 
+              
+              <!-- ADS-->
+              <div class="sider-bar-ads"> <img src="images/side-bar-ad.jpg" alt="" >
+                <div class="position-center-center full-width text-center"> 1805 <a href="#." class="btn btn-small btn-dark" >SHOP NOW</a> </div>
+              </div>
+            </div>
           </div>
           
           <!--======= ITEMS =========-->
@@ -52,7 +152,9 @@
                   <option>Short by</option>
                   <option>Short by</option>
                 </select>
-                <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
+                {% if products %}
+                  <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
+                {% endif %}
               </div>
               
               <!--======= VIEW ITEM NUMBER =========-->
@@ -67,12 +169,11 @@
                 </ul>
               </div>
             </div>
-
-            {% if products %}
-              <!--======= Products =========-->
+            
+            <!--======= Products =========-->
             <div class="popurlar_product">
               <ul class="row">
-
+                {% if products %}
                 {% for product in products %}
                 <!-- New Products -->
                 <li class="col-sm-4 animate fadeIn" data-wow-delay="{% if forloop.counter > 3 %}{% if forloop.counter|mod:3 == 0 %}0.6{% else %}{{ forloop.counter|mod:3|mul:0.2 }}{% endif %}{% else %}{{ forloop.counter|mul:0.2 }}{% endif %}s">
@@ -108,12 +209,11 @@
                 {% endfor %}
               </ul>
             </div>
+                {% else %}
+                  <h5>По запросу "ююю" ничего не найдено</h5>
+                {% endif %}
+                
 
-            {% else %}
-              <p>По запросу "...." ничего не найдено</p>
-            {% endif %}
-            
-            
             {% for product in products %}
             <!-- Modal window -->
               <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">

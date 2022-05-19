@@ -78,7 +78,13 @@ def contact_page(request):
 
 def search_view(request):
     if request.method == 'POST':
-        # try:
-        #     products = Product.objects.filter(title__icontains=request.POST.get(''))
-        result = []
+        low_product_title = request.POST.get('search-field').lower()
+        print(low_product_title)
+
+        if request.POST.get('category-field'):
+            products = Product.objects.filter(title__contains=low_product_title, category__title=request.POST.get('category-field'))
+        else:
+            products = Product.objects.filter(title__contains=low_product_title)
+        print(products)
+        result = products
         return render(request, 'shop/search.html', context={'products': result})

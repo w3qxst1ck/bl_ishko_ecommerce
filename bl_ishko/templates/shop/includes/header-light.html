@@ -294,14 +294,15 @@
                     <select class="selectpicker">
                       <option>КАТЕГОРИИ</option>
                       {% for category in categories %}
-                        <option>{{ category|upper }}</option>
+                        <option>{{ category.title|upper }}</option>
                       {% endfor %}
                     </select>
                   </div>
                   <div class="col-sm-8 no-padding">
                     <form action="{% url 'shop:search' %}" method="POST">
                       {% csrf_token %}
-                      <input type="search" class="form-control" placeholder="Search Here">
+                      <input type="hidden" name="category-field" value="">
+                      <input type="search" class="form-control" placeholder="Search Here" name="search-field">
                       <button type="submit"> <i class="fa fa-search"></i> </button>
                     </form>
                   </div>
