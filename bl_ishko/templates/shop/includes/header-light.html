@@ -124,7 +124,7 @@
               </ul>
             </li>
 
-            <li class="meganav"><a href="">НОВИНКИ</a> 
+            <li class="meganav"><a>НОВИНКИ</a> 
               <!--======= MEGA MENU =========-->
               <ul class="megamenu full-width look-book">
                 <li class="row nav-post">
@@ -291,7 +291,7 @@
               <ul class="dropdown">
                 <li class="row">
                   <div class="col-sm-4 no-padding">
-                    <select class="selectpicker">
+                    <select class="selectpicker" id='select-search'>
                       <option>КАТЕГОРИИ</option>
                       {% for category in categories %}
                         <option>{{ category.title|upper }}</option>
@@ -301,7 +301,7 @@
                   <div class="col-sm-8 no-padding">
                     <form action="{% url 'shop:search' %}" method="POST">
                       {% csrf_token %}
-                      <input type="hidden" name="category-field" value="">
+                      <input type="hidden" name="category-field" value="КАТЕГОРИИ" id='category-input'>
                       <input type="search" class="form-control" placeholder="Search Here" name="search-field">
                       <button type="submit"> <i class="fa fa-search"></i> </button>
                     </form>

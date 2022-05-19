@@ -94,6 +94,15 @@ $("#product-quantity").on('change', function () {
 	quantity_input.val(quantity_value);
 });
 /*-----------------------------------------------------------------------------------*/
+/* 	SEARCH NAVBAR
+/*-----------------------------------------------------------------------------------*/
+$("#select-search").on('change', function () {
+	let searched_category = this.value;
+	let hidden_input_category = $("#category-input");
+	hidden_input_category.val(searched_category);
+});
+
+/*-----------------------------------------------------------------------------------*/
 /* 	COPY URL
 /*-----------------------------------------------------------------------------------*/
 $("a#share-product").on('click', function () {

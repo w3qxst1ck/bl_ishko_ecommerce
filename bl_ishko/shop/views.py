@@ -52,6 +52,8 @@ def product_detail(request, slug):
 
 
 def shop_page(request, slug=None):
+
+
     # get products from category
     if slug:
         category = get_object_or_404(Category, slug=slug)
@@ -114,9 +116,9 @@ def search_view(request):
         print(low_product_title)
 
         if request.POST.get('category-field'):
-            products = Product.objects.filter(title__contains=low_product_title, category__title=request.POST.get('category-field'))
+            products = Product.objects.filter(title__icontains=low_product_title, category__title__iexact=request.POST.get('category-field'))
         else:
-            products = Product.objects.filter(title__contains=low_product_title)
+            products = Product.objects.filter(title__icontains=low_product_title)
         print(products)
         result = products
         return render(request, 'shop/search.html', context={'products': result})
