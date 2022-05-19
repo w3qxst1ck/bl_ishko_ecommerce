@@ -87,10 +87,15 @@
               
               <!-- COLORE -->
               <ul class="cate">
-                <li><a href="#.">Purple <span>(32) </span></a></li>
-                <li><a href="#.">Red (9) <span>(9)</span></a> </li>
-                <li><a href="#.">Yellow <span>(25)</span></a> </li>
-                <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#color"> White/Black <span>(15)</span></a>
+                {% for color_tuple in colors_tuple_list %}
+<!--                   {% if min_price or max_price %}
+                    <li><a href="?color={{ color_tuple.0 }}&min-price={{ min_price }}&max-price={{ max_price }}">{{ color_tuple.0 }} <span>({{ color_tuple.1 }}) </span></a></li>
+                  {% else %}
+                    <li><a href="?color={{ color_tuple.0 }}">{{ color_tuple.0 }} <span>({{ color_tuple.1 }}) </span></a></li>
+                  {% endif %} -->
+                <li><a href="?color={{ color_tuple.0 }}">{{ color_tuple.0 }} <span>({{ color_tuple.1 }}) </span></a></li>
+                {% endfor %}
+                <!-- <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#color"> White/Black <span>(15)</span></a>
                   <div class="collapse" id="color">
                     <div class="well">
                       <ul>
@@ -100,7 +105,7 @@
                       </ul>
                     </div>
                   </div>
-                </li>
+                </li> -->
               </ul>
               
               <!-- HEADING -->
@@ -108,13 +113,22 @@
                 <h6>PRICE</h6>
               </div>
               <!-- PRICE -->
-              <div class="cost-price-content">
-                <div id="price-range" class="price-range"></div>
-                <span id="price-min" class="price-min">20</span> <span id="price-max" class="price-max">80</span> </div>
-              <a href="#." class="btn btn-small btn-dark" >FILTER</a> 
+              <form {% if category %}action="{{ category.get_absolute_url }}"{% else %}action="{% url 'shop:shop-page' %}" {% endif %} method="GET">
+                <div class="cost-price-content">
+                  <div id="price-range" class="price-range"></div>
+                  <span id="price-min" class="price-min">20</span>
+                  <input type="hidden" value="" id="price-min-input" name="min-price">
+                  <span id="price-max" class="price-max">80</span>
+                  <input type="hidden" value="" id="price-max-input" name="max-price">
+                  {% if color %}
+                    <input type="hidden" value="{{ color }}" name="color">
+                  {% endif %}
+                </div>
+                <button type="submit" class="btn btn-small btn-dark" style="font-family: 'Montserrat', sans-serif;">ФИЛЬТР</button>
+              </form>
               
               <!-- TAGS -->
-              <h4 class="margin-t-40">Product Tags</h4>
+<!--               <h4 class="margin-t-40">Product Tags</h4>
               <ul class="tags">
                 <li><a href="#.">FASHION</a></li>
                 <li><a href="#.">BAGS</a></li>
@@ -123,19 +137,19 @@
                 <li><a href="#.">BEAUTY</a></li>
                 <li><a href="#.">TRtENDING</a></li>
                 <li><a href="#.">SHOES</a></li>
-              </ul>
+              </ul> -->
               
               <!-- COMPAIR BOX -->
-              <h4 class="margin-t-40">Compare</h4>
+<!--               <h4 class="margin-t-40">Compare</h4>
               <div class="compair-box">
                 <div class="position-center-center full-width text-center"> No products to compare </div>
               </div>
-              <a href="#." class="btn btn-small btn-dark" >Compare</a> 
+              <a href="#." class="btn btn-small btn-dark" >Compare</a>  -->
               
               <!-- ADS-->
-              <div class="sider-bar-ads"> <img src="images/side-bar-ad.jpg" alt="" >
+<!--               <div class="sider-bar-ads"> <img src="images/side-bar-ad.jpg" alt="" >
                 <div class="position-center-center full-width text-center"> 1805 <a href="#." class="btn btn-small btn-dark" >SHOP NOW</a> </div>
-              </div>
+              </div> -->
             </div>
           </div>
           
@@ -146,12 +160,15 @@
               <!--======= GRID LIST STYLE =========-->
               <div class="grid-list"> <a href="#."><i class="fa fa-th-large"></i></a> <a href="#."><i class="fa fa-th-list"></i></a> </div>
               
-              <!--======= SHORT BY =========-->
+              <!--======= SORT BY =========-->
               <div class="short-by">
                 <select class="selectpicker">
-                  <option>Short by</option>
-                  <option>Short by</option>
+                  <option>По новинкам</option>
+                  <option>По убыванию цены</option>
+                  <option>По возрастанию цены</option>
+                  <option>По скидкам</option>
                 </select>
+                <input type="hidden" value="По убыванию цены" name="sort_by">
                 {% if products %}
                   <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
                 {% endif %}
@@ -159,10 +176,11 @@
               
               <!--======= VIEW ITEM NUMBER =========-->
               
+
               <div class="view-num">
                 <ul>
-                  {% if category %}
-                  <li><a href="{% url 'shop:shop-page' %}">Все категории</a></li>
+                  {% if category or color_new or min_price or max_price %}
+                  <li><a href="{% url 'shop:shop-page' %}">Сбросить фильтры</a></li>
                   {% else %}
                   <li><a>Все товары</a></li>
                   {% endif %}
@@ -203,7 +221,7 @@
                       </ul>
                     </div>
                     <!-- Item Name -->
-                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
+                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat" style="text-decoration: line-through;">{% if product.discount %}{{ product.price }}{% endif %}</span> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
                   </div>
                 </li>
                 {% endfor %}
@@ -346,11 +364,11 @@ jQuery(document).ready(function($) {
       ],
       format: {
       // Set formatting
-        decimals: 2,
-        prefix: '$'
+        decimals: 1,
+        prefix: '₽'
       }
         }
-  })
+  });
 })
 
 </script>

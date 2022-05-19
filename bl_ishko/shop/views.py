@@ -59,6 +59,36 @@ def shop_page(request, slug=None):
     else:
         products = Product.objects.all()
         category = None
+
+    # get colors for sidebar
+    colors = sorted(list(set([product.color for product in products])))
+    colors_tuple_list = []
+    for color in colors:
+        product_count = products.filter(color=color).count()
+        colors_tuple_list.append((color, product_count))
+
+    # get prices from slide
+    if request.GET.get('min-price'):
+        min_price = float(request.GET.get('min-price'))
+        products = products.filter(price__gte=min_price)
+        min_price = str(min_price).replace(',', '.')
+    else:
+        min_price = None
+
+    if request.GET.get('max-price'):
+        max_price = float(request.GET.get('max-price'))
+        products = products.filter(price__lte=max_price)
+        max_price = str(max_price).replace(',', '.')
+    else:
+        max_price = None
+
+    # get product for color
+    if request.GET.get('color'):
+        color = request.GET.get('color')
+        products = products.filter(color=color)
+    else:
+        color = None
+
     # wish product list
     if request.user.is_authenticated:
         wish_list = WishProduct.objects.filter(user=request.user)
@@ -68,8 +98,10 @@ def shop_page(request, slug=None):
             wish_list_products = []
     else:
         wish_list_products = []
+
     return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products,
-                                              'category': category})
+                                              'category': category, 'colors_tuple_list': colors_tuple_list,
+                                              'color': color, 'min_price': min_price, 'max_price': max_price})
 
 
 def contact_page(request):

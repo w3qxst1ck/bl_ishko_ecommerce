@@ -74,7 +74,7 @@
                 <span class="price">{{ product.price }} RUB</span>
                 {% endif %}
               </div>
-              <div class="col-sm-12"> <span class="code">КАТЕГОРИЯ: {{ product.category.title|upper }}</span>
+              <div class="col-sm-12"> <span class="code">КАТЕГОРИЯ: {{ product.category.title|upper }} | ЦВЕТ: {{ product.color|upper }}</span>
                 <div class="some-info no-border"> <br>
                   {% if product.items.all|distinct_size %}
                     <div class="in-stoke"> <i class="fa fa-check-circle"></i>В НАЛИЧИИ</div>
