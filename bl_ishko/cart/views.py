@@ -51,6 +51,9 @@ def add_to_cart(request, pk):
             order.order_items.add(order_item)
     else:
         redirect('shop:shop-page')
+
+    if request.META.get('HTTP_REFERER').split('/')[-2] == 'search':
+        return redirect('cart:cart-page')
     return redirect(request.META.get('HTTP_REFERER'))
 
 

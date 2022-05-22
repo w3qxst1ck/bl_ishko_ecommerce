@@ -27,6 +27,8 @@ def add_item_to_wish_list(request, slug):
     wishlist_qs = WishProduct.objects.filter(user=request.user, product=product)
     if not wishlist_qs.exists():
         WishProduct.objects.create(product=product, user=request.user)
+    if request.META.get('HTTP_REFERER').split('/')[-2] == 'search':
+        return redirect('users:wishlist-page')
     return redirect(request.META.get('HTTP_REFERER'))
 
 

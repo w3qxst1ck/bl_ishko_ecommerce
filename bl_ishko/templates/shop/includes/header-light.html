@@ -299,7 +299,7 @@
                     </select>
                   </div>
                   <div class="col-sm-8 no-padding">
-                    <form action="{% url 'shop:shop-page' %}" method="POST">
+                    <form action="{% url 'shop:search-page' %}" method="POST">
                       {% csrf_token %}
                       <input type="hidden" name="category-field" value="КАТЕГОРИИ" id='category-input'>
                       <input type="search" class="form-control" required placeholder="Поиск" name="search-field">

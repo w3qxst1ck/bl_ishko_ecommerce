@@ -51,8 +51,7 @@ def product_detail(request, slug):
                                                         })
 
 
-def shop_page(request, slug=None, product_query_set=None):
-    print(product_query_set)
+def shop_page(request, slug=None):
     if request.method == 'POST':
         if request.POST.get('search-field') == ' ' or not request.POST.get('search-field'):
             products = Product.objects.all()
@@ -115,6 +114,49 @@ def shop_page(request, slug=None, product_query_set=None):
     return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products,
                                                   'category': category, 'colors_tuple_list': colors_tuple_list,
                                                   'color': color, 'min_price': min_price, 'max_price': max_price})
+
+
+def search_view(request):
+    if request.method == 'POST':
+        searched_product_title = request.POST.get('search-field')
+        searched_product_category = request.POST.get('category-field')
+
+        if searched_product_title == ' ' or not searched_product_title:
+            if searched_product_category != 'КАТЕГОРИИ':
+                products = Product.objects.filter(category__title=searched_product_category)
+            else:
+                searched_product_title = None
+                searched_product_category = None
+                products = Product.objects.all()
+        else:
+            searched_product_title = searched_product_title.strip()
+            if searched_product_category != 'КАТЕГОРИИ':
+                products = Product.objects.filter(title__icontains=searched_product_title,
+                                                  category__title=searched_product_category)
+            else:
+                searched_product_category = None
+                products = Product.objects.filter(title__icontains=searched_product_title)
+    else:
+        # защита от запроса через url
+        searched_product_title = None
+        searched_product_category = None
+        products = []
+
+    # wish product list
+    if request.user.is_authenticated:
+        wish_list = WishProduct.objects.filter(user=request.user)
+        if wish_list.exists():
+            wish_list_products = [product.product for product in wish_list]
+        else:
+            wish_list_products = []
+    else:
+        wish_list_products = []
+    return render(request, 'shop/search.html', context={'products': products,
+                                                        'wish_list_products': wish_list_products,
+                                                        'searched_title': searched_product_title,
+                                                        'searched_category': searched_product_category,
+                                                        })
+
 
 
 def contact_page(request):
