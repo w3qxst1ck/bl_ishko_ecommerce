@@ -10,5 +10,3 @@ from .models import UserInfo
 def post_init_user(**kwargs):
     if kwargs['created']:
         UserInfo.objects.create(user=kwargs['instance'])
-        print('Srabotal signal')
-

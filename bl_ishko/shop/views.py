@@ -52,14 +52,24 @@ def product_detail(request, slug):
 
 
 def shop_page(request, slug=None):
-
+    if request.method == 'POST':
+        if request.POST.get('search-field') == ' ' or not request.POST.get('search-field'):
+            products = Product.objects.all()
+        else:
+            product_title = request.POST.get('search-field').strip()
+            if request.POST.get('category-field') != 'КАТЕГОРИИ':
+                products = Product.objects.filter(title__icontains=request.POST.get('search-field'),
+                                                  category__title=product_title)
+            else:
+                products = Product.objects.filter(title__icontains=product_title)
+    else:
+        products = Product.objects.all()
 
     # get products from category
     if slug:
         category = get_object_or_404(Category, slug=slug)
         products = Product.objects.filter(category=category)
     else:
-        products = Product.objects.all()
         category = None
 
     # get colors for sidebar
@@ -102,8 +112,8 @@ def shop_page(request, slug=None):
         wish_list_products = []
 
     return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products,
-                                              'category': category, 'colors_tuple_list': colors_tuple_list,
-                                              'color': color, 'min_price': min_price, 'max_price': max_price})
+                                                  'category': category, 'colors_tuple_list': colors_tuple_list,
+                                                  'color': color, 'min_price': min_price, 'max_price': max_price})
 
 
 def contact_page(request):
