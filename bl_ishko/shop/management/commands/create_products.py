@@ -42,7 +42,7 @@ class Command(BaseCommand):
             mixer.blend(
                 Product,
                 title=mixer.FAKE,
-                color=random.choice(['Red', 'BLue', 'Yellow', 'Black', 'Purple', 'Orange', 'Green', 'White']),
+                color=random.choice(['Red', 'Blue', 'Yellow', 'Black', 'Purple', 'Orange', 'Green', 'White']),
                 category=mixer.SELECT,
                 price=random.randint(100, 1000),
                 slug=mixer.SKIP,

@@ -51,7 +51,8 @@ def product_detail(request, slug):
                                                         })
 
 
-def shop_page(request, slug=None):
+def shop_page(request, slug=None, product_query_set=None):
+    print(product_query_set)
     if request.method == 'POST':
         if request.POST.get('search-field') == ' ' or not request.POST.get('search-field'):
             products = Product.objects.all()
