@@ -204,7 +204,7 @@
                 <div class="media">
                   <div class="media-left"> 
                     <!--  Image -->
-                    <div class="avatar"> <a> <img class="media-object" src="{% static 'images/avatar-1.jpg' %}" alt=""> </a> </div>
+                    <!-- <div class="avatar"> <a> <img class="media-object" src="{% static 'images/avatar-1.jpg' %}" alt=""> </a> </div> -->
                   </div>
                   <!--  Details -->
                   <div class="media-body">
@@ -297,7 +297,7 @@
                   </ul>
                 </div>
                 <!-- Item Name -->
-                <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{product.title|upper }}</a> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
+                <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{product.title|upper }}</a> <span class="font-montserrat" style="text-decoration: line-through;">{% if product.discount %}{{ product.price }}{% endif %}</span> <span class="font-montserrat">{{ product.get_price }} RUB</span></div>
               </div>
             {% endfor %}
         </div>

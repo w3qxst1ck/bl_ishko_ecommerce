@@ -98,6 +98,10 @@ def order_complete_page_intermediate(request):
             item.item_count -= order_item.quantity
             item.save()
         order.ordered = True
+        if request.GET.get('card_payment'):
+            order.card_payment = True
+        if request.GET.get('cash_payment'):
+            order.cash_payment = True
         order.save()
         # оповещение клиента
         send_message_to_client(request, order)
@@ -126,6 +130,8 @@ def cancel_order(request, order_id):
         item = order_item.item
         item.item_count += order_item.quantity
         item.save()
+    # оповещение администратора
+    send_message_to_admin()
     return redirect('users:profile-orders-page')
 
 

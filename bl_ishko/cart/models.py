@@ -36,6 +36,8 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     ordered = models.BooleanField(default=False)
+    cash_payment = models.BooleanField(default=False, verbose_name='Оплата наличными')
+    card_payment = models.BooleanField(default=False, verbose_name='Перевод на карту')
 
     def get_order_total_price(self):
         return sum([item.item_total() for item in self.order_items.all()])

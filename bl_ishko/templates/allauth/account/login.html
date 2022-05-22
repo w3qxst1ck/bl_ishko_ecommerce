@@ -70,7 +70,7 @@
                 </form>
                 {% endif %} -->
 
-                <h6>LOGIN FORM</h6>
+                <h6>ВХОД</h6>
                 <form method="POST" action="{% url 'account_login' %}">
                   {% csrf_token %}
                   {% if redirect_field_value %}

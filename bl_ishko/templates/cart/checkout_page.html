@@ -65,13 +65,13 @@
                     <!-- Name -->
                     <li class="col-md-6">
                       <label> *ИМЯ
-                        <input type="text" name="first-name" value="{{ user.first_name }}" placeholder="" required>
+                        <input type="text" name="first-name" value="{% if user.first_name %}{{ user.first_name }}{% endif %}" placeholder="" required>
                       </label>
                     </li>
                     <!-- LAST NAME -->
                     <li class="col-md-6">
                       <label> *ФАМИЛИЯ
-                        <input type="text" name="last-name" value="{{ user.last_name }}" placeholder="" required>
+                        <input type="text" name="last-name" value="{% if user.last_name %}{{ user.last_name }}{% endif %}" placeholder="" required>
                       </label>
                     </li>
                     <!-- *COUNTRY -->
@@ -85,27 +85,27 @@
                     <!-- COUNTRY -->
                     <li class="col-md-6">
                       <label> РЕГИОН
-                        <input type="text" name="region" value="{{ user.info.region }}" placeholder="Краснодарский край">
+                        <input type="text" name="region" value="{% if user.info.region %}{{ user.info.region }}{% endif %}" placeholder="Краснодарский край">
                       </label>
                     </li>
                     
                     <!-- POSTCODE -->
                     <li class="col-md-6">
                       <label> *ПОЧТОВЫЙ ИНДЕКС
-                        <input type="number" name="postal-code" value="{{ user.info.index }}" placeholder="123456" max='999999' min="000001" required>
+                        <input type="number" name="postal-code" value="{% if user.info.index %}{{ user.info.index }}{% endif %}" placeholder="123456" max='999999' min="000001" required>
                       </label>
                     </li>
 
                     <!-- TOWN/CITY -->
                     <li class="col-md-12">
                       <label>*ГОРОД/НАСЕЛЕННЫЙ ПУНКТ
-                        <input type="text" name="city" value="{{ user.info.city }}" placeholder="Сочи" required>
+                        <input type="text" name="city" value="{% if user.info.city %}{{ user.info.city }}{% endif %}" placeholder="Сочи" required>
                       </label>
                     </li>
                     <li class="col-md-12"> 
                       <!-- ADDRESS -->
                       <label>*АДРЕС
-                        <input type="text" name="address" value="{{ user.info.address }}" placeholder="улица Пушкинская, д. 25, кв. 10" required>
+                        <input type="text" name="address" value="{% if user.info.address %}{{ user.info.address }}{% endif %}" placeholder="улица Пушкинская, д. 25, кв. 10" required>
                         <!-- <input type="text" name="address" value="" placeholder="Optional"> -->
                       </label>
                     </li>
@@ -119,7 +119,7 @@
                     <!-- PHONE -->
                     <li class="col-md-6">
                       <label> *ТЕЛЕФОН
-                        <input type="tel" name="phone" placeholder="+7" value="{{ user.info.phone }}" required>
+                        <input type="tel" name="phone" placeholder="+7" value="{% if user.info.phone %}{{ user.info.phone }}{% endif %}" required>
                       </label>
                     </li>
                     
@@ -159,31 +159,19 @@
                     <p>ДОСТАВКА <span>500 RUB</span></p>
                     <p>ОБЩАЯ СУММА <span>{{ order.get_order_total_price_with_sale|addition:500 }} RUB</span></p>
                   </div>
-                    <h5>PAYMENT METHODS</h5>
+                    <h5>СПОСОБЫ ОПЛАТЫ</h5>
                     <ul>
-                      <li>
+                      <li style="margin-top: 20px;">
                         <div class="checkbox">
-                          <input id="checkbox3-1" class="styled" type="checkbox">
-                          <label for="checkbox3-1"> DIRECT BANK TRANSFER </label>
+                          <input id="checkbox3-1" class="styled" type="checkbox" name="card_payment">
+                          <label for="checkbox3-1" style="margin-bottom: 0px;"> ОНЛАЙН ПЕРЕВОД НА КАРТУ </label>
                         </div>
-                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                        <p>Вы можете оплатить заказ с помощью перевода на банковскую карту по номеру телефона или номеру карты, которые вам предоставит администратор после подтверждения заказа.</p>
                       </li>
                       <li>
                         <div class="checkbox">
-                          <input id="checkbox3-2" class="styled" type="checkbox">
-                          <label for="checkbox3-2"> CHEQUE PAYMENT </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="checkbox">
-                          <input id="checkbox3-3" class="styled" type="checkbox">
-                          <label for="checkbox3-3"> PAYPAL </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="checkbox">
-                          <input id="checkbox3-4" class="styled" type="checkbox">
-                          <label for="checkbox3-4"> I’VE READ AND ACCEPT THE <span class="color"> TERMS & CONDITIONS </span> </label>
+                          <input id="checkbox3-2" class="styled" type="checkbox" name="cash_payment">
+                          <label for="checkbox3-2"> ОПЛАТА НАЛИЧНЫМИ ПРИ ПОЛУЧЕНИИ </label>
                         </div>
                       </li>
                     </ul>

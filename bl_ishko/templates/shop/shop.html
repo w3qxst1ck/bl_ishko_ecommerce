@@ -169,9 +169,20 @@
                   <option>По скидкам</option>
                 </select>
                 <input type="hidden" value="По убыванию цены" name="sort_by">
-                {% if products %}
+                {% if products and not color and not min_price %}
                   <p>Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
                 {% endif %}
+
+                {% if color or min_price or max_price %}
+                  {% if color %}
+                    <p>Цвет: {{ color }}</p>
+                  {% endif %}
+
+                  {% if min_price or max_price %}
+                    <p>Цена: {{ min_price }} - {{ max_price }} RUB</p>
+                  {% endif %}
+                {% endif %}
+                <p></p>
               </div>
               
               <!--======= VIEW ITEM NUMBER =========-->
@@ -179,7 +190,7 @@
 
               <div class="view-num">
                 <ul>
-                  {% if category or color_new or min_price or max_price %}
+                  {% if category or color or min_price or max_price %}
                   <li><a href="{% url 'shop:shop-page' %}">Сбросить фильтры</a></li>
                   {% else %}
                   <li><a>Все товары</a></li>
@@ -209,7 +220,9 @@
                       {% endif %}
 
                       <ul class="animated fadeIn">
-                        <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                        {% thumbnail product.title_image "378x476" crop="center" as im %}
+                          <li> <a href="{{ im.url }}" data-lighter><i class="ion-search"></i></a></li>
+                        {% endthumbnail %}
                         <li> <a href="" id="share-product1" data-toggle="modal" data-target="#shareModal"><i class="ion-shuffle"></i></a></li>
                         <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
                         {% if product not in wish_list_products %}
