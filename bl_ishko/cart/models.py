@@ -5,6 +5,12 @@ from shop.models import Item
 from django.conf import settings
 
 
+PAYMENT_CHOICES = (
+    ('CARD', 'Картой'),
+    ('CASH', 'Наличными'),
+)
+
+
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Товар')
@@ -36,8 +42,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     ordered = models.BooleanField(default=False)
-    cash_payment = models.BooleanField(default=False, verbose_name='Оплата наличными')
-    card_payment = models.BooleanField(default=False, verbose_name='Перевод на карту')
+    payment_method = models.CharField(choices=PAYMENT_CHOICES, max_length=10, verbose_name='Способ оплаты')
 
     def get_order_total_price(self):
         return sum([item.item_total() for item in self.order_items.all()])

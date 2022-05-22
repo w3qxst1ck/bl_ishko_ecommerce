@@ -102,9 +102,9 @@ def order_complete_page_intermediate(request):
             item.save()
         order.ordered = True
         if request.GET.get('card_payment'):
-            order.card_payment = True
+            order.payment_method = 'CARD'
         if request.GET.get('cash_payment'):
-            order.cash_payment = True
+            order.payment_method = 'CASH'
         order.save()
         # оповещение клиента
         send_message_to_client(request, order)
