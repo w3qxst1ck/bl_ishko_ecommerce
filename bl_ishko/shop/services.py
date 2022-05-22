@@ -23,5 +23,14 @@ def get_related_products_for_detail(product, count=6):
     return related_products[:count]
 
 
+def get_size_list(products):
+    all_sizes = ['XS', 'S', 'M', 'L', 'XL']
+    size_list = []
+    for s in all_sizes:
+        if len(products.filter(items__size=s)) > 0:
+            size_list.append(s)
+    return size_list
+
+
 def search_products(request):
     pass

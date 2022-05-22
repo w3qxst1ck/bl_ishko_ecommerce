@@ -79,21 +79,37 @@
                 <li><a href="#.">Collections <span>(17)</span></a> </li> -->
                 <li><a href="{% url 'shop:contact-page' %}">СВЯЗАТЬСЯ С НАМИ </a> </li>
               </ul>
-              
+
               <!-- HEADING -->
               <div class="heading">
-                <h6>COLOR</h6>
+                <h6>РАЗМЕР</h6>
+              </div>
+
+              <!-- SIZE -->
+              <ul class="cate">
+                {% for size in size_list %}
+                  {% if color %}
+                    <li><a href="?size={{ size }}&color={{ color }}">{{ size }}<span></span></a></li>
+                  {% else %}
+                    <li><a href="?size={{ size }}">{{ size }}<span></span></a></li>
+                  {% endif %}
+                  
+                {% endfor %}
+              </ul>
+
+              <!-- HEADING -->
+              <div class="heading">
+                <h6>ЦВЕТ</h6>
               </div>
               
-              <!-- COLORE -->
+              <!-- COLOR -->
               <ul class="cate">
-                {% for color_tuple in colors_tuple_list %}
-<!--                   {% if min_price or max_price %}
-                    <li><a href="?color={{ color_tuple.0 }}&min-price={{ min_price }}&max-price={{ max_price }}">{{ color_tuple.0 }} <span>({{ color_tuple.1 }}) </span></a></li>
+                {% for color in color_list %}
+                  {% if size %}
+                    <li><a href="?color={{ color }}&size={{ size }}">{{ color }} <span></span></a></li>
                   {% else %}
-                    <li><a href="?color={{ color_tuple.0 }}">{{ color_tuple.0 }} <span>({{ color_tuple.1 }}) </span></a></li>
-                  {% endif %} -->
-                <li><a href="?color={{ color_tuple.0 }}">{{ color_tuple.0 }} <span>({{ color_tuple.1 }}) </span></a></li>
+                    <li><a href="?color={{ color }}">{{ color }} <span></span></a></li>
+                  {% endif %}
                 {% endfor %}
                 <!-- <li class="drop-menu"> <a href="#." class="title collapsed" data-toggle="collapse" data-target="#color"> White/Black <span>(15)</span></a>
                   <div class="collapse" id="color">
@@ -110,7 +126,7 @@
               
               <!-- HEADING -->
               <div class="heading">
-                <h6>PRICE</h6>
+                <h6>ЦЕНА</h6>
               </div>
               <!-- PRICE -->
               <form {% if category %}action="{{ category.get_absolute_url }}"{% else %}action="{% url 'shop:shop-page' %}" {% endif %} method="GET">
@@ -122,6 +138,9 @@
                   <input type="hidden" value="" id="price-max-input" name="max-price">
                   {% if color %}
                     <input type="hidden" value="{{ color }}" name="color">
+                  {% endif %}
+                  {% if size %}
+                    <input type="hidden" value="{{ size }}" name="size">
                   {% endif %}
                 </div>
                 <button type="submit" class="btn btn-small btn-dark" style="font-family: 'Montserrat', sans-serif;">ФИЛЬТР</button>
@@ -173,7 +192,11 @@
                   <p style="margin-left: 0;">Показаны 1-{% if products.count < 12 %}{{ products.count }}{% else %}12{% endif %} из {{ products.count }} товаров</p>
                 {% endif %}
 
-                {% if color or min_price or max_price %}
+                {% if color or min_price or max_price or size %}
+                  {% if size %}
+                    <p style="margin-left: 0;">Размер: {{ size }}{% if min_price or max_price or color %} | {% endif %}</p>
+                  {% endif %}
+
                   {% if color %}
                     <p style="margin-left: 0;">Цвет: {{ color }}{% if min_price or max_price %} | {% endif %}</p>
                   {% endif %}
@@ -318,18 +341,15 @@
             <!-- end Modal window -->
             
             <!--======= PAGINATION =========-->
-            {% if products.count > 12 %}
-            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s">
+<!--             <ul class="pagination animate fadeInUp" data-wow-delay="0.4s">
               <li><a href="#.">1</a></li>
               <li><a href="#.">2</a></li>
               <li><a href="#.">3</a></li>
               <li><a href="#.">4</a></li>
               <li><a href="#.">5</a></li>
               <li><a href="#."><i class="fa fa-angle-right"></i></a></li>
-            </ul>
-            {% else %}
+            </ul> -->
             <ul class="pagination animate fadeInUp" data-wow-delay="0.4s" style="border-bottom: none; border-top: none;"></ul>
-            {% endif %}
           </div>
         </div>
       </div>

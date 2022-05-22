@@ -5,7 +5,7 @@ from django.views.generic import DetailView
 
 from users.models import WishProduct, ProductComment
 from .models import Product, Category, Faq, FaqCategory
-from .services import get_related_products_for_detail
+from .services import get_related_products_for_detail, get_size_list
 
 
 def home_page(request):
@@ -51,36 +51,22 @@ def product_detail(request, slug):
                                                         })
 
 
-def shop_page(request, slug=None, product_query_set=None):
-    print(product_query_set)
-    if request.method == 'POST':
-        if request.POST.get('search-field') == ' ' or not request.POST.get('search-field'):
-            products = Product.objects.all()
-        else:
-            product_title = request.POST.get('search-field').strip()
-            if request.POST.get('category-field') != 'КАТЕГОРИИ':
-                products = Product.objects.filter(title__icontains=request.POST.get('search-field'),
-                                                  category__title=product_title)
-            else:
-                products = Product.objects.filter(title__icontains=product_title)
-    else:
-        products = Product.objects.all()
-
+def shop_page(request, slug=None):
     # get products from category
     if slug:
         category = get_object_or_404(Category, slug=slug)
         products = Product.objects.filter(category=category)
     else:
+        products = Product.objects.all()
         category = None
 
     # get colors for sidebar
-    colors = sorted(list(set([product.color for product in products])))
-    colors_tuple_list = []
-    for color in colors:
-        product_count = products.filter(color=color).count()
-        colors_tuple_list.append((color, product_count))
+    color_list = sorted(list(set([product.color for product in products])))
 
-    # get prices from slide
+    # get sizes for sidebar
+    size_list = get_size_list(products)
+
+    # get products by price slider
     if request.GET.get('min-price'):
         min_price = float(request.GET.get('min-price'))
         products = products.filter(price__gte=min_price)
@@ -95,12 +81,19 @@ def shop_page(request, slug=None, product_query_set=None):
     else:
         max_price = None
 
-    # get product for color
+    # get products by color
     if request.GET.get('color'):
         color = request.GET.get('color')
         products = products.filter(color=color)
     else:
         color = None
+
+    # get products by size
+    if request.GET.get('size'):
+        size = request.GET.get('size')
+        products = products.filter(items__size=size)
+    else:
+        size = None
 
     # wish product list
     if request.user.is_authenticated:
@@ -113,8 +106,9 @@ def shop_page(request, slug=None, product_query_set=None):
         wish_list_products = []
 
     return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products,
-                                                  'category': category, 'colors_tuple_list': colors_tuple_list,
-                                                  'color': color, 'min_price': min_price, 'max_price': max_price})
+                                                  'category': category, 'color_list': color_list,
+                                                  'color': color, 'min_price': min_price, 'max_price': max_price,
+                                                'size_list': size_list, 'size': size})
 
 
 def contact_page(request):
