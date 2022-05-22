@@ -119,16 +119,3 @@ def shop_page(request, slug=None):
 def contact_page(request):
     return render(request, 'shop/contact.html')
 
-
-def search_view(request):
-    if request.method == 'POST':
-        low_product_title = request.POST.get('search-field').lower()
-        print(low_product_title)
-
-        if request.POST.get('category-field'):
-            products = Product.objects.filter(title__icontains=low_product_title, category__title__iexact=request.POST.get('category-field'))
-        else:
-            products = Product.objects.filter(title__icontains=low_product_title)
-        print(products)
-        result = products
-        return render(request, 'shop/search.html', context={'products': result})
