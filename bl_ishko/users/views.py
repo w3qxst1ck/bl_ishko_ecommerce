@@ -39,6 +39,8 @@ def delete_item_from_wishlist(request, slug):
         WishProduct.objects.get(product=product, user=request.user).delete()
     except WishProduct.DoesNotExist:
         pass
+    if request.META.get('HTTP_REFERER').split('/')[-2] == 'search':
+        return redirect('users:wishlist-page')
     return redirect(request.META.get('HTTP_REFERER'))
 
 

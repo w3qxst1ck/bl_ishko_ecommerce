@@ -1,7 +1,7 @@
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 
-ADMIN_EMAIL = 'sonya123@mail.ru'
+ADMIN_EMAIL = 'bl.ishko@yandex.ru'
 
 
 def send_message_to_client(request, order):
@@ -25,8 +25,36 @@ def send_message_to_client(request, order):
         return HttpResponse('Invalid header found.')
 
 
-def send_message_to_admin(admin_email=ADMIN_EMAIL):
+def send_message_to_admin_created_order(request, order, admin_email=ADMIN_EMAIL):
     """Отправка сообщения администратору о заказе"""
+    try:
+        message_title = f'Заказ {order.id} bl_ishko, {order.user.email}'
+        email = admin_email
+        from_email = 'test1@mail.ru'
+        text = f'Пользователь {order.user.email} ({request.GET.get("first-name")} {request.GET.get("last-name")}) оформил заказ № {order.id}.\nСостав заказа:\n'
+
+        count = 0
+        for order_item in order.order_items.all():
+            count += 1
+            text += f'{count}. {order_item.item.product.title} ({order_item.item.size}) - {order_item.quantity} шт.\n'
+
+        text += f'Сумма заказа - {order.get_order_total_price_with_sale()} руб. (без скидки - {order.get_order_total_price()} руб.) + доставка 500 руб.\nМетод оплаты: \"{order.payment_method}\".\n'
+
+        text += f'Заказ оформлен на адресс:\nСтрана: \"Россия\",\nРегион: \"{request.GET.get("region")}\",\nГород (населенный пункт): \"{request.GET.get("city")}\",\nАдрес: \"{request.GET.get("address")}\".\n'
+
+        text += f'Телефон для связи: {request.GET.get("phone")}, email: {request.GET.get("email")}.'
+
+        send_mail(
+            message_title,
+            text,
+            from_email,
+            [email, ]
+        )
+    except BadHeaderError:
+        return HttpResponse('Invalid header found.')
+
+
+def send_message_to_admin_canceled_order():
     pass
 
 

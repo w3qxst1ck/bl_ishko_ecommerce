@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from shop.models import Product
 
 from cart.models import OrderItem, Order
-from .services import is_enough_items, send_message_to_client, send_message_to_admin
+from .services import is_enough_items, send_message_to_client, send_message_to_admin_created_order
 
 
 @login_required
@@ -109,7 +109,7 @@ def order_complete_page_intermediate(request):
         # оповещение клиента
         send_message_to_client(request, order)
         # оповещение администратора
-        send_message_to_admin()
+        send_message_to_admin_created_order(request, order)
         return redirect('cart:order-complete-page', uuid=order.id)
     else:
         return render(request, 'cart/sold_out.html')
