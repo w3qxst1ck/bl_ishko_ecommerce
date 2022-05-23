@@ -54,7 +54,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
                   <div class="order_complete" style="margin-left: 45px;">
-                    <p style="font-weight: 500;">Некоторые товары отсутствуют в наличии.<p>
+                    <p style="font-weight: 400;">Некоторые товары отсутствуют в наличии.<p>
                     {% for order_item in order.order_items.all %}
                       {% if order_item.quantity > order_item.item.item_count %}
                         <p>Вы выбрали "{{ order_item.item.product.title|upper }} {{ order_item.item.size }}": {{ order_item.quantity }} шт., в данный момент в наличии имеется {{ order_item.item.item_count }} шт. размера {{ order_item.item.size }}.</p>
