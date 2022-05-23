@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 
 from users.models import WishProduct, ProductComment
+from .forms import FormWithCaptcha
 from .models import Product, Category, Faq, FaqCategory
 from .services import get_related_products_for_detail, get_size_list
 
@@ -153,7 +154,9 @@ def search_view(request):
                                                         })
 
 
-
 def contact_page(request):
-    return render(request, 'shop/contact.html')
+    context = {
+        'captcha': FormWithCaptcha,
+    }
+    return render(request, 'shop/contact.html', context)
 

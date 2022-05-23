@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     # photo editor
     'sorl.thumbnail',
 
+    # captcha
+    'captcha',
+
     # apps
     'shop.apps.ShopConfig',
     'users',
@@ -178,3 +181,7 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = bool(int(os.getenv('EMAIL_USE_TLS')))
+
+# Captcha
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
