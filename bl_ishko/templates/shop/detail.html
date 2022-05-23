@@ -248,7 +248,7 @@
                 <p class="font-playfair" style="margin-top: 20px;">Для того чтобы оставить комментарий необходимо <a href="{% url 'account_login' %}">авторизироваться</a>.</p>
               {% endif %}
             </div>
-
+        </section>
         </div>
       </div>
       
@@ -301,175 +301,173 @@
               </div>
             {% endfor %}
         </div>
-
-        <!-- Modal window size table -->
-        <div class="modal fade" id="sizeModal" tabindex="-1" role="dialog" aria-labelledby="sizeModal" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
-            <div class="modal-content">
-              <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="col">
-                  <h6 style="font-weight: 400;">ТАБЛИЦА РАЗМЕРОВ</h6>
-                </div>
-                
-                <div class="col">
-                  <p style="font-size: 11px;">Общая таблица размеров показывает нашу стандартную размерную линейку.</p>
-                </div>
-
-                <!-- First table -->
-                <div class="col">
-                  <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">INT</span></div></th>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">RU</span></div></th>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>груди</span></div></th>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>талии</span></div></th>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>бедер</span></div></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">XXS</th>
-                      <td class="row-header">40</td>
-                      <td>80</td>
-                      <td>60</td>
-                      <td>88</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">XX</th>
-                      <td class="row-header">42</td>
-                      <td>84</td>
-                      <td>64</td>
-                      <td>92</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">S</th>
-                      <td class="row-header">44</td>
-                      <td>88</td>
-                      <td>68</td>
-                      <td>98</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">M</th>
-                      <td class="row-header">46</td>
-                      <td>92</td>
-                      <td>72</td>
-                      <td>100</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">L</th>
-                      <td class="row-header">48</td>
-                      <td>96</td>
-                      <td>76</td>
-                      <td>104</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">XL</th>
-                      <td class="row-header">50</td>
-                      <td>100</td>
-                      <td>80</td>
-                      <td>108</td>
-                    </tr>
-                  </tbody>
-                </table>
-                </div>
-
-                <!-- Second table -->
-                <div class="col">
-                  <h6 style="font-weight: 400;">ОБМЕРЫ ИЗДЕЛИЯ</h6>
-                </div>
-
-                <div class="col">
-                  <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">INT</span></div></th>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Длина<br>изделия</span></div></th>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>груди</span></div></th>
-                      <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Длина<br>рукава</span></div></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">XXS</th>
-                      <td>40</td>
-                      <td>80</td>
-                      <td>60</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">XX</th>
-                      <td>42</td>
-                      <td>84</td>
-                      <td>64</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">S</th>
-                      <td>44</td>
-                      <td>88</td>
-                      <td>68</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">M</th>
-                      <td>46</td>
-                      <td>92</td>
-                      <td>72</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">L</th>
-                      <td>48</td>
-                      <td>96</td>
-                      <td>76</td>
-                    </tr>
-                    <tr class="table-row">
-                      <th scope="row" class="row-header">XL</th>
-                      <td>50</td>
-                      <td>100</td>
-                      <td>80</td>
-                    </tr>
-                  </tbody>
-                </table>
-                </div>
-
-                <div class="col">
-                  <p style="font-size: 11px;">Все размеры указаны в сантиметрах.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end Modal window -->
-
-        <!-- Modal window share product -->
-        <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
-            <div class="modal-content">
-              <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="col">
-                  <h6 style="font-weight: 500;">ПОДЕЛИТЬСЯ</h6>
-                </div>
-                
-                <div class="col">
-                  <p style="font-size: 11px;">Ссылка на товар скопирована в буфер обмена.</p>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end Modal window -->
-
       </section>
     </section>
   </div>
 
+ <!-- Modal window size table -->
+<div class="modal fade" id="sizeModal" tabindex="-1" role="dialog" aria-labelledby="sizeModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+    <div class="modal-content">
+      <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="col">
+          <h6 style="font-weight: 400;">ТАБЛИЦА РАЗМЕРОВ</h6>
+        </div>
+        
+        <div class="col">
+          <p style="font-size: 11px; font-family: 'Montserrat', sans-serif;">Общая таблица размеров показывает нашу стандартную размерную линейку.</p>
+        </div>
 
-  
+        <!-- First table -->
+        <div class="col">
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">INT</span></div></th>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">RU</span></div></th>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>груди</span></div></th>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>талии</span></div></th>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>бедер</span></div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">XXS</th>
+              <td class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">40</td>
+              <td>80</td>
+              <td>60</td>
+              <td>88</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">XX</th>
+              <td class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">42</td>
+              <td>84</td>
+              <td>64</td>
+              <td>92</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">S</th>
+              <td class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">44</td>
+              <td>88</td>
+              <td>68</td>
+              <td>98</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">M</th>
+              <td class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">46</td>
+              <td>92</td>
+              <td>72</td>
+              <td>100</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">L</th>
+              <td class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">48</td>
+              <td>96</td>
+              <td>76</td>
+              <td>104</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">XL</th>
+              <td class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">50</td>
+              <td>100</td>
+              <td>80</td>
+              <td>108</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+        <!-- Second table -->
+        <div class="col">
+          <h6 style="font-weight: 400;">ОБМЕРЫ ИЗДЕЛИЯ</h6>
+        </div>
+
+        <div class="col">
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">INT</span></div></th>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Длина<br>изделия</span></div></th>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Обхват<br>груди</span></div></th>
+              <th scope="col" class="table-th" style="vertical-align: middle;"><div class="table-header"><span class="font-montserrat">Длина<br>рукава</span></div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">XXS</th>
+              <td>40</td>
+              <td>80</td>
+              <td>60</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">XX</th>
+              <td>42</td>
+              <td>84</td>
+              <td>64</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">S</th>
+              <td>44</td>
+              <td>88</td>
+              <td>68</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">M</th>
+              <td>46</td>
+              <td>92</td>
+              <td>72</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">L</th>
+              <td>48</td>
+              <td>96</td>
+              <td>76</td>
+            </tr>
+            <tr class="table-row" style="font-family: 'Montserrat', sans-serif; font-size: 11px;">
+              <th scope="row" class="row-header" style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 400;">XL</th>
+              <td>50</td>
+              <td>100</td>
+              <td>80</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+        <div class="col">
+          <p style="font-size: 11px; font-family: 'Montserrat', sans-serif;">Все размеры указаны в сантиметрах.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Modal window -->
+
+<!-- Modal window share product -->
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+    <div class="modal-content">
+      <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="col">
+          <h6 style="font-weight: 500;">ПОДЕЛИТЬСЯ</h6>
+        </div>
+        
+        <div class="col">
+          <p style="font-size: 11px; font-family: 'Montserrat', sans-serif;">Ссылка на товар скопирована в буфер обмена.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Modal window -->
+
+
   {% endblock content %}
 </div>
 <!-- Wrap End --> 
