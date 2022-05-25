@@ -47,11 +47,11 @@
                 </li>
                 <!--======= PRODUCT IMAGES =========-->
                 {% for product_image in product.images.all %}
-                  <li data-thumb="{{ product_image.image.url }}"> 
-                    {% thumbnail product_image.image "570x660" crop="center" as im %}
+                  {% thumbnail product_image.image "570x660" crop="center" as im %}
+                  <li data-thumb="{{ im.url }}"> 
                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
-                    {% endthumbnail %}
                   </li>
+                  {% endthumbnail %}
                 {% endfor %}
 
 <!--                 <li data-thumb="{{ product.images.first.image.url }}"> <img class="img-responsive" src="{{ product.images.first.image.url }}"  alt=""> </li>
