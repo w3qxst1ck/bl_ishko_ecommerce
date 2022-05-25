@@ -15,25 +15,27 @@
             
             <!--  INFOMATION -->
             <li class="col-sm-6">
-              <h5>INFOMATION</h5>
+              <h5>ИНФОРМАЦИЯ</h5>
               <ul class="f-links">
-                <li><a href="#.">ABOUT US</a></li>
-                <li><a href="#."> DELIVERY INFOMATION</a></li>
-                <li><a href="#."> PRIVACY & POLICY</a></li>
-                <li><a href="#."> TEMRS & CONDITIONS</a></li>
-                <li><a href="#."> MANUFACTURES</a></li>
+                <li><a href="{% url 'shop:faq-page' 1 %}"> ПОКУПАТЕЛЯМ</a></li>
+                <li><a href="{% url 'shop:contact-page' %}."> КОНТАКТЫ</a></li>
+                <li><a href="{% url 'shop:home-page' %}"> ГЛАВНАЯ</a></li>
+                <li><a href="{% url 'shop:shop-page' %}"> МАГАЗИН</a></li>
+                <!-- <li><a href="#."> MANUFACTURES</a></li> -->
               </ul>
             </li>
             
             <!-- MY ACCOUNT -->
             <li class="col-sm-6">
-              <h5>MY ACCOUNT</h5>
+              <h5>МОЙ АККАУНТ</h5>
               <ul class="f-links">
-                <li><a href="#.">MY ACCOUNT</a></li>
-                <li><a href="#."> LOGIN</a></li>
-                <li><a href="#."> MY CART</a></li>
-                <li><a href="#."> WISHLIST</a></li>
-                <li><a href="#."> CHECKOUT</a></li>
+                <li><a href="{% url 'users:profile-page' %}">ЛИЧНЫЙ КАБИНЕТ</a></li>
+                <li><a href="{% url 'users:wishlist-page' %}"> ИЗБРАННОЕ</a></li>
+                <li><a href="{% url 'cart:cart-page' %}"> КОРЗИНА</a></li>
+                <li><a href="{% url 'users:profile-orders-page' %}"> МОИ ЗАКАЗЫ</a></li>
+                {% if user.is_authenticated %}
+                  <li><a href="{% url 'account_logout' %}"> ВЫХОД</a></li>
+                {% endif %}
               </ul>
             </li>
           </ul>
@@ -45,8 +47,8 @@
             
             <!-- TWITTER -->
             <li class="col-sm-6">
-              <h5>TWITTER</h5>
-              <p>Check out new work on my @Behance portfolio: "BCreative_Multipurpose Theme" http://on.be.net/1zOOfBQ </p>
+              <h5>INSTAGRAM</h5>
+              <p>Следите за скидками и новыми поступлениями в Instagram @bl_ishko : www.instagram.com/bl_ishko/ </p>
             </li>
             
             <!-- FLICKR PHOTO -->
@@ -67,7 +69,7 @@
       
       <!-- Rights -->
       <div class="rights">
-        <p>© 2015 HTML5 TEMPLATE SEBIAN. All Rights Reserved. Powered By WPELITE</p>
+        <p>© BL_ISHKO, 2022</p>
       </div>
     </div>
   </footer>
