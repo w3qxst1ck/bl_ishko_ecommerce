@@ -43,6 +43,7 @@ class Order(models.Model):
     is_active = models.BooleanField(default=True)
     ordered = models.BooleanField(default=False)
     payment_method = models.CharField(choices=PAYMENT_CHOICES, max_length=10, verbose_name='Способ оплаты')
+    paid = models.BooleanField(default=False, verbose_name='Оплачен')
 
     def get_order_total_price(self):
         return sum([item.item_total() for item in self.order_items.all()])
@@ -58,7 +59,10 @@ class Order(models.Model):
 
     def __str__(self):
         if self.ordered and self.is_active:
-            order_status = 'В работе'
+            if self.paid:
+                order_status = 'Оплачен'
+            else:
+                order_status = 'Ожидает оплаты'
         elif self.ordered and not self.is_active:
             order_status = 'Выполнен'
         elif not self.ordered and self.is_active:

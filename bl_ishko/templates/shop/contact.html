@@ -37,29 +37,41 @@
         <!-- Tittle -->
         <div class="tittle">
           <!-- <h5>CONTACT US</h5> -->
-          <p style="font-family: 'Montserrat', sans-serif; font-style: normal;">Пожалуйста, не стесняйтесь обращаться к поддержке, если у вас есть какие-либо вопросы, <br>комментарии или предложения. 
+          {% if message_name and message_email %}
+          <p style="font-family: 'Montserrat', sans-serif; font-style: normal; font-weight: 400;">Ваше сообщение отправлено.</p>
+          {% else %}
+          <p style="font-family: 'Montserrat', sans-serif; font-style: normal; font-weight: 400;">Пожалуйста, не стесняйтесь обращаться к поддержке, если у вас есть какие-либо вопросы, <br>комментарии или предложения. 
             Постараемся на все ответить!</p>
+          {% endif %}
         </div>
         <div class="contact section-p-30px no-padding-b">
+          {% if message_name and message_email %}
+          <div class="row">
+            <div class="col-md-12">
+              <p style="font-family: 'Montserrat', sans-serif;"><span style="color: #b26a82;">{{ message_name }}</span>, спасибо за Ваше сообщение! Мы обязательно прочтем его в ближайшее время и свяжемся с Вами по указанному в письме адресу электронной почты ({{ message_email }}).</p>
+            </div>
+          </div>
+          {% else %}
           <div class="contact-form"> 
             <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
+            <form action="{% url 'shop:contact-page' %}" method="POST" role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-md-6">
                   <ul class="row">
                     <li class="col-sm-12">
                       <label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="*ИМЯ">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="*ИМЯ" required>
                       </label>
                     </li>
                     <li class="col-sm-12">
                       <label>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="*EMAIL">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="*EMAIL" required>
                       </label>
                     </li>
                     <li class="col-sm-12">
                       <label>
-                        <input type="text" class="form-control" name="company" id="company" placeholder="ТЕМА">
+                        <input type="text" class="form-control" name="topic" id="company" placeholder="ТЕМА">
                       </label>
                     </li>
                   </ul>
@@ -68,17 +80,19 @@
                   <ul class="row">
                     <li class="col-sm-12">
                       <label>
-                        <textarea class="form-control" name="message" id="message" rows="5" placeholder="*СООБЩЕНИЕ"></textarea>
+                        <textarea class="form-control" name="message" id="message" rows="5" placeholder="*СООБЩЕНИЕ" required></textarea>
                       </label>
                     </li>
                     <li class="col-sm-12 no-margin">
                       <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">ОТПРАВИТЬ СООБЩЕНИЕ</button>
                     </li>
+                    <li class="col-sm-12" style="color: #fff">{{ captcha }}</li>
                   </ul>
                 </div>
               </div>
             </form>
           </div>
+          {% endif %}
         </div>
       </div>
     </section>

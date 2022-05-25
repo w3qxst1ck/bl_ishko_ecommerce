@@ -72,7 +72,7 @@
                         <th scope="row"><a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}">{{ order.id }}</a></th>
                         <td>{{ order.created }}</td>
                         <td>{{ order.get_order_total_price_with_sale }} RUB</td>
-                        <td>{% if order.ordered and not order.is_active %}Выполнен{% elif order.ordered and order.is_active %}В работе{% elif not order.ordered and not order.is_active %}Отменен{% endif %}</td>
+                        <td>{% if order.ordered and not order.is_active %}Выполнен{% elif order.ordered and order.is_active %}{% if order.paid %}Оплачен{% else %}Ожидает оплаты{% endif %}{% elif not order.ordered and not order.is_active %}Отменен{% endif %}</td>
                       </tr>
                     {% endfor %}
                   </tbody>

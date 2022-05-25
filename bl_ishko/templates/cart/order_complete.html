@@ -62,7 +62,8 @@
                 <h6>ЗАКАЗ ГОТОВ</h6>
                 <div class="order_complete">
                   <p>Номер Вашего заказа: <span style="color: #af5875; font-weight: 400;">{{ order.id }}</span>.<p>
-                  <p>В ближайшее время администратор магазина свяжяется с вами по телефону или электронной почте для подтверждения заказа и уточнения деталей доставки и оплаты.<p>
+                  <p>В ближайшее время администратор магазина свяжяется с Вами по телефону или электронной почте для подтверждения заказа и уточнения деталей доставки и оплаты. 
+                    <br>Итоговую сумму заказа (с учетом выбранного способа доставки) Вам сообщит администратор магазина.<p>
                 </div>
               </div>
               
@@ -80,8 +81,14 @@
                       {% endfor %}
                     </div>
                     <p>СУММА ЗАКАЗА <span>{{ order.get_order_total_price_with_sale }} RUB</span></p>
-                    <p>ДОСТАВКА <span>500 RUB</span></p>
-                    <p>ОБЩАЯ СУММА <span>{{ order.get_order_total_price_with_sale|addition:500 }} RUB</span></p>
+                    <p>ДОСТАВКА <span>ЦЕНА</span></p>
+                    <div class="item-order" style="padding-top: 10px; padding-bottom: 10px;">
+                      <p>ПО МОСКВЕ <span> Бесплатно???</span></p>
+                      <p>СДЭК <span> В зависимости от города</span></p>
+                      <p>ПОЧТА РОССИИ 1 КЛАСС <span>280 RUB</span></p>
+                      <p>ПОЧТОЙ ЗА ГРАНИЦУ <span>500 RUB</span></p>
+                    </div>
+                    <!-- <p>ОБЩАЯ СУММА <span>{{ order.get_order_total_price_with_sale|addition:500 }} RUB</span></p> -->
                   </div>
                 </div>
               </div>

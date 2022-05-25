@@ -34,3 +34,7 @@ def get_size_list(products):
 
 def search_products(request):
     pass
+
+
+def send_mail_from_contact(name, email, topic, message_text):
+    pass
