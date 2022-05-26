@@ -58,18 +58,6 @@
               <div class="col-sm-3"></div>
               <div class="col-sm-6">
 
-<!--                 {% if messages %}
-                <form >
-                  <ul class="row">
-                    <li class="col-md-12">
-                      {% for message in messages %}
-                      <p>Message: {{message}}</p>
-                      {% endfor %}
-                    </li>
-                  </ul>
-                </form>
-                {% endif %} -->
-
                 <h6>ВХОД</h6>
                 <form method="POST" action="{% url 'account_login' %}">
                   {% csrf_token %}
@@ -91,6 +79,7 @@
                       </label>
                     </li>
                   </ul>
+                  {% include 'account/includes/field_errors.html' %}
                   <a class="button" href="{% url 'account_reset_password' %}">Забыли пароль?</a>
                   <br>
                   <button type="submit" class="btn btn-dark btn-small">ВОЙТИ</button>
