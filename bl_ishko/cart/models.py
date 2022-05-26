@@ -10,6 +10,14 @@ PAYMENT_CHOICES = (
     ('CASH', 'Наличными'),
 )
 
+DELIVERY_CHOICES = (
+    ('NONE', 'Не выбран'),
+    ('MOSCOW', 'Москва и МО'),
+    ('CDEK', 'СДЭК'),
+    ('POST_OFFICE', 'Почта России 1 класс'),
+    ('ABROAD', 'Почтой за границу')
+)
+
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -88,7 +96,13 @@ class BillingInfo(models.Model):
     email = models.CharField(max_length=128, verbose_name='Email для заказа')
     phone = models.CharField(max_length=50, verbose_name='Телефон')
     payment_method = models.CharField(choices=PAYMENT_CHOICES, max_length=10, verbose_name='Способ оплаты')
+    delivery_type = models.CharField(choices=DELIVERY_CHOICES, max_length=30, verbose_name='Способ доставки', default='NONE')
+    delivery_price = models.IntegerField(blank=True, null=True, verbose_name='Цена доставки')
 
     def __str__(self):
         return f'Платежная информация - заказ № {self.order.id} ({self.order.user.email})'
+
+    class Meta:
+        verbose_name = 'Платежная информация о заказе'
+        verbose_name_plural = 'Платежная ифнормация о заказах'
 
