@@ -34,42 +34,38 @@
               <div class="col-sm-6">
                 <h6>РЕГИСТРАЦИЯ</h6>
                 <form id="signup_form" method="post" action="{% url 'account_signup' %}">
-                	
-                	{% csrf_token %}
-          		   {% if redirect_field_value %}
-					  	  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-					   {% endif %}
+                  {% csrf_token %}
+          		    {% if redirect_field_value %}
+					  	      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+					         {% endif %}
 
                   <ul class="row">
                     <li class="col-md-12"> 
                       <!-- EMAIL -->
                       <label>*EMAIL
-                        <!-- <input type="text" name="company" value="" placeholder=""> -->
                         {{ form.email }}
                       </label>
                     </li>
                     <li class="col-md-12"> 
                       <!-- USERNAME -->
                       <label>*USERNAME
-                        <!-- <input type="text" name="address" value="" placeholder=""> -->
                         {{ form.username }}
                       </label>
                     </li>
                     <!-- PASSWORD1 -->
                     <li class="col-md-6">
                       <label> *PASSWORD
-                        <!-- <input type="text" name="first-name" value="" placeholder=""> -->
                         {{ form.password1 }}
                       </label>
                     </li>
                     <!-- PASSWORD2 -->
                     <li class="col-md-6">
                       <label> *PASSWORD (AGAIN)
-                        <!-- <input type="text" name="last-name" value="" placeholder=""> -->
                         {{ form.password2 }}
                       </label>
                     </li>
                   </ul>
+                  {% include 'account/includes/field_errors.html' %}
                   <a class="button" href="{{ login_url }}">У вас уже есть аккаунт? Авторизоваться.</a>
                   <br>
                   <button type="submit" class="btn btn-dark btn-small">ЗАРЕГИСТРИРОВАТЬСЯ</button>

@@ -1,0 +1,11 @@
+{% if form.errors %}
+	<div style="margin-bottom: 10px;">
+   {% for field in form %}
+       {% for error in field.errors %} 
+         <ul>
+         	<li style="margin-top: 5px; margin-bottom: 5px;">* {{ error|escape }}</li>
+         </ul>
+       {% endfor %}
+   {% endfor %}
+   </div>
+{% endif %}

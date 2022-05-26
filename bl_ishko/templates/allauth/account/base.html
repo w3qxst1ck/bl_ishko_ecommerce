@@ -9,41 +9,12 @@
 {% block content %}
 
     {% block body %}
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-        {% for message in messages %}
-        <li>{{message}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
 
-    <!-- <div>
-      <strong>Menu:</strong>
-      <ul>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
-    </div> -->
-    {% block content_auth %}
-    {% endblock %}
-    {% if form.errors %}
-       {% for field in form %}
-           {% for error in field.errors %} 
-              <div class="alert alert-danger">
-                   <strong>{{ error|escape }}</strong>
-              </div>
-           {% endfor %}
-       {% endfor %}
-    {% endif %}
+      {% block content_auth %}
+      {% endblock %}
+
     {% endblock body %}
+    
     {% block extra_body %}
     {% endblock %}
 
