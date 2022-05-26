@@ -40,11 +40,11 @@
             <div class="images-slider">
               <ul class="slides">
               <!--======= TITLE IMAGE =========-->
-                <li data-thumb="{{ product.title_image.url }}"> 
-                    {% thumbnail product.title_image "570x660" crop="center" as im %}
+                {% thumbnail product.title_image "570x660" crop="center" as im %}
+                  <li data-thumb="{{ im.url }}"> 
                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
-                    {% endthumbnail %}
-                </li>
+                  </li>
+                {% endthumbnail %}
                 <!--======= PRODUCT IMAGES =========-->
                 {% for product_image in product.images.all %}
                   {% thumbnail product_image.image "570x660" crop="center" as im %}
