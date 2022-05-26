@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from shop.models import Product
 
-from cart.models import OrderItem, Order
+from cart.models import OrderItem, Order, BillingInfo
 from .services import is_enough_items, send_message_to_client, send_message_to_admin
 
 
@@ -101,18 +101,38 @@ def order_complete_page_intermediate(request):
             item.item_count -= order_item.quantity
             item.save()
         order.ordered = True
-        if request.GET.get('card_payment'):
-            order.payment_method = 'CARD'
-        if request.GET.get('cash_payment'):
-            order.payment_method = 'CASH'
         order.save()
+
+        # сохранение доп информации
+        create_billing_info(request, order)
+
         # оповещение клиента
-        send_message_to_client(request, order)
+        send_message_to_client(order)
+
         # оповещение администратора
         send_message_to_admin(request, order)
         return redirect('cart:order-complete-page', uuid=order.id)
     else:
         return render(request, 'cart/sold_out.html')
+
+
+def create_billing_info(request, order):
+    billing_info = BillingInfo.objects.create(
+        order=order,
+        first_name=request.GET.get('first-name'),
+        last_name=request.GET.get('last-name'),
+        region=request.GET.get('region'),
+        index=request.GET.get('postal-code'),
+        city=request.GET.get('city'),
+        address=request.GET.get('address'),
+        email=request.GET.get('email'),
+        phone=request.GET.get('phone')
+    )
+    if request.GET.get('card_payment'):
+        billing_info.payment_method = 'CARD'
+    if request.GET.get('cash_payment'):
+        billing_info.payment_method = 'CASH'
+    billing_info.save()
 
 
 @login_required
@@ -136,7 +156,7 @@ def cancel_order(request, order_id):
     # оповещение администратора
     send_message_to_admin(request, order, canceled=True)
     # оповещение клиента
-    send_message_to_client(request, order, canceled=True)
+    send_message_to_client(order, canceled=True)
     return redirect('users:profile-orders-page')
 
 

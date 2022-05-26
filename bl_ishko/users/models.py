@@ -6,7 +6,7 @@ from shop.models import Product
 
 class UserInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='info')
-    phone = models.CharField(max_length=12, null=True, blank=True)
+    phone = models.CharField(max_length=50, null=True, blank=True)
     country = models.CharField(max_length=30, blank=True, default='Россия')
     region = models.CharField(max_length=127, blank=True, null=True)
     city = models.CharField(max_length=127, blank=True, null=True)

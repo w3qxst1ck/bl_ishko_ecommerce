@@ -42,7 +42,6 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     ordered = models.BooleanField(default=False)
-    payment_method = models.CharField(choices=PAYMENT_CHOICES, max_length=10, verbose_name='Способ оплаты')
     paid = models.BooleanField(default=False, verbose_name='Оплачен')
 
     def get_order_total_price(self):
@@ -75,4 +74,21 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
         ordering = ['-created']
+
+
+class BillingInfo(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='info', verbose_name='Заказ')
+    first_name = models.CharField(max_length=60, verbose_name='Имя')
+    last_name = models.CharField(max_length=60, verbose_name='Фамилия')
+    country = models.CharField(default='Россия', max_length=50, blank=True, verbose_name='Страна')
+    region = models.CharField(max_length=120, verbose_name='Регион')
+    index = models.IntegerField(verbose_name='Почтовый индес')
+    city = models.CharField(max_length=50, verbose_name='Город/Населенный пункт')
+    address = models.CharField(max_length=256, verbose_name='Адрес')
+    email = models.CharField(max_length=128, verbose_name='Email для заказа')
+    phone = models.CharField(max_length=50, verbose_name='Телефон')
+    payment_method = models.CharField(choices=PAYMENT_CHOICES, max_length=10, verbose_name='Способ оплаты')
+
+    def __str__(self):
+        return f'Платежная информация - заказ № {self.order.id} ({self.order.user.email})'
 
