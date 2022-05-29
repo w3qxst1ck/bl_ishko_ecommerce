@@ -2,6 +2,8 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 import os
 
+from django.template.loader import get_template
+
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 
 
@@ -10,17 +12,19 @@ def send_message_to_client(order, canceled=None):
         message_title = f'Заказ {order.id} bl_ishko'
         email = order.info.email
         from_email = os.getenv('EMAIL_HOST_USER')
-
+        context = {'order': order}
         if canceled:
-            text = client_message_text_canceled_order(order)
+            html_message = get_template('emails/client_canceled_order.html').render(context)
         else:
-            text = client_message_text_created_order(order)
+            html_message = get_template('emails/client_create_order.html').render(context)
 
+        text = ''
         send_mail(
             message_title,
             text,
             from_email,
-            [email,]
+            [email],
+            html_message=html_message
         )
     except BadHeaderError:
         return HttpResponse('Invalid header found.')
@@ -58,17 +62,21 @@ def send_message_to_admin(request, order, admin_email=ADMIN_EMAIL, canceled=None
         message_title = f'Заказ {order.id} bl_ishko, {order.user.email}'
         email = admin_email
         from_email = os.getenv('EMAIL_HOST_USER')
-
+        context = {'user_email': request.user.email,
+                   'order': order}
         if canceled:
-            text = admin_message_text_canceled_order(request, order)
+            html_message = get_template('emails/admin_canceled_order.html').render(context)
         else:
-            text = admin_message_text_created_order(request, order)
+            html_message = get_template('emails/admin_create_order.html').render(context)
 
+        text = ''
         send_mail(
             message_title,
-            text,
             from_email,
-            [email, ]
+            text,
+            [email, ],
+            html_message=html_message,
+
         )
     except BadHeaderError:
         return HttpResponse('Invalid header found.')

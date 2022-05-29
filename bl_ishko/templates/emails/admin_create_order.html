@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	<p>Пользователь {{ user_email }} ({{ order.info.first_name }} {{ order.info.last_name }}) оформил заказ <b>№ {{ order.id }}</b>.</p>
+	</p>Состав заказа:
+		<ul>
+		    {% for order_item in order.order_items.all %}
+		        <li> {{ order_item.item.product.title }} ({{ order_item.item.size }}) - {{ order_item.quantity }}  шт. {{ order_item.item_total_with_sale }} руб.</li>
+		    {% endfor %}
+	    </ul>
+	</p>
+	<p>Сумма заказа - <b>{{ order.get_order_total_price_with_sale }} руб.</b> (без скидки - {{ order.get_order_total_price }} руб.) + цена за доставку.</p>
+	{% if order.payment_method == 'CASH' %}
+		<p>Метод оплаты: "Наличными".</p>
+	{% else %}
+		<p>Метод оплаты: "Перевод на карту".</p>
+	{% endif %}
+	<br>
+	Заказ оформлен на адресс:
+	<p>Страна: "Россия",</p>
+	<p>Регион: "{{ order.info.region }}",</p>
+	<p>Город (населенный пункт): "{{ order.info.city }}",</p>
+	<p>Адрес: "{{ order.info.address }}",</p>
+	<p>Комментарий к заказу: "{{ order.info.order_comment }}".</p>
+	<br>
+	<p>Вам необходимо связаться с клиентом, для уточнения способа и суммы доставки (после внести данные в администраторской панели).</p>
+	<p>Телефон для связи: {{ order.info.phone }}, email: {{ order.info.email }}.</p>
+</body>
+</html>

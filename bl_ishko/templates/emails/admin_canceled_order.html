@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	<p>Пользователь {{ user_email }} ({{ order.info.first_name }} {{ order.info.last_name }}) отменил заказ <b>№ {{ order.id }}</b>.</p>
+	<br>
+	</p>Состав заказа:
+		<ul>
+		    {% for order_item in order.order_items.all %}
+		        <li> {{ order_item.item.product.title }} ({{ order_item.item.size }}) - {{ order_item.quantity }}  шт. {{ order_item.item_total_with_sale }} руб.</li>
+		    {% endfor %}
+	    </ul>
+	</p>
+	<p>Общая сумма заказа - <b>{{ order.get_order_total_price_with_sale }} руб.</b>
+	<br>
+	{% if order.paid %}
+		<p>Сумма к возврату клиенту - <b>{{ order.get_order_total_price_with_sale|add:order.info.delivery_price }} руб.</b> (сумма заказа - {{ order.get_order_total_price_with_sale }} руб., цена доставки - {{ order.info.delivery_price }} руб.)</p>
+	{% else %}
+		<p><b>Заказ не был оплачен. Сумма к возврату - 0 руб.</b></p>
+	{% endif %}
+	<p>Телефон для связи с клиентом <b>{{ order.info.phone }}</b>, email {{ order.info.email }}</p>
+</body>
+</html>
