@@ -98,6 +98,7 @@ class BillingInfo(models.Model):
     payment_method = models.CharField(choices=PAYMENT_CHOICES, max_length=10, verbose_name='Способ оплаты')
     delivery_type = models.CharField(choices=DELIVERY_CHOICES, max_length=30, verbose_name='Способ доставки', default='NONE')
     delivery_price = models.IntegerField(blank=True, null=True, verbose_name='Цена доставки')
+    order_comment = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f'Платежная информация - заказ № {self.order.id} ({self.order.user.email})'

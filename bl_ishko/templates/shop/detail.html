@@ -214,16 +214,6 @@
                 <form id="review-form" action="{% url 'shop:detail-page' product.slug %}" method="POST">
                   {% csrf_token %}
                   <ul class="row">
-                    <!-- <li class="col-sm-6">
-                      <label> *ИМЯ
-                        <input type="text" value="" placeholder="">
-                      </label>
-                    </li>
-                    <li class="col-sm-6">
-                      <label> *EMAIL
-                        <input type="email" value="" placeholder="">
-                      </label>
-                    </li> -->
                     <li class="col-sm-12">
                       <label> *ВАШ ОТЗЫВ
                         <textarea required name='comment_text'></textarea>

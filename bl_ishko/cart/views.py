@@ -126,7 +126,8 @@ def create_billing_info(request, order):
         city=request.GET.get('city'),
         address=request.GET.get('address'),
         email=request.GET.get('email'),
-        phone=request.GET.get('phone')
+        phone=request.GET.get('phone'),
+        order_comment=request.GET.get('order-message')
     )
     if request.GET.get('card_payment'):
         billing_info.payment_method = 'CARD'

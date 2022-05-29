@@ -86,7 +86,8 @@ def admin_message_text_created_order(request, order):
     else:
         payment_method = 'Картой'
     text += f'Сумма заказа - {order.get_order_total_price_with_sale()} руб. (без скидки - {order.get_order_total_price()} руб.) + цена за доставку.\n\nМетод оплаты: \"{payment_method}\".\n'
-    text += f'Заказ оформлен на адресс:\nСтрана: \"Россия\",\nРегион: \"{order.info.region}\",\nГород (населенный пункт): \"{order.info.city}\",\nАдрес: \"{order.info.address}\".\n'
+    text += f'Заказ оформлен на адресс:\nСтрана: \"Россия\",\nРегион: \"{order.info.region}\",\nГород (населенный пункт): \"{order.info.city}\",\nАдрес: \"{order.info.address}\",\n'
+    text += f'Комментарий к заказу: "{order.info.order_comment}".\n'
     text += f'\nВам необходимо связаться с клиентом, для уточнения способа и суммы доставки (после внести данные в администраторской панели)\n'
     text += f'Телефон для связи: {order.info.phone}, email: {order.info.email}.'
     return text
