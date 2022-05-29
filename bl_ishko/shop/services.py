@@ -1,3 +1,4 @@
+import os
 from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Q
 from django.http import HttpResponse
@@ -38,7 +39,7 @@ def search_products(request):
     pass
 
 
-def send_mail_from_contact(name, from_email, topic, message_text):
+def send_mail_from_contact(name, from_email, topic, message_text, admin_email=os.getenv('ADMIN_EMAIL')):
     if topic:
         text = f'Сообщение от {name}, электронная почта {from_email}\nТема сообщения: {topic}\n' \
            f'Текст сообщения:\n' \
@@ -49,6 +50,6 @@ def send_mail_from_contact(name, from_email, topic, message_text):
                f'{message_text}'
     try:
         message_title = topic if topic else 'Без темы'
-        send_mail(message_title, text, from_email, ['1996sasha2507@mail.ru'])
+        send_mail(message_title, text, from_email, [admin_email])
     except BadHeaderError:
         return HttpResponse('Invalid header found.')
