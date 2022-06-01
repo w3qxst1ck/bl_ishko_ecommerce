@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
+from django.contrib.postgres.search import TrigramSimilarity
+from .utils import gen_slug
 
 from users.models import WishProduct, ProductComment
 from .forms import FormWithCaptcha
@@ -60,7 +62,7 @@ def shop_page(request, slug=None):
         category = get_object_or_404(Category, slug=slug)
         products = Product.objects.filter(category=category)
     else:
-        products = Product.objects.all()
+        products = Product.objects.all().order_by('-created')
         category = None
 
     # get colors for sidebar
@@ -119,21 +121,33 @@ def search_view(request):
         searched_product_title = request.POST.get('search-field')
         searched_product_category = request.POST.get('category-field')
 
+        # если ввели пробел или пустая строка
         if searched_product_title == ' ' or not searched_product_title:
+            # выбрали категорию
             if searched_product_category != 'КАТЕГОРИИ':
                 products = Product.objects.filter(category__title=searched_product_category)
+            # не выбрали категорию
             else:
                 searched_product_title = None
                 searched_product_category = None
-                products = Product.objects.all()
+                products = Product.objects.all().order_by('-created')
+
+        # ввели корректное название
         else:
             searched_product_title = searched_product_title.strip()
+            searched_product_slugify = gen_slug(searched_product_title)
+            # выбрали категорию
             if searched_product_category != 'КАТЕГОРИИ':
-                products = Product.objects.filter(title__icontains=searched_product_title,
-                                                  category__title=searched_product_category)
+
+                products = Product.objects.annotate(
+                    similarity=TrigramSimilarity('slug', searched_product_slugify),
+                ).filter(similarity__gt=0.1).order_by('-similarity').filter(category__title=searched_product_category)
+            # не выбрали категорию
             else:
                 searched_product_category = None
-                products = Product.objects.filter(title__icontains=searched_product_title)
+                products = Product.objects.annotate(
+                    similarity=TrigramSimilarity('slug', searched_product_slugify),
+                ).filter(similarity__gt=0.1).order_by('-similarity')
     else:
         # защита от запроса через url
         searched_product_title = None
@@ -149,6 +163,7 @@ def search_view(request):
             wish_list_products = []
     else:
         wish_list_products = []
+
     return render(request, 'shop/search.html', context={'products': products,
                                                         'wish_list_products': wish_list_products,
                                                         'searched_title': searched_product_title,
