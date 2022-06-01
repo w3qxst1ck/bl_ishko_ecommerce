@@ -171,3 +171,7 @@ def contact_page(request):
     else:
         captcha = FormWithCaptcha
         return render(request, 'shop/contact.html', {'captcha': captcha})
+
+
+def handle_not_found(request, exception):
+    return render(request, 'shop/404.html')
