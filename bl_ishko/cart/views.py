@@ -5,6 +5,7 @@ from shop.models import Product
 
 from cart.models import OrderItem, Order, BillingInfo
 from .services import is_enough_items, send_message_to_client, send_message_to_admin
+from .tasks import send_messages, test_func
 
 
 @login_required
@@ -20,6 +21,8 @@ def cart_page(request):
 @login_required
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
+
+    test_func.delay('hello')
 
     input_size = request.GET.get('size')
     # получение количества товара с фронтенда
@@ -107,10 +110,10 @@ def order_complete_page_intermediate(request):
         create_billing_info(request, order)
 
         # оповещение клиента
-        send_message_to_client(order)
+        send_messages.delay(request, order, 'client')
 
         # оповещение администратора
-        send_message_to_admin(request, order)
+        send_messages.delay(request, order, 'admin')
         return redirect('cart:order-complete-page', uuid=order.id)
     else:
         return render(request, 'cart/sold_out.html')
@@ -155,9 +158,9 @@ def cancel_order(request, order_id):
         item.item_count += order_item.quantity
         item.save()
     # оповещение администратора
-    send_message_to_admin(request, order, canceled=True)
+    send_messages.delay(request, order, 'admin', canceled=True)
     # оповещение клиента
-    send_message_to_client(order, canceled=True)
+    send_messages.delay(request, order, 'client', canceled=True)
     return redirect('users:profile-orders-page')
 
 
