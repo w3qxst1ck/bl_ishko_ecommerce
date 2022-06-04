@@ -5,7 +5,7 @@ from shop.models import Product
 
 from cart.models import OrderItem, Order, BillingInfo
 from .services import is_enough_items, send_message_to_client, send_message_to_admin
-from .tasks import send_messages
+from .tasks import send_messages_to_admin, send_messages_to_client
 
 
 @login_required
@@ -108,12 +108,12 @@ def order_complete_page_intermediate(request):
         create_billing_info(request, order)
 
         # оповещение клиента
-        send_messages.delay(request.user.email, order.id, 'client')
+        send_messages_to_client.delay(order.id)
         # send_messages.delay(request, order, 'client')
         # send_message_to_client(order)
 
         # оповещение администратора
-        send_messages.delay(request.user.email, order.id, 'admin')
+        send_messages_to_admin.delay(request.user.email, order.id)
         # send_message_to_admin(request, order)
 
         return redirect('cart:order-complete-page', uuid=order.id)
