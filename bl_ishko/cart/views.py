@@ -107,11 +107,11 @@ def order_complete_page_intermediate(request):
         # сохранение доп информации
         create_billing_info(request, order)
 
-        # оповещение клиента
-        send_messages_to_client.delay(order.id)
-
         # оповещение администратора
         send_messages_to_admin.delay(request.user.email, order.id)
+
+        # оповещение клиента
+        send_messages_to_client.delay(order.id)
 
         return redirect('cart:order-complete-page', uuid=order.id)
     else:
@@ -151,15 +151,19 @@ def cancel_order(request, order_id):
     order.ordered = False
     order.is_active = False
     order.save()
+
     # изменение количества товара на складе
     for order_item in order.order_items.all():
         item = order_item.item
         item.item_count += order_item.quantity
         item.save()
+
     # оповещение администратора
-    send_messages.delay(request, order, 'admin', canceled=True)
+    send_messages_to_admin.delay(request.user.email, order.id, canceled=True)
+
     # оповещение клиента
-    send_messages.delay(request, order, 'client', canceled=True)
+    send_messages_to_client.delay(order.id, canceled=True)
+
     return redirect('users:profile-orders-page')
 
 

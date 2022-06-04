@@ -16,4 +16,3 @@ def send_messages_to_admin(client_login_email, order_id, canceled=None):
     send_message_to_admin(client_login_email, order, canceled)
     return 'Message to admin - Done'
 
-
