@@ -261,7 +261,7 @@
                   {% endif %}
 
                 <li class="no-padding no-border">
-                  <h5 class="text-center">СУММА: {% if order %}{{ order.get_order_total_price }}{% else %}0{% endif %} RUB</h5>
+                  <h5 class="text-center">СУММА: {% if order %}{{ order.get_order_total_price_with_sale }}{% else %}0{% endif %} RUB</h5>
                 </li>
                 <li class="no-padding no-border">
                   <div class="row"> 
