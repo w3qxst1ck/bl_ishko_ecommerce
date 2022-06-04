@@ -3,14 +3,14 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView
 from django.contrib.postgres.search import TrigramSimilarity
-from .utils import gen_slug
 
+from .utils import gen_slug
 from users.models import WishProduct, ProductComment
 from .forms import FormWithCaptcha
 from .models import Product, Category, Faq, FaqCategory
-from .services import get_related_products_for_detail, get_size_list, send_mail_from_contact
+from .services import get_related_products_for_detail, get_size_list
+from .tasks import send_messages_from_contact_task
 
 
 def home_page(request):
@@ -178,11 +178,8 @@ def contact_page(request):
         topic = request.POST.get('topic', None)
         message_text = request.POST.get('message')
         if request.POST.get('g-recaptcha-response') and name and email and message_text:
-            try:
-                send_mail_from_contact(name, email, topic, message_text)
-                return render(request, 'shop/contact.html', {'message_name': name, 'message_email': email})
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
+            send_messages_from_contact_task.delay(name, email, topic, message_text)
+            return render(request, 'shop/contact.html', {'message_name': name, 'message_email': email})
     else:
         captcha = FormWithCaptcha
         return render(request, 'shop/contact.html', {'captcha': captcha})
