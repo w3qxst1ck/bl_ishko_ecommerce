@@ -109,12 +109,9 @@ def order_complete_page_intermediate(request):
 
         # оповещение клиента
         send_messages_to_client.delay(order.id)
-        # send_messages.delay(request, order, 'client')
-        # send_message_to_client(order)
 
         # оповещение администратора
         send_messages_to_admin.delay(request.user.email, order.id)
-        # send_message_to_admin(request, order)
 
         return redirect('cart:order-complete-page', uuid=order.id)
     else:

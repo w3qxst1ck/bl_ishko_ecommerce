@@ -11,8 +11,9 @@ def send_messages_to_client(order_id, canceled=None):
 
 
 @app.task
-def send_messages_to_admin(user_email, order_id, canceled=None):
+def send_messages_to_admin(client_login_email, order_id, canceled=None):
     order = Order.objects.get(id=order_id)
-    send_message_to_admin(user_email, order, canceled)
+    send_message_to_admin(client_login_email, order, canceled)
     return 'Message to admin - Done'
+
 

@@ -30,13 +30,14 @@ def send_message_to_client(order, canceled=None):
         return HttpResponse('Invalid header found.')
 
 
-def send_message_to_admin(user_email, order, admin_email=ADMIN_EMAIL, canceled=None):
+def send_message_to_admin(client_login_email, order, canceled=None):
     """Отправка сообщения администратору о заказе"""
     try:
         message_title = f'Заказ {order.id} bl_ishko, {order.user.email}'
-        email = admin_email
+        email = os.getenv('ADMIN_EMAIL')
         from_email = os.getenv('EMAIL_HOST_USER')
-        context = {'user_email': user_email,
+
+        context = {'user_email': client_login_email,
                    'order': order}
         if canceled:
             html_message = get_template('emails/admin_canceled_order.html').render(context)
@@ -48,9 +49,8 @@ def send_message_to_admin(user_email, order, admin_email=ADMIN_EMAIL, canceled=N
             message_title,
             from_email,
             text,
-            [email, ],
+            [email],
             html_message=html_message,
-
         )
     except BadHeaderError:
         return HttpResponse('Invalid header found.')
