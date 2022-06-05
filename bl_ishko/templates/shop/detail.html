@@ -276,9 +276,9 @@
                     <li> <a href="" data-toggle="modal" data-target="#shareModal" id="share-product1"><i class="ion-shuffle"></i></a></li>
                     <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
                     {% if product not in wish_list_products %}
-                      <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
+                       <a class="share-sec wishlist-status" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
                     {% else %}
-                      <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                        <a class="share-sec wishlist-status" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
                     {% endif %}
                     <li class="full-w"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter|add:100 }}" class="btn">В КОРЗИНУ</a></li>
                     <!-- Rating Stars -->
