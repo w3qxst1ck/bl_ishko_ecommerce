@@ -51,6 +51,11 @@
               </ul>
             </div>
           </div>
+          {% if messages %}
+            {% for message in messages %}
+              <p hidden="true">{{message}}</p>
+            {% endfor %}
+          {% endif %}
 
         <!-- SELF INFO -->
         <div class="shopping-cart"> 

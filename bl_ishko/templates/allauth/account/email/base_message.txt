@@ -1,7 +1,7 @@
-{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Приветствуем, это интернет магазин нижнего белья и одежды BL_ishko!{% endblocktrans %}
+{% load i18n %}{% autoescape off %}{% blocktrans %}Приветствуем, это интернет магазин нижнего белья и одежды BL_ishko!{% endblocktrans %}
 
 {% block content %}{% endblock %}
 
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Cпасибо, что используете blishko.com!
+{% blocktrans %}Cпасибо, что используете blishko.com!
 blishko.com{% endblocktrans %}
 {% endautoescape %}

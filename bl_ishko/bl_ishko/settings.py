@@ -73,7 +73,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # 'bl_ishko.middleware.ErrorLogMiddleware',
+    'bl_ishko.middleware.ErrorLogMiddleware',
 ]
 
 ROOT_URLCONF = 'bl_ishko.urls'

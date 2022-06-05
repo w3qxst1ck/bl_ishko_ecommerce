@@ -48,8 +48,8 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', verbose_name='Пользоатель')
     order_items = models.ManyToManyField(OrderItem, related_name='order')
     created = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
-    ordered = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True, verbose_name='Активен')
+    ordered = models.BooleanField(default=False, verbose_name='Оформлен')
     paid = models.BooleanField(default=False, verbose_name='Оплачен')
 
     def get_order_total_price(self):
@@ -63,6 +63,13 @@ class Order(models.Model):
 
     def get_order_items_count(self):
         return self.order_items.all().count()
+
+    def get_summary_sale(self):
+        sale_list = []
+        for order_item in self.order_items.all():
+            if order_item.item.product.discount:
+                sale_list.append(order_item.item_total() - order_item.item_total_with_sale())
+        return round(sum(sale_list), 1)
 
     def __str__(self):
         if self.ordered and self.is_active:
