@@ -19,7 +19,8 @@ const csrftoken = getCookie('csrftoken');
 var wishButtons = document.getElementsByClassName('wishlist-status');
 
 for(var i = 0; i < wishButtons.length; i++){
-  wishButtons[i].addEventListener('click', function(){
+  wishButtons[i].addEventListener('click', function(e){
+  e.preventDefault();
 
   var productId = this.dataset.product;
   var action = this.dataset.action;

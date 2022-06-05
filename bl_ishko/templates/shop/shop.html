@@ -185,9 +185,9 @@
                         <li> <a href="" id="share-product1" data-toggle="modal" data-target="#shareModal"><i class="ion-shuffle"></i></a></li>
                         <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
                         {% if product not in wish_list_products %}
-                          <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
+                          <li> <a href="" class="wishlist-status" data-domain="{{ domain_url }}" data-product="{{ product.id }}" data-action="add-item"><i class="fa fa-heart-o"></i></a></li>
                         {% else %}
-                          <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                          <li> <a href="" class="wishlist-status" data-domain="{{ domain_url }}" data-product="{{ product.id }}" data-action="delete-item" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
                         {% endif %}
                         <li class="full-w"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}" class="btn">В КОРЗИНУ</a></li>
                       </ul>
@@ -309,6 +309,7 @@
 <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
 <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
 <script src="{% static 'js/main.js' %}"></script> 
+<script src="{% static 'js/wishlist.js' %}"></script> 
 <script>
 jQuery(document).ready(function($) {
   

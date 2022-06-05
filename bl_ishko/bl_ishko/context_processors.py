@@ -1,3 +1,5 @@
+import os
+
 from cart.models import Order
 from shop.models import Category, Product
 
@@ -20,3 +22,8 @@ def get_categories(request):
 def get_new_products(request):
     new_products = Product.objects.all().order_by('-created')[:4]
     return {'new_products': new_products}
+
+
+def get_domain_name(request):
+    domain_url = os.getenv('DOMAIN') + '/user/add_to_wishlist/'
+    return {'domain_url': domain_url}
