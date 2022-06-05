@@ -41,7 +41,6 @@ for(var i = 0; i < wishButtons.length; i++){
 
 
 function changeWishStatus (productId, action, url){
-  
   fetch(url, {
       method: 'POST',
       headers: {
