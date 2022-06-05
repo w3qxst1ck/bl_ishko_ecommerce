@@ -102,6 +102,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[blishko.com] '
 
 WSGI_APPLICATION = 'bl_ishko.wsgi.application'
 LOGIN_REDIRECT_URL = 'shop:shop-page'
