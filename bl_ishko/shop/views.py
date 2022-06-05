@@ -50,11 +50,9 @@ def product_detail(request, slug):
     else:
         wish_list_products = []
 
-    domain_url = os.getenv('DOMAIN') + '/user/add_to_wishlist/'
     return render(request, 'shop/detail.html', context={'product': product,
                                                         'wish_list_products': wish_list_products,
                                                         'related_products': related_products,
-                                                        'domain_url': domain_url
                                                         })
 
 

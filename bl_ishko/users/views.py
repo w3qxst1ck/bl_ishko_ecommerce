@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 import json
+import os
 
 from .services import save_or_change_user_info, get_related_products
 from cart.models import Order

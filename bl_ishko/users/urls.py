@@ -14,8 +14,8 @@ urlpatterns = [
     path('wishlist/', wish_list, name='wishlist-page'),
     path('profile/', profile, name='profile-page'),
     path('my_orders/', profile_orders, name='profile-orders-page'),
-    # path('wishlist/add/<str:slug>/', add_item_to_wish_list, name='wishlist-add'),
+    path('wishlist/add/<str:slug>/', add_item_to_wish_list, name='wishlist-add'),
     path('add_to_wishlist/', add_to_wish_list_ajax, name='wishlist-add-ajax'),
     path('wishlist/delete/all/', delete_all_items_from_wishlist, name='wishlist-delete-all'),
-    # path('wishlist/delete/<str:slug>/', delete_item_from_wishlist, name='wishlist-delete'),
+    path('wishlist/delete/<str:slug>/', delete_item_from_wishlist, name='wishlist-delete'),
 ]
