@@ -85,7 +85,7 @@
             <p>Уход: {{ product.care }}</p>
 
             <hr>
-            <form action="{% url 'cart:add-to-cart' product.id %}" method="GET">
+
               <div class="row">
                 <div class="col-sm-12">
                   <div class="item-select"> 
@@ -117,7 +117,6 @@
                       {% endif %}
                     </select>
                     <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all|distinct_size|first }}">
-
                     <a href="" data-toggle="modal" data-target="#sizeModal"><p>ТАБЛИЦА РАЗМЕРОВ</p></a>
                   </div>
                 </div>
@@ -129,7 +128,7 @@
                     <input type="number" max="9" value=1 id="product-quantity">
                     <input type="hidden" id="quantity_input" name="quantity" value="1">
                     {% if product.items.all|distinct_size %}
-                      <button type="submit" class="btn btn-small btn-dark">В КОРЗИНУ</button>
+                      <button id="ajax-add-to-cart" data-domain='{{ domain_add_to_cart }}' data-product="{{ product.id }}" class="btn btn-small btn-dark">В КОРЗИНУ</button>
                     {% else %}
                       <button type="submit" class="btn btn-small btn-dark" disabled>В КОРЗИНУ</button>
                     {% endif %}
@@ -141,10 +140,12 @@
                     {% endif %}
                   </div>
                 </div>
-            </form>
+
 
               <!-- SHARE -->
               <div class="col-sm-12">
+                <!-- AJAX HIDDEN MESSAGE -->
+                <p hidden="true" id="ajax-add-to-cart-p" style="font-family: 'Montserrat', sans-serif; color: #af5875;">Товар добавлен в корзину</p>
                 <ul class="share-with">
                   <li>
                     <p>ПОДЕЛИТЬСЯ</p>

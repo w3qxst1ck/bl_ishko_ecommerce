@@ -1,10 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-from shop.models import Product
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+import json
+import os
 
+from shop.models import Product
 from cart.models import OrderItem, Order, BillingInfo
-from .services import is_enough_items, send_message_to_client, send_message_to_admin
+from .services import is_enough_items
 from .tasks import send_messages_to_admin, send_messages_to_client
 
 
@@ -56,6 +59,43 @@ def add_to_cart(request, pk):
     if request.META.get('HTTP_REFERER').split('/')[-2] == 'search':
         return redirect('cart:cart-page')
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+@require_POST
+def add_to_cart_ajax(request):
+    data = json.loads(request.body)
+    product_id = data['productId']
+    item_size = data['itemSize']
+    item_count = int(data['itemCount'])
+
+    product = get_object_or_404(Product, id=product_id)
+    item = product.items.filter(size=item_size)[0]
+
+    if item.item_count > 0:
+        order_item, created = OrderItem.objects.get_or_create(
+            item=item,
+            user=request.user,
+        )
+        order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            if order.order_items.filter(item=item).exists():
+                order_item.quantity += item_count
+                order_item.save()
+            else:
+                order_item.quantity = item_count
+                order_item.save()
+                order.order_items.add(order_item)
+        else:
+            order = Order.objects.create(user=request.user)
+            order_item.quantity = item_count
+            order_item.save()
+            order.order_items.add(order_item)
+        return JsonResponse('Item added to cart', safe=False)
+    else:
+        return JsonResponse('Not enough items for this size', safe=False)
+
 
 
 @login_required

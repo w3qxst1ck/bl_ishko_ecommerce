@@ -1,3 +1,4 @@
+// csrf token
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -13,9 +14,44 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
 const csrftoken = getCookie('csrftoken');
 
+// add to cart
+var cartButton = document.getElementById('ajax-add-to-cart');
+
+cartButton.addEventListener('click', function(e){
+    e.preventDefault();
+
+    var itemCount = document.getElementById('quantity_input').value;
+    var itemSize = document.getElementById('size_input').value;
+    var productId = this.dataset.product;
+    var url = this.dataset.domain;
+
+    addToCart(url, productId, itemSize, itemCount);
+    var hiddenP = document.getElementById('ajax-add-to-cart-p');
+    hiddenP.removeAttribute('hidden');
+});
+
+function addToCart(url, productId, itemSize, itemCount){
+  fetch(url, {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'aplication/json',
+          'X-CSRFToken': csrftoken,
+        },
+      body: JSON.stringify({'productId': productId, 'itemSize': itemSize, 'itemCount': itemCount})
+  })
+
+    .then((response) => {
+      return response.json()
+  })
+
+  .then((data) => {
+      console.log('data:', data)
+  })
+}
+
+// add to wish list
 var wishButtons = document.getElementsByClassName('wishlist-status');
 
 for(var i = 0; i < wishButtons.length; i++){
@@ -58,4 +94,6 @@ function changeWishStatus (productId, action, url){
       console.log('data:', data)
   })
 };
+
+
 

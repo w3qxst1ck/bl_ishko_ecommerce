@@ -86,13 +86,18 @@ $("select#product-size").on('change', function () {
 	let size_value = this.value;
 	let size_input = $(this).siblings('input');
 	size_input.val(size_value);
+	let hiddenP = $('#ajax-add-to-cart-p');
+	hiddenP.attr('hidden', 'true');
 });
 
 $("#product-quantity").on('change', function () {
 	let quantity_value = this.value;
 	let quantity_input = $("#quantity_input");
 	quantity_input.val(quantity_value);
+	let hiddenP = $('#ajax-add-to-cart-p');
+	hiddenP.attr('hidden', 'true');
 });
+
 /*-----------------------------------------------------------------------------------*/
 /* 	SEARCH NAVBAR
 /*-----------------------------------------------------------------------------------*/
