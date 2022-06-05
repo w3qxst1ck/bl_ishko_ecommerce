@@ -176,6 +176,7 @@ def search_view(request):
 def contact_page(request):
     if request.method == "POST":
         name = request.POST.get('name')
+        name = request.POST.get('name')
         email = request.POST.get('email')
         topic = request.POST.get('topic', None)
         message_text = request.POST.get('message')
