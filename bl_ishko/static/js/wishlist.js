@@ -16,9 +16,10 @@ function getCookie(name) {
 
 const csrftoken = getCookie('csrftoken');
 
-var wishButton = document.getElementById('wishlist-status');
+var wishButtons = document.getElementsByClassName('wishlist-status');
 
-wishButton.addEventListener('click', function(){
+for(var i = 0; i < wishButtons.length; i++){
+  wishButtons[i].addEventListener('click', function(){
 
   var productId = this.dataset.product;
   var action = this.dataset.action;
@@ -34,7 +35,9 @@ wishButton.addEventListener('click', function(){
   }
 
   changeWishStatus(productId, action, url)
-});
+  })
+};
+
 
 function changeWishStatus (productId, action, url){
   

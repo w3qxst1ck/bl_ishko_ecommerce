@@ -140,9 +140,9 @@
                       <a class="share-sec" href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a> 
                     {% endif %} -->
                     {% if product not in wish_list_products %}
-                       <a class="share-sec" id='wishlist-status' data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
+                       <a class="share-sec wishlist-status" id='wishlist-status' data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
                     {% else %}
-                        <a class="share-sec" id='wishlist-status' data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
+                        <a class="share-sec wishlist-status" id='wishlist-status' data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
                     {% endif %}
                   </div>
                 </div>
