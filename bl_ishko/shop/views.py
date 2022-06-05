@@ -1,9 +1,8 @@
-from django.core.mail import BadHeaderError
 from django.db.models import Q
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.postgres.search import TrigramSimilarity
+import os
 
 from .utils import gen_slug
 from users.models import WishProduct, ProductComment
@@ -50,9 +49,12 @@ def product_detail(request, slug):
             wish_list_products = []
     else:
         wish_list_products = []
+
+    domain_url = os.getenv('DOMAIN') + '/user/add_to_wishlist/'
     return render(request, 'shop/detail.html', context={'product': product,
                                                         'wish_list_products': wish_list_products,
                                                         'related_products': related_products,
+                                                        'domain_url': domain_url
                                                         })
 
 

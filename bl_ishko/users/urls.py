@@ -1,6 +1,12 @@
 from django.urls import path
 
-from .views import wish_list, add_item_to_wish_list, delete_item_from_wishlist, delete_all_items_from_wishlist, profile, profile_orders
+from .views import (wish_list,
+    add_item_to_wish_list,
+    delete_item_from_wishlist,
+    delete_all_items_from_wishlist,
+    profile,
+    profile_orders,
+    add_to_wish_list_ajax)
 
 app_name = 'users'
 
@@ -9,6 +15,7 @@ urlpatterns = [
     path('profile/', profile, name='profile-page'),
     path('my_orders/', profile_orders, name='profile-orders-page'),
     path('wishlist/add/<str:slug>/', add_item_to_wish_list, name='wishlist-add'),
+    path('add_to_wishlist/', add_to_wish_list_ajax, name='wishlist-add-ajax'),
     path('wishlist/delete/all/', delete_all_items_from_wishlist, name='wishlist-delete-all'),
     path('wishlist/delete/<str:slug>/', delete_item_from_wishlist, name='wishlist-delete'),
 ]

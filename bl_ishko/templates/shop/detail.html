@@ -134,10 +134,15 @@
                       <button type="submit" class="btn btn-small btn-dark" disabled>В КОРЗИНУ</button>
                     {% endif %}
                     <a href="" data-toggle="modal" data-target="#shareModal" id="share-product" class="share-sec"><i class="ion-shuffle"></i></a>
-                    {% if product not in wish_list_products %}
+                    <!-- {% if product not in wish_list_products %}
                       <a class="share-sec" href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a> 
                     {% else %}
                       <a class="share-sec" href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a> 
+                    {% endif %} -->
+                    {% if product not in wish_list_products %}
+                       <a class="share-sec" id='wishlist-status' data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
+                    {% else %}
+                        <a class="share-sec" id='wishlist-status' data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
                     {% endif %}
                   </div>
                 </div>
@@ -526,6 +531,8 @@
   <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
   <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
   <script src="{% static 'js/main.js' %}"></script> 
+  <script src="{% static 'js/wishlist.js' %}"></script> 
+  
   <script>
   $(".zoom_05").elevateZoom({ 
   	zoomType	: "inner", 

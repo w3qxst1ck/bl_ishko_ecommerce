@@ -1,13 +1,14 @@
 from django.db.models import Q
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
-from django.db.utils import IntegrityError
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+import json
 
 from .services import save_or_change_user_info, get_related_products
 from cart.models import Order
-from .models import WishProduct, UserInfo
+from .models import WishProduct
 from shop.models import Product
 
 
@@ -30,6 +31,25 @@ def add_item_to_wish_list(request, slug):
     if request.META.get('HTTP_REFERER').split('/')[-2] == 'search':
         return redirect('users:wishlist-page')
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+@require_POST
+@login_required
+def add_to_wish_list_ajax(request):
+    data = json.loads(request.body)
+    product = get_object_or_404(Product, id=data['productId'])
+    if data['action'] == 'add-item':
+        wishlist_qs = WishProduct.objects.filter(user=request.user, product=product)
+        if not wishlist_qs.exists():
+            WishProduct.objects.create(product=product, user=request.user)
+        return JsonResponse('Added to wishlist', safe=False)
+    elif data['action'] == 'delete-item':
+        try:
+            WishProduct.objects.get(product=product, user=request.user).delete()
+        except WishProduct.DoesNotExist:
+            pass
+        return JsonResponse('Deleted from wishlist', safe=False)
+    return JsonResponse('Nothing changed', safe=False)
 
 
 @login_required
