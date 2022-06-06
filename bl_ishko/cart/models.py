@@ -45,9 +45,9 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', verbose_name='Пользоатель')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', verbose_name='Пользователь')
     order_items = models.ManyToManyField(OrderItem, related_name='order')
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     is_active = models.BooleanField(default=True, verbose_name='Активен')
     ordered = models.BooleanField(default=False, verbose_name='Оформлен')
     paid = models.BooleanField(default=False, verbose_name='Оплачен')
@@ -57,6 +57,26 @@ class Order(models.Model):
 
     def get_order_total_price_with_sale(self):
         return round(sum([item.item_total_with_sale() for item in self.order_items.all()]), 1)
+    get_order_total_price_with_sale.short_description = 'Сумма заказа'
+
+    def get_user_email(self):
+        return self.user.email
+    get_user_email.short_description = 'Email пользователя'
+
+    def get_order_status(self):
+        if self.ordered and self.is_active:
+            if self.paid:
+                order_status = 'Оплачен'
+            else:
+                order_status = 'Ожидает оплаты'
+        elif self.ordered and not self.is_active:
+            order_status = 'Выполнен'
+        elif not self.ordered and self.is_active:
+            order_status = 'В корзине'
+        elif not self.ordered and not self.is_active:
+            order_status = 'Отменен'
+        return order_status
+    get_order_status.short_description = 'Статус заказа'
 
     def get_total_quantity(self):
         return sum([item.quantity for item in self.order_items.all()])

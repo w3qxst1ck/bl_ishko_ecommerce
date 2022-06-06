@@ -171,10 +171,14 @@
                     <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
                     <li> <a href="" data-toggle="modal" data-target="#shareModal" id="share-product1"><i class="ion-shuffle"></i></a></li>
                     <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
-                    {% if product not in wish_products %}
-                      <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
+                    {% if request.user.is_authenticated %}
+                      {% if product not in wish_products %}
+                        <li> <a href="{% url 'users:wishlist-add' product.slug %}"><i class="fa fa-heart-o"></i></a></li>
+                      {% else %}
+                        <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                      {% endif %}
                     {% else %}
-                      <li> <a href="{% url 'users:wishlist-delete' product.slug %}" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                      <li> <a href="{% url 'account_login' %}"><i class="fa fa-heart-o"></i></a></li>
                     {% endif %}
                     <li class="full-w"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter|add:100 }}" class="btn">В КОРЗИНУ</a></li>
                     <!-- Rating Stars -->

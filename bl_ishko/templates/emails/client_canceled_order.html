@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-	<p>{{ order.info.first_name }}, вы отменили заказ <b>№ {{ order.id }}</b>.</p>
+<!-- 	<p>{{ order.info.first_name }}, вы отменили заказ <b>№ {{ order.id }}</b>.</p>
 	<p>Его состав:</p>
 	<p>
 		<ul>
@@ -19,6 +19,49 @@
 	{% else %}
 		<p>Заказ не был оплачен.</p>
 	{% endif %}
+	<p>Если у Вас остались вопросы, можете связаться с администратором по телефону <b>8(800)555-35-35</b> для уточнения информации.</p> -->
+
+
+
+	<p>Добрый день, {{ order.info.first_name }}!</p>
+	<p>Вы отменили заказ № <span style="color: #af5875;">{{ order.id }}</span> от {{ order.info.checked_out_date }}.</p>
+	
+	<table border="1" style="border: 1px solid black; border-collapse: collapse;">
+		<caption>Состав заказа</caption>
+		<tr>
+			<th>#</th>
+			<th>Товар</th>
+			<th>Размер</th>
+			<th>Цвет</th>
+			<th>Кол-во, шт.</th>
+			<th>Цена, руб.</th>
+			<th>Цена со скидкой, руб.</th>
+			<th>Сумма, руб.</th>
+		</tr>
+		{% for order_item in order.order_items.all %}
+		<tr align="center">
+			<td>{{ forloop.counter }}</td>
+			<td>{{ order_item.item.product.title }}</td>
+			<td>{{ order_item.item.size }}</td>
+			<td>{{ order_item.item.product.color }}</td>
+			<td>{{ order_item.quantity }}</td>
+			<td>{{ order_item.item.product.price }}</td>
+			{% if order_item.item.product.discount > 0 %}
+				<td>{{ order_item.item.product.get_price }}</td>
+			{% else %}
+				<td> - </td>
+			{% endif %}
+			<td>{% if order_item.item.product.discount %}{{ order_item.item_total_with_sale }}{% else %}{{ order_item.item_total }}{% endif %}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	{% if order.paid %}
+		<p>С Вами свяжется администратор для возврата средств по телефону {{ order.info.phone }}, сумма к возврату - <b>{{ order.get_order_total_price_with_sale|add:order.info.delivery_price }} руб.</b> (сумма заказа - {{ order.get_order_total_price_with_sale }} руб., цена доставки - {{ order.info.delivery_price }} руб.)</p>
+	{% else %}
+		<p>Заказ не был оплачен.</p>
+	{% endif %}
+
 	<p>Если у Вас остались вопросы, можете связаться с администратором по телефону <b>8(800)555-35-35</b> для уточнения информации.</p>
 </body>
 </html>

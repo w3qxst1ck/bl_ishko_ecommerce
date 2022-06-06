@@ -127,16 +127,24 @@
                   <div class="fun-share">
                     <input type="number" max="9" value=1 id="product-quantity">
                     <input type="hidden" id="quantity_input" name="quantity" value="1">
-                    {% if product.items.all|distinct_size %}
-                      <button id="ajax-add-to-cart" data-domain='{{ domain_add_to_cart }}' data-product="{{ product.id }}" class="btn btn-small btn-dark">В КОРЗИНУ</button>
+                    {% if request.user.is_authenticated %}
+                      {% if product.items.all|distinct_size %}
+                        <button id="ajax-add-to-cart" data-domain='{{ domain_add_to_cart }}' data-product="{{ product.id }}" class="btn btn-small btn-dark">В КОРЗИНУ</button>
+                      {% else %}
+                        <button type="submit" class="btn btn-small btn-dark" disabled>В КОРЗИНУ</button>
+                      {% endif %}
                     {% else %}
-                      <button type="submit" class="btn btn-small btn-dark" disabled>В КОРЗИНУ</button>
+                      <a href="{% url 'account_login' %}" class="btn btn-small btn-dark">В КОРЗИНУ</a>
                     {% endif %}
                     <a href="" data-toggle="modal" data-target="#shareModal" id="share-product" class="share-sec"><i class="ion-shuffle"></i></a>
-                    {% if product not in wish_list_products %}
-                       <a class="share-sec wishlist-status" href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
+                    {% if request.user.is_authenticated %}
+                      {% if product not in wish_list_products %}
+                         <a class="share-sec wishlist-status" href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
+                      {% else %}
+                          <a class="share-sec wishlist-status"  href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
+                      {% endif %}
                     {% else %}
-                        <a class="share-sec wishlist-status"  href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
+                      <a class="share-sec wishlist-status" href="{% url 'account_login' %}" ><i class="fa fa-heart-o"></i></a> 
                     {% endif %}
                   </div>
                 </div>
@@ -145,6 +153,9 @@
               <!-- SHARE -->
               <div class="col-sm-12">
                 <!-- AJAX HIDDEN MESSAGE -->
+                {% if not product.items.all|distinct_size %}
+                  <p style="font-family: 'Montserrat', sans-serif; color: #af5875;">Товар отсутствует в наличии</p>
+                {% endif %}
                 <p hidden="true" id="ajax-add-to-cart-p" style="font-family: 'Montserrat', sans-serif; color: #af5875;">Товар добавлен в корзину</p>
                 <ul class="share-with">
                   <li>
@@ -271,10 +282,14 @@
                     <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
                     <li> <a href="" data-toggle="modal" data-target="#shareModal" id="share-product1"><i class="ion-shuffle"></i></a></li>
                     <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
-                    {% if product not in wish_list_products %}
-                       <a class="share-sec wishlist-status"  href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
+                    {% if request.user.is_authenticated %}
+                      {% if product not in wish_list_products %}
+                         <a class="share-sec wishlist-status"  href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='add-item'><i class="fa fa-heart-o"></i></a> 
+                      {% else %}
+                          <a class="share-sec wishlist-status"  href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
+                      {% endif %}
                     {% else %}
-                        <a class="share-sec wishlist-status"  href="" data-domain='{{ domain_url }}' data-product='{{ product.id }}' data-action='delete-item' style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a>
+                      <a class="share-sec"  href="{% url 'account_login' %}"><i class="fa fa-heart-o"></i></a> 
                     {% endif %}
                     <li class="full-w"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter|add:100 }}" class="btn">В КОРЗИНУ</a></li>
                     <!-- Rating Stars -->
