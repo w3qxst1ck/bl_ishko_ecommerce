@@ -55,29 +55,6 @@ class Order(models.Model):
     def get_order_total_price(self):
         return sum([item.item_total() for item in self.order_items.all()])
 
-    def get_order_total_price_with_sale(self):
-        return round(sum([item.item_total_with_sale() for item in self.order_items.all()]), 1)
-    get_order_total_price_with_sale.short_description = 'Сумма заказа'
-
-    def get_user_email(self):
-        return self.user.email
-    get_user_email.short_description = 'Email пользователя'
-
-    def get_order_status(self):
-        if self.ordered and self.is_active:
-            if self.paid:
-                order_status = 'Оплачен'
-            else:
-                order_status = 'Ожидает оплаты'
-        elif self.ordered and not self.is_active:
-            order_status = 'Выполнен'
-        elif not self.ordered and self.is_active:
-            order_status = 'В корзине'
-        elif not self.ordered and not self.is_active:
-            order_status = 'Отменен'
-        return order_status
-    get_order_status.short_description = 'Статус заказа'
-
     def get_total_quantity(self):
         return sum([item.quantity for item in self.order_items.all()])
 
@@ -104,6 +81,30 @@ class Order(models.Model):
         elif not self.ordered and not self.is_active:
             order_status = 'Отменен'
         return f'Заказ {self.id} от {self.user.email} - {order_status}'
+
+    # Methods for admin panel
+    def get_order_total_price_with_sale(self):
+        return round(sum([item.item_total_with_sale() for item in self.order_items.all()]), 1)
+    get_order_total_price_with_sale.short_description = 'Сумма заказа'
+
+    def _get_user_email(self):
+        return self.user.email
+    _get_user_email.short_description = 'Email пользователя'
+
+    def _get_order_status(self):
+        if self.ordered and self.is_active:
+            if self.paid:
+                order_status = 'Оплачен'
+            else:
+                order_status = 'Ожидает оплаты'
+        elif self.ordered and not self.is_active:
+            order_status = 'Выполнен'
+        elif not self.ordered and self.is_active:
+            order_status = 'В корзине'
+        elif not self.ordered and not self.is_active:
+            order_status = 'Отменен'
+        return order_status
+    _get_order_status.short_description = 'Статус заказа'
 
     class Meta:
         verbose_name = 'Заказ'

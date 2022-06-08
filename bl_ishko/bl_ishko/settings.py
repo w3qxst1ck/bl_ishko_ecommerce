@@ -185,8 +185,8 @@ EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = bool(int(os.getenv('EMAIL_USE_TLS')))
-
+# EMAIL_USE_TLS = bool(int(os.getenv('EMAIL_USE_TLS')))
+EMAIL_USE_SSL = bool(int(os.getenv('EMAIL_USE_SSL')))
 # Captcha
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')

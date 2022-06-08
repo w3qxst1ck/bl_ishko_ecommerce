@@ -5,23 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<!-- 	<p>{{ order.info.first_name }}, вы отменили заказ <b>№ {{ order.id }}</b>.</p>
-	<p>Его состав:</p>
-	<p>
-		<ul>
-		    {% for order_item in order.order_items.all %}
-		        <li> {{ order_item.item.product.title }} ({{ order_item.item.size }}) - {{ order_item.quantity }}  шт. {{ order_item.item_total_with_sale }} руб.</li>
-		    {% endfor %}
-	    </ul>
-	</p>
-	{% if order.paid %}
-		<p>С Вами свяжется администратор для возврата средств по телефону {{ order.info.phone }}, сумма к возврату - <b>{{ order.get_order_total_price_with_sale|add:order.info.delivery_price }} руб.</b> (сумма заказа - {{ order.get_order_total_price_with_sale }} руб., цена доставки - {{ order.info.delivery_price }} руб.)</p>
-	{% else %}
-		<p>Заказ не был оплачен.</p>
-	{% endif %}
-	<p>Если у Вас остались вопросы, можете связаться с администратором по телефону <b>8(800)555-35-35</b> для уточнения информации.</p> -->
-
-
 
 	<p>Добрый день, {{ order.info.first_name }}!</p>
 	<p>Вы отменили заказ № <span style="color: #af5875;">{{ order.id }}</span> от {{ order.info.checked_out_date }}.</p>
