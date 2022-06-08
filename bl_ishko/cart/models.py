@@ -125,7 +125,7 @@ class BillingInfo(models.Model):
     payment_method = models.CharField(choices=PAYMENT_CHOICES, max_length=10, verbose_name='Способ оплаты')
     delivery_type = models.CharField(choices=DELIVERY_CHOICES, max_length=30, verbose_name='Способ доставки', default='NONE')
     delivery_price = models.IntegerField(blank=True, null=True, verbose_name='Цена доставки')
-    order_comment = models.TextField(blank=True, null=True)
+    order_comment = models.TextField(blank=True, null=True, verbose_name='Комментарий к заказу')
     checked_out_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
