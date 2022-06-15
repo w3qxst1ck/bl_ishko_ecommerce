@@ -34,7 +34,7 @@ def send_message_to_admin(client_login_email, order, canceled=None):
     """Отправка сообщения администратору о заказе"""
     try:
         message_title = f'Заказ {order.id} bl_ishko, {order.user.email}'
-        email = os.getenv('ADMIN_EMAIL')
+        email = ADMIN_EMAIL
         from_email = os.getenv('EMAIL_HOST_USER')
 
         context = {'user_email': client_login_email,
@@ -47,10 +47,10 @@ def send_message_to_admin(client_login_email, order, canceled=None):
         text = ''
         send_mail(
             message_title,
-            from_email,
             text,
+            from_email,
             [email],
-            html_message=html_message,
+            html_message,
         )
     except BadHeaderError:
         return HttpResponse('Invalid header found.')
