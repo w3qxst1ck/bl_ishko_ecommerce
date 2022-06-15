@@ -29,6 +29,8 @@ def add_to_cart(request, pk):
     # получение количества товара с фронтенда
     if request.GET.get('quantity'):
         input_quantity = int(request.GET.get('quantity'))
+        if input_quantity == 0:
+            return redirect('shop:shop-page')
     else:
         input_quantity = 1
 

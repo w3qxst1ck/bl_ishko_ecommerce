@@ -62,20 +62,48 @@ function changeWishStatus (productId, action, url){
 };
 
 
-// add to cart
+// add to cart in detail
 var cartButton = document.getElementById('ajax-add-to-cart');
 
 cartButton.addEventListener('click', function(e){
     e.preventDefault();
 
     var itemCount = document.getElementById('quantity_input').value;
-    var itemSize = document.getElementById('size_input').value;
-    var productId = this.dataset.product;
-    var url = this.dataset.domain;
+    if (itemCount == '0') {
+      alert('this is 0')
+      // cartButton.setAttribute('disabled', 'disabled');
+    } else {
+      var itemSize = document.getElementById('size_input').value;
+      var productId = this.dataset.product;
+      var url = this.dataset.domain;
 
-    addToCart(url, productId, itemSize, itemCount);
-    var hiddenP = document.getElementById('ajax-add-to-cart-p');
-    hiddenP.removeAttribute('hidden');
+      addToCart(url, productId, itemSize, itemCount);
+      var hiddenP = document.getElementById('ajax-add-to-cart-p');
+      hiddenP.removeAttribute('hidden');
+
+      // chech span is exist
+      if (document.getElementsByClassName('numb').length) {
+        // change span value
+        var currentItemCount = document.getElementsByClassName('numb')[0].innerText;
+        newItemCount = Number(itemCount) + Number(currentItemCount);
+        document.getElementsByClassName('numb')[0].innerHTML = newItemCount;
+
+      } else {
+        // create span element if ajax
+        var cartSpan = document.createElement("span");
+        cartSpan.classList.add('numb');
+
+        // add span with new item count
+        cartSpan.textContent = `${itemCount}`;
+        var cartUl = document.getElementById("cart-dropdown-menu-ul");
+        var parentEl = cartUl.parentNode;
+        parentEl.insertBefore(cartSpan, cartUl);
+      };
+
+      // delete ul dropdown
+      var cartUl = document.getElementById("cart-dropdown-menu-ul");
+      cartUl.parentNode.removeChild(cartUl);
+    };
 });
 
 function addToCart(url, productId, itemSize, itemCount){
