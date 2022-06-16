@@ -50,6 +50,6 @@ def send_mail_from_contact(name, from_email, topic, message_text, admin_email=os
                f'{message_text}'
     try:
         message_title = topic if topic else 'Без темы'
-        send_mail(message_title, text, from_email, [admin_email])
+        send_mail(message_title, text, os.getenv('DEFAULT_FROM_EMAIL'), [admin_email])
     except BadHeaderError:
         return HttpResponse('Invalid header found.')

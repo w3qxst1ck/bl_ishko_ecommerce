@@ -50,7 +50,7 @@ def send_message_to_admin(client_login_email, order, canceled=None):
             text,
             from_email,
             [email],
-            html_message,
+            html_message=html_message,
         )
     except BadHeaderError:
         return HttpResponse('Invalid header found.')
