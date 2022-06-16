@@ -70,8 +70,7 @@ cartButton.addEventListener('click', function(e){
 
     var itemCount = document.getElementById('quantity_input').value;
     if (itemCount == '0') {
-      alert('this is 0')
-      // cartButton.setAttribute('disabled', 'disabled');
+      console.log('item count must be greater than 0');
     } else {
       var itemSize = document.getElementById('size_input').value;
       var productId = this.dataset.product;
