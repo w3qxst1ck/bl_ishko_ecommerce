@@ -49,6 +49,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+        ordering = ['-created']
 
 
 class Item(models.Model):
@@ -79,9 +80,9 @@ class ProductImages(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, verbose_name='Название')
     slug = models.SlugField()
-    image = models.ImageField(upload_to='categories/')
+    image = models.ImageField(upload_to='categories/', verbose_name='Изображение')
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
