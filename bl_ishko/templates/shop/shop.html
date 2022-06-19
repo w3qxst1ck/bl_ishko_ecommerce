@@ -197,7 +197,7 @@
                       </ul>
                     </div>
                     <!-- Item Name -->
-                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat" style="text-decoration: line-through;">{% if product.discount %}{{ product.price }}{% endif %}</span> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
+                    <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper|truncatechars:40 }}</a> <span class="font-montserrat" style="text-decoration: line-through;">{% if product.discount %}{{ product.price }}{% endif %}</span> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
                   </div>
                 </li>
                 {% endfor %}
