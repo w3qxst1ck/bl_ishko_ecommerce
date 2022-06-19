@@ -500,514 +500,93 @@
           
           <!--  Tittle -->
           <div class="tittle animate fadeInUp" data-wow-delay="0.4s">
-            <h5>NEW ARRIVAL</h5>
+            <h5>НОВИНКИ</h5>
             <p>Treding fashion</p>
           </div>
           
           <!-- Nav tabs -->
           <ul class="nav nav-tabs animate fadeInUp" data-wow-delay="0.4s" role="tablist">
-            <li role="presentation" class="active"><a href="#men" aria-controls="men" role="tab" data-toggle="tab">MEN’S</a></li>
-            <li role="presentation"><a href="#women" aria-controls="women" role="tab" data-toggle="tab">WOMAN</a></li>
+
+            <li role="presentation" class="active"><a href="#{{ categories.first.slug }}" aria-controls="{{ categories.first.slug }}" role="tab" data-toggle="tab">{{ categories.first.title|upper }}</a></li>
+            {% for category in categories|slice:"1:" %}
+            <li role="presentation" >
+              <a href="#{{ category.slug }}" aria-controls="{{ category.slug }}" role="tab" data-toggle="tab">{{ category.title|upper }}</a>
+            </li>
+            <!-- <li role="presentation"><a href="#women" aria-controls="women" role="tab" data-toggle="tab">WOMAN</a></li>
             <li role="presentation"><a href="#access" aria-controls="access" role="tab" data-toggle="tab">ACCESSORIES</a></li>
             <li role="presentation"><a href="#shoes" aria-controls="shoes" role="tab" data-toggle="tab">SHOES</a></li>
-            <li role="presentation"><a href="#bags" aria-controls="bags" role="tab" data-toggle="tab">BAGS</a></li>
+            <li role="presentation"><a href="#bags" aria-controls="bags" role="tab" data-toggle="tab">BAGS</a></li> -->
+            {% endfor %}
           </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content animate fadeInUp" data-wow-delay="0.4s">
+                  <!-- FRIST CATEGORY  -->
+                  <div role="tabpanel" class="tab-pane fade in active" id="{{ categories.first.slug }}"> 
+                    <!--  New Arrival Tabs Products  -->
+                    <div class="popurlar_product">
+                      <ul class="row">
+                        
+                        {% for product in categories.first.products.all %}
+                          <!--  New Arrival  -->
+                          <li class="col-sm-3">
+                            <div class="items-in"> 
+                              <!-- Image --> 
+                              <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                              <!-- Hover Details -->
+                              <div class="over-item">
+                                <ul class="animated fadeIn">
+                                  <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                                  <!-- Rating Stars -->
+                                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                </ul>
+                              </div>
+                              <!-- Item Name -->
+                              <div class="details-sec"> <a href="#.">{{ product.title }}</a> <span class="font-montserrat">{{ product.price }}</span> </div>
+                            </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
           
-          <!-- Tab panes -->
-          <div class="tab-content animate fadeInUp" data-wow-delay="0.4s"> 
-            <!-- MEN’S  -->
-            <div role="tabpanel" class="tab-pane fade in active" id="men"> 
-              
-              <!--  New Arrival Tabs Products  -->
-              <div class="popurlar_product">
-                <ul class="row">
+          
+            {% for category in categories|slice:"1:" %}
+              <!-- OTHER CATEGORIES EXCEPT FIRST  -->
+                <div role="tabpanel" class="tab-pane fade" id="{{ category.slug }}"> 
                   
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="new-tag"> NEW </div>
-                      
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="hot-tag"> HOT </div>
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="images/new-item-4.jpg" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            <!-- WOMAN  -->
-            <div role="tabpanel" class="tab-pane fade" id="women"> 
-              
-              <!--  New Arrival Tabs Products  -->
-              <div class="popurlar_product">
-                <ul class="row">
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="new-tag"> NEW </div>
-                      
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="hot-tag"> HOT </div>
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            <!-- ACCESSORIES  -->
-            <div role="tabpanel" class="tab-pane fade" id="access"> 
-              
-              <!--  New Arrival Tabs Products  -->
-              <div class="popurlar_product">
-                <ul class="row">
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="new-tag"> NEW </div>
-                      
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="hot-tag"> HOT </div>
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            <!-- SHOES  -->
-            <div role="tabpanel" class="tab-pane fade" id="shoes"> 
-              
-              <!--  New Arrival Tabs Products  -->
-              <div class="popurlar_product">
-                <ul class="row">
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="new-tag"> NEW </div>
-                      
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="hot-tag"> HOT </div>
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            <!-- BAGS  -->
-            <div role="tabpanel" class="tab-pane fade" id="bags"> 
-              
-              <!--  New Arrival Tabs Products  -->
-              <div class="popurlar_product">
-                <ul class="row">
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-3.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-3.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="new-tag"> NEW </div>
-                      
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-4.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-4.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                  
-                  <!--  New Arrival  -->
-                  <li class="col-sm-3">
-                    <div class="items-in"> 
-                      <!--  Tags  -->
-                      <div class="hot-tag"> HOT </div>
-                      <!-- Image --> 
-                      <img src="{% static 'images/new-item-2.jpg' %}" alt=""> 
-                      <!-- Hover Details -->
-                      <div class="over-item">
-                        <ul class="animated fadeIn">
-                          <li> <a href="{% static 'images/new-item-2.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                          <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                          <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                          <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                          <!-- Rating Stars -->
-                          <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                        </ul>
-                      </div>
-                      <!-- Item Name -->
-                      <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                  <!--  New Arrival Tabs Products  -->
+                  <div class="popurlar_product">
+                    <ul class="row">
+                      {% for product in category.products.all %}
+                        <!--  New Arrival  -->
+                        <li class="col-sm-3">
+                          <div class="items-in"> 
+                            <!-- Image --> 
+                            <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                            <!-- Hover Details -->
+                            <div class="over-item">
+                              <ul class="animated fadeIn">
+                                <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
+                                <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                                <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                                <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                                <!-- Rating Stars -->
+                                <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                              </ul>
+                            </div>
+                            <!-- Item Name -->
+                            <div class="details-sec"> <a href="#.">{{ product.title }}</a> <span class="font-montserrat">{{ product.price }}</span> </div>
+                          </div>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>

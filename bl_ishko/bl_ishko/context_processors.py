@@ -15,7 +15,7 @@ def get_order(request):
 
 
 def get_categories(request):
-    categories = Category.objects.all().order_by('title')
+    categories = Category.objects.all().order_by('-created')
     return {'categories': categories}
 
 
