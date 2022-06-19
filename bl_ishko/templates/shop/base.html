@@ -10,6 +10,7 @@
 
 {% load static %}
 {% load thumbnail %}
+{% load sort_size %}
 
 
 <!-- FONTS ONLINE -->
@@ -379,6 +380,7 @@
                                 {% endthumbnail %}
                                 <li> <a href="" id="share-product1" data-toggle="modal" data-target="#shareModal"><i class="ion-shuffle"></i></a></li>
                                 <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
+                                
                                 {% if request.user.is_authenticated %}
                                   {% if product not in wish_list_products %}
                                     <li> <a href="" class="wishlist-status" data-domain="{{ domain_url }}" data-product="{{ product.id }}" data-action="add-item"><i class="fa fa-heart-o"></i></a></li>
@@ -398,6 +400,62 @@
                       {% endfor %}
                     </ul>
                   </div>
+
+                     {% for product in products %}
+                      <!-- Modal window -->
+                        <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+                            <div class="modal-content">
+                              <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                                <section class="pages-in item-detail-page">
+                                  <form action="{% url 'cart:add-to-cart' product.id %}" method="GET">
+                                      <!-- size -->
+                                      <div class="col-sm-12">
+                                        <div class="item-select"> 
+                                          <!--  SIZE -->
+                                          <p>*РАЗМЕР</p>
+                                          <select class="selectpicker" id='product-size'>
+                                            {% if product.items.all|distinct_size %}
+                                              {% for size in product.items.all|distinct_size %}
+                                                <option>{{ size }}</option>
+                                              {% endfor %}
+                                            {% else %}
+                                              <option disabled>ТОВАР ОТСУТСТВУЕТ</option>
+                                            {% endif %}
+                                          </select>
+                                          <input type="" id="size_input" hidden="true" name="size" value="{{ product.items.all|distinct_size|first }}">
+                                        </div>
+                                      </div>
+
+                                      <div class="col-sm-12">
+                                        <p style="font-size: 12px; margin-top: 10px">{{ product.description }}</p>
+                                      </div>
+
+                                      <div class="col-sm-12">
+                                        <p style="font-size: 12px; margin-top: 10px">Состав: {{ product.compound }}</p>
+                                      </div> 
+
+                                      <div class="col-sm-12">
+                                        <p style="font-size: 12px; margin-top: 10px">Уход: {{ product.care }}</p>
+                                      </div> 
+                                      {% if product.items.all|distinct_size %}
+                                        <div class="col-sm-12">
+                                          <button type="submit" class="btn btn-small btn-dark float-right">В КОРЗИНУ</button>
+                                        </div>
+                                      {% endif %}
+                                  </form>
+                                </section>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <!-- end Modal window -->
+                      {% endfor %}
+
+
                 </div>
                 {% endif %}
               {% endfor %}
@@ -573,6 +631,38 @@
 <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
 <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
 <script src="{% static 'js/main.js' %}"></script>
+<script>
+jQuery(document).ready(function($) {
+  
+  //  Price Filter ( noUiSlider Plugin)
+    $("#price-range").noUiSlider({
+    range: {
+      'min': [ 0 ],
+      'max': [ 1000 ]
+    },
+    start: [40, 940],
+        connect:true,
+        serialization:{
+            lower: [
+        $.Link({
+          target: $("#price-min")
+        })
+      ],
+      upper: [
+        $.Link({
+          target: $("#price-max")
+        })
+      ],
+      format: {
+      // Set formatting
+        decimals: 1,
+        prefix: '₽'
+      }
+        }
+  });
+})
+
+</script>
 {% endblock scripts %}
 </body>
 </html>
