@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.postgres.search import TrigramSimilarity
 import os
 
+from loguru import logger
+
 from .utils import gen_slug
 from users.models import WishProduct, ProductComment
 from .forms import FormWithCaptcha
@@ -128,6 +130,7 @@ def search_view(request):
             # выбрали категорию
             if searched_product_category != 'КАТЕГОРИИ':
                 products = Product.objects.filter(category__title=searched_product_category)
+
             # не выбрали категорию
             else:
                 searched_product_title = None
@@ -144,12 +147,19 @@ def search_view(request):
                 products = Product.objects.annotate(
                     similarity=TrigramSimilarity('slug', searched_product_slugify),
                 ).filter(similarity__gt=0.1).order_by('-similarity').filter(category__title=searched_product_category)
+
+                logger.info(f'Был сделан запрос на поиск "{searched_product_title}" и категорией {searched_product_category}. '
+                            f'Надены следующие товары {[p.title for p in products]}')
+
             # не выбрали категорию
             else:
                 searched_product_category = None
                 products = Product.objects.annotate(
                     similarity=TrigramSimilarity('slug', searched_product_slugify),
                 ).filter(similarity__gt=0.1).order_by('-similarity')
+
+                logger.info(f'Был сделан запрос на поиск "{searched_product_title}" и без указания категории.'
+                    f'Надены следующие товары {[p.title for p in products]}')
     else:
         # защита от запроса через url
         searched_product_title = None
