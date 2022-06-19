@@ -30,10 +30,14 @@ class Command(BaseCommand):
         return objects
 
     def create_categories(self):
+        all_images = os.listdir(path='shop/data/images/')
+        i = 0
         for category in self.CATEGORIES:
             Category.objects.create(
-                title=category
+                title=category,
+                image=File(open(f'shop/data/images/{all_images[i]}', 'rb')),
             )
+            i += 1
         print('Объекты Categories супешно созданы!')
 
     def create_products(self, count):

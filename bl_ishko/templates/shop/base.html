@@ -9,6 +9,8 @@
 <meta name="author" content="Sofy">
 
 {% load static %}
+{% load thumbnail %}
+
 
 <!-- FONTS ONLINE -->
 <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
@@ -305,25 +307,19 @@
         <div class="container">
           <ul class="row">
             
-            <!-- Collection Add -->
-            <li class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
-              <div class="inn-sec"> <a href="#."> <img class="img-responsive" src="{% static 'images/collection-img-1.jpg' %}" alt=""> <span>MEN’</span> </a> </div>
+            {% for category in categories|slice:":4" %}
+              <!-- Collection Add -->
+              <li class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
+              <div class="inn-sec"> 
+                <a href="{{ category.get_absolute_url }}">
+                  {% thumbnail category.image "270x269" crop="center" as im  %}
+                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
+                    <span>{{ category.title|upper }}</span> </a> 
+                  {% endthumbnail %}
+              </div>
             </li>
+            {% endfor %}
             
-            <!-- Collection Add -->
-            <li class="col-sm-3 animate fadeInLeft" data-wow-delay="0.6s">
-              <div class="inn-sec"> <a href="#."> <img class="img-responsive" src="{% static 'images/collection-img-2.jpg' %}" alt=""> <span>SHOES</span> </a> </div>
-            </li>
-            
-            <!-- Collection Add -->
-            <li class="col-sm-3 animate fadeInRight" data-wow-delay="0.4s">
-              <div class="inn-sec"> <a href="#."> <img class="img-responsive" src="{% static 'images/collection-img-3.jpg' %}" alt=""> <span>WOMAN</span> </a> </div>
-            </li>
-            
-            <!-- Collection Add -->
-            <li class="col-sm-3 animate fadeInRight" data-wow-delay="0.6s">
-              <div class="inn-sec"> <a href="#."> <img class="img-responsive" src="{% static 'images/collection-img-4.jpg' %}" alt=""> <span>KID’S</span> </a> </div>
-            </li>
           </ul>
         </div>
       </section>
