@@ -96,6 +96,13 @@ $("#product-quantity").on('change', function () {
 	quantity_input.val(quantity_value);
 	let hiddenP = $('#ajax-add-to-cart-p');
 	hiddenP.attr('hidden', 'true');
+
+	// check 0
+	if (quantity_value == '0') {
+		$("#ajax-add-to-cart").prop("disabled", true);
+	} else {
+		$("#ajax-add-to-cart").prop("disabled", false);
+	};
 });
 
 /*-----------------------------------------------------------------------------------*/

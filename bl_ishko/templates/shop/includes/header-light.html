@@ -39,7 +39,8 @@
     
     <!-- Logo -->
     <div class="container">
-      <div class="logo"> <a href="{% url 'shop:home-page' %}"><img src="{% static 'images/bl_logo3.png' %}" alt=""></a> </div>
+      <!-- <div class="logo"> <a href="{% url 'shop:home-page' %}"><img src="{% static 'images/bl_logo3.png' %}" alt=""></a> </div> -->
+      <div class="logo"> <a href="{% url 'shop:home-page' %}"><img src="{% static 'images/dark-logo.png' %}" width="15%" alt=""></a> </div>
     </div>
     <div class="sticky">
       <div class="container"> 
@@ -219,7 +220,7 @@
             
             <!--======= Shopping Cart =========-->
             <li class="shop-cart"><a href="{% url 'cart:cart-page' %}"><i class="fa fa-shopping-cart"></i></a> {% if order.order_items.all %}<span class="numb">{{ order.get_total_quantity }}</span>{% endif %}
-              <ul class="dropdown">
+              <ul class="dropdown" id="cart-dropdown-menu-ul">
                 {% if order.order_items %}
                   {% for item in order.order_items.all %}
                     {% if forloop.counter < 3 %}
