@@ -342,7 +342,7 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs animate fadeInUp" data-wow-delay="0.4s" role="tablist">
 
-            {% for category in categories%}
+            {% for category in categories %}
               {% if category.products.all %}
                 <li role="presentation" {% if forloop.counter == 1 %} class="active" {% endif %}>
                   <a href="#{{ category.slug }}" aria-controls="{{ category.slug }}" role="tab" data-toggle="tab">{{ category.title|upper }}</a>
@@ -367,21 +367,32 @@
                         <!--  New Arrival  -->
                         <li class="col-sm-3">
                           <div class="items-in"> 
-                            <!-- Image --> 
-                            <img src="{% static 'images/new-item-1.jpg' %}" alt=""> 
+                            <!-- Image -->
+                            {% thumbnail product.title_image "270x340" crop="center" as im %}
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                            {% endthumbnail %}
                             <!-- Hover Details -->
                             <div class="over-item">
                               <ul class="animated fadeIn">
-                                <li> <a href="{% static 'images/new-item-1.jpg' %}" data-lighter><i class="ion-search"></i></a></li>
-                                <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                                <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                                <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                                <!-- Rating Stars -->
-                                <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                {% thumbnail product.title_image "378x476" crop="center" as im %}
+                                  <li> <a href="{{ im.url }}" data-lighter><i class="ion-search"></i></a></li>
+                                {% endthumbnail %}
+                                <li> <a href="" id="share-product1" data-toggle="modal" data-target="#shareModal"><i class="ion-shuffle"></i></a></li>
+                                <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
+                                {% if request.user.is_authenticated %}
+                                  {% if product not in wish_list_products %}
+                                    <li> <a href="" class="wishlist-status" data-domain="{{ domain_url }}" data-product="{{ product.id }}" data-action="add-item"><i class="fa fa-heart-o"></i></a></li>
+                                  {% else %}
+                                    <li> <a href="" class="wishlist-status" data-domain="{{ domain_url }}" data-product="{{ product.id }}" data-action="delete-item" style="background: #af5875; color: #fff;"><i class="fa fa-heart-o"></i></a></li>
+                                  {% endif %}
+                                {% else %}
+                                    <li> <a href="{% url 'account_login' %}"><i class="fa fa-heart-o"></i></a></li>
+                                {% endif %}
+                                <li class="full-w"> <a href="" data-toggle="modal" data-target="#choiceModal{{ forloop.counter }}" class="btn">В КОРЗИНУ</a></li>
                               </ul>
                             </div>
                             <!-- Item Name -->
-                            <div class="details-sec"> <a href="#.">{{ product.title|upper }}</a> <span class="font-montserrat">{{ product.price }}</span> </div>
+                            <div class="details-sec"> <a href="{{ product.get_absolute_url }}">{{ product.title|upper }}</a> <span class="font-montserrat" style="text-decoration: line-through;">{% if product.discount %}{{ product.price }}{% endif %}</span> <span class="font-montserrat">{{ product.get_price }} RUB</span> </div>
                           </div>
                         </li>
                       {% endfor %}
@@ -513,6 +524,28 @@
         </div>
       </section>
       
+            <!-- Modal window share product -->
+            <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+                <div class="modal-content">
+                  <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="col">
+                      <h6 style="font-weight: 500; font-family: 'Montserrat', sans-serif;">ПОДЕЛИТЬСЯ</h6>
+                    </div>
+                    
+                    <div class="col">
+                      <p style="font-size: 11px; font-family: 'Montserrat', sans-serif;">Ссылка на товар скопирована в буфер обмена.</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end Modal window -->
+
     </div>
   {% endblock content %}
 

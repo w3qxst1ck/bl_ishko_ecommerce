@@ -13,7 +13,11 @@ from .tasks import send_messages_from_contact_task
 
 
 def home_page(request):
-    return render(request, 'shop/base.html')
+    if request.user.is_authenticated:
+        wish_list_products = WishProduct.objects.filter(user=request.user)
+    else:
+        wish_list_products = []
+    return render(request, 'shop/base.html', context={'wish_list_products': wish_list_products})
 
 
 def faq_page(request, pk=None):
