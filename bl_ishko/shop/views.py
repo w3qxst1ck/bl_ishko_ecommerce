@@ -9,13 +9,20 @@ from loguru import logger
 from .utils import gen_slug
 from users.models import WishProduct, ProductComment
 from .forms import FormWithCaptcha
-from .models import Product, Category, Faq, FaqCategory
+from .models import Product, Category, Faq, FaqCategory, Post
 from .services import get_related_products_for_detail, get_size_list
 from .tasks import send_messages_from_contact_task
 
 
 def home_page(request):
-    return render(request, 'shop/base.html')
+    if request.user.is_authenticated:
+        wish_list_products = WishProduct.objects.filter(user=request.user)
+    else:
+        wish_list_products = []
+
+    posts = Post.objects.filter(is_active=True)[:2]
+    return render(request, 'shop/base.html', context={'wish_list_products': wish_list_products,
+                                                      'posts': posts,})
 
 
 def faq_page(request, pk=None):

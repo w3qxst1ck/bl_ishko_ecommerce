@@ -3,6 +3,9 @@ from .utils import gen_slug
 from django.shortcuts import reverse
 from datetime import datetime, timedelta
 
+from django.contrib.auth.models import User
+
+
 CHOICES = (
     ('XS', 'XS'),
     ('S', 'S'),
@@ -129,4 +132,19 @@ class Faq(models.Model):
         verbose_name_plural = 'FAQs'
 
 
+class Post(models.Model):
+    category = models.CharField(max_length=512, verbose_name='Тема поста')
+    title = models.CharField(max_length=512, verbose_name='Заголовок')
+    text = models.TextField(verbose_name='Текст поста')
+    image = models.ImageField(upload_to='posts/', verbose_name='Постер')
+    date = models.DateField(auto_now_add=True)
+    author = models.CharField(max_length=125, default='admin', verbose_name='Автора поста', blank=True)
+    is_active = models.BooleanField(default=False, verbose_name='Активный')
 
+    def __str__(self):
+        return f'{self.author} - "{self.title}"'
+
+    class Meta:
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
+        ordering = ['-date']
