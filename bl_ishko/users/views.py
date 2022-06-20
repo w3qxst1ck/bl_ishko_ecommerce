@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -7,14 +7,19 @@ from django.views.decorators.http import require_POST
 import json
 
 from .services import save_or_change_user_info, get_related_products
-from cart.models import Order
+from cart.models import Order, OrderItem
 from .models import WishProduct
-from shop.models import Product
+from shop.models import Product, Item
 
 
 @login_required
 def wish_list(request):
-    wish_products = WishProduct.objects.filter(user=request.user).order_by('-adding_date')
+    # optimization
+    product_qs = Product.objects.prefetch_related('items').select_related('category')
+
+    wish_products = WishProduct.objects.filter(user=request.user)\
+        .prefetch_related(Prefetch('product', queryset=product_qs))\
+        .order_by('-adding_date')
     related_products = get_related_products(wish_products)
     context = {'wish_products': [], 'related_products': related_products}
     if len(wish_products) > 0:
@@ -83,7 +88,13 @@ def profile(request):
 
 @login_required
 def profile_orders(request):
-    orders = Order.objects.filter(user=request.user).filter(~Q(is_active=True) | ~Q(ordered=False))
+    # optimization
+    item_qs = Item.objects.select_related('product')
+    order_items_qs = OrderItem.objects.prefetch_related(Prefetch('item', queryset=item_qs))
+
+    orders = Order.objects.filter(user=request.user)\
+        .filter(~Q(is_active=True) | ~Q(ordered=False))\
+        .prefetch_related(Prefetch('order_items', queryset=order_items_qs))
     return render(request, 'users/profile_orders.html', {'orders': orders})
 
 

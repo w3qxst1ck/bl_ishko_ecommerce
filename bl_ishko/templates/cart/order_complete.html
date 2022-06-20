@@ -75,13 +75,13 @@
                   <div class="order-detail">
                     <p>ТОВАР <span>СУММА</span></p>
                     <div class="item-order">
-                      {% for order_item in order.order_items.all %}
+                      {% for order_item in completed_order.order_items.all %}
                         <p>{{ order_item.item.product.title|upper }} - {{ order_item.item.size }} <span class="color"> x{{ order_item.quantity }} </span></p>
                         <p>ЦВЕТ: {{ order_item.item.product.color|upper }} </p>
                         <p class="text-right">{% if order_item.item.product.discount %}{{ order_item.item_total_with_sale }} RUB (sale {{ order_item.item.product.discount }}%){% else %}{{ order_item.item_total }} RUB{% endif %}</p>
                       {% endfor %}
                     </div>
-                    <p>СУММА ЗАКАЗА <span>{{ order.get_order_total_price_with_sale }} RUB</span></p>
+                    <p>СУММА ЗАКАЗА <span>{{ completed_order.get_order_total_price_with_sale }} RUB</span></p>
                     <p>ДОСТАВКА <span>ЦЕНА</span></p>
                     <div class="item-order" style="padding-top: 10px; padding-bottom: 10px;">
                       <p>СДЭК <span> В зависимости от города</span></p>

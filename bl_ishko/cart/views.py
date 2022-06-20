@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
@@ -6,7 +7,7 @@ from loguru import logger
 import json
 import os
 
-from shop.models import Product
+from shop.models import Product, Item
 from cart.models import OrderItem, Order, BillingInfo
 from .services import is_enough_items
 from .tasks import send_messages_to_admin, send_messages_to_client
@@ -14,7 +15,10 @@ from .tasks import send_messages_to_admin, send_messages_to_client
 
 @login_required
 def cart_page(request):
-    order_qs = Order.objects.filter(user=request.user, ordered=False, is_active=True)
+    # optimization
+    order_item_qs = OrderItem.objects.select_related('item')
+
+    order_qs = Order.objects.filter(user=request.user, ordered=False, is_active=True).prefetch_related(Prefetch('order_items', queryset=order_item_qs))
     sold_out = False
     if order_qs.exists():
         if not is_enough_items(order_qs[0]):
@@ -142,7 +146,12 @@ def delete_all_from_cart(request):
 
 @login_required
 def checkout_page(request):
-    order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)
+    # optimization
+    order_item_qs = OrderItem.objects.select_related('item')
+
+    order_qs = Order.objects.filter(user=request.user, is_active=True, ordered=False)\
+        .prefetch_related(Prefetch('order_items', queryset=order_item_qs))
+
     if order_qs.exists():
         if order_qs[0].order_items.all():
             if is_enough_items(order_qs[0]):
@@ -218,8 +227,12 @@ def create_billing_info(request, order):
 
 @login_required
 def order_complete_page(request, uuid):
-    order = Order.objects.get(id=uuid)
-    return render(request, 'cart/order_complete.html', context={'order': order})
+    # optimization
+    item_qs = Item.objects.select_related('product')
+    order_items_qs = OrderItem.objects.prefetch_related(Prefetch('item', queryset=item_qs))
+
+    completed_order = Order.objects.prefetch_related(Prefetch('order_items', queryset=order_items_qs)).filter(id=uuid)[0]
+    return render(request, 'cart/order_complete.html', context={'completed_order': completed_order})
 
 
 @login_required

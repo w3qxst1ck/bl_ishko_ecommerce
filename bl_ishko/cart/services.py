@@ -4,6 +4,8 @@ import os
 
 from django.template.loader import get_template
 
+from cart.models import Order
+
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 
 
