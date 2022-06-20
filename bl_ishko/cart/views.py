@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
+from loguru import logger
 import json
 import os
 
@@ -56,10 +57,22 @@ def add_to_cart(request, pk):
             order_item.save()
             order.order_items.add(order_item)
     else:
+
+        logger.warning(f'Пользователь с Email: {request.user.email} пытался добавить в корзину товар "{item.product.title}",которого нет в наличии, '
+                    f'размер: {item.size} цвет: {item.product.color} количество: {input_quantity}')
+
         redirect('shop:shop-page')
 
     if request.META.get('HTTP_REFERER').split('/')[-2] == 'search':
+
+        logger.info(f'Пользователь с Email: {request.user.email} добавил в корзину товар (со страницы поиска товаров) "{item.product.title}" '
+                    f'размер: {item.size} цвет: {item.product.color} количество: {input_quantity}')
+
         return redirect('cart:cart-page')
+
+    logger.info(f'Пользователь с Email: {request.user.email} добавил в корзину товар "{item.product.title}" '
+                f'размер: {item.size} цвет: {item.product.color} количество: {input_quantity}')
+
     return redirect(request.META.get('HTTP_REFERER'))
 
 
@@ -94,10 +107,17 @@ def add_to_cart_ajax(request):
             order_item.quantity = item_count
             order_item.save()
             order.order_items.add(order_item)
+
+        logger.info(f'Пользователь с Email: {request.user.email} добавил в корзину с помощью ajax запроса товар "{item.product.title}" '
+                    f'размер: {item.size} цвет: {item.product.color} количество: {item_count}')
+
         return JsonResponse('Item added to cart', safe=False)
     else:
-        return JsonResponse('Not enough items for this size', safe=False)
 
+        logger.warning(f'Пользователь с Email: {request.user.email} пытался добавить в корзину с помощью ajax запроса '
+                       f'товар "{item.product.title}",которого нет в наличии, размер: {item.size} цвет: {item.product.color} количество: {item_count}')
+
+        return JsonResponse('Not enough items for this size', safe=False)
 
 
 @login_required
@@ -128,10 +148,19 @@ def checkout_page(request):
             if is_enough_items(order_qs[0]):
                 return render(request, 'cart/checkout_page.html')
             else:
+
+                logger.warning(f'Пользователь с Email: {request.user.email} пытался перейти в checkout, при нехватке товаров для оформления заказа')
+
                 return render(request, 'cart/sold_out.html')
         else:
+
+            logger.warning(f'Пользователь с Email: {request.user.email} пытался перейти в checkout, при отсутствии товаров в заказе')
+
             return render(request, 'cart/empty_order.html')
     else:
+
+        logger.warning(f'Пользователь с Email: {request.user.email} пытался перейти в checkout, при отсутствии заказа')
+
         return HttpResponse('Заказ не существует')
 
 
@@ -155,8 +184,15 @@ def order_complete_page_intermediate(request):
         # оповещение клиента
         send_messages_to_client.delay(order.id)
 
+        logger.info(f'Пользователь с Email: {request.user.email} оформил заказ номер {order.id} состав заказа: '
+                    f'{[(order_item.item.product.title, order_item.item.product.color, order_item.item.size, order_item.quantity) for order_item in order.order_items.all()]}')
+
         return redirect('cart:order-complete-page', uuid=order.id)
     else:
+
+        logger.warning(f'Пользователь с Email: {request.user.email} пытался перейти в order_complete_page, '
+                       f'при нехватке товаров для оформления заказа')
+
         return render(request, 'cart/sold_out.html')
 
 
@@ -205,6 +241,9 @@ def cancel_order(request, order_id):
 
     # оповещение клиента
     send_messages_to_client.delay(order.id, canceled=True)
+
+    logger.info(f'Пользователь с Email: {request.user.email} отменил заказ номер {order.id} состав заказа: '
+                f'{[(o_i.item.product.title, o_i.item.product.color, o_i.item.size, o_i.quantity) for o_i in order.order_items.all()]}')
 
     return redirect('users:profile-orders-page')
 

@@ -1,5 +1,6 @@
 from pathlib import Path
 from dotenv import load_dotenv
+from loguru import logger as loguru_logger
 import os
 
 # get data from .env
@@ -204,7 +205,12 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 # CELERY_TIMEZONE = 'Africa/Nairobi'
 
+
 # debug tool bar
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# LOGURU
+loguru_logger.add(os.path.join(BASE_DIR, 'logs/cart/logs.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='INFO', filter="cart.views", rotation='50 MB', compression='zip')
+loguru_logger.add(os.path.join(BASE_DIR, 'logs/warning.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='WARNING', rotation='50 MB', compression='zip')
