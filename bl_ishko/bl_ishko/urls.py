@@ -10,6 +10,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('user/', include('users.urls', namespace='users')),
     path('cart/', include('cart.urls', namespace='cart')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 handler404 = 'shop.views.handle_not_found'

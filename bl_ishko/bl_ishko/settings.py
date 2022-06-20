@@ -48,10 +48,13 @@ INSTALLED_APPS = [
     # captcha
     'captcha',
 
+    # debug tool bar
+    "debug_toolbar",
+
     # apps
     'shop.apps.ShopConfig',
     'users',
-    'cart'
+    'cart',
 ]
 
 SITE_ID = 1
@@ -72,6 +75,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # debug tool bar
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 
     # 'bl_ishko.middleware.ErrorLogMiddleware',
 ]
@@ -198,3 +204,7 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 # CELERY_TIMEZONE = 'Africa/Nairobi'
 
+# debug tool bar
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

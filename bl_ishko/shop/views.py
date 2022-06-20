@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.postgres.search import TrigramSimilarity
@@ -7,7 +7,7 @@ import os
 from .utils import gen_slug
 from users.models import WishProduct, ProductComment
 from .forms import FormWithCaptcha
-from .models import Product, Category, Faq, FaqCategory, Post
+from .models import Product, Category, Faq, FaqCategory, Post, Item, ProductImages
 from .services import get_related_products_for_detail, get_size_list
 from .tasks import send_messages_from_contact_task
 
@@ -39,17 +39,26 @@ def faq_page(request, pk=None):
 
 
 def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product.objects.
+                                select_related('category')
+                                .prefetch_related('images')
+                                # .prefetch_related(Prefetch('items', queryset=Item.objects.only('id', 'size', 'item_count'))),
+                                .prefetch_related('items')
+                                .prefetch_related('comments'),
+                                slug=slug)
 
+    # при публикации комментария
     if request.method == 'POST' and request.user.is_authenticated:
         comment = ProductComment.objects.create(product=product, user=request.user)
         comment.text = request.POST['comment_text']
         comment.save()
         return redirect('shop:detail-page', slug=slug)
 
+    # формирование списка похожих товаров
     related_products = get_related_products_for_detail(product)
     if request.user.is_authenticated:
-        wish_list = WishProduct.objects.filter(user=request.user)
+        wish_list = WishProduct.objects.filter(user=request.user).select_related('product')
+
         if wish_list.exists():
             wish_list_products = [product.product for product in wish_list]
         else:

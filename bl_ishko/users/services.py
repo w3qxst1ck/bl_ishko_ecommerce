@@ -60,5 +60,3 @@ def get_related_products(wish_products, count=6):
         related_products.extend(Product.objects.filter(~Q(id__in=id_already_in_related))[:4-len(related_products)])
 
     return related_products[:count]
-
-
