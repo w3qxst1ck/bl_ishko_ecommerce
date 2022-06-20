@@ -1,12 +1,18 @@
 import os
+from django.db.models import Prefetch
 
-from cart.models import Order
-from shop.models import Category, Product
+from cart.models import Order, OrderItem
+from shop.models import Category, Product, Item
 
 
 def get_order(request):
     if request.user.is_authenticated:
-        order = Order.objects.filter(user=request.user, ordered=False, is_active=True)
+        # optimization
+        item_qs = Item.objects.select_related('product')
+        order_items_qs = OrderItem.objects.prefetch_related(Prefetch('item', queryset=item_qs))
+
+        order = Order.objects.filter(user=request.user, ordered=False, is_active=True)\
+            .prefetch_related(Prefetch('order_items', queryset=order_items_qs))
         if order.exists():
             order = order[0]
     else:

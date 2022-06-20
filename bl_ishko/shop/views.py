@@ -41,12 +41,13 @@ def faq_page(request, pk=None):
 
 
 def product_detail(request, slug):
+    # optimization
+    comment_user_qs = ProductComment.objects.select_related('user')
+
     product = get_object_or_404(Product.objects.
                                 select_related('category')
-                                .prefetch_related('images')
-                                # .prefetch_related(Prefetch('items', queryset=Item.objects.only('id', 'size', 'item_count'))),
                                 .prefetch_related('items')
-                                .prefetch_related('comments'),
+                                .prefetch_related(Prefetch('comments', queryset=comment_user_qs)),
                                 slug=slug)
 
     # при публикации комментария
