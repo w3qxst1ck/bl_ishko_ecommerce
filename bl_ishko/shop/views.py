@@ -21,8 +21,14 @@ def home_page(request):
         wish_list_products = []
 
     posts = Post.objects.filter(is_active=True)[:2]
+
+    # optimization
+    products_qs = Product.objects.prefetch_related('items')
+    categories = Category.objects.all().prefetch_related(Prefetch('products', queryset=products_qs))
+
     return render(request, 'shop/base.html', context={'wish_list_products': wish_list_products,
-                                                      'posts': posts,})
+                                                      'posts': posts,
+                                                      'categories': categories,})
 
 
 def faq_page(request, pk=None):
@@ -146,13 +152,14 @@ def search_view(request):
         if searched_product_title == ' ' or not searched_product_title:
             # выбрали категорию
             if searched_product_category != 'КАТЕГОРИИ':
-                products = Product.objects.filter(category__title=searched_product_category)
+
+                products = Product.objects.filter(category__title=searched_product_category).prefetch_related('items')
 
             # не выбрали категорию
             else:
                 searched_product_title = None
                 searched_product_category = None
-                products = Product.objects.all().order_by('-created')
+                products = Product.objects.all().order_by('-created').prefetch_related('items')
 
         # ввели корректное название
         else:
@@ -163,7 +170,9 @@ def search_view(request):
 
                 products = Product.objects.annotate(
                     similarity=TrigramSimilarity('slug', searched_product_slugify),
-                ).filter(similarity__gt=0.1).order_by('-similarity').filter(category__title=searched_product_category)
+                    ).filter(similarity__gt=0.1).order_by('-similarity')\
+                    .prefetch_related('items')\
+                    .filter(category__title=searched_product_category)
 
                 logger.info(f'Был сделан запрос на поиск "{searched_product_title}" и категорией {searched_product_category}. '
                             f'Надены следующие товары {[p.title for p in products]}')
@@ -173,7 +182,9 @@ def search_view(request):
                 searched_product_category = None
                 products = Product.objects.annotate(
                     similarity=TrigramSimilarity('slug', searched_product_slugify),
-                ).filter(similarity__gt=0.1).order_by('-similarity')
+                    ).filter(similarity__gt=0.1)\
+                    .prefetch_related('items')\
+                    .order_by('-similarity')
 
                 logger.info(f'Был сделан запрос на поиск "{searched_product_title}" и без указания категории.'
                     f'Надены следующие товары {[p.title for p in products]}')
