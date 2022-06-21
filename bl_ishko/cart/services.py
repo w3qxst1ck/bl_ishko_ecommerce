@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import os
 
 from django.template.loader import get_template
+from loguru import logger
 
 from cart.models import Order
 
@@ -28,7 +29,10 @@ def send_message_to_client(order, canceled=None):
             [email],
             html_message=html_message
         )
+
+        logger.info(f'Отправлено письмо клиенту на Email: {order.info.email} при оформлении заказа номер {order.id}')
     except BadHeaderError:
+        logger.info(f'Не получилось отправить письмо клиенту на Email: {order.info.email} при оформлении заказа номер {order.id}')
         return HttpResponse('Invalid header found.')
 
 
@@ -54,7 +58,9 @@ def send_message_to_admin(client_login_email, order, canceled=None):
             [email],
             html_message=html_message,
         )
+        logger.info(f'Отправлено письмо администратору на Email: {from_email} при оформлении заказа клиентом ({order.info.email}) номер {order.id}')
     except BadHeaderError:
+        logger.info(f'Не получилось отправить письмо администратору при оформлении заказа клиентом ({order.info.email}) номер {order.id}')
         return HttpResponse('Invalid header found.')
 
 
