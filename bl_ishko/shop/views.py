@@ -16,7 +16,7 @@ from .tasks import send_messages_from_contact_task
 
 def home_page(request):
     if request.user.is_authenticated:
-        wish_list_products = WishProduct.objects.filter(user=request.user)
+        wish_list_products = WishProduct.objects.filter(user=request.user).select_related('product')
     else:
         wish_list_products = []
 
@@ -87,9 +87,9 @@ def shop_page(request, slug=None):
     # get products from category
     if slug:
         category = get_object_or_404(Category, slug=slug)
-        products = Product.objects.filter(category=category)
+        products = Product.objects.filter(category=category).prefetch_related('items')
     else:
-        products = Product.objects.all().order_by('-created')
+        products = Product.objects.all().order_by('-created').prefetch_related('items')
         category = None
 
     # get colors for sidebar
@@ -129,7 +129,7 @@ def shop_page(request, slug=None):
 
     # wish product list
     if request.user.is_authenticated:
-        wish_list = WishProduct.objects.filter(user=request.user)
+        wish_list = WishProduct.objects.filter(user=request.user).select_related('product')
         if wish_list.exists():
             wish_list_products = [product.product for product in wish_list]
         else:
@@ -138,9 +138,9 @@ def shop_page(request, slug=None):
         wish_list_products = []
 
     return render(request, 'shop/shop.html', {'products': products, 'wish_list_products': wish_list_products,
-                                                  'category': category, 'color_list': color_list,
-                                                  'color': color, 'min_price': min_price, 'max_price': max_price,
-                                                'size_list': size_list, 'size': size})
+                                              'category': category, 'color_list': color_list,
+                                              'color': color, 'min_price': min_price, 'max_price': max_price,
+                                              'size_list': size_list, 'size': size})
 
 
 def search_view(request):
@@ -196,7 +196,7 @@ def search_view(request):
 
     # wish product list
     if request.user.is_authenticated:
-        wish_list = WishProduct.objects.filter(user=request.user)
+        wish_list = WishProduct.objects.filter(user=request.user).select_related('product')
         if wish_list.exists():
             wish_list_products = [product.product for product in wish_list]
         else:
