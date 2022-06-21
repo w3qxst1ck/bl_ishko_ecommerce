@@ -23,6 +23,7 @@ def save_or_change_user_info(request):
 
 def get_related_products(wish_products, count=6):
     related_products = []
+    all_products = Product.objects.all().prefetch_related('items')
 
     if wish_products:
         # выбираем id товаров которые уже в избранных
@@ -30,11 +31,10 @@ def get_related_products(wish_products, count=6):
 
         # выбираем товары подходящие и по цвету и по категории
         for wish_product in wish_products:
-            category_and_color = Product.objects.filter(
+            category_and_color = all_products.filter(
                 Q(category=wish_product.product.category)
                 & Q(color=wish_product.product.color)
                 & ~Q(id__in=id_already_in_use))\
-                .prefetch_related('items')
             # доабвляем id отбранных товаров в общее множество
             for product in category_and_color:
                 id_already_in_use.add(product.id)
@@ -43,29 +43,27 @@ def get_related_products(wish_products, count=6):
 
         if len(related_products) < count:
             for wish_product in wish_products:
-                category_products = Product.objects.filter(
+                category_products = all_products.filter(
                     Q(category=wish_product.product.category)
-                    & ~Q(id__in=id_already_in_use))\
-                    .prefetch_related('items')
+                    & ~Q(id__in=id_already_in_use))
                 for product in category_products:
                     id_already_in_use.add(product.id)
                 related_products.extend(category_products)
 
         if len(related_products) < count:
             # id_already_in_related = list(id_already_in_related) + [product.id for product in related_products]
-            random_products = Product.objects.filter(
+            random_products = all_products.filter(
                 ~Q(id__in=id_already_in_use)) \
-                .prefetch_related('items')\
                 .order_by('-created')[:count - len(related_products)]
             for product in random_products:
                 id_already_in_use.add(product.id)
             related_products.extend(random_products)
     else:
-        related_products.extend(Product.objects.all().prefetch_related('items').order_by('-created')[:count])
+        related_products.extend(all_products.order_by('-created')[:count])
 
     # минимально необходимое число продуктов
-    if len(related_products) < 4:
-        id_already_in_related = [product.id for product in related_products]
-        related_products.extend(Product.objects.filter(~Q(id__in=id_already_in_related)).prefetch_related('items')[:4-len(related_products)])
+    # if len(related_products) < 4:
+    #     id_already_in_related = [product.id for product in related_products]
+    #     related_products.extend(Product.objects.filter(~Q(id__in=id_already_in_related)).prefetch_related('items')[:4-len(related_products)])
 
     return related_products[:count]
