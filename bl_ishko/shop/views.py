@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.postgres.search import TrigramSimilarity
 import os
-
+from django.views.decorators.cache import cache_page
 from loguru import logger
 
 from .utils import gen_slug
