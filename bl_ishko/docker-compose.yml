@@ -27,6 +27,16 @@ services:
     ports:
       - 5432:5432
 
+  nginx:
+    build: ./nginx
+    restart: on-failure
+    ports:
+      - 80:80
+    volumes:
+      - ./static:/static
+      - ./media:/media
+    depends_on:
+      - backend
 
 volumes:
   bl_ishko_postgres_data:

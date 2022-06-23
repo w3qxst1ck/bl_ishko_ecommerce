@@ -175,7 +175,6 @@ USE_TZ = False
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # STATICFILES_DIRS = [BASE_DIR / "static"]
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bl_ishko/static')]
 
 
 MEDIA_URL = '/media/'
