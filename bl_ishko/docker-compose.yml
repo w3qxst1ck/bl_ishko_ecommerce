@@ -18,6 +18,7 @@ services:
 
   postgresdb:
     image: postgres:13.1
+    container_name: bl_ishko_postgres
     restart: always
     volumes:
       - bl_ishko_postgres_data:/var/lib/postgresql/data/
