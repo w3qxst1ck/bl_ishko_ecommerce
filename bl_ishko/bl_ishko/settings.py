@@ -217,3 +217,11 @@ loguru_logger.add(os.path.join(BASE_DIR, 'logs/cart/logs.log'), format='{level} 
 loguru_logger.add(os.path.join(BASE_DIR, 'logs/mails/logs.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='INFO', filter="cart.services", rotation='50 MB', compression='zip')
 loguru_logger.add(os.path.join(BASE_DIR, 'logs/warning.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='WARNING', rotation='50 MB', compression='zip')
 
+
+# Cache
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+    }
+}
