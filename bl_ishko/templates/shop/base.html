@@ -11,6 +11,7 @@
 {% load static %}
 {% load thumbnail %}
 {% load sort_size %}
+{% load cache %}
 
 
 <!-- FONTS ONLINE -->
@@ -309,20 +310,20 @@
           </div> -->
 
           <ul class="row">
-            
-            {% for category in categories|slice:":4" %}
-              <!-- Collection Add -->
-              <li class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
-              <div class="inn-sec"> 
-                <a href="{{ category.get_absolute_url }}">
-                  {% thumbnail category.image "270x269" crop="center" as im  %}
-                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
-                    <span>{{ category.title|upper }}</span> </a> 
-                  {% endthumbnail %}
-              </div>
-            </li>
-            {% endfor %}
-            
+            {% cache 300 categories_preview %}
+              {% for category in categories|slice:":4" %}
+                <!-- Collection Add -->
+                <li class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
+                <div class="inn-sec"> 
+                  <a href="{{ category.get_absolute_url }}">
+                    {% thumbnail category.image "270x269" crop="center" as im  %}
+                      <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
+                      <span>{{ category.title|upper }}</span> </a> 
+                    {% endthumbnail %}
+                </div>
+              </li>
+              {% endfor %}
+            {% endcache %}
           </ul>
         </div>
       </section>
@@ -500,23 +501,25 @@
           <!--  Blog Posts -->
           <div class="blog-posts">
             <ul class="row">
-              {% for post in posts %}
-                <!--  Posts 1 -->
-                <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> 
-                  <!--  Image --> 
-                  {% thumbnail post.image "570x340" crop="center" as im %}
-                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
-                  {% endthumbnail %}
-                  <span class="tags">{{ post.category }}</span> <a class="tittle-post font-playfair">{{ post.title }}</a>
-                  <p>{{ post.text }}</p>
-                  <!--  Post Info -->
-                  <ul class="info">
-                    <li><i class="fa fa-user"></i> {{ post.author }}</li>
-                    <li><i class="fa fa-calendar-o"></i> {{ post.date|date:"d M" }}</li>
-                    <!-- <li><i class="fa fa-eye"></i> 325</li> -->
-                  </ul>
-                </li>
-              {% endfor %}
+              {% cache 300 blogs %}
+                {% for post in posts %}
+                  <!--  Posts 1 -->
+                  <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> 
+                    <!--  Image --> 
+                    {% thumbnail post.image "570x340" crop="center" as im %}
+                      <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                    {% endthumbnail %}
+                    <span class="tags">{{ post.category }}</span> <a class="tittle-post font-playfair">{{ post.title }}</a>
+                    <p>{{ post.text }}</p>
+                    <!--  Post Info -->
+                    <ul class="info">
+                      <li><i class="fa fa-user"></i> {{ post.author }}</li>
+                      <li><i class="fa fa-calendar-o"></i> {{ post.date|date:"d M" }}</li>
+                      <!-- <li><i class="fa fa-eye"></i> 325</li> -->
+                    </ul>
+                  </li>
+                {% endfor %}
+                {% endcache %}
             </ul>
           </div>
         </div>

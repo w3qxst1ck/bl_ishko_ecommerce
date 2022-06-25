@@ -1,6 +1,7 @@
 {% load static %}
-
 {% load thumbnail %}
+{% load cache %}
+
 
   <!-- Header -->
   {% block header_class %}<header class="header-style-2">{% endblock header_class %}
@@ -36,12 +37,16 @@
         </div>
       </div>
     </div>
+
     
     <!-- Logo -->
+    {% cache 600 logo %}
     <div class="container">
       <!-- <div class="logo"> <a href="{% url 'shop:home-page' %}"><img src="{% static 'images/bl_logo3.png' %}" alt=""></a> </div> -->
       <div class="logo"> <a href="{% url 'shop:home-page' %}"><img src="{% static 'images/dark-logo.png' %}" width="15%" alt=""></a> </div>
     </div>
+    {% endcache %}
+
     <div class="sticky">
       <div class="container"> 
         <!-- Nav -->
@@ -49,74 +54,9 @@
           <!-- MENU BUTTON RESPONSIVE -->
           <div class="menu-toggle"> <i class="fa fa-bars"> </i> </div>
           <ul class="ownmenu">
-
+            {% cache 300 headers %}
             <li class="active"><a href="{% url 'shop:home-page' %}">ГЛАВНАЯ</a>
             </li>
-
-            <!-- <li><a href="12-contact.html">PAGES</a>
-              <ul class="dropdown">
-                <li><a href="index.html">HOME</a>
-                  <ul class="dropdown">
-                    <li><a href="index.html">Index Defult</a></li>
-                    <li><a href="index-2.html">Index 2</a></li>
-                    <li><a href="index-3.html">Index 3</a></li>
-                    <li><a href="index-4.html">Index 4</a></li>
-                    <li><a href="index-5.html">Index 5</a></li>
-                    <li><a href="index-6.html">Index 6</a></li>
-                    <li><a href="index-7-construction.html">Index Construction</a></li>
-                    <li><a href="index-8-construction.html">Index Construction 2</a></li>
-                    <li><a href="index-09-furniture.html">Index Furniture</a></li>
-                    <li><a href="index-10-sports.html">Index Sports</a></li>
-                    <li><a href="index-11-beauty.html">Index Beauty</a></li>
-                    <li><a href="index-12-watches.html">Index Watches</a></li>
-                  </ul>
-                </li>
-                <li><a href="05-about-us-01.html">About</a>
-                  <ul class="dropdown">
-                    <li><a href="05-about-us-01.html">About US 01</a></li>
-                    <li><a href="05-about-us-02.html">About US 02</a></li>
-                  </ul>
-                </li>
-                <li><a href="{% url 'shop:shop-page' %}">Shop</a>
-                </li>
-                <li><a href="09-01-portfolio-grid.html">PORTFOLIO</a>
-                  <ul class="dropdown">
-                    <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID </a>
-                      <ul class="dropdown">
-                        <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID 02 COL</a></li>
-                        <li><a href="09-02-portfolio-grid.html">PORTFOLIO GRID 03 COL</a></li>
-                        <li><a href="09-03-portfolio-grid.html">PORTFOLIO GRID 04 COL</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="09-01-portfolio-grid.html">PORTFOLIO Default </a>
-                      <ul class="dropdown">
-                        <li><a href="09-05-portfolio-grid-default.html">PORTFOLIO 02 COL</a></li>
-                        <li><a href="09-06-portfolio-grid-default.html">PORTFOLIO 03 COL</a></li>
-                        <li><a href="09-07-portfolio-grid-default.html">PORTFOLIO 04 COL</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="09-03-portfolio-full-width.html">PORTFOLIO FULLWIDTH</a></li>
-                    <li><a href="09-08-portfolio-masonry.html">PORTFOLIO MANSORY 01</a></li>
-                    <li><a href="09-09-portfolio-masonry.html">PORTFOLIO MANSORY 02</a></li>
-                    <li><a href="09-10-portfolio-single.html">Portfolio Single 01</a></li>
-                    <li><a href="09-11-portfolio-single.html">Portfolio Single 02</a></li>
-                  </ul>
-                </li>
-                <li><a href="04-contact-01.html">Contact</a>
-                  <ul class="dropdown">
-                    <li><a href="04-contact-01.html">Contact US 01</a></li>
-                    <li><a href="04-contact-02.html">Contact US 02</a></li>
-                    <li><a href="04-contact-03.html">Contact US 03</a></li>
-                  </ul>
-                </li>
-                <li><a href="03-pay-checkout.html">Pay Checkout</a></li>
-                <li><a href="03-pay-viewcart.html">Pay Viewcart</a></li>
-                <li><a href="06-404-page.html">404 Page</a></li>
-                <li><a href="07-faqs-page.html">Faqs Pages</a></li>
-                <li><a href="10-coming-soon.html">Coming Soon</a></li>
-              </ul>
-            </li> -->
-
             <li class="meganav"><a href="{% url 'shop:shop-page' %}">МАГАЗИН</a>
               <ul class="dropdown">
                 {% for c in categories %}
@@ -177,22 +117,13 @@
                         </div>
                       {% endif %}
                     {% endfor %}
-                    <!-- <div class="media">
-                      <div class="media-left">
-                        <div class="nav-img"> <a href="#"> <img class="media-object img-responsive" src="{% static 'images/nav-img-3.jpg' %}" alt=""> </a> </div>
-                      </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">Oversized T-Shirt Dress</h6>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium </p>
-                        <a href="#.">READ MORE</a> </div>
-                    </div> -->
-                  </div>
+                    </div>
                 </li>
               </ul>
             </li>
             <li><a href="{% url 'shop:faq-page' 1 %}">ПОКУПАТЕЛЯМ</a>
             </li>
-            <ul class="dropdown">
+            <!-- <ul class="dropdown">
               <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID </a>
                 <ul class="dropdown">
                   <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID 02 COL</a></li>
@@ -212,12 +143,11 @@
               <li><a href="09-09-portfolio-masonry.html">PORTFOLIO MANSORY 02</a></li>
               <li><a href="09-10-portfolio-single.html">Portfolio Single 01</a></li>
               <li><a href="09-11-portfolio-single.html">Portfolio Single 02</a></li>
-            </ul>
+            </ul> -->
             </li>
-
             <li><a href="{% url 'shop:contact-page' %}">КОНТАКТЫ</a>
             </li>
-            
+            {% endcache headers %}
             <!--======= Shopping Cart =========-->
             <li class="shop-cart"><a href="{% url 'cart:cart-page' %}"><i class="fa fa-shopping-cart"></i></a> {% if order.order_items.all %}<span class="numb">{{ order.get_total_quantity }}</span>{% endif %}
               <ul class="dropdown" id="cart-dropdown-menu-ul">
@@ -287,6 +217,7 @@
                 {% endif %}
               </ul>
             </li>
+            {% cache 300 search_field %}
             <!--======= SEARCH ICON =========-->
             <li class="search-nav"><a><i class="fa fa-search"></i></a>
               <ul class="dropdown">
@@ -310,6 +241,7 @@
                 </li>
               </ul>
             </li>
+            {% endcache %}
           </ul>
         </nav>
       </div>

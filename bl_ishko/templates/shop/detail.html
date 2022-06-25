@@ -3,6 +3,8 @@
 {% load static %}
 {% load sort_size %}
 {% load comment_end %}
+{% load cache %}
+
 
 {% load thumbnail %}
 
@@ -12,6 +14,8 @@
   {% include 'shop/includes/header-light.html' %}
 {% endblock header %}
 
+
+{% cache 300 fragment_name %}
 {% block content %}
   
   <!-- CONTENT START -->
@@ -524,6 +528,7 @@
 
 
   {% endblock content %}
+  {% endcache %}
 </div>
 <!-- Wrap End --> 
 
