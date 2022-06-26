@@ -84,7 +84,11 @@
                       </label>
                     </li>
                     <li class="col-sm-12 no-margin">
-                      <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">ОТПРАВИТЬ СООБЩЕНИЕ</button>
+                      <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">ОТПРАВИТЬ СООБЩЕНИЕ</button><br><br><br>
+
+                      <p style="line-height: 15px; text-align: right; font-size: 10px; font-style: normal; font-family: 'Montserrat', sans-serif; color: #666666; margin-top: 10px;">
+                        *Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с <a target="_blank" style="color: #b26a82" href="{% url 'shop:privacy-page' %}">политикой конфидециальности</a>
+                      </p>
                     </li>
                     <li class="col-sm-12" style="color: #fff">{{ captcha }}</li>
                   </ul>

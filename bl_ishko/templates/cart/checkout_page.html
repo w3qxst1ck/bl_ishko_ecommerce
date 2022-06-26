@@ -128,22 +128,6 @@
                         <input class="form-control" name="order-message" id="message" placeholder="Комментарий к заказу"></input>
                       </label>
                     </li>
-                    
-                    <!-- CREATE AN ACCOUNT -->
-<!--                     <li class="col-md-6">
-                      <div class="checkbox">
-                        <input id="checkbox1" class="styled" type="checkbox">
-                        <label for="checkbox1"> CREATE AN ACCOUNT ? </label>
-                      </div>
-                    </li>
-      -->               
-                    <!-- SHIP TO BILLING ADDRESS -->
-<!--                     <li class="col-md-6">
-                      <div class="checkbox">
-                        <input id="checkbox2" class="styled" type="checkbox">
-                        <label for="checkbox2"> SHIP TO BILLING ADDRESS? </label>
-                      </div>
-                    </li> -->
                   </ul>
                 <!-- </form> -->
               </div>
@@ -190,7 +174,12 @@
                       <p>Данный способ оплаты доступен только при условии самовывоза.</p>
                     </li>
                   </ul>
-                  <button type="submit" class="btn btn-small btn-dark pull-right">ПОДТВЕРДИТЬ ЗАКАЗ</button> </div>
+                  <button type="submit" class="btn btn-small btn-dark pull-right">ПОДТВЕРДИТЬ ЗАКАЗ</button><br><br><br>
+                  <p style="line-height: 15px; text-align: right; font-size: 10px; font-style: normal; font-family: 'Montserrat', sans-serif; color: #666666; margin-top: 10px;">
+                    *Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с <a target="_blank" style="color: #b26a82" href="{% url 'shop:privacy-page' %}">политикой конфидециальности</a>
+                  </p>
+                </div>
+
                 </div>
                 </form>
               </div>

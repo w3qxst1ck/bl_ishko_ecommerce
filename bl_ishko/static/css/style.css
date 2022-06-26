@@ -6080,3 +6080,20 @@ input:focus {
 	font-family: 'Montserrat', sans-serif;
 	line-height: 24px;
 }
+
+.privacy {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 24px;
+	letter-spacing: 1.5px;
+	color: #666666;
+}
+
+.privacy-header {
+	font-weight: 500;
+}
+
+.privacy-paragraph {
+	margin-left: 30px;
+}
