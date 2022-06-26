@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from loguru import logger
 
 
 class ErrorLogMiddleware:
@@ -10,4 +11,5 @@ class ErrorLogMiddleware:
         return response
 
     def process_exception(self, request, exception):
+        logger.error(f'Error middleware: {exception}')
         return render(request, 'shop/404.html')
