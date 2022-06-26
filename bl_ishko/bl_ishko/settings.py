@@ -215,6 +215,7 @@ INTERNAL_IPS = [
 loguru_logger.add(os.path.join(BASE_DIR, 'logs/cart/logs.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='INFO', filter="cart.views", rotation='50 MB', compression='zip')
 loguru_logger.add(os.path.join(BASE_DIR, 'logs/mails/logs.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='INFO', filter="cart.services", rotation='50 MB', compression='zip')
 loguru_logger.add(os.path.join(BASE_DIR, 'logs/warning.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='WARNING', rotation='50 MB', compression='zip')
+loguru_logger.add(os.path.join(BASE_DIR, 'logs/error.log'), format='{level} {time: HH:mm.ss DD.MM.YYYY} {name} ({function}) {message}', level='ERROR', rotation='50 MB', compression='zip')
 
 
 # Cache
