@@ -38,5 +38,17 @@ services:
     depends_on:
       - backend
 
+  redis:
+    image: redis:alpine
+
+  celery:
+    build: ./
+    restart: always
+    command: celery -A bl_ishko worker -l info
+    env_file:
+      - ../.env.dev
+    depends_on:
+      - redis
+
 volumes:
   bl_ishko_postgres_data:

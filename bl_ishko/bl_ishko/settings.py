@@ -202,9 +202,8 @@ RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
 
 # celery
 # CELERY_BROKER_URL = 'amqp://localhost'
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-# CELERY_TIMEZONE = 'Africa/Nairobi'
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
 
 
 # debug tool bar
@@ -222,6 +221,6 @@ loguru_logger.add(os.path.join(BASE_DIR, 'logs/warning.log'), format='{level} {t
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379',
+        'LOCATION': 'redis://redis:6379',
     }
 }
