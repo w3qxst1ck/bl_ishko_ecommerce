@@ -1,11 +1,9 @@
 from django.urls import path
 
-from .views import (home_page, faq_page, product_detail,
-                    shop_page, contact_page, search_view)
+from .views import (home_page, faq_page, product_detail, shop_page, contact_page, search_view, privacy_page)
 
 
 app_name = 'shop'
-
 urlpatterns = [
     path('', home_page, name='home-page'),
     path('faq/', faq_page, name='faq-search'),
@@ -14,5 +12,7 @@ urlpatterns = [
     path('detail/<str:slug>/', product_detail, name='detail-page'),
     path('shop/', shop_page, name='shop-page'),
     path('shop/search/', search_view, name='search-page'),
+    path('privacy/', privacy_page, name='privacy-page'),
     path('shop/<str:slug>/', shop_page, name='cat-shop-page'),
 ]
+

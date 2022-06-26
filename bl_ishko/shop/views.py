@@ -225,5 +225,9 @@ def contact_page(request):
         return render(request, 'shop/contact.html', {'captcha': captcha})
 
 
+def privacy_page(request):
+    return render(request, 'shop/privacy.html')
+
+
 def handle_not_found(request, exception):
     return render(request, 'shop/404.html')
