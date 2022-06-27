@@ -32,7 +32,7 @@ def send_message_to_client(order, canceled=None):
 
         logger.info(f'Отправлено письмо клиенту на Email: {order.info.email} при оформлении заказа номер {order.id}')
     except BadHeaderError:
-        logger.info(f'Не получилось отправить письмо клиенту на Email: {order.info.email} при оформлении заказа номер {order.id}')
+        logger.warning(f'Не получилось отправить письмо клиенту на Email: {order.info.email} при оформлении заказа номер {order.id}')
         return HttpResponse('Invalid header found.')
 
 
@@ -60,7 +60,7 @@ def send_message_to_admin(client_login_email, order, canceled=None):
         )
         logger.info(f'Отправлено письмо администратору на Email: {from_email} при оформлении заказа клиентом ({order.info.email}) номер {order.id}')
     except BadHeaderError:
-        logger.info(f'Не получилось отправить письмо администратору при оформлении заказа клиентом ({order.info.email}) номер {order.id}')
+        logger.warning(f'Не получилось отправить письмо администратору при оформлении заказа клиентом ({order.info.email}) номер {order.id}')
         return HttpResponse('Invalid header found.')
 
 
