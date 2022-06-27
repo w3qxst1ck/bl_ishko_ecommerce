@@ -2,6 +2,7 @@ import os
 from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Q
 from django.http import HttpResponse
+from loguru import logger
 
 from .models import Product
 
@@ -51,5 +52,9 @@ def send_mail_from_contact(name, from_email, topic, message_text, admin_email=os
     try:
         message_title = topic if topic else 'Без темы'
         send_mail(message_title, text, os.getenv('DEFAULT_FROM_EMAIL'), [admin_email])
+        logger.info(f'Отправлено письмо со страницы контактов на Email администратора: {admin_email}. '
+                    f'Email для обратной свзяи {from_email}')
     except BadHeaderError:
+        logger.warning(f'Не получилось отправить письмо администратору на почту {admin_email} со страницы контактов. '
+                       f'Email для обратной свзяи {from_email}')
         return HttpResponse('Invalid header found.')
