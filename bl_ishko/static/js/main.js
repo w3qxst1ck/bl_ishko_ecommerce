@@ -136,7 +136,7 @@ $("a#share-product").on('click', function () {
 });
 $("a#share-product1").on('click', function () {
 	var dummy = document.createElement('input');
-	var my_domen = "http://127.0.0.1:8000";
+	var my_domen = "https://blishko.com";
 	var product_url = $(this).parents().siblings('input').val();
 	var text = my_domen + product_url;
 	document.body.appendChild(dummy);
