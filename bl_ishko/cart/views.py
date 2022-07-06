@@ -232,7 +232,7 @@ def order_complete_page(request, uuid):
     order_items_qs = OrderItem.objects.prefetch_related(Prefetch('item', queryset=item_qs))
 
     completed_order = Order.objects.prefetch_related(Prefetch('order_items', queryset=order_items_qs)).filter(id=uuid)[0]
-    return render(request, 'cart/order_complete.html', context={'completed_order': completed_order})
+    return render(request, 'cart/order_complete.html', context={'order': completed_order})
 
 
 @login_required
