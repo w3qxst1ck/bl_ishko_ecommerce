@@ -80,7 +80,7 @@
           <ul>
             
             <!-- Slider 1 -->
-            <li data-transition="fade" data-slotamount="7"> <img src="{% static 'images/slides/slide-1.jpg' %}" data-bgposition="center top" alt="" />
+            <li data-transition="fade" data-slotamount="7"> <img src="{% static 'images/slides/main_slider_1.jpg' %}" data-bgposition="center top" alt="" />
               <div class="overlay"></div>
               <!-- Layer -->
               <div class="tp-caption sft tp-resizeme rs-parallaxlevel-5" 
@@ -162,7 +162,7 @@
             </li>
             
             <!-- Slider 2 -->
-            <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/slide-2.jpg' %}" data-bgposition="center center" alt="" />
+            <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/main_slider_2.jpg' %}" data-bgposition="center center" alt="" />
               <div class="overlay"></div>
               
               <!-- Layer -->
@@ -214,7 +214,7 @@
             </li>
             
             <!-- Slider 3 -->
-            <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/slide-3.jpg' %}" data-bgposition="center center" alt="" />
+            <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/main_slider_3.jpg' %}" data-bgposition="center center" alt="" />
               <div class="overlay"></div>
               
               <!-- SLIDER LAYERS -->
@@ -507,7 +507,7 @@
           <!--  Blog Posts -->
           <div class="blog-posts">
             <ul class="row">
-              {% cache 300 blogs %}
+              <!-- cache 300 blogs -->
                 {% for post in posts %}
                   <!--  Posts 1 -->
                   <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> 
@@ -515,7 +515,7 @@
                     {% thumbnail post.image "570x340" crop="center" as im %}
                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
                     {% endthumbnail %}
-                    <span class="tags">{{ post.category }}</span> <a class="tittle-post font-playfair">{{ post.title }}</a>
+                    <span class="tags">{{ post.category }}</span> <p class="title-post" style="font-size: 15px; color: #272727; ">{{ post.title }}</p>
                     <p>{{ post.text }}</p>
                     <!--  Post Info -->
                     <ul class="info">
@@ -525,7 +525,7 @@
                     </ul>
                   </li>
                 {% endfor %}
-                {% endcache %}
+                <!-- endcache -->
             </ul>
           </div>
         </div>

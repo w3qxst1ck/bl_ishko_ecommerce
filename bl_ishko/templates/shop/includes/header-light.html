@@ -40,12 +40,12 @@
 
     
     <!-- Logo -->
-    {% cache 600 logo %}
+
     <div class="container">
       <!-- <div class="logo"> <a href="{% url 'shop:home-page' %}"><img src="{% static 'images/bl_logo3.png' %}" alt=""></a> </div> -->
       <div class="logo"> <a href="{% url 'shop:home-page' %}"><img src="{% static 'images/dark-logo.png' %}" width="15%" alt=""></a> </div>
     </div>
-    {% endcache %}
+
 
     <div class="sticky">
       <div class="container"> 
@@ -59,6 +59,7 @@
             </li>
             <li class="meganav"><a href="{% url 'shop:shop-page' %}">МАГАЗИН</a>
               <ul class="dropdown">
+                <li><a href="{% url 'shop:shop-page' %}">ВСЕ ТОВАРЫ</a></li>
                 {% for c in categories %}
                 <li><a href="{{ c.get_absolute_url }}">{{ c.title }}</a></li>
                 {% endfor %}
@@ -123,27 +124,6 @@
             </li>
             <li><a href="{% url 'shop:faq-page' 1 %}">ПОКУПАТЕЛЯМ</a>
             </li>
-            <!-- <ul class="dropdown">
-              <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID </a>
-                <ul class="dropdown">
-                  <li><a href="09-01-portfolio-grid.html">PORTFOLIO GRID 02 COL</a></li>
-                  <li><a href="09-02-portfolio-grid.html">PORTFOLIO GRID 03 COL</a></li>
-                  <li><a href="09-03-portfolio-grid.html">PORTFOLIO GRID 04 COL</a></li>
-                </ul>
-              </li>
-              <li><a href="09-01-portfolio-grid.html">PORTFOLIO Default </a>
-                <ul class="dropdown">
-                  <li><a href="09-05-portfolio-grid-default.html">PORTFOLIO 02 COL</a></li>
-                  <li><a href="09-06-portfolio-grid-default.html">PORTFOLIO 03 COL</a></li>
-                  <li><a href="09-07-portfolio-grid-default.html">PORTFOLIO 04 COL</a></li>
-                </ul>
-              </li>
-              <li><a href="09-03-portfolio-full-width.html">PORTFOLIO FULLWIDTH</a></li>
-              <li><a href="09-08-portfolio-masonry.html">PORTFOLIO MANSORY 01</a></li>
-              <li><a href="09-09-portfolio-masonry.html">PORTFOLIO MANSORY 02</a></li>
-              <li><a href="09-10-portfolio-single.html">Portfolio Single 01</a></li>
-              <li><a href="09-11-portfolio-single.html">Portfolio Single 02</a></li>
-            </ul> -->
             </li>
             <li><a href="{% url 'shop:contact-page' %}">КОНТАКТЫ</a>
             </li>
