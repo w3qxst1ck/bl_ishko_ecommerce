@@ -168,7 +168,11 @@
                     <div class="hot-tag">-{{ product.discount }}%</div>
                   {% endif %}
                   <ul class="animated fadeIn">
-                    <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
+                    <li> 
+                      {% thumbnail product.title_image "378x476" crop="center" as im %}
+                        <a href="{{ im.url }}" data-lighter><i class="ion-search"></i></a>
+                      {% endthumbnail %}
+                    </li>
                     <li> <a href="" data-toggle="modal" data-target="#shareModal" id="share-product1"><i class="ion-shuffle"></i></a></li>
                     <input id="share-input" hidden="true" value="{{ product.get_absolute_url }}">
                     {% if request.user.is_authenticated %}
