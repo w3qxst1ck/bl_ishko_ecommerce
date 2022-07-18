@@ -3560,6 +3560,9 @@ footer .flicker img {
 	background-color: #507ea4;
 	border-color: #507ea4;
 }
+.social_icons .instagram-footer a:hover i {
+	color: #af5875;
+}
 .social_icons .lastfm a:hover {
 	color: #fff;
 	background-color: #da0019;

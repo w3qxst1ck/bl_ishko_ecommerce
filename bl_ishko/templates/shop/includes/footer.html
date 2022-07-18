@@ -9,75 +9,25 @@
         <!-- <img class="margin-t-40" src="{% static 'images/hammer.png' %}" alt=""> -->
         <p class="intro-small" style="font-style: normal; font-family: 'Montserrat', sans-serif; margin-top: 18px;">Интернет магазин нижнего белья и одежды</p>
       </div>
-      
-      <!--  Footer Links -->
 
-<!--       <div class="footer-link row">
-        <div class="col-md-6">
-          <ul> -->
-            
-            <!--  INFOMATION -->
-<!--             <li class="col-sm-6">
-              <h5>ИНФОРМАЦИЯ</h5>
-              <ul class="f-links">
-                <li><a href="{% url 'shop:faq-page' 1 %}"> ПОКУПАТЕЛЯМ</a></li>
-                <li><a href="{% url 'shop:contact-page' %}."> КОНТАКТЫ</a></li>
-                <li><a href="{% url 'shop:home-page' %}"> ГЛАВНАЯ</a></li>
-                <li><a href="{% url 'shop:shop-page' %}"> МАГАЗИН</a></li> -->
-                <!-- <li><a href="#."> MANUFACTURES</a></li> -->
-<!--               </ul>
-            </li> -->
-            
-            <!-- MY ACCOUNT -->
-<!--             <li class="col-sm-6">
-              <h5>МОЙ АККАУНТ</h5>
-              <ul class="f-links">
-                <li><a href="{% url 'users:profile-page' %}">ЛИЧНЫЙ КАБИНЕТ</a></li>
-                <li><a href="{% url 'users:wishlist-page' %}"> ИЗБРАННОЕ</a></li>
-                <li><a href="{% url 'cart:cart-page' %}"> КОРЗИНА</a></li>
-                <li><a href="{% url 'users:profile-orders-page' %}"> МОИ ЗАКАЗЫ</a></li>
-                {% if user.is_authenticated %}
-                  <li><a href="{% url 'account_logout' %}"> ВЫХОД</a></li>
-                {% endif %}
-              </ul>
-            </li>
-          </ul>
-        </div> -->
-        
-        <!-- Second Row -->
-<!--         <div class="col-md-6">
-          <ul class="row"> -->
-            
-            <!-- TWITTER -->
-<!--             <li class="col-sm-6">
-              <h5>INSTAGRAM</h5>
-              <p>Следите за скидками и новыми поступлениями в Instagram @bl_ishko : www.instagram.com/bl_ishko/ </p>
-            </li> -->
-            
-            <!-- FLICKR PHOTO -->
-<!--             <li class="col-sm-6">
-              <h5>FLICKR PHOTO</h5>
-              <ul class="flicker">
-                <li><a href="#."><img src="{% static 'images/flicker-1.jpg' %}" alt=""></a></li>
-                <li><a href="#."><img src="{% static 'images/flicker-2.jpg' %}" alt=""></a></li>
-                <li><a href="#."><img src="{% static 'images/flicker-3.jpg' %}" alt=""></a></li>
-                <li><a href="#."><img src="{% static 'images/flicker-4.jpg' %}" alt=""></a></li>
-                <li><a href="#."><img src="{% static 'images/flicker-5.jpg' %}" alt=""></a></li>
-                <li><a href="#."><img src="{% static 'images/flicker-6.jpg' %}" alt=""></a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div> -->
-      
-      <!-- Rights -->
       <div class="rights">
-        <p></p>
-        <p>
-          <!-- <a href="https://www.instagram.com/bl_ishko/" target="_blank" style="text-align: center;"><i class="fa fa-instagram"></i> </a>
-          <a href="https://vk.com/bl_ishko" target="_blank"><i class="fa fa-vk"></i> </a> -->
-          <a target="_blank" href="{% url 'shop:privacy-page' %}">© BL_ISHKO</a>, 2022
-        </p>
+            <p>
+              <div class="row">
+                <div class="col-sm-2" align="left" style="margin-bottom: 15px;">
+                  <ul class="social_icons">
+                    <li class="instagram-footer"><a href="https://www.instagram.com/bl_ishko/" target="_blank" style="border: none"> <i class="fa fa-instagram"></i></a></li>
+                    <li class="instagram-footer"><a href="https://vk.com/bl_ishko" target="_blank" style="border: none"><i class="fa fa-vk"></i> </a></li>
+                  </ul>
+                </div>
+                <!-- <a href="https://www.instagram.com/bl_ishko/" target="_blank" style="text-align: center;"><i class="fa fa-instagram"></i> </a>
+                <a href="https://vk.com/bl_ishko" target="_blank"><i class="fa fa-vk"></i> </a> -->
+                <div class="col-sm-10">
+                  <a target="_blank" href="{% url 'shop:privacy-page' %}">© BL_ISHKO</a>, 2022
+                </div>
+              </div>
+            </p>
+      </div>
+
       </div>
     </div>
   </footer>
