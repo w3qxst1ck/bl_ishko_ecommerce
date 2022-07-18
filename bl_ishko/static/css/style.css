@@ -2270,6 +2270,15 @@ header .ownmenu .look-book .media-body a {
 	color: #272727;
 	margin: 10px 0;
 }
+.title-post {
+	display: inline-block;
+	width: 100%;
+	font-style: normal;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+	color: #272727;
+	margin: 10px 0;
+}
 .blog-posts .tags {
 	font-size: 12px;
 	font-family: 'Montserrat', sans-serif;
