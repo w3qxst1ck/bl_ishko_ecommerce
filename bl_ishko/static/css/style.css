@@ -6109,3 +6109,64 @@ input:focus {
 .privacy-paragraph {
 	margin-left: 30px;
 }
+
+/*ADAPTATION*/
+/*576px*/
+
+/*product-list shop page*/
+@media (max-width:576px){
+	.product-item {
+		margin-left: 50px;
+	}
+}
+/*tabs in detail page (состав, описание, отзывы)*/
+@media (max-width:576px){
+	.li-tabs {
+		width: 100%;
+	}
+}
+/*related products images*/
+@media (max-width:576px){
+	.related-produts-item-image {
+		max-width: 270px;
+		margin-left: 50px;
+	}
+}
+/*hide "оставить отзыв"*/
+@media (max-width:576px){
+	.add-review {
+		visibility: hidden;
+	}
+}
+/*выравнивание "в наличии"*/
+@media (max-width:576px){
+	.in-stoke {
+		margin-right: 60px;
+		margin-left: 20px;
+	}
+}
+/*выравнивание контента вкладок "состав, описание, отзывы"*/
+@media (max-width:576px){
+	.item-decribe .tab-content {
+		padding-bottom: 5px;
+	}
+}
+/*add to cart modal window*/
+@media (max-width:576px){
+	.modal-adaptation {
+		width: 580px;
+	}
+}
+@media (max-width:576px){
+	.modal-adaptation-content {
+		position: absolute !important;
+		left: 30% !important;
+		top: 50% !important;
+		transform: translate(-50%,-50%) !important;
+		margin-left: 20px !important;
+	}
+}
+
+
+
+

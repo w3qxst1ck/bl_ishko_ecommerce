@@ -94,8 +94,8 @@
 
     <!-- Modal window -->
     {% for order in orders %}
-    <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+    <div class="modal fade modal-adaptation" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
         <div class="modal-content">
           <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">

@@ -163,7 +163,7 @@
 
                 {% for product in products %}
                 <!-- New Products -->
-                <li class="col-sm-4 animate fadeIn" data-wow-delay="{% if forloop.counter > 3 %}{% if forloop.counter|mod:3 == 0 %}0.6{% else %}{{ forloop.counter|mod:3|mul:0.2 }}{% endif %}{% else %}{{ forloop.counter|mul:0.2 }}{% endif %}s">
+                <li class="col-xs-9 col-sm-4 animate fadeIn product-item" data-wow-delay="{% if forloop.counter > 3 %}{% if forloop.counter|mod:3 == 0 %}0.6{% else %}{{ forloop.counter|mod:3|mul:0.2 }}{% endif %}{% else %}{{ forloop.counter|mul:0.2 }}{% endif %}s">
                   <div class="items-in"> 
                     <!-- Image -->
                     {% thumbnail product.title_image "270x340" crop="center" as im %}
@@ -205,8 +205,8 @@
 
             {% for product in products %}
             <!-- Modal window -->
-              <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+              <div class="modal fade modal-adaptation" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
                   <div class="modal-content">
                     <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
                       <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -258,8 +258,8 @@
             {% endfor %}
 
             <!-- Modal window share product -->
-            <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+            <div class="modal fade modal-adaptation" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
                 <div class="modal-content">
                   <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
