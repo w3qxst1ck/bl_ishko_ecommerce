@@ -79,8 +79,8 @@
                   {% else %}
                     <div class="in-stoke"> НЕТ В НАЛИЧИИ</div>
                   {% endif %}
-                  <!-- <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div> -->
-                  <a href="#review" class="review" style="margin-left: 7px;">({{ product.comments.all.count }}) Отзывы</a> &nbsp;&nbsp;&nbsp; <a href="#review-form" class="review">Оставить отзыв</a></div>
+                  <!-- <div class="stars"></div> -->
+                  <a href="#review" class="review" style="margin-left: 7px;">({{ product.comments.all.count }}) Отзывы</a> &nbsp;&nbsp;&nbsp; <a href="#review-form" class="review add-review">Оставить отзыв</a></div>
                 <hr>
               </div>
             </div>
@@ -180,9 +180,9 @@
           <div class="text-center"> 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation"><a href="#descr" aria-controls="men" role="tab" data-toggle="tab">ОПИСАНИЕ</a></li>
-              <li role="presentation"><a href="#tags" aria-controls="access" role="tab" data-toggle="tab">СОСТАВ</a></li>
-              <li role="presentation" class="active"><a href="#review" aria-controls="women" role="tab" data-toggle="tab">ОТЗЫВЫ ({{ product.comments.all.count }})</a></li>
+              <li class="li-tabs" role="presentation"><a href="#descr" aria-controls="men" role="tab" data-toggle="tab">ОПИСАНИЕ</a></li>
+              <li class="li-tabs" role="presentation"><a href="#tags" aria-controls="access" role="tab" data-toggle="tab">СОСТАВ</a></li>
+              <li class="li-tabs" role="presentation" class="active"><a href="#review" aria-controls="women" role="tab" data-toggle="tab">ОТЗЫВЫ ({{ product.comments.all.count }})</a></li>
             </ul>
           </div>
           <!-- Tab panes -->
@@ -202,7 +202,7 @@
             </div>
 
             <!-- REVIEW -->
-            <div role="tabpanel" class="tab-pane fade  in active" id="review">
+            <div role="tabpanel" class="tab-pane fade in active" id="review">
               {% if product.comments.all %}
                 <h6>{{ product.comments.all.count|change_comment_end }} О ТОВАРЕ</h6>
               {% else %}
@@ -218,7 +218,7 @@
                   </div>
                   <!--  Details -->
                   <div class="media-body">
-                    <p class="font-playfair">{{ comment.text }}</p>
+                    <p style="font-family: 'Montserrat', sans-serif; font-style: normal;">{{ comment.text }}</p>
                     <h6>{{ comment.user.username }}<span class="pull-right">{{ comment.adding_date }}</span> </h6>
                   </div>
                 </div>
@@ -275,7 +275,7 @@
               <!-- <div class="hot-tag"> HOT </div> -->
                 <!-- Image --> 
                 {% thumbnail product.title_image "270x340" crop="center" as im %}
-                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="related-produts-item-image">
                 {% endthumbnail %}
                 <!-- Hover Details -->
                 <div class="over-item">
@@ -312,8 +312,8 @@
   </div>
 
  <!-- Modal window size table -->
-<div class="modal fade" id="sizeModal" tabindex="-1" role="dialog" aria-labelledby="sizeModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+<div class="modal fade modal-adaptation" id="sizeModal" tabindex="-1" role="dialog" aria-labelledby="sizeModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <div class="modal-content">
       <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -454,8 +454,8 @@
 
 {% for product in related_products %}
 <!-- Modal window add to cart for related products -->
-  <div class="modal fade" id="choiceModal{{ forloop.counter|add:100 }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter|add:100 }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+  <div class="modal fade modal-adaptation" id="choiceModal{{ forloop.counter|add:100 }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter|add:100 }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
       <div class="modal-content">
         <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -507,8 +507,8 @@
 {% endfor %}
 
 <!-- Modal window share product -->
-<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+<div class="modal fade modal-adaptation" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <div class="modal-content">
       <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">

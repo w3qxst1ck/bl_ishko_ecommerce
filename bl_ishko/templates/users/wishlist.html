@@ -139,7 +139,7 @@
           <div class="tittle tittle-2">
             {% if wish_products %}
               <h5>ПОХОЖИЕ ТОВАРЫ</h5>
-              <p class="font-playfair">Вам также может понравиться</p>
+              <p style="font-family: 'Montserrat', sans-serif; font-style: normal;">Вам также может понравиться</p>
             {% else %}
               <h5>ПОПУЛЯРНЫЕ ТОВАРЫ</h5>
               <p style="font-family: 'Montserrat', sans-serif; font-style: normal;">Вам может понравиться</p>
@@ -160,7 +160,7 @@
 
                 <!-- Image --> 
                 {% thumbnail product.title_image "270x340" crop="center" as im %}
-                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="related-produts-item-image">
                 {% endthumbnail %}
                 <!-- Hover Details -->
                 <div class="over-item">
@@ -201,8 +201,8 @@
 
 {% for wish_product in wish_products %}
 <!-- Modal window -->
-  <div class="modal fade" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+  <div class="modal fade modal-adaptation" id="choiceModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
       <div class="modal-content">
         <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -256,8 +256,8 @@
 
 {% for product in related_products %}
 <!-- Modal window add to cart for related products -->
-  <div class="modal fade" id="choiceModal{{ forloop.counter|add:100 }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter|add:100 }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+  <div class="modal fade modal-adaptation" id="choiceModal{{ forloop.counter|add:100 }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter|add:100 }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
       <div class="modal-content">
         <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -309,8 +309,8 @@
 {% endfor %}
 
 <!-- Modal window share product -->
-<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+<div class="modal fade modal-adaptation" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <div class="modal-content">
       <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
