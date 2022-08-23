@@ -4,4 +4,4 @@
 
 {% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans %}Вы получили это электронное письмо, потому что пользователь {{ user_display }} предоставил ваш адрес электронной почты для регистрации учетной записи на blishko.com.
 
-Чтобы подтвердить адреса электронной почты, перейдите по ссылке {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
+Чтобы подтвердить адрес электронной почты, перейдите по ссылке {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
