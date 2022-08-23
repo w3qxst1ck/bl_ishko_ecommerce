@@ -3572,6 +3572,9 @@ footer .flicker img {
 .social_icons .instagram-footer a:hover i {
 	color: #af5875;
 }
+.avito-footer a:hover {
+	color: #af5875;
+}
 .social_icons .lastfm a:hover {
 	color: #fff;
 	background-color: #da0019;
@@ -6166,6 +6169,14 @@ input:focus {
 		margin-left: 20px !important;
 	}
 }
+/*news images in home page*/
+@media (max-width:576px){
+	.news-item-image {
+		max-width: 270px; 
+		margin-left: 50px;
+	}
+}
+
 
 
 

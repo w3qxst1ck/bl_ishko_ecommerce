@@ -358,7 +358,7 @@
 
             {% for category in categories %}
               {% if category.products.all %}
-                <li role="presentation" {% if forloop.counter == 1 %} class="active" {% endif %}>
+                <li role="presentation" {% if forloop.counter == 1 %}class="active"{% endif %}>
                   <a href="#{{ category.slug }}" aria-controls="{{ category.slug }}" role="tab" data-toggle="tab">{{ category.title|upper }}</a>
                 </li>
               {% endif %}
@@ -383,7 +383,7 @@
                           <div class="items-in"> 
                             <!-- Image -->
                             {% thumbnail product.title_image "270x340" crop="center" as im %}
-                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                              <img class="news-item-image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
                             {% endthumbnail %}
                             <!-- Hover Details -->
                             <div class="over-item">
@@ -471,11 +471,13 @@
                   </div>
                   <!--  Text -->
                   <div class="media-body">
-                    <p style="font-style: normal; font-weight: 500; font-family: 'Montserrat', sans-serif;">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.”</p>
+                    <p style="font-style: normal; font-weight: 500; font-family: 'Montserrat', sans-serif;">
+                        “На днях получила от вас костюм. Выглядит великоплено. Ткань очень приятная на ощупь, швы обработаны очень аккуратно. Стильный, красивый, выполнен профессионалами высшей категории. Сидит идеально. В дальнейшем планирую заказывать белье только у вас. Спасибо огромное!”
+                    </p>
                     <hr>
                     <h6>SANSA STARK</h6>
-                    <span>Founder-Ceo. Dell Corp</span> </div>
+                    <!-- <span>Founder-Ceo. Dell Corp</span> -->
+                </div>
                 </div>
                 
                 <!--  Slide 3 -->
@@ -486,11 +488,12 @@
                   </div>
                   <!--  Text -->
                   <div class="media-body">
-                    <p style="font-style: normal; font-weight: 500; font-family: 'Montserrat', sans-serif;">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.”</p>
+                    <p style="font-style: normal; font-weight: 500; font-family: 'Montserrat', sans-serif;">
+                        “Спасибо большое продавцу. Все очень понравилось, посылка очень хорошо упакована с приятным бонусом, сам комплект очень понравился.”
+                    </p>
                     <hr>
                     <h6>john now</h6>
-                    <span>Founder-Ceo. Dell Corp</span> </div>
+                    <!-- <span>Founder-Ceo. Dell Corp</span> </div> -->
                 </div>
               </div>
             </div>
@@ -536,8 +539,8 @@
       {% for category in categories %}
         {% for product in category.products.all|slice:":4" %}
         <!-- Modal window -->
-          <div class="modal fade" id="choiceModal{{ forloop.counter }}{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}{{ category.id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+          <div class="modal fade modal-adaptation" id="choiceModal{{ forloop.counter }}{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="choiceModal{{ forloop.counter }}{{ category.id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
               <div class="modal-content">
                 <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -590,8 +593,8 @@
       {% endfor %}
       
             <!-- Modal window share product -->
-            <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+            <div class="modal fade modal-adaptation" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-adaptation-content" role="document" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
                 <div class="modal-content">
                   <div class="modal-body" style="background-color: #fff; border-radius: 4px; padding: 20px;">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
