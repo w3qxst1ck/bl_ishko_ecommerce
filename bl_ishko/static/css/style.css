@@ -6219,6 +6219,11 @@ input:focus {
 		display: none;
 	}
 }
+/*remove cart from navbar */
+@media (min-width:991px){
+	.remove-cart {
+		display: none;
+}
 
 
 

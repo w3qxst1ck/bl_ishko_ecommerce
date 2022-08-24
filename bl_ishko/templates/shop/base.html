@@ -338,8 +338,8 @@
       <section class="section-p-30px add_block_2">
         <div class="container">
           <ul class="row">
-            <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> <a href="#."><img src="{% static 'images/strepi-cut.jpeg' %}" width="570" alt=""></a> </li>
-            <li class="col-sm-6 animate fadeInRight" data-wow-delay="0.4s"> <a href="#."><img src="{% static 'images/milk-costume-cut.jpeg' %}" alt="" width="570"></a> </li>
+            <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> <a href="#."><img src="{% static 'images/lemon-costume-cut.jpeg' %}"></a> </li>
+            <li class="col-sm-6 animate fadeInRight" data-wow-delay="0.4s"> <a href="#."><img src="{% static 'images/milk-costume-cut.jpeg' %}"></a> </li>
           </ul>
         </div>
       </section>
@@ -475,7 +475,7 @@
                         “На днях получила от вас костюм. Выглядит великоплено. Ткань очень приятная на ощупь, швы обработаны очень аккуратно. Стильный, красивый, выполнен профессионалами высшей категории. Сидит идеально. В дальнейшем планирую заказывать белье только у вас. Спасибо огромное!”
                     </p>
                     <hr>
-                    <h6>ПОЛИНА</h6>
+                    <h6>ЕВГЕНИЯ</h6>
                     <!-- <span>Founder-Ceo. Dell Corp</span> -->
                 </div>
                 </div>
@@ -512,7 +512,7 @@
           <!--  Blog Posts -->
           <div class="blog-posts">
             <ul class="row">
-              <!-- cache 300 blogs -->
+              {% cache 300 blogs %}
                 {% for post in posts %}
                   <!--  Posts 1 -->
                   <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> 
@@ -530,7 +530,7 @@
                     </ul>
                   </li>
                 {% endfor %}
-                <!-- endcache -->
+                {% endcache %}
             </ul>
           </div>
         </div>
