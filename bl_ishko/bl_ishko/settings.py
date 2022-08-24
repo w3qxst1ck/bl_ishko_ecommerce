@@ -81,7 +81,7 @@ MIDDLEWARE = [
     # debug tool bar
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 
-    # 'bl_ishko.middleware.ErrorLogMiddleware',
+    'bl_ishko.middleware.ErrorLogMiddleware',
 ]
 
 ROOT_URLCONF = 'bl_ishko.urls'
