@@ -50,7 +50,10 @@
         <!-- Payments Steps -->
         <div class="shopping-cart text-center">
           
-          
+
+          <!-- cart table for full version -->
+          <div class="cart-table-full">
+
           {% if order.order_items.all %}
             <div class="cart-head">
                   <ul class="row">
@@ -123,7 +126,7 @@
                 <!-- EDIT AND REMOVE -->
                 <li class="col-sm-1">
                   <div class="position-center-center"> 
-                    <a href="#."><i class="fa fa-pencil-square-o"></i></a>
+                    <!-- <a href="#."><i class="fa fa-pencil-square-o"></i></a> -->
                     <a href="{% url 'cart:cart-delete-item' order_item.id %}"><i class="fa fa-times"></i></a>
                   </div>
                 </li>
@@ -132,6 +135,58 @@
           {% else %}
             <p style="margin-top: 50px; margin-bottom: 100px; font-family: 'Montserrat', sans-serif;">В КОРЗИНЕ ПОКА НЕТ ТОВАРОВ</p>
           {% endif %}
+
+          <!-- cart-table-full div -->
+        </div> 
+
+
+        <!-- cart version for phones -->
+        <div class="cart-table-phone">
+
+          {% if order.order_items.all %}
+          <table class="table cart-phone-version text-left">
+            <thead>
+              <tr class="cart-phone-head">
+                <th scope="col">Название</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Сумма</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order_item in order.order_items.all %}
+              <tr class="cart-phone-row">
+                <td class="cart-phone-product-title" style="vertical-align: middle;">
+                  <p><a href="{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title|upper }}</a></p>
+                  <p>{{ order_item.item.product.color|upper }} - {{ order_item.item.size }}</p>
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                  <p>{{ order_item.quantity }}</p>
+                  {% if order_item.quantity > order_item.item.item_count %}
+                  <br><p>(доступно: {{ order_item.item.item_count }} шт.)</p>
+                  {% endif %}
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                  <p>{{ order_item.item.product.price }} RUB</p>
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                  {% if order_item.item.product.discount %}<p>{{ order_item.item_total_with_sale }} RUB (sale {{ order_item.item.product.discount }}%)</p>
+                  {% else %}<p>{{ order_item.item_total }} RUB</p>
+                  {% endif %}
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                  <a href="{% url 'cart:cart-delete-item' order_item.id %}"><i class="fa fa-times"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+            <p style="margin-top: 50px; margin-bottom: 50px; font-family: 'Montserrat', sans-serif;">В КОРЗИНЕ ПОКА НЕТ ТОВАРОВ</p>
+          {% endif %}
+        </div>
+        <!-- end cart version for phones -->
 
           {% if order.order_items.all %}
             <!-- BTN INFO -->
@@ -144,7 +199,7 @@
               <a href="{% url 'users:wishlist-page' %}" class="btn btn-dark"> <i class="fa fa-heart-o"></i> ПЕРЕЙТИ В ИЗБРАННОЕ </a> 
               
               <!-- CONTINUE SHOPPING --> 
-              <a href="{% url 'shop:shop-page' %}" class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i> ПРОДОЛЖИТЬ ПОКУПКИ </a> </div>
+              <a href="{% url 'shop:shop-page' %}" class="btn btn-dark right-btn cart-buttons"> <i class="fa fa-shopping-cart"></i> ПРОДОЛЖИТЬ ПОКУПКИ </a> </div>
             {% endif %}
             
             <!-- SHOPPING INFORMATION -->

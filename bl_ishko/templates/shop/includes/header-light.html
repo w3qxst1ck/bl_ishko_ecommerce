@@ -13,6 +13,7 @@
         <div class="top-links">
           <ul>
             {% if user.is_authenticated %}
+              <li><a href="{% url 'cart:cart-page' %}">КОРЗИНА</a></li>
               <li><a href="{% url 'users:profile-page' %}">ЛИЧНЫЙ КАБИНЕТ</a></li>
               <li><a href="{% url 'users:wishlist-page' %}">ИЗБРАННОЕ</a></li>
               <li><a href="{% url 'account_logout' %}">ВЫЙТИ</a></li>
