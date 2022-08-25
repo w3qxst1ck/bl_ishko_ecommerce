@@ -162,8 +162,7 @@ class Advertising(models.Model):
     def get_absolute_url(self):
         if self.product:
             return self.product.get_absolute_url()
-        else:
-            return self.category.get_absolute_url()
+        return self.category.get_absolute_url()
 
     class Meta:
         verbose_name = 'Реклама'
