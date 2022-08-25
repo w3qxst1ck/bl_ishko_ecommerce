@@ -9,7 +9,7 @@ from loguru import logger
 from .utils import gen_slug
 from users.models import WishProduct, ProductComment
 from .forms import FormWithCaptcha
-from .models import Product, Category, Faq, FaqCategory, Post, Item, ProductImages
+from .models import Product, Category, Faq, FaqCategory, Post, Advertising
 from .services import get_related_products_for_detail, get_size_list
 from .tasks import send_messages_from_contact_task
 
@@ -21,6 +21,7 @@ def home_page(request):
         wish_list_products = []
 
     posts = Post.objects.filter(is_active=True)[:2]
+    advertising = Advertising.objects.filter(is_active=True).select_related('product').select_related('category')
 
     # optimization
     products_qs = Product.objects.prefetch_related('items')
@@ -28,7 +29,9 @@ def home_page(request):
 
     return render(request, 'shop/base.html', context={'wish_list_products': wish_list_products,
                                                       'posts': posts,
-                                                      'categories': categories,})
+                                                      'categories': categories,
+                                                      'adv1': advertising[0],
+                                                      'adv2': advertising[1]})
 
 
 def faq_page(request, pk=None):
