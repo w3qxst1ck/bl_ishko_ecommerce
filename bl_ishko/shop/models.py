@@ -148,3 +148,25 @@ class Post(models.Model):
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ['-date']
+
+
+class Advertising(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    image = models.ImageField(upload_to='products/advertising_images', verbose_name='рекламная картинка')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'Товар "{self.product.title}"' if self.product else f'Категория "{self.category}"'
+
+    def get_absolute_url(self):
+        if self.product:
+            return self.product.get_absolute_url()
+        else:
+            return self.category.get_absolute_url()
+
+    class Meta:
+        verbose_name = 'Реклама'
+        verbose_name_plural = 'Рекламные банеры'
+        ordering = ['-id']
+

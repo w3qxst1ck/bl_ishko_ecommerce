@@ -338,8 +338,24 @@
       <section class="section-p-30px add_block_2">
         <div class="container">
           <ul class="row">
-            <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> <a href="#."><img src="{% static 'images/lemon-costume-cut.jpeg' %}"></a> </li>
-            <li class="col-sm-6 animate fadeInRight" data-wow-delay="0.4s"> <a href="#."><img src="{% static 'images/milk-costume-cut.jpeg' %}"></a> </li>
+
+                <li class="col-sm-6 animate fadeInLeft" data-wow-delay="0.4s"> <a href="{{ adv1.get_absolute_url }}">
+                    {% thumbnail adv1.image "555x355" crop="center" as im  %}
+                        <!-- <img src="{% static 'images/lemon-costume-cut.jpeg' %}"> -->
+                        <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
+                    {% endthumbnail %}
+                    </a> 
+                </li>
+
+                <li class="col-sm-6 animate fadeInRight" data-wow-delay="0.4s"> <a href="{{ adv2.get_absolute_url }}">
+                    <!-- <img src="{% static 'images/milk-costume-cut.jpeg' %}">  -->
+                    {% thumbnail adv2.image "555x355" crop="center" as im  %}
+                        <!-- <img src="{% static 'images/lemon-costume-cut.jpeg' %}"> -->
+                        <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> 
+                    {% endthumbnail %}
+                    </a>
+                </li>
+
           </ul>
         </div>
       </section>
