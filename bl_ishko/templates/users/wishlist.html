@@ -215,14 +215,7 @@
           <div class="popurlar_product client-slide"> 
             {% for product in related_products %}
               <!--  New Arrival  -->
-              <div class="items-in"> 
-                
-              <!--  Tags  -->
-              <!-- <div class="hot-tag">SALE</div> -->
-<!--          {% if product.is_new %}
-                <div class="new-tag">NEW </div>
-              {% endif %} -->
-
+                <div class="items-in">
                 <!-- Image --> 
                 {% thumbnail product.title_image "270x340" crop="center" as im %}
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="related-produts-item-image">
