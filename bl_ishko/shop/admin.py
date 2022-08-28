@@ -6,7 +6,11 @@ admin.site.register(models.ProductImages)
 admin.site.register(models.Faq)
 admin.site.register(models.FaqCategory)
 admin.site.register(models.Post)
-admin.site.register(models.Advertising)
+
+
+@admin.register(models.Advertising)
+class AdvertisingAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'is_active')
 
 
 @admin.register(models.Category)
