@@ -6,21 +6,6 @@
     <title>Title</title>
 </head>
 <body>
-<!-- <p>{{ order.info.first_name }}, спасибо за Ваш заказ! Его номер номер <b>№ {{ order.id }}</b>.</p>
-<p>Ваш заказ:</p>
-	<p>
-		<ul>
-		    {% for order_item in order.order_items.all %}
-		        <li> {{ order_item.item.product.title }} ({{ order_item.item.size }}) - {{ order_item.quantity }}  шт. {{ order_item.item_total_with_sale }} руб.</li>
-		    {% endfor %}
-	    </ul>
-	</p>
-	<br>
-	<p>
-		Общая сумма заказа <b>{{ order.get_order_total_price_with_sale }} руб.</b>
-	</p>
-	<p>В ближайшее время по телефону <b>{{ order.info.phone }}</b> с Вами свяжется администартор для уточнения заказа и способа доставки.</p> -->
-
 
 <p>Добрый день, {{ order.info.first_name }}!</p>
 <p>Вы оформили заказ на сайте Интернет-магазина BL_ishko</p>
