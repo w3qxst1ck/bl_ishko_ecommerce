@@ -25,7 +25,7 @@ def home_page(request):
 
     # optimization
     products_qs = Product.objects.prefetch_related('items')
-    categories = Category.objects.all().prefetch_related(Prefetch('products', queryset=products_qs))
+    categories = Category.objects.all().order_by('created').prefetch_related(Prefetch('products', queryset=products_qs))
 
     return render(request, 'shop/base.html', context={'wish_list_products': wish_list_products,
                                                       'posts': posts,

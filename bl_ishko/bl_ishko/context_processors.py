@@ -21,7 +21,7 @@ def get_order(request):
 
 
 def get_categories(request):
-    categories = Category.objects.all().order_by('-created').prefetch_related('products')
+    categories = Category.objects.all().order_by('created').prefetch_related('products')
     return {'categories': categories}
 
 
