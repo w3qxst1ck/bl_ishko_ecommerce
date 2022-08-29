@@ -26,7 +26,7 @@ def get_categories(request):
 
 
 def get_new_products(request):
-    new_products = Product.objects.all().order_by('-created')[:4]
+    new_products = Product.objects.all().order_by('created')[:4]
     return {'new_products': new_products}
 
 
