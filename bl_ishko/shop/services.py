@@ -21,6 +21,7 @@ def get_related_products_for_detail(product, count=6):
     related_products.extend(same_category_products)
     id_already_in_use.extend([product.id for product in same_category_products])
 
+    related_products.remove(product)
     if len(related_products) < count:
         related_products.extend(Product.objects.filter(~Q(id__in=id_already_in_use)).prefetch_related('items').order_by('-created')[:count - len(related_products)])
 
