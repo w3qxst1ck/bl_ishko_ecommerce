@@ -92,7 +92,7 @@ def shop_page(request, slug=None):
         category = get_object_or_404(Category, slug=slug)
         products = Product.objects.filter(category=category).prefetch_related('items')
     else:
-        products = Product.objects.all().order_by('-created').prefetch_related('items')
+        products = Product.objects.all().order_by('created').prefetch_related('items')
         category = None
 
     # get colors for sidebar
