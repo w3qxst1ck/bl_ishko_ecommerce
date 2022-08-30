@@ -6223,7 +6223,16 @@ input:focus {
 @media (min-width:991px){
 	.remove-cart {
 		display: none;
+	}
 }
+
+@media (max-width:767px){
+	.bg-1 {
+		background: url(../images/bg/about_section.jpeg) fixed no-repeat;
+		background-size: cover;
+	}
+}
+
 
 
 
