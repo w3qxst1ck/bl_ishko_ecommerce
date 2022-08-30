@@ -6228,7 +6228,7 @@ input:focus {
 
 @media (max-width:767px){
 	.bg-1 {
-		background: url(../images/bg/about_section.jpeg) fixed no-repeat;
+		background: url(../images/bg/about_section2.jpeg) fixed no-repeat;
 		background-size: cover;
 	}
 }
