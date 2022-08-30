@@ -59,7 +59,7 @@ def get_related_products(wish_products, count=6):
                 id_already_in_use.add(product.id)
             related_products.extend(random_products)
     else:
-        related_products.extend(all_products.order_by('-created')[:count])
+        related_products.extend(all_products.order_by('created')[:count])
 
     # минимально необходимое число продуктов
     # if len(related_products) < 4:
