@@ -50,8 +50,8 @@ class Product(models.Model):
         return f'{self.title} - {self.color}'
 
     class Meta:
-        verbose_name = 'Продукт'
-        verbose_name_plural = 'Продукты'
+        verbose_name = 'Продукт (ex. шорты мини лемон)'
+        verbose_name_plural = 'Продукты (ex. шорты мини лемон)'
         ordering = ['created']
 
 
@@ -64,8 +64,8 @@ class Item(models.Model):
         return f'{self.product.title} ({self.size}) - {self.item_count} шт.'
 
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name = 'Товар (кол-во, размер)'
+        verbose_name_plural = 'Товары (кол-во, размер)'
         ordering = ['product__title',]
 
 
@@ -100,8 +100,8 @@ class Category(models.Model):
         return reverse('shop:cat-shop-page', kwargs={'slug': self.slug})
 
     class Meta:
-        verbose_name = 'Категория товаров'
-        verbose_name_plural = 'Категории товаров'
+        verbose_name = 'Категория товаров (ex. костюмы)'
+        verbose_name_plural = 'Категории товаров (ex. костюмы)'
         ordering = ['title']
 
 
