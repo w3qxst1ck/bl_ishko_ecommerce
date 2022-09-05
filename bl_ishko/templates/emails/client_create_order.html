@@ -59,7 +59,7 @@
 	{% for order_item in order.order_items.all %}
 	<tr align="center">
 		<td>{{ forloop.counter }}</td>
-		<td>{{ order_item.item.product.title }}</td>
+		<td><a href="{{ domain }}{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title }}</a></td>
 		<td>{{ order_item.item.size }}</td>
 		<td>{{ order_item.item.product.color }}</td>
 		<td>{{ order_item.quantity }}</td>
