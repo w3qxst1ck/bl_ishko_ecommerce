@@ -5,7 +5,6 @@ from . import models
 admin.site.register(models.ProductImages)
 admin.site.register(models.Faq)
 admin.site.register(models.FaqCategory)
-admin.site.register(models.Post)
 
 
 @admin.register(models.Advertising)
@@ -37,4 +36,9 @@ class ItemAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'product')
     list_filter = ('size', 'item_count')
     search_fields = ('product__title',)
+
+
+@admin.register(models.Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'date', 'author', 'is_active')
 

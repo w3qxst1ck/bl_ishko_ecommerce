@@ -9,7 +9,7 @@
 	</p>Состав заказа:
 		<ul>
 		    {% for order_item in order.order_items.all %}
-		        <li> {{ order_item.item.product.title }} ({{ order_item.item.size }}) - {{ order_item.quantity }}  шт. {{ order_item.item_total_with_sale }} руб.</li>
+		        <li> <a href="{{ domain }}{{ order_item.item.product.get_absolute_url }}">{{ order_item.item.product.title }}</a> ({{ order_item.item.size }}) - {{ order_item.quantity }}  шт. {{ order_item.item_total_with_sale }} руб.</li>
 		    {% endfor %}
 	    </ul>
 	</p>
