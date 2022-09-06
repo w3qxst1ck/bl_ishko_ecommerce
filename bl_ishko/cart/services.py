@@ -66,6 +66,28 @@ def send_message_to_admin(client_login_email, order, canceled=None):
         return HttpResponse('Invalid header found.')
 
 
+def changed_paid_status_message(order):
+    try:
+        message_title = f'Заказ {order.id} bl_ishko, {order.user.email}'
+        email = order.info.email
+        from_email = os.getenv('EMAIL_HOST_USER')
+        context = {'order': order}
+        html_message = get_template('emails/client_changed_paid_status.html').render(context)
+        text = ''
+
+        send_mail(
+            message_title,
+            text,
+            from_email,
+            [email],
+            html_message=html_message,
+        )
+
+    except BadHeaderError:
+        logger.warning(f'Не получилось отправить письмо клиенту на Email: {order.info.email} об оплате его заказа {order.id}')
+        return HttpResponse('Invalid header found.')
+
+
 def is_enough_items(order):
     for order_item in order.order_items.all():
         if order_item.item.item_count < order_item.quantity:
