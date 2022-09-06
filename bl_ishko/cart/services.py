@@ -8,6 +8,7 @@ from loguru import logger
 from cart.models import Order
 
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+DOMAIN = os.getenv('DOMAIN')
 
 
 def send_message_to_client(order, canceled=None):
@@ -15,7 +16,7 @@ def send_message_to_client(order, canceled=None):
         message_title = f'Заказ {order.id} bl_ishko'
         email = order.info.email
         from_email = os.getenv('EMAIL_HOST_USER')
-        context = {'order': order}
+        context = {'order': order, 'domain': DOMAIN}
         if canceled:
             html_message = get_template('emails/client_canceled_order.html').render(context)
         else:
@@ -44,7 +45,8 @@ def send_message_to_admin(client_login_email, order, canceled=None):
         from_email = os.getenv('EMAIL_HOST_USER')
 
         context = {'user_email': client_login_email,
-                   'order': order}
+                   'order': order,
+                   'domain': DOMAIN}
         if canceled:
             html_message = get_template('emails/admin_canceled_order.html').render(context)
         else:

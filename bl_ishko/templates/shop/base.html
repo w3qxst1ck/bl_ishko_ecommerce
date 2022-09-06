@@ -76,7 +76,7 @@
     <!--======= HOME MAIN SLIDER =========-->
     <section class="home-slider">
       <div class="tp-banner-container">
-        <div class="tp-banner" >
+        <div class="tp-banner" id="slider-full-version">
           <ul>
             
             <!-- Slider 1 -->
@@ -97,7 +97,31 @@
         </div>
       </div>
     </section>
-    
+
+<!--     <section class="home-slider">
+      <div class="tp-banner-container">
+        <div class="tp-banner" id="slider-phone-version">
+          <ul> -->
+            
+            <!-- Slider 1 -->
+<!--             <li data-transition="fade" data-slotamount="7"> <img src="{% static 'images/slides/phone_slider_1.jpeg' %}" data-bgposition="center top" alt="" />
+              <div class="overlay"></div>
+            </li> -->
+            
+            <!-- Slider 2 -->
+<!--             <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/main_slider_2.jpg' %}" data-bgposition="center center" alt="" />
+              <div class="overlay"></div>
+            </li> -->
+            
+            <!-- Slider 3 -->
+<!--             <li data-transition="random" data-slotamount="7"> <img src="{% static 'images/slides/main_slider_3.jpg' %}" data-bgposition="center center" alt="" />
+              <div class="overlay"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section> -->
+
     <!-- CONTENT START -->
     <div class="content"> 
       
@@ -449,7 +473,8 @@
 <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script> 
 <script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script> 
 <script src="{% static 'js/main.js' %}"></script>
-<script src="{% static 'js/wishlist.js' %}"></script> 
+<script src="{% static 'js/wishlist.js' %}"></script>
+
 <script>
 jQuery(document).ready(function($) {
   
@@ -479,6 +504,13 @@ jQuery(document).ready(function($) {
       }
         }
   });
+
+  // change slider full/phone
+  // if ($(window).width() >= 768) {
+  //   $("#slider-phone-version").removeClass('tp-banner');
+  // } else {
+  //   $("#slider-full-version").removeClass('tp-banner');
+  // };
 })
 
 </script>
