@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from django.db.models import Q, Prefetch
+from django.db.models import Q
 
 from .models import UserInfo
 from shop.models import Product
