@@ -232,5 +232,6 @@ def privacy_page(request):
     return render(request, 'shop/privacy.html')
 
 
+# 404 error
 def handle_not_found(request, exception):
     return render(request, 'shop/404.html')
