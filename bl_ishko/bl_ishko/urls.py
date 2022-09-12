@@ -14,7 +14,7 @@ urlpatterns = [
 ]
 
 handler404 = 'shop.views.handle_not_found'
-admin.site.site_header = 'BL_ishko'
+admin.site.site_header = 'Blishko'
 
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
