@@ -10,20 +10,6 @@ $(window).load(function() {
 	$("#loader").delay(500).fadeOut("slow");
 });
 
-// change SLIDER full/mobile
-function changeSlider() {
-	if ($(window).width() >= '768'){
-        $("#slider-phone-version").removeClass('tp-banner');
-        // $("#slider-full-version").addClass('tp-banner');
-    } else {
-        $("#slider-full-version").removeClass('tp-banner');
-        // $("#slider-phone-version").addClass('tp-banner');
-    }
-}
-
-
-$(window).on('load resize', changeSlider);
-
 /*-----------------------------------------------------------------------------------*/
 /*		STICKY NAVIGATION
 /*-----------------------------------------------------------------------------------*/
